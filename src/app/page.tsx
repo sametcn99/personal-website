@@ -12,7 +12,7 @@ export default function Home() {
           className="rounded-3xl transition-transform transform scale-100 group-hover:scale-105"
         />
       </div>
-      <div className="mt-4 font-mono text-lg text-white hover:scale-105 text-center">
+      <div className="mt-4 font-mono text-lg text-white hover:scale-105 text-center select-none">
         This page is still in development!...
       </div>
     </div>

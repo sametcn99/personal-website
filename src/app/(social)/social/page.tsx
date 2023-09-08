@@ -20,14 +20,14 @@ export default function Social() {
             height={120}
           />
         </div>
-        <div className="pb-5 text-center text-xs text-white font-mono font-bold tracking-tight">
+        <div className="pb-5 text-center text-xs text-white font-mono font-bold tracking-tight select-none">
           You can reach me through these links
         </div>
         <div className="space-y-2 mt-4">
           {socialLinks.map((link, index) => (
             <Link legacyBehavior key={index} href={link.href}>
               <a
-                className="block w-full rounded-lg bg-zinc-800 sm:px-32 md:px-60 py-2 text-center text-white lowercase hover:scale-105 hover:bg-zinc-700"
+                className="block w-full rounded-lg bg-zinc-800 sm:px-32 md:px-60 py-2 text-center text-white lowercase hover:scale-105 hover:bg-zinc-700 select-none"
                 target="_blank"
               >
                 {link.name}

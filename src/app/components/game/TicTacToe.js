@@ -46,6 +46,7 @@ export default function TicTacToe() {
   const renderSquare = (index) => (
     // Render a single square button with its click event handler.
     <button
+      key={index} // Add a unique key prop to each square.
       className="w-16 h-16 border border-gray-300 flex items-center justify-center text-4xl font-bold"
       onClick={() => handleClick(index)}
     >

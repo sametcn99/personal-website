@@ -5,6 +5,7 @@ export default function NotFound() {
     <div className="text-3xl text-white h-screen flex flex-col items-center justify-center">
       <div className="relative group">
         <Image
+          unoptimized={true}
           src={"/404icon.png"}
           alt="Picture of the author"
           width={200}

@@ -14,6 +14,7 @@ export default function Social() {
       <div className="p-8 space-y-3 rounded-2xl">
         <div className="flex items-center justify-center">
           <Image
+            unoptimized={true}
             src={"/icon.png"}
             alt="Picture of the author"
             width={120}

@@ -24,6 +24,7 @@ export default function Home() {
         <div onClick={handleImageClick}>
           <div className="relative group">
             <Image
+              unoptimized={true}
               src={"/development.png"}
               alt="Picture of the author"
               width={300}

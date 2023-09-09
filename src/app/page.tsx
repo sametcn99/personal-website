@@ -40,6 +40,7 @@ export default function Home() {
           {showGif ? (
             <div>
               <Image
+                unoptimized={true}
                 src={"/game.gif"}
                 alt="Game Gif"
                 width={300}

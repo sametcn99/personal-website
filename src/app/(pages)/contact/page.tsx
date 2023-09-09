@@ -22,7 +22,7 @@ export default function Contact() {
 
   return (
     <div className="min-h-screen flex items-center justify-center">
-      <div className="bg-white shadow-lg rounded-lg w-96 p-6">
+      <div className="bg-white shadow-lg rounded-lg w-96 p-6 scale-90">
         <h1 className="text-center text-xl font-bold text-red-500">
           Still in development!..
         </h1>

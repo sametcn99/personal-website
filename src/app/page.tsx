@@ -7,9 +7,12 @@ export default function Home() {
   const [showImage, setShowImage] = useState(true);
   const [showGif, setShowGif] = useState(true);
 
-  // Resme tıklandığında resmi ve yazıyı kaldırmak için bir işlev tanımlayın.
   const handleImageClick = () => {
     setShowImage(false);
+  };
+
+  const handleGifLoad = () => {
+    setShowGif(true);
     setTimeout(() => {
       setShowGif(false);
     }, 3000);
@@ -42,6 +45,7 @@ export default function Home() {
                 width={300}
                 height={300}
                 className="rounded-3xl transition-transform transform scale-100 group-hover:scale-105"
+                onLoad={handleGifLoad}
               />
             </div>
           ) : (

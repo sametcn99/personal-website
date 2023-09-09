@@ -41,7 +41,7 @@ export default function Home() {
             <div>
               <Image
                 src={"/game.gif"}
-                alt="Picture of the author"
+                alt="Game Gif"
                 width={300}
                 height={300}
                 className="rounded-3xl transition-transform transform scale-100 group-hover:scale-105"

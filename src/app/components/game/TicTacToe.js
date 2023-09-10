@@ -19,7 +19,7 @@ export default function TicTacToe() {
       const bestMove = getBestMove(board, 'O', xIsNext); // Calculate the best move for X
       handleClick(bestMove); // Perform the best move
     }
-  }, [board, xIsNext, firstMove]);
+  });
 
   const handleClick = (index) => {
     // Handle a square click

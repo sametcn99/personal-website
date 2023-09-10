@@ -14,7 +14,7 @@ export default function Rbweb() { // Define a default export function named Rbwe
 
     // Cleanup function to clear the timer when the component unmounts.
     return () => clearTimeout(redirectTimer);
-  }, []); // The empty dependency array [] ensures this effect runs only once after initial render.
+  }); // The empty dependency array [] ensures this effect runs only once after initial render.
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center">

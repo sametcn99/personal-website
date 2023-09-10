@@ -1,89 +1,79 @@
-"use client";
 "use client"; // This might be a specific directive or comment related to the development environment.
 
 import React, { useState, useEffect } from 'react';
 
 export default function TicTacToe() {
-  // Create an initial game board with 9 empty squares.
-  const initialBoard = Array(9).fill(null);
-
-  // Initialize the state for the game board and whose turn it is.
-  const [board, setBoard] = useState(initialBoard);
-  const [xIsNext, setXIsNext] = useState(true); // True means it's X's turn.
+  const initialBoard = Array(9).fill(null); // Create an initial game board with 9 empty squares
+  const [board, setBoard] = useState(initialBoard); // Create a state variable to hold the game board
+  const [xIsNext, setXIsNext] = useState(true); // Create a state variable to track whose turn it is (X or O)
+  const [firstMove, setFirstMove] = useState(false); // Create a state variable to track if it's the first move
 
   useEffect(() => {
-    // This effect is triggered whenever the board or player turn changes.
-    if (!xIsNext) {
-      // If it's not X's turn, it's the computer's turn.
-
-      // Calculate the best move for the computer ('O').
-      const bestMove = getBestMove(board, 'O');
-
-      // Trigger a click event on the best move for the computer.
-      handleClick(bestMove);
+    if (xIsNext && firstMove === false) {
+      // If it's X's turn and it's the first move
+      const randomIndex = Math.floor(Math.random() * 9); // Generate a random index
+      handleClick(randomIndex); // Perform a random move
+      setFirstMove(true); // Set firstMove to true to indicate that the first move has been made
+    } else if (xIsNext) {
+      // If it's X's turn and not the first move
+      const bestMove = getBestMove(board, 'O', xIsNext); // Calculate the best move for X
+      handleClick(bestMove); // Perform the best move
     }
-  }, [board, xIsNext]);
+  }, [board, xIsNext, firstMove]);
 
   const handleClick = (index) => {
-    // Handle a square click event.
-
-    // If there's already a winner or the square is already filled, do nothing.
+    // Handle a square click
     if (calculateWinner(board) || board[index]) {
+      // If there's a winner or the square is already filled, do nothing
       return;
     }
 
-    // Create a new board array with the updated square.
-    const newBoard = [...board];
-    newBoard[index] = xIsNext ? 'X' : 'O';
-
-    // Update the board state with the new board.
-    setBoard(newBoard);
-
-    // Toggle the player's turn.
-    setXIsNext(!xIsNext);
+    const newBoard = [...board]; // Create a copy of the current board
+    newBoard[index] = xIsNext ? 'X' : 'O'; // Place X or O on the clicked square
+    setBoard(newBoard); // Update the game board state
+    setXIsNext(!xIsNext); // Toggle the turn to the next player
   };
 
   const renderSquare = (index) => (
-    // Render a single square button with its click event handler.
+    // Render a square button
     <button
-      key={index} // Add a unique key prop to each square.
+      key={index}
       className="w-16 h-16 border border-gray-300 flex items-center justify-center text-4xl font-bold"
-      onClick={() => handleClick(index)}
+      onClick={() => handleClick(index)} // Call handleClick when the square is clicked
     >
-      {board[index]} {/* Display the 'X' or 'O' on the square. */}
+      {board[index]} {/* Display the X or O on the square */}
     </button>
   );
 
-  // Determine if there's a winner or if it's a draw.
-  const winner = calculateWinner(board);
-  const isDraw = !winner && board.every((square) => square);
+  const winner = calculateWinner(board); // Determine if there's a winner
+  const isDraw = !winner && board.every((square) => square); // Check if it's a draw
 
-  // Display the appropriate game status message.
   const status = winner
     ? `Winner: ${winner}`
     : isDraw
       ? 'Draw!'
-      : `Next player: ${xIsNext ? 'X' : 'O'}`;
+      : `${xIsNext ? 'Computers Turn' : 'Your Turn'}`; // Determine the game status message
 
   const handleRestart = () => {
-    // Reset the game by setting the board back to its initial state.
-    setBoard(initialBoard);
-    setXIsNext(true);
+    // Handle game restart
+    setBoard(initialBoard); // Reset the game board
+    setXIsNext(true); // Set X as the first player
+    setFirstMove(false); // Reset the firstMove variable
   };
 
   return (
     <div className="w-60 mx-auto mt-10">
       <div className="mb-5 text-2xl font-bold">{status}</div>
       <div className="grid grid-cols-3 gap-2">
-        {/* Render the 9 game squares using the renderSquare function. */}
         {Array.from({ length: 9 }, (_, index) => renderSquare(index))}
+        {/* Render the game board with squares */}
       </div>
       <div className="flex justify-center mt-5">
-        {/* Display a "Play Again" button if there's a winner or it's a draw. */}
         {(winner || isDraw) && (
+          // Show the "Play Again" button if there's a winner or it's a draw
           <button
             className="px-4 py-2 bg-zinc-800 text-white rounded"
-            onClick={handleRestart}
+            onClick={handleRestart} // Call handleRestart when the button is clicked
           >
             Play Again
           </button>
@@ -93,8 +83,8 @@ export default function TicTacToe() {
   );
 }
 
-// Function to calculate if there's a winner by checking the lines on the board.
 const calculateWinner = (squares) => {
+  // Function to determine the winner
   const lines = [
     [0, 1, 2],
     [3, 4, 5],
@@ -107,48 +97,100 @@ const calculateWinner = (squares) => {
   ];
 
   for (let i = 0; i < lines.length; i++) {
+    // Check all possible winning combinations
     const [a, b, c] = lines[i];
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      // If the squares on a winning line all have the same value, return the winner.
-      return squares[a];
+      // If the same player occupies all three squares in a winning combination
+      return squares[a]; // Return the winning player (X or O)
     }
   }
 
-  return null; // If no winner is found, return null.
+  return null; // Return null if there's no winner
 };
 
-// Function to calculate the computer's best move on the board.
-const getBestMove = (board, player) => {
-  const corners = [0, 2, 6, 8];
-  const center = 4;
-  const sides = [1, 3, 5, 7];
-
-  // Prefer corner squares if available.
-  for (let i = 0; i < corners.length; i++) {
-    if (!board[corners[i]]) {
-      return corners[i];
-    }
-  }
-
-  // Prefer the center square if available.
-  if (!board[center]) {
-    return center;
-  }
-
-  // Prefer side squares if available.
-  for (let i = 0; i < sides.length; i++) {
-    if (!board[sides[i]]) {
-      return sides[i];
-    }
-  }
-
-  // If none of the preferred moves are available, choose a random empty square.
-  const emptySquares = [];
+const getBestMove = (board, player, isMaximizing) => {
+  // Function to calculate the best move using the minimax algorithm
+  const availableMoves = [];
   for (let i = 0; i < board.length; i++) {
     if (!board[i]) {
-      emptySquares.push(i);
+      availableMoves.push(i); // Find all available (empty) squares
     }
   }
-  const randomIndex = Math.floor(Math.random() * emptySquares.length);
-  return emptySquares[randomIndex];
+
+  if (isMaximizing) {
+    let bestScore = -Infinity;
+    let bestMove = null;
+
+    for (let i = 0; i < availableMoves.length; i++) {
+      const move = availableMoves[i];
+      const newBoard = [...board];
+      newBoard[move] = player;
+      const score = minimax(newBoard, player, false);
+      if (score > bestScore) {
+        bestScore = score;
+        bestMove = move;
+      }
+    }
+
+    return bestMove; // Return the best move for the maximizing player (X)
+  } else {
+    let bestScore = Infinity;
+    let bestMove = null;
+
+    for (let i = 0; i < availableMoves.length; i++) {
+      const move = availableMoves[i];
+      const newBoard = [...board];
+      newBoard[move] = player === 'X' ? 'O' : 'X';
+      const score = minimax(newBoard, player, true);
+      if (score < bestScore) {
+        bestScore = score;
+        bestMove = move;
+      }
+    }
+
+    return bestMove; // Return the best move for the minimizing player (O)
+  }
+};
+
+const scores = {
+  X: 1,
+  O: -1,
+  draw: 0,
+};
+
+const minimax = (board, player, isMaximizing) => {
+  // Function to implement the minimax algorithm
+  const result = calculateWinner(board);
+
+  if (result) {
+    return scores[result];
+  }
+
+  if (isMaximizing) {
+    let bestScore = -Infinity;
+
+    for (let i = 0; i < board.length; i++) {
+      if (!board[i]) {
+        const newBoard = [...board];
+        newBoard[i] = player;
+        const score = minimax(newBoard, player, false);
+        bestScore = Math.max(score, bestScore);
+      }
+    }
+
+    return bestScore;
+  } else {
+    let bestScore = Infinity;
+
+    for (let i = 0; i < board.length; i++) {
+      if (!board[i]) {
+        const newBoard = [...board];
+        newBoard[i] = player === 'X' ? 'O' : 'X';
+        const score = minimax(newBoard, player, true);
+        bestScore = Math.min(score, bestScore);
+      }
+    }
+
+    return bestScore;
+  }
 };

@@ -29,19 +29,17 @@ export default function RootLayout({
     <html lang="en">
       {/* Set the shortcut icon for the page. */}
       <link rel="shortcut icon" href="/favicon.png" />
-      
+
       {/* Start the page body with the Inter font applied. */}
       <body className={inter.className}>
-      
         {/* Render the Header component. */}
         <Header />
-        
+
         {/* Render the children components, which will be the page content. */}
         {children}
-        
+
         {/* Render the Footer component. */}
         <Footer />
-        
       </body>
     </html>
   );

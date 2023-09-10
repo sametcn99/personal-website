@@ -63,16 +63,16 @@ export default function TicTacToe() {
 
   return (
     <div className="w-60 mx-auto mt-10">
-      <div className="mb-5 text-2xl font-bold">{status}</div>
-      <div className="grid grid-cols-3 gap-2">
+      <div className="mb-5 text-2xl font-bold select-none">{status}</div>
+      <div className="grid grid-cols-3 gap-2 select-none">
         {Array.from({ length: 9 }, (_, index) => renderSquare(index))}
         {/* Render the game board with squares */}
       </div>
-      <div className="flex justify-center mt-5">
+      <div className="flex justify-center mt-5 select-none">
         {(winner || isDraw) && (
           // Show the "Play Again" button if there's a winner or it's a draw
           <button
-            className="px-4 py-2 bg-zinc-800 text-white rounded"
+            className="px-4 py-2 bg-zinc-800 text-white rounded select-none"
             onClick={handleRestart} // Call handleRestart when the button is clicked
           >
             Play Again

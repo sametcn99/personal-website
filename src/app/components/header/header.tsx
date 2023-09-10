@@ -18,7 +18,6 @@ export const Header = () => {
     { label: "Home", href: "/" },
     { label: "Social Links", href: "/social" },
     { label: "Projects", href: "/projectspg" },
-    { label: "Contact", href: "/contact" },
   ];
 
   return (
@@ -33,7 +32,7 @@ export const Header = () => {
       >
         {/* Create a navigation bar with various styling classes. */}
         <Link legacyBehavior href="/">
-          <a className="inline-flex items-center p-2 mr-4 select-none">
+          <a className="inline-flex items-center p-2 mr-4 select-none hover:scale-105">
             <Image
               unoptimized={true}
               src={"/hello-icon.png"}
@@ -81,7 +80,7 @@ export const Header = () => {
             {/* Create a div for navigation links */}
             {navLinks.map((link, index) => (
               <Link legacyBehavior key={index} href={link.href}>
-                <a className="lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-white font-bold items-center justify-center hover:bg-zinc-700 select-none">
+                <a className="lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-white font-bold items-center justify-center hover:text-lg select-none">
                   {link.label}
                 </a>
               </Link>

@@ -3,6 +3,8 @@ import Link from "next/link"; // Import the Link component from the Next.js fram
 import Image from "next/image"; // Import the Image component from Next.js.
 import type { Metadata } from "next"; // Import the Metadata type from Next.js.
 import socialLinks from "./links.json"; // Import an array of social links from a local JSON file.
+import { IconButton, Tooltip } from "@mui/material";
+import EmailIcon from "@mui/icons-material/Email";
 
 export const metadata: Metadata = {
   // Define metadata for the page.
@@ -31,9 +33,6 @@ export default function Social() {
           />
           {/* Display an image with specified dimensions */}
         </div>
-        <div className="pb-5 text-center text-xs text-white font-mono font-bold tracking-tight select-none">
-          You can reach me through these links
-        </div>
         {/* Display a text message */}
         <div className="space-y-2 mt-4">
           {/* Create a container for social links */}
@@ -50,6 +49,20 @@ export default function Social() {
               {/* Create an anchor element with styling and 'target="_blank"' to open links in a new tab */}
             </Link>
           ))}
+        </div>
+        <div className="flex items-center justify-center">
+          <Tooltip title="Mail to Me!">
+            <IconButton
+              aria-label="delete"
+              size="large"
+              className="hover:bg-zinc-700 "
+              onClick={() =>
+                (window.location.href = "mailto:sametcn99@gmail.com")
+              }
+            >
+              <EmailIcon color="primary" />
+            </IconButton>
+          </Tooltip>
         </div>
       </div>
     </div>

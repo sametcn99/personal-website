@@ -42,6 +42,9 @@ export default function StillDevelopment() {
               width={300}
               height={300}
               className="rounded-3xl transition-transform transform scale-100 group-hover:scale-105"
+              onDragStart={(e) => e.preventDefault()}
+              onContextMenu={(e) => e.preventDefault()}
+              onSelect={(e) => e.preventDefault()}
             />
             {/* Display an image with specified dimensions and styling */}
           </div>
@@ -64,6 +67,9 @@ export default function StillDevelopment() {
                 height={300}
                 className="rounded-3xl transition-transform transform scale-100 group-hover:scale-105"
                 onLoad={handleGifLoad}
+                onDragStart={(e) => e.preventDefault()}
+                onContextMenu={(e) => e.preventDefault()}
+                onSelect={(e) => e.preventDefault()}
               />
               <audio ref={audioRef} src="playgame.mp3" />
             </div>

@@ -30,8 +30,8 @@ export default function StillDevelopment() {
   return (
     <div className="text-3xl text-white h-screen flex flex-col items-center justify-center">
       {/* Create a container div with text styling and center the content vertically and horizontally */}
-      <Tooltip title="Click to Image!">
-        {showImage ? ( // Conditional rendering based on the 'showImage' state.
+      {showImage ? ( // Conditional rendering based on the 'showImage' state.
+        <Tooltip title="Click to Image!">
           <div onClick={handleImageClick}>
             {/* If 'showImage' is true, display the following content */}
             <div className="relative group">
@@ -54,33 +54,33 @@ export default function StillDevelopment() {
               This page is still in development!...
             </div>
           </div>
-        ) : (
-          // If 'showImage' is false, display the following content
-          <div>
-            {showGif ? ( // Conditional rendering based on the 'showGif' state.
-              <div>
-                {/* If 'showGif' is true, display the following content */}
-                <Image
-                  unoptimized={true}
-                  src={"playgame.gif"}
-                  alt="Game Gif"
-                  width={300}
-                  height={300}
-                  className="rounded-3xl transition-transform transform scale-100 group-hover:scale-105"
-                  onLoad={handleGifLoad}
-                  onDragStart={(e) => e.preventDefault()}
-                  onContextMenu={(e) => e.preventDefault()}
-                  onSelect={(e) => e.preventDefault()}
-                />
-                <audio ref={audioRef} src="playgame.mp3" />
-              </div>
-            ) : (
-              // If 'showGif' is false, display the TicTacToe component
-              <TicTacToe />
-            )}
-          </div>
-        )}
-      </Tooltip>
+        </Tooltip>
+      ) : (
+        // If 'showImage' is false, display the following content
+        <div>
+          {showGif ? ( // Conditional rendering based on the 'showGif' state.
+            <div>
+              {/* If 'showGif' is true, display the following content */}
+              <Image
+                unoptimized={true}
+                src={"playgame.gif"}
+                alt="Game Gif"
+                width={300}
+                height={300}
+                className="rounded-3xl transition-transform transform scale-100 group-hover:scale-105"
+                onLoad={handleGifLoad}
+                onDragStart={(e) => e.preventDefault()}
+                onContextMenu={(e) => e.preventDefault()}
+                onSelect={(e) => e.preventDefault()}
+              />
+              <audio ref={audioRef} src="playgame.mp3" />
+            </div>
+          ) : (
+            // If 'showGif' is false, display the TicTacToe component
+            <TicTacToe />
+          )}
+        </div>
+      )}
     </div>
   );
 }

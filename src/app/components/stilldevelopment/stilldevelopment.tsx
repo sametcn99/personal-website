@@ -8,20 +8,6 @@ import TicTacToe from "../game/TicTacToe"; // Import the TicTacToe component fro
 export default function StillDevelopment() {
   // Define a default export function named StillDevelopment.
   const [showImage, setShowImage] = useState(true); // Create a state variable 'showImage' and a function 'setShowImage' to manage its value. Initialize 'showImage' as 'true'.
-  const [showGif, setShowGif] = useState(true); // Create a state variable 'showGif' and a function 'setShowGif' to manage its value. Initialize 'showGif' as 'true'.
-  const audioRef = useRef<HTMLAudioElement | null>(null); // Create a ref for an HTML audio element and initialize it as null.
-
-
-  const handleGifLoad = () => {
-    // Define a function 'handleGifLoad'.
-    setShowGif(true); // Set 'showGif' to 'true'.
-    toggleAudio();
-    setTimeout(() => {
-      setShowGif(false); // After 3000 milliseconds (3 seconds), set 'showGif' back to 'false'.
-    }, 10000);
-  };
-
-  const toggleAudio = () => audioRef.current?.play(); // play audio
 
   return (
     <div className="text-3xl text-white h-screen flex flex-col items-center justify-center">
@@ -54,7 +40,7 @@ export default function StillDevelopment() {
       ) : (
         // If 'showImage' is false, display the following content
         <div>
-            <TicTacToe />
+          <TicTacToe />
         </div>
       )}
     </div>

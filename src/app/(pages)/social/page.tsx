@@ -4,7 +4,7 @@ import Image from "next/image"; // Import the Image component from Next.js.
 import socialLinks from "./links.json"; // Import an array of social links from a local JSON file.
 import { IconButton, Tooltip } from "@mui/material";
 import EmailIcon from "@mui/icons-material/Email";
-import TelegramIcon from '@mui/icons-material/Telegram';
+import TelegramIcon from "@mui/icons-material/Telegram";
 
 export default function Social() {
   // Define a default export function named Social.
@@ -32,15 +32,12 @@ export default function Social() {
           {/* Create a container for social links */}
           {socialLinks.map((link, index) => (
             // Map through the socialLinks array and create a Link for each link.
-            <Link legacyBehavior key={index} href={link.href}>
-              {/* Create a Link component with the 'href' attribute from the array */}
-              <a
-                className="block rounded-lg bg-zinc-800 px-36 py-2 text-center text-white lowercase hover:scale-105 hover:bg-zinc-700 select-none"
-                target="_blank"
-              >
-                {link.name}
-              </a>
-              {/* Create an anchor element with styling and 'target="_blank"' to open links in a new tab */}
+            <Link
+              className="block rounded-lg bg-zinc-800 px-36 py-2 text-center text-white lowercase hover:scale-105 hover:bg-zinc-700 select-none"
+              key={index}
+              href={link.href}
+            >
+              {link.name}
             </Link>
           ))}
         </div>

@@ -24,26 +24,9 @@ export const Header = () => {
             "radial-gradient(circle, rgb(0, 0, 0) 0%, rgb(0, 0, 20) 50%, rgb(0, 0, 0) 100%)",
         }}
       >
-        {/* Create a navigation bar with various styling classes. */}
-        <Link legacyBehavior href="/">
-          <a className="inline-flex items-center p-2 mr-4 select-none hover:scale-105">
-            <Image
-              unoptimized={true}
-              src={"/hello-icon.png"}
-              alt="Game Gif"
-              width={30}
-              height={30}
-              className="rounded-3xl transition-transform transform scale-100 group-hover:scale-105"
-            />
-            <path d="M12.001 4.8c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8..." />
-            {/* The above code appears to be SVG path data for an icon. */}
-            <span className="text-xl text-white font-bold uppercase tracking-wide ml-3">
-              Hello World!
-            </span>
-          </a>
-        </Link>
+
         <button
-          className="inline-flex p-3 hover:bg-zinc-700 rounded lg:hidden text-white ml-auto hover:text-white outline-none"
+          className="inline-flex p-3  rounded lg:hidden text-white ml-auto"
           onClick={handleClick}
         >
           {/* Create a button with a click event handler 'handleClick'. */}
@@ -74,7 +57,7 @@ export const Header = () => {
             {/* Create a div for navigation links */}
             {navLinks.map((link, index) => (
               <Link legacyBehavior key={index} href={link.href}>
-                <a className="lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-white font-bold items-center justify-center hover:text-lg select-none">
+                <a className="lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-white font-bold items-center justify-center hover:bg-slate-600 select-none">
                   {link.label}
                 </a>
               </Link>

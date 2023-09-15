@@ -36,6 +36,7 @@ export default function Social() {
               key={index}
               className="block rounded-lg bg-zinc-800 px-36 py-2 text-center text-white lowercase hover:scale-105 hover:bg-zinc-700 select-none"
               target="_blank"
+              href={link.href}
             >
               {link.name}
             </a>
@@ -58,10 +59,8 @@ export default function Social() {
             <IconButton
               aria-label="delete"
               size="large"
-              className="hover:bg-zinc-700 "
-              onClick={() =>
-                (window.location.href = "mailto:sametcn99@gmail.com")
-              }
+              className="hover:bg-zinc-700"
+              onClick={() => window.open("https://t.me/sametc0", "_blank")}
             >
               <TelegramIcon color="primary" />
             </IconButton>

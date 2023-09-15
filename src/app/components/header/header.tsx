@@ -3,6 +3,7 @@
 import Image from "next/image"; // Import the Image component from the Next.js framework.
 import Link from "next/link"; // Import the Link component from Next.js.
 import { useState } from "react"; // Import the useState hook from React.
+import { navLinks } from "./page-links";
 
 export const Header = () => {
   // Define a functional component named Header.
@@ -12,13 +13,6 @@ export const Header = () => {
     // Define a function 'handleClick'.
     setActive(!active); // Toggle the value of 'active' when this function is called.
   };
-
-  const navLinks = [
-    // Create an array 'navLinks' containing navigation links as objects.
-    { label: "Home", href: "/" },
-    { label: "Social Links", href: "/social" },
-    { label: "Projects", href: "/projects" },
-  ];
 
   return (
     <>

@@ -1,13 +1,12 @@
 "use client";
-import Image from "next/image";
-import React, { useState } from "react";
-import TicTacToe from "./components/game/tictactoe/TicTacToe";
-import StillDevelopment from "./components/stilldevelopment/stilldevelopment";
+import About from "./(pages)/about/page";
+import Social from "./(pages)/social/page";
 
 export default function Home() {
   return (
-    <div>
-      <StillDevelopment />
-    </div>
+    <>
+      <About />
+      <Social />
+    </>
   );
 }

@@ -3,7 +3,7 @@
 import Image from "next/image"; // Import the Image component from Next.js.
 import React, { useState, useRef } from "react"; // Import React and the useState hook.
 import { Tooltip } from "@mui/material";
-import TicTacToe from "../game/TicTacToe"; // Import the TicTacToe component from a relative path.
+import TicTacToe from "../game/tictactoe/TicTacToe"; // Import the TicTacToe component from a relative path.
 
 export default function StillDevelopment() {
   // Define a default export function named StillDevelopment.

@@ -32,13 +32,13 @@ export default function Social() {
           {/* Create a container for social links */}
           {socialLinks.map((link, index) => (
             // Map through the socialLinks array and create a Link for each link.
-            <Link
-              className="block rounded-lg bg-zinc-800 px-36 py-2 text-center text-white lowercase hover:scale-105 hover:bg-zinc-700 select-none"
+            <a
               key={index}
-              href={link.href}
+              className="block rounded-lg bg-zinc-800 px-36 py-2 text-center text-white lowercase hover:scale-105 hover:bg-zinc-700 select-none"
+              target="_blank"
             >
               {link.name}
-            </Link>
+            </a>
           ))}
         </div>
         <div className="flex justify-center scale-110 mt-3">

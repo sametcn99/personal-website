@@ -2,19 +2,17 @@
 
 import Image from "next/image"; // Import the Image component from the Next.js framework.
 import { useEffect } from "react"; // Import the useEffect hook from React.
-import { useRouter } from "next/navigation"; // Import the useRouter hook from Next.js for routing.
 
-export default function Rbweb() { // Define a default export function named Rbweb.
-  const router = useRouter(); // Initialize the router object using the useRouter hook from Next.js.
+export default function Redirect() { // Define a default export function named Rbweb.
+  // const router = useRouter(); // Initialize the router object using the useRouter hook from Next.js.
 
-  useEffect(() => { // Use the useEffect hook to perform actions after the component has rendered.
-    const redirectTimer = setTimeout(() => { // Create a timer using setTimeout to delay the redirection.
-      router.push("https://resumebuilderwebapplication.netlify.app"); // Redirect to the specified URL after 3000 milliseconds (3 seconds).
-    }, 3000);
+  // useEffect(() => { // Use the useEffect hook to perform actions after the component has rendered.
+  //   const redirectTimer = setTimeout(() => { // Create a timer using setTimeout to delay the redirection.
+  //   }, 3000);
 
-    // Cleanup function to clear the timer when the component unmounts.
-    return () => clearTimeout(redirectTimer);
-  }); // The empty dependency array [] ensures this effect runs only once after initial render.
+  //   // Cleanup function to clear the timer when the component unmounts.
+  //   return () => clearTimeout(redirectTimer);
+  // }); // The empty dependency array [] ensures this effect runs only once after initial render.
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center">

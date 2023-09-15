@@ -10,7 +10,7 @@ export default function StillDevelopment() {
   const [showImage, setShowImage] = useState(true); // Create a state variable 'showImage' and a function 'setShowImage' to manage its value. Initialize 'showImage' as 'true'.
 
   return (
-    <div className="text-3xl text-white h-screen flex flex-col items-center justify-center">
+    <div className="text-3xl text-white h-screen flex items-center justify-center">
       {/* Create a container div with text styling and center the content vertically and horizontally */}
       {showImage ? ( // Conditional rendering based on the 'showImage' state.
         <Tooltip title="Click to Image!">

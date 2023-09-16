@@ -29,27 +29,29 @@ const Header = () => {
   }, [pathname]);
 
   return (
-    <div
-      className="fixed flex items-center justify-center space-x-4 scale-75 sm:scale-100 w-full p-4"
-      style={{
-        background:
-          "radial-gradient(circle, rgb(0, 0, 0) 0%, rgb(0, 0, 20) 50%, rgb(0, 0, 0) 100%)",
-      }}
-    >
-      {buttons.map((button) => (
-        <Link key={button.id} href={button.href}>
-          <button
-            className={`rounded-full text-white outline p-2 hover:bg-slate-500 ${
-              button.active
-                ? "bg-slate-500 text-slate-400 hover:bg-slate-500"
-                : ""
-            }`}
-          >
-            {button.text}
-          </button>
-        </Link>
-      ))}
-    </div>
+    <>
+      <div
+        className="fixed flex items-center justify-center space-x-4 scale-75 sm:scale-100 p-4 w-full rounded-full"
+        style={{
+          background:
+            "radial-gradient(circle, rgb(0, 0, 0) 0%, rgb(0, 0, 20) 50%, rgb(0, 0, 0) 100%)",
+        }}
+      >
+        {buttons.map((button) => (
+          <Link key={button.id} href={button.href}>
+            <button
+              className={`rounded-full text-white outline p-2 hover:bg-slate-500 ${
+                button.active
+                  ? "bg-slate-500 text-slate-400 hover:bg-slate-500"
+                  : ""
+              }`}
+            >
+              {button.text}
+            </button>
+          </Link>
+        ))}
+      </div>
+    </>
   );
 };
 

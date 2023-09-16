@@ -42,7 +42,7 @@ export default function RootLayout({
                 dataLayer.push(arguments);
               }
               gtag("js", new Date());
-              gtag("config", "${GTM_ID}"); // GTM_ID'yi burada kullanın
+              gtag("config", "${GTM_ID}");
             `,
           }}
         />

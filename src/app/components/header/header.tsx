@@ -30,7 +30,7 @@ const Header = () => {
 
   return (
     <div
-      className="fixed flex items-center justify-center space-x-2 scale-75 sm:scale-100 w-full p-4"
+      className="fixed flex items-center justify-center space-x-4 scale-75 sm:scale-100 w-full p-4"
       style={{
         background:
           "radial-gradient(circle, rgb(0, 0, 0) 0%, rgb(0, 0, 20) 50%, rgb(0, 0, 0) 100%)",
@@ -38,16 +38,15 @@ const Header = () => {
     >
       {buttons.map((button) => (
         <Link key={button.id} href={button.href}>
-          <Button
-            variant="outlined"
-            className={`rounded-full text-white ${
+          <button
+            className={`rounded-full text-white outline p-2 hover:bg-slate-500 ${
               button.active
                 ? "bg-slate-500 text-slate-400 hover:bg-slate-500"
                 : ""
             }`}
           >
             {button.text}
-          </Button>
+          </button>
         </Link>
       ))}
     </div>

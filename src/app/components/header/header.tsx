@@ -1,70 +1,57 @@
 "use client"; // This comment appears to have no impact on the code and can be ignored.
+import { Button } from "@mui/material";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
-import Image from "next/image"; // Import the Image component from the Next.js framework.
-import Link from "next/link"; // Import the Link component from Next.js.
-import { useState } from "react"; // Import the useState hook from React.
-import { navLinks } from "./page-links";
+const Header = () => {
+  const initialButtons = [
+    { id: 1, text: "Home", href: "/", active: false },
+    { id: 2, text: "Social", href: "/social", active: false },
+    { id: 3, text: "Projects", href: "/projects", active: false },
+    { id: 4, text: "About", href: "/about", active: false },
+  ];
 
-export const Header = () => {
-  // Define a functional component named Header.
-  const [active, setActive] = useState(false); // Create a state variable 'active' and a function 'setActive' to manage its value. Initialize 'active' as 'false'.
+  const [buttons, setButtons] = useState(initialButtons);
 
-  const handleClick = () => {
-    // Define a function 'handleClick'.
-    setActive(!active); // Toggle the value of 'active' when this function is called.
-  };
+  const pathname = usePathname();
+  // Sayfa değiştikçe düğmeleri güncelle
+  console.log(usePathname());
+
+  // Sayfa değiştikçe düğmeleri güncelle
+  useEffect(() => {
+    setButtons((prevButtons) =>
+      prevButtons.map((button) => ({
+        ...button,
+        active: button.href === pathname,
+      }))
+    );
+  }, [pathname]);
 
   return (
-    <>
-      {/* This is a shorthand for a React Fragment, which allows you to return multiple elements without a wrapping div. */}
-      <nav
-        className="fixed top-0 left-0 right-0 z-10 flex items-center flex-wrap p-3"
-        style={{
-          background:
-            "radial-gradient(circle, rgb(0, 0, 0) 0%, rgb(0, 0, 20) 50%, rgb(0, 0, 0) 100%)",
-        }}
-      >
-
-        <button
-          className="inline-flex p-3  rounded lg:hidden text-white ml-auto"
-          onClick={handleClick}
-        >
-          {/* Create a button with a click event handler 'handleClick'. */}
-          <svg
-            className="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
+    <div
+      className="fixed flex items-center justify-center space-x-2 scale-75 sm:scale-100 w-full p-4"
+      style={{
+        background:
+          "radial-gradient(circle, rgb(0, 0, 0) 0%, rgb(0, 0, 20) 50%, rgb(0, 0, 0) 100%)",
+      }}
+    >
+      {buttons.map((button) => (
+        <Link key={button.id} href={button.href}>
+          <Button
+            variant="outlined"
+            className={`rounded-full text-white ${
+              button.active
+                ? "bg-slate-500 text-slate-400 hover:bg-slate-500"
+                : ""
+            }`}
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M4 6h16M4 12h16M4 18h16"
-            />
-          </svg>
-        </button>
-        {/* The above SVG code represents a hamburger menu icon. */}
-        {/* Note that in this div we will use a ternary operator to decide whether or not to display the content of the div */}
-        <div
-          className={`${
-            active ? "" : "hidden"
-          }   w-full lg:inline-flex lg:flex-grow lg:w-auto`}
-        >
-          {/* Conditional rendering of content based on the 'active' state. */}
-          <div className="lg:inline-flex lg:flex-row lg:ml-auto lg:w-auto w-full lg:items-center items-start flex flex-col lg:h-auto">
-            {/* Create a div for navigation links */}
-            {navLinks.map((link, index) => (
-              <Link legacyBehavior key={index} href={link.href}>
-                <a className="lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-white font-bold items-center justify-center hover:bg-slate-600 select-none">
-                  {link.label}
-                </a>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </nav>
-    </>
+            {button.text}
+          </Button>
+        </Link>
+      ))}
+    </div>
   );
 };
+
+export default Header;

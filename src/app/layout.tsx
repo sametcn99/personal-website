@@ -4,10 +4,9 @@ import "./styles/globals.css";
 // Import necessary types from external libraries.
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-
+import Header from "./components/header/header";
 // Import custom components.
 import Footer from "./components/footer/footer";
-import { Header } from "./components/header/header";
 
 // Initialize the Inter font with Latin subset.
 const inter = Inter({ subsets: ["latin"] });

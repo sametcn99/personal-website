@@ -25,7 +25,7 @@ export default function Social() {
           {socialLinks.map((link, index) => (
             <li key={index}>
               <a
-                className="block rounded-lg bg-zinc-800 px-20 py-1 text-center text-white lowercase hover:scale-105 hover:bg-zinc-700 select-none whitespace-nowrap"
+                className="block rounded-lg bg-zinc-800 px-20 md:px-32 py-1 text-center md:text-xl text-white lowercase hover:scale-105 hover:bg-zinc-700 select-none whitespace-nowrap"
                 target="_blank"
                 href={link.href}
               >

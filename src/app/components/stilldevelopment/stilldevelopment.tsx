@@ -4,7 +4,7 @@ import Image from "next/image"; // Import the Image component from Next.js.
 import React, { useState, useRef } from "react"; // Import React and the useState hook.
 import { Tooltip } from "@mui/material";
 import TicTacToe from "../game/tictactoe/TicTacToe"; // Import the TicTacToe component from a relative path.
-
+import { motion } from "framer-motion";
 export default function StillDevelopment() {
   // Define a default export function named StillDevelopment.
   const [showImage, setShowImage] = useState(true); // Create a state variable 'showImage' and a function 'setShowImage' to manage its value. Initialize 'showImage' as 'true'.
@@ -18,17 +18,19 @@ export default function StillDevelopment() {
             {/* If 'showImage' is true, display the following content */}
             <div className="relative group">
               {/* Create a div with relative positioning */}
-              <Image
-                unoptimized={true}
-                src={"/development.png"}
-                alt="Picture of the author"
-                width={300}
-                height={300}
-                className="rounded-3xl transition-transform transform scale-100 group-hover:scale-105"
-                onDragStart={(e) => e.preventDefault()}
-                onContextMenu={(e) => e.preventDefault()}
-                onSelect={(e) => e.preventDefault()}
-              />
+              <motion.div initial={{ scale: 0.9 }} animate={{ scale: 1 }}>
+                <Image
+                  unoptimized={true}
+                  src={"/development.png"}
+                  alt="Picture of the author"
+                  width={300}
+                  height={300}
+                  className="rounded-3xl transition-transform transform scale-100 group-hover:scale-105"
+                  onDragStart={(e) => e.preventDefault()}
+                  onContextMenu={(e) => e.preventDefault()}
+                  onSelect={(e) => e.preventDefault()}
+                />
+              </motion.div>
               {/* Display an image with specified dimensions and styling */}
             </div>
             <div className="mt-4 font-mono text-white text-sm hover:scale-105 text-center select-none">

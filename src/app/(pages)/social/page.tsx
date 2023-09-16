@@ -5,25 +5,59 @@ import socialLinks from "./links.json"; // Import an array of social links from 
 import { IconButton, Tooltip } from "@mui/material";
 import EmailIcon from "@mui/icons-material/Email";
 import TelegramIcon from "@mui/icons-material/Telegram";
+import { motion } from "framer-motion";
 
 export default function Social() {
+  const container = {
+    hidden: { opacity: 1, scale: 0 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const item = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+    },
+  };
   // Define a default export function named Social.
   return (
     <>
       <div className="min-h-screen flex flex-col items-center justify-center space-y-3">
-        <Image
-          unoptimized={true}
-          src={"/icon.png"}
-          alt="Picture of the author"
-          width={120}
-          height={120}
-          onDragStart={(e) => e.preventDefault()}
-          onContextMenu={(e) => e.preventDefault()}
-          onSelect={(e) => e.preventDefault()}
-        />
-        <ul className="space-y-2">
+        <motion.div
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{
+            type: "spring",
+            stiffness: 260,
+            damping: 20,
+          }}
+        >
+          <Image
+            unoptimized={true}
+            src={"/icon.png"}
+            alt="Picture of the author"
+            width={120}
+            height={120}
+            onDragStart={(e) => e.preventDefault()}
+            onContextMenu={(e) => e.preventDefault()}
+            onSelect={(e) => e.preventDefault()}
+          />
+        </motion.div>
+        <motion.ul
+          className="space-y-2 "
+          variants={container}
+          initial="hidden"
+          animate="visible"
+        >
           {socialLinks.map((link, index) => (
-            <li key={index}>
+            <motion.li variants={item} key={index}>
               <a
                 className="block rounded-lg bg-zinc-800 px-20 md:px-32 py-1 text-center md:text-xl text-white lowercase hover:scale-105 hover:bg-zinc-700 select-none whitespace-nowrap"
                 target="_blank"
@@ -31,10 +65,18 @@ export default function Social() {
               >
                 {link.name}
               </a>
-            </li>
+            </motion.li>
           ))}
-        </ul>
-        <div>
+        </motion.ul>
+        <motion.div
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{
+            type: "spring",
+            stiffness: 260,
+            damping: 20,
+          }}
+        >
           <Tooltip title="Send me an email!">
             <IconButton
               aria-label="delete"
@@ -57,7 +99,7 @@ export default function Social() {
               <TelegramIcon color="primary" />
             </IconButton>
           </Tooltip>
-        </div>
+        </motion.div>
       </div>
     </>
   );

@@ -7,7 +7,6 @@ import { Inter } from "next/font/google";
 import Header from "./components/header/header";
 // Import custom components.
 import Footer from "./components/footer/footer";
-import { initializeGTM } from "./helpers/gtm";
 
 // Initialize the Inter font with Latin subset.
 const inter = Inter({ subsets: ["latin"] });
@@ -24,12 +23,30 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  initializeGTM();
+  let GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
   return (
     // Define the HTML structure of the page with the language set to English.
     <html lang="en">
       {/* Set the shortcut icon for the page. */}
       <link rel="shortcut icon" href="/favicon.png" />
+      <head>
+        <script
+          async
+          src={`https://www.googletagmanager.com/gtag/js?id=${GTM_ID}`}
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag() {
+                dataLayer.push(arguments);
+              }
+              gtag("js", new Date());
+              gtag("config", "${GTM_ID}");
+            `,
+          }}
+        />
+      </head>
       {/* Start the page body with the Inter font applied. */}
       <body className={inter.className}>
         {/* Render the Header component. */}

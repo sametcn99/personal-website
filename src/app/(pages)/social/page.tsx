@@ -51,7 +51,7 @@ export default function Social() {
           />
         </motion.div>
         <motion.ul
-          className="space-y-2 "
+          className="space-y-4 "
           variants={container}
           initial="hidden"
           animate="visible"
@@ -59,7 +59,12 @@ export default function Social() {
           {socialLinks.map((link, index) => (
             <motion.li variants={item} key={index}>
               <a
-                className="block rounded-lg bg-zinc-800 px-20 md:px-32 py-1 text-center md:text-xl text-white lowercase hover:scale-105 hover:bg-zinc-700 select-none whitespace-nowrap"
+                className="block rounded-lg px-20 md:px-32 py-1
+                outline outline-slate-500 outline-offset-1 
+                text-center md:text-xl text-white lowercase select-none whitespace-nowrap
+                hover:bg-zinc-300 hover:text-black hover:scale-110 
+                transition-all duration-300
+                "
                 target="_blank"
                 href={link.href}
               >
@@ -69,6 +74,7 @@ export default function Social() {
           ))}
         </motion.ul>
         <motion.div
+        className="space-x-3"
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{
@@ -81,7 +87,7 @@ export default function Social() {
             <IconButton
               aria-label="delete"
               size="large"
-              className="hover:bg-zinc-700"
+              className="hover:bg-zinc-700 hover:scale-110"
               onClick={() =>
                 (window.location.href = "mailto:sametcn99@gmail.com")
               }
@@ -93,7 +99,7 @@ export default function Social() {
             <IconButton
               aria-label="delete"
               size="large"
-              className="hover:bg-zinc-700"
+              className="hover:bg-zinc-700 hover:scale-110"
               onClick={() => window.open("https://t.me/sametc0", "_blank")}
             >
               <TelegramIcon color="primary" />

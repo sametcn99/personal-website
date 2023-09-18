@@ -15,7 +15,7 @@ On this website, I'm actively involved in a comprehensive learning journey that 
 
 ## What I Learned While Developing This Website:
 
-**Here are the key tools and features used on this website:**
+**Here are the key tools and features used on this website**
 
 -   **React:** A JavaScript library for building user interfaces.
 -   **Framer Motion:** A motion library for React that provides animation capabilities.

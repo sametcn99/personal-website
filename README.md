@@ -13,9 +13,9 @@ On this website, I'm actively involved in a comprehensive learning journey that 
 **Social Media Links:** Stay connected with me across various social media platforms. Follow, like, or connect to keep up with my latest updates, thoughts, and shared content.
 **JavaScript Games:** Get ready for some interactive fun! Check out the collection of small JavaScript games that I've created for your entertainment. Challenge yourself and see if you can beat the high scores.
 
-## What I Learned While Developing This Website:
+## What I Learned While Developing This Website
 
-**Here are the key tools and features used on this website**
+**Here are the key tools and features used on this website:**
 
 -   **React:** A JavaScript library for building user interfaces.
 -   **Framer Motion:** A motion library for React that provides animation capabilities.

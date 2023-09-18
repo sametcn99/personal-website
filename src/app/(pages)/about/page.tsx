@@ -7,13 +7,14 @@ import Tooltip from "@mui/material/Tooltip";
 import { motion } from "framer-motion";
 
 export default function About() {
+  // Define an array of objects containing icon and description data
   const iconData = [
-    { icon: <FaReact />, description: "React" },
-    { icon: <FaNodeJs />, description: "Node.js" },
-    { icon: <FaCss3Alt />, description: "CSS" },
-    { icon: <FaHtml5 />, description: "HTML" },
-    { icon: <SiCsharp />, description: "C#" },
-    { icon: <BsFiletypeSql />, description: "SQL" },
+    { icon: <FaReact />, description: "React" }, // React icon with description
+    { icon: <FaNodeJs />, description: "Node.js" }, // Node.js icon with description
+    { icon: <FaCss3Alt />, description: "CSS" }, // CSS icon with description
+    { icon: <FaHtml5 />, description: "HTML" }, // HTML icon with description
+    { icon: <SiCsharp />, description: "C#" }, // C# icon with description
+    { icon: <BsFiletypeSql />, description: "SQL" }, // SQL icon with description
   ];
 
   return (

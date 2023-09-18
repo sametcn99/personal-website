@@ -1,14 +1,8 @@
 "use client";
-import { IconButton } from "@mui/material";
-import About from "./(pages)/about/page";
-import Social from "./(pages)/social/page";
-import ArrowCircleDownIcon from "@mui/icons-material/ArrowCircleDown";
+import React from "react";
+
+import Questions from "./components/questions/questions";
 
 export default function Home() {
-  return (
-    <div>
-      <About />
-      <Social />
-    </div>
-  );
+  return <Questions />;
 }

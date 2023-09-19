@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
-
-import Questions from "./components/questions/questions";
+import MarkdownPreview from "@uiw/react-markdown-preview";
+import { source } from "./content/readme";
 
 export default function Home() {
-  return <Questions />;
+  return <MarkdownPreview className="lg:p-36 pt-32 p-4" source={source} />;
 }

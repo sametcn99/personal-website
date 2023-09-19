@@ -13,13 +13,12 @@ export default function MarkdownCompoment() {
         );
         if (response.ok) {
           const markdownText: string = await response.text();
-          console.log("Markdown içeriği alındı.");
           setMarkdownContent(markdownText);
         } else {
-          console.error("Markdown içeriği alınamadı.");
+          console.error("Failed to retrieve Markdown content.");
         }
       } catch (error) {
-        console.error("Markdown içeriği çekilirken hata oluştu:", error);
+        console.error("Error pulling Markdown content:", error);
       }
     }
 

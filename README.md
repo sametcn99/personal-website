@@ -3,14 +3,19 @@ I'm using this website to enhance my web development skills. It's a valuable pla
 
 ## What I'm Testing on This Website
 
-On this website, I'm actively involved in a comprehensive learning journey that covers both back-end and front-end development. I'm honing my skills and expertise in these critical areas of web development. In the realm of back-end development, I'm delving into creating and managing server-side functionalities, databases, and server infrastructure. This involves mastering programming languages like TypeScript, JavaScript, or Node.js and working with frameworks like Next.js, Angular, or Express.js. Simultaneously, I'm immersing myself in front-end development, focusing on crafting engaging and user-friendly interfaces. This journey includes mastering HTML, CSS, JavaScript, and TypeScript, as well as using libraries and frameworks like React and Next.js to create responsive and visually appealing websites. In essence, this website is both a canvas for my ongoing learning process and a testament to my dedication to becoming a proficient web developer. I've also integrated Google Analytics to test and enhance my analytical skills in understanding visitor data and improving the user experience. Through continuous exploration, practice, and skill refinement, I'm committed to staying at the forefront of web development trends and technologies, ultimately striving for excellence in this dynamic and ever-evolving field.
+On this website, I'm actively involved in a comprehensive learning journey that covers both back-end and front-end development. I'm honing my skills and expertise in these critical areas of web development. In the realm of back-end development, I'm delving into creating and managing server-side functionalities, databases, and server infrastructure. This involves mastering programming languages like TypeScript, JavaScript, or Node.js and working with frameworks like Next.js, Angular, or Express.js. Simultaneously, I'm immersing myself in front-end development, focusing on crafting engaging and user-friendly interfaces. 
+
+This journey includes mastering HTML, CSS, JavaScript, and TypeScript, as well as using libraries and frameworks like React and Next.js to create responsive and visually appealing websites. In essence, this website is both a canvas for my ongoing learning process and a testament to my dedication to becoming a proficient web developer. I've also integrated Google Analytics to test and enhance my analytical skills in understanding visitor data and improving the user experience. Through continuous exploration, practice, and skill refinement, I'm committed to staying at the forefront of web development trends and technologies, ultimately striving for excellence in this dynamic and ever-evolving field.
 
 
 ## What's Inside This Website?
 
 **About Me:** In this section, you'll discover more about who I am, my background, interests, and what drives me. It's a great place to get to know the person behind the website.
+
 **My Projects:** Explore the various projects I've been involved in. From web development to creative endeavors, you'll find detailed descriptions, images, and links to explore further.
+
 **Social Media Links:** Stay connected with me across various social media platforms. Follow, like, or connect to keep up with my latest updates, thoughts, and shared content.
+
 **JavaScript Games:** Get ready for some interactive fun! Check out the collection of small JavaScript games that I've created for your entertainment. Challenge yourself and see if you can beat the high scores.
 
 ## What I Learned While Developing This Website

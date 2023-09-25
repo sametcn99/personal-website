@@ -1,9 +1,12 @@
 "use client";
 import MarkdownPreview from "@uiw/react-markdown-preview";
 import React, { useEffect, useState } from "react";
+import Box from "@mui/material/Box";
+import LinearProgress from "@mui/material/LinearProgress";
 
 export default function MarkdownCompoment() {
   const [markdownContent, setMarkdownContent] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     async function fetchMarkdownContent() {
@@ -14,6 +17,7 @@ export default function MarkdownCompoment() {
         if (response.ok) {
           const markdownText: string = await response.text();
           setMarkdownContent(markdownText);
+          setIsLoading(false);
         } else {
           console.error("Failed to retrieve Markdown content.");
         }
@@ -24,7 +28,11 @@ export default function MarkdownCompoment() {
 
     fetchMarkdownContent();
   }, []);
-  return (
+  return isLoading ? (
+    <Box sx={{ width: "100%" }}>
+      <LinearProgress />
+    </Box>
+  ) : (
     <MarkdownPreview className="lg:p-36 pt-32 p-4" source={markdownContent} />
   );
 }

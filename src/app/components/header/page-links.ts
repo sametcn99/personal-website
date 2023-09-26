@@ -1,7 +1,7 @@
-export const navLinks = [
-    // Create an array 'navLinks' containing navigation links as objects.
-    { label: "Home", href: "/" },
-    { label: "Social Links", href: "/social" },
-    { label: "Projects", href: "/projects" },
-    { label: "About", href: "/about" },
-  ];
+export const initialButtons = [
+  { id: 1, text: "Home", href: "/", active: false },
+  { id: 2, text: "Social", href: "/social", active: false },
+  { id: 3, text: "Blog", href: "/blog", active: false },
+  { id: 4, text: "Projects", href: "/projects", active: false },
+  { id: 5, text: "About", href: "/about", active: false },
+];

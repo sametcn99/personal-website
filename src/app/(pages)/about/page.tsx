@@ -1,7 +1,6 @@
 "use client";
 /* eslint-disable react/no-unescaped-entities */
 import { FaReact, FaNodeJs, FaCss3Alt, FaHtml5 } from "react-icons/fa";
-import { SiCsharp } from "react-icons/si";
 import { BsFiletypeSql } from "react-icons/bs";
 import Tooltip from "@mui/material/Tooltip";
 import { motion } from "framer-motion";
@@ -13,7 +12,6 @@ export default function About() {
     { icon: <FaNodeJs />, description: "Node.js" }, // Node.js icon with description
     { icon: <FaCss3Alt />, description: "CSS" }, // CSS icon with description
     { icon: <FaHtml5 />, description: "HTML" }, // HTML icon with description
-    { icon: <SiCsharp />, description: "C#" }, // C# icon with description
     { icon: <BsFiletypeSql />, description: "SQL" }, // SQL icon with description
   ];
 

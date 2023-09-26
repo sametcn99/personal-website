@@ -2,16 +2,9 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import { initialButtons } from "./page-links";
 
 const Header = () => {
-  // Define an array of initial buttons
-  const initialButtons = [
-    { id: 1, text: "Home", href: "/", active: false },
-    { id: 2, text: "Social", href: "/social", active: false },
-    { id: 3, text: "Projects", href: "/projects", active: false },
-    { id: 4, text: "About", href: "/about", active: false },
-  ];
-
   // Define state for buttons and a function to update the state
   const [buttons, setButtons] = useState(initialButtons);
 
@@ -30,22 +23,16 @@ const Header = () => {
   }, [pathname]);
 
   return (
-    <nav
-      className="fixed flex items-center justify-center space-x-4 scale-75 sm:scale-100 p-4 w-full rounded-full"
-      style={{
-        background:
-          "radial-gradient(circle, rgb(0, 0, 0) 0%, rgb(0, 0, 20) 50%, rgb(0, 0, 0) 100%)",
-      }}
-    >
+    <nav className="fixed flex items-center justify-center space-x-4 scale-75 sm:scale-100 p-4 w-full rounded-full">
       {buttons.map((button) => (
         // Create a Link component for each button
         <Link key={button.id} href={button.href}>
           <button
             // Apply CSS classes based on button state
-            className={`rounded-full text-white outline p-2 hover:bg-slate-500 ${
+            className={`rounded-full text-white outline p-2 hover:bg-slate-500 uppercase text-xs ${
               button.active
                 ? "bg-slate-500 text-slate-400 hover:bg-slate-500"
-                : ""
+                : "bg-black"
             }`}
           >
             {/* Display the button text */}

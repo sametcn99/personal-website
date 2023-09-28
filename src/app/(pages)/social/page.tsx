@@ -38,7 +38,7 @@ export default function Social() {
   return (
     <main className="min-h-screen flex flex-col items-center justify-center space-y-3">
       {/* Author image */}
-      <motion.div
+      <motion.figure
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{
@@ -54,8 +54,7 @@ export default function Social() {
           height={120}
           loading="lazy"
         />
-      </motion.div>
-
+      </motion.figure>
       {/* Social links */}
       <motion.ul
         className="space-y-4"
@@ -82,7 +81,7 @@ export default function Social() {
       </motion.ul>
 
       {/* Contact buttons */}
-      <motion.div
+      <motion.footer
         className="space-x-3"
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
@@ -117,7 +116,7 @@ export default function Social() {
             <TelegramIcon color="primary" />
           </IconButton>
         </Tooltip>
-      </motion.div>
+      </motion.footer>
     </main>
   );
 }

@@ -25,7 +25,6 @@ export default function MarkdownCompoment() {
         console.error("Error pulling Markdown content:", error);
       }
     }
-
     fetchMarkdownContent();
   }, []);
   return isLoading ? (

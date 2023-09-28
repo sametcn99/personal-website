@@ -10,19 +10,9 @@ export default function StillDevelopment() {
       initial={{ scale: 0.9 }}
       animate={{ scale: 1 }}
     >
-      <figure>
-        <Image
-          unoptimized={true}
-          src={"/development.png"}
-          alt="Picture of the author"
-          width={300}
-          height={300}
-          className="rounded-3xl transition-transform transform scale-100"
-        />
-      </figure>
-      <figcaption className="mt-4 text-center font-mono text-white text-sm select-none">
-        This page is still in development!...
-      </figcaption>
+      <span className="mt-4 text-center font-bold text-slate-200 text-2xl select-none uppercase">
+        This page is still in development!..
+      </span>
     </motion.main>
   );
 }

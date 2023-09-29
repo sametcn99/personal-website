@@ -10,7 +10,6 @@ import socialLinks from "./links.json";
 import { IconButton, Tooltip } from "@mui/material";
 import EmailIcon from "@mui/icons-material/Email";
 import TelegramIcon from "@mui/icons-material/Telegram";
-import { FiShare } from "react-icons/fi";
 
 // Import the motion module from framer-motion library.
 import { motion } from "framer-motion";

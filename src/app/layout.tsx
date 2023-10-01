@@ -5,6 +5,7 @@ import "./styles/globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Header from "./components/header/header";
+import { Analytics } from '@vercel/analytics/react';
 // Import custom components.
 
 // Initialize the Inter font with Latin subset.
@@ -55,7 +56,7 @@ export default function RootLayout({
 
         {/* Render the children components, which will be the page content. */}
         {children}
-
+        <Analytics />
         {/* Render the Footer component. */}
       </body>
     </html>

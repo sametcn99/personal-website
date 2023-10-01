@@ -6,7 +6,7 @@ import projectItems from "./project-items.json";
 
 // CSS classes
 const mainClass =
-  "min-h-screen flex flex-col pt-24 items-center justify-center  select-none space-y-4 md:flex-row md:space-x-16 md:space-y-0 flex-wrap";
+  "min-h-screen flex flex-col pt-24 items-center justify-center select-none space-y-4 md:flex-row md:space-x-16 md:space-y-0 flex-wrap";
 const buttonClass =
   "w-60 h-60 bg-slate-900  text-white flex m-4 flex-col items-center justify-center text-xl font-bold uppercase text-center rounded-lg md:w-60 md:h-60 hover:bg-slate-800 hover:text-white transition duration-300 ease-in-out transform hover:scale-105";
 const spanClass = "text-xs m-5 font-normal";

@@ -5,7 +5,6 @@ export default function AdminPage() {
   const [password, setPassword] = useState("");
   const handleLogin = () => {
     const ADMIN_KEY = process.env.ADMIN_KEY;
-    console.log(ADMIN_KEY);
     switch (password.length) {
       case 23:
         if (ADMIN_KEY === password) {

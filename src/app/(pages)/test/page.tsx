@@ -1,5 +1,4 @@
 import { sql } from "@vercel/postgres";
-
 export default async function TestPage() {
   const { rows } = await sql`SELECT * from social_links`;
 

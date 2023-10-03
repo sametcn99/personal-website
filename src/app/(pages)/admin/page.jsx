@@ -21,7 +21,6 @@ export default function AdminPage() {
         console.log("Lütfen 24 karakterli bir şifre giriniz.");
     }
   };
-
   return (
     <main className="min-h-screen flex flex-col items-center justify-center text-black ">
       <div className="bg-white p-8 rounded shadow-md w-96">

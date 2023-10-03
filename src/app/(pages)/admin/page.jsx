@@ -5,8 +5,9 @@ export default function AdminPage() {
   const [password, setPassword] = useState("");
   const handleLogin = () => {
     const ADMIN_KEY = process.env.ADMIN_KEY;
+    console.log(ADMIN_KEY);
     switch (password.length) {
-      case 23:
+      case 24:
         if (ADMIN_KEY === password) {
           console.log("Giriş başarılı.");
         } else {
@@ -17,7 +18,7 @@ export default function AdminPage() {
         console.log("Lütfen bir şifre giriniz.");
         break;
       default:
-        console.log("Lütfen 23 karakterli bir şifre giriniz.");
+        console.log("Lütfen 24 karakterli bir şifre giriniz.");
     }
   };
 

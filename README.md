@@ -33,3 +33,4 @@ This journey includes mastering HTML, CSS, JavaScript, and TypeScript, as well a
 -   **Routing:** Next.js or a similar library is likely used for handling client-side routing between different pages.
 -   **State Management:** React's useState hook is used for managing state within functional components.
 -   **TypeScript (TS):** The primary programming language used in the project.
+-   **Postgres(SQL):** PostgreSQL  is an open-source database management system.

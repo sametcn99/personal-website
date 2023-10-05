@@ -1,8 +1,7 @@
-"use client";
 import React from "react";
 import Link from "next/link";
 import { Tooltip } from "@mui/material";
-import projectItems from "./project-items.json";
+import { sql } from "@vercel/postgres";
 
 // CSS classes
 const mainClass =
@@ -16,10 +15,11 @@ const categoryContainerClass = "flex flex-col items-center space-y-8  ";
 /**
  * Renders the ProjectsPage component.
  */
-export default function ProjectsPage() {
+export default async function ProjectsPage() {
   // Filters the project items based on the 'continue' property
-  const continueTrueItems = projectItems.filter((item) => item.continue);
-  const continueFalseItems = projectItems.filter((item) => !item.continue);
+  const { rows } = await sql`SELECT * from projects`;
+  const continueTrueItems = rows.filter((item) => item.continue);
+  const continueFalseItems = rows.filter((item) => !item.continue);
 
   return (
     <main className={mainClass}>

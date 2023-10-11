@@ -22,6 +22,9 @@ const Header = () => {
     );
   }, [pathname]);
 
+  if (pathname === "/portfolio") {
+    return null; // Return null to prevent rendering
+  }
   return (
     <nav className="fixed flex items-center justify-center space-x-4 scale-75 sm:scale-100 p-4 w-full rounded-full z-10">
       {buttons.map((button) => (

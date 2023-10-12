@@ -1,6 +1,3 @@
-![alt text](https://repository-images.githubusercontent.com/688643854/fff1f001-8912-46bd-b11c-f3bdf7c1ba66
-)
-
 ## Purpose of the Website
 I'm using this website to enhance my web development skills. It's a valuable platform where I can apply and expand my knowledge of web development by experimenting with various technologies, design principles, and interactive features. My goal is to showcase my abilities, share my passion for web development, and create an engaging online presence that reflects my evolving expertise in this field.
 

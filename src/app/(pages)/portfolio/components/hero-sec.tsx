@@ -4,11 +4,11 @@ export default function HeroSec() {
       className="h-screen w-screen flex flex-col justify-center items-center"
       id="hero-sec"
     >
-      <span className="text-white text-center ">
+      <span className="text-white text-center space-y-2">
         <h1 className="text-5xl font-bold">
-          Hello! I&apos;m a Full-Stack Web Developer
+          Hello!
+          <br /> I&apos;m a Full-Stack Software Developer
         </h1>
-        <br />
         <h2 className="text-3xl">Welcome to my portfolio!</h2>
       </span>
     </div>

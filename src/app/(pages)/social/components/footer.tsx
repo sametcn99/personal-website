@@ -2,6 +2,10 @@ import { IconButton, Tooltip } from "@mui/material";
 import EmailIcon from "@mui/icons-material/Email";
 import TelegramIcon from "@mui/icons-material/Telegram";
 
+/**
+ * Renders the footer component with email and Telegram buttons.
+ * @returns The footer component.
+ */
 export default function FooterComponent() {
   return (
     <footer className="space-x-3">

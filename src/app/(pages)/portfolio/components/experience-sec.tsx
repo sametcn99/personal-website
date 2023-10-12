@@ -1,3 +1,7 @@
+/**
+ * Renders the experience section of the portfolio page, including internship details and skills learned.
+ * @returns JSX element
+ */
 export default function ExperienceSec() {
   return (
     <div className="h-screen flex flex-col justify-center items-center" >

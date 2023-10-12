@@ -1,3 +1,7 @@
+/**
+ * Renders the Education section of the portfolio page, including the user's education information and a list of skills learned at university.
+ * @returns JSX element
+ */
 export default function EducationSec() {
   const items = [
     "C#",

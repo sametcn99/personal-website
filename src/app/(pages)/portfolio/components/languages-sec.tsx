@@ -3,7 +3,17 @@ import LinearProgress, {
 } from "@mui/material/LinearProgress";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+
+/**
+ * A component that displays the user's language proficiency levels.
+ * @returns JSX.Element
+ */
 export default function LanguagesSec() {
+  /**
+   * A customized LinearProgress component that displays the progress bar with a label.
+   * @param props - LinearProgressProps & { value: number }
+   * @returns JSX.Element
+   */
   function LinearProgressWithLabel(
     props: LinearProgressProps & { value: number }
   ) {
@@ -20,6 +30,7 @@ export default function LanguagesSec() {
       </Box>
     );
   }
+
   return (
     <div className="h-screen flex flex-col justify-center items-center select-none">
       <div className="relative text-white ">

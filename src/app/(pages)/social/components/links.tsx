@@ -1,6 +1,10 @@
 import { sql } from "@vercel/postgres";
 
 export default async function LinkTable() {
+  /**
+   * Fetches all social links from the database.
+   * @returns {Promise<Object>} A promise that resolves to an object containing the rows of the social_links table.
+   */
   const { rows } = await sql`SELECT * from social_links`;
   return (
     <ul className="space-y-4">

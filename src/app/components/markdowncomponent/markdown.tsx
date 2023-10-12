@@ -7,7 +7,11 @@ import LinearProgress from "@mui/material/LinearProgress";
 export default function MarkdownCompoment() {
   const [markdownContent, setMarkdownContent] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  async function fetchMarkdownContent() {
+  /**
+   * Fetches the markdown content from a specified URL and sets it as the state of the component.
+   * @returns {Promise<void>}
+   */
+  async function fetchMarkdownContent(): Promise<void> {
     try {
       const response = await fetch(
         "https://raw.githubusercontent.com/sametcn99/personal-website/master/README.md"

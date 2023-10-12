@@ -1,3 +1,7 @@
+/**
+ * Renders the hero section of the portfolio page.
+ * @returns JSX element
+ */
 export default function HeroSec() {
   return (
     <div

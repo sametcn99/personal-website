@@ -3,6 +3,10 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import EmailIcon from "@mui/icons-material/Email";
 
+/**
+ * Renders the Contact section of the Portfolio page.
+ * @returns JSX.Element
+ */
 export default function ContactSec() {
   return (
     <div className="h-screen flex flex-col justify-center items-center space-y-6">

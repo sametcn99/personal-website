@@ -1,5 +1,10 @@
 import { sql } from "@vercel/postgres";
 
+/**
+ * Renders the AdminComponent which fetches social links from the database and displays them in a list.
+ * @returns {JSX.Element} The rendered AdminComponent.
+ */
+
 export default async function AdminComponent() {
   const { rows } = await sql`SELECT * from social_links`;
 

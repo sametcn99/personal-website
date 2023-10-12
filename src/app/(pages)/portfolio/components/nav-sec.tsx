@@ -1,3 +1,7 @@
+/**
+ * Renders the navigation section for the portfolio page.
+ * @returns A JSX element representing the navigation section.
+ */
 export default function NavSec() {
   const items = ["Education", "Experience", "Languages", "Contact"];
   return (

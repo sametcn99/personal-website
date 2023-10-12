@@ -2,6 +2,10 @@ import FigureComponent from "./components/figure";
 import FooterComponent from "./components/footer";
 import LinkTable from "./components/links";
 
+/**
+ * Renders the Social page component.
+ * @returns JSX element
+ */
 export default function Social() {
   return (
     <main className="min-h-screen flex flex-col items-center justify-center">

@@ -3,9 +3,14 @@ import { useState } from "react";
 
 export default function AdminPage() {
   const [password, setPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState(""); // Yeni hata mesajı state'i
+  const [errorMessage, setErrorMessage] = useState("");
   const ADMIN_KEY = process.env.NEXT_PUBLIC_ADMIN_KEY;
 
+  /**
+   * Handles the login process.
+   *
+   * @returns void
+   */
   const handleLogin = () => {
     switch (password.length) {
       case 24:

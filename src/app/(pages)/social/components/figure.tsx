@@ -1,5 +1,9 @@
 import Image from "next/image";
 
+/**
+ * Renders a figure component with an image of the author.
+ * @returns JSX element
+ */
 export default function FigureComponent() {
   return (
     <figure>

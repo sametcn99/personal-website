@@ -5,7 +5,7 @@ import EmailIcon from "@mui/icons-material/Email";
 
 export default function ContactSec() {
   return (
-    <section className="h-screen flex flex-col justify-center items-center space-y-6">
+    <section className="h-screen flex flex-col justify-center items-center space-y-6" id="contact-sec">
       <span className=" text-white text-center">
         <h1 className=" md:text-8xl lg:text-9xl text-7xl opacity-10 font-bold select-none">
           Contact

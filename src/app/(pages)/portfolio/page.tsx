@@ -1,3 +1,4 @@
+import React from "react";
 import ContactSec from "./components/contact-sec";
 import EducationSec from "./components/education-sec";
 import ExperienceSec from "./components/experience-sec";

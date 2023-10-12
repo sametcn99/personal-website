@@ -1,6 +1,6 @@
 export default function EducationSec() {
   return (
-    <section className="h-screen flex flex-col justify-center items-center">
+    <section className="h-screen flex flex-col justify-center items-center" id="education-sec">
       <span className="relative text-white ">
         <h1 className="absolute md:text-8xl lg:text-9xl text-7xl  opacity-10 font-bold select-none">
           Education

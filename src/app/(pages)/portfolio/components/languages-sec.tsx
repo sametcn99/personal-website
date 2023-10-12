@@ -31,11 +31,11 @@ export default function LanguagesSec() {
         <hr className="w-56 h-1 mx-auto my-4 bg-gray-700 border-0 rounded md:my-10" />
         <div className="text-4xl font-bold mt-20">English</div>
         <div className="text-3xl font-thin mb-4">Secondary Language</div>
-        <span>Reading %90</span>
+        <span className="text-white">Reading %90</span>
         <LinearProgressWithLabel value={90} />
-        <span>Writing %70</span>
+        <span className="text-white">Writing %70</span>
         <LinearProgressWithLabel value={70} />
-        <span>Speaking %55</span>
+        <span className="text-white">Speaking %55</span>
         <LinearProgressWithLabel value={55} />
       </div>
     </section>

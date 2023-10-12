@@ -4,15 +4,25 @@ import EducationSec from "./components/education-sec";
 import ExperienceSec from "./components/experience-sec";
 import HeroSec from "./components/hero-sec";
 import LanguagesSec from "./components/languages-sec";
+import NavSec from "./components/nav-sec";
 
 export default function Portfolio() {
   return (
     <main className="overflow-hidden">
       <HeroSec />
-      <EducationSec />
-      <ExperienceSec />
-      <LanguagesSec />
-      <ContactSec />
+      <NavSec />
+      <section id="Education">
+        <EducationSec />
+      </section>
+      <section id="Experience">
+        <ExperienceSec />
+      </section>
+      <section id="Languages">
+        <LanguagesSec />
+      </section>
+      <section id="Contact">
+        <ContactSec />
+      </section>
     </main>
   );
 }

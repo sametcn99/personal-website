@@ -1,6 +1,6 @@
 export default function HeroSec() {
   return (
-    <section
+    <div
       className="h-screen w-screen flex flex-col justify-center items-center"
       id="hero-sec"
     >
@@ -11,6 +11,6 @@ export default function HeroSec() {
         <br />
         <h2 className="text-3xl">Welcome to my portfolio!</h2>
       </span>
-    </section>
+    </div>
   );
 }

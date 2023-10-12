@@ -13,7 +13,7 @@ export default function LanguagesSec() {
           <LinearProgress variant="determinate" {...props} />
         </Box>
         <Box sx={{ minWidth: 35 }}>
-          <Typography variant="body2" color="text.secondary">{`${Math.round(
+          <Typography variant="body2" color="fff">{`${Math.round(
             props.value
           )}%`}</Typography>
         </Box>
@@ -21,7 +21,7 @@ export default function LanguagesSec() {
     );
   }
   return (
-    <section className="h-screen flex flex-col justify-center items-center">
+    <div className="h-screen flex flex-col justify-center items-center select-none">
       <div className="relative text-white ">
         <div className="absolute md:text-8xl lg:text-9xl text-7xl opacity-10 font-bold select-none">
           Languages
@@ -38,6 +38,6 @@ export default function LanguagesSec() {
         <span>Speaking</span>
         <LinearProgressWithLabel value={55} />
       </div>
-    </section>
+    </div>
   );
 }

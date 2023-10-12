@@ -1,6 +1,6 @@
 export default function ExperienceSec() {
   return (
-    <section className="h-screen flex flex-col justify-center items-center" id="experience-sec">
+    <div className="h-screen flex flex-col justify-center items-center" >
       <span className="relative text-white ">
         <h1 className="absolute md:text-8xl lg:text-9xl text-7xl opacity-10 font-bold select-none">
           Experience
@@ -14,13 +14,13 @@ export default function ExperienceSec() {
       </span>
       <hr className="w-56 h-1 mx-auto my-16 bg-gray-700 border-0 rounded" />
       <span className="text-white font-bold text-4xl text-center">
-        The things I used & learned at internship.
+        Things I used & learned at internship.
       </span>
       <p className="text-white font-thin text-2xl text-center mt-3 sm:mx-20 md:mx-40 lg:mx-80">
         During my internship, I participated as a developer in an Artificial
         Intelligence and Image Processing-based Android application development
         project with our intern team.
       </p>
-    </section>
+    </div>
   );
 }

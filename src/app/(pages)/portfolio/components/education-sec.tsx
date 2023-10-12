@@ -1,6 +1,15 @@
 export default function EducationSec() {
+  const items = [
+    "C#",
+    "Python",
+    "JavaScript",
+    "Java",
+    "MSSQL",
+    "MySQL",
+    "Asp.NET",
+  ];
   return (
-    <section className="h-screen flex flex-col justify-center items-center" id="education-sec">
+    <div className="h-screen flex flex-col justify-center items-center">
       <span className="relative text-white ">
         <h1 className="absolute md:text-8xl lg:text-9xl text-7xl  opacity-10 font-bold select-none">
           Education
@@ -13,10 +22,16 @@ export default function EducationSec() {
       <span className="text-white font-bold text-4xl text-center">
         The things I learned at university
       </span>
-      <p className="text-white font-thin text-2xl text-center mt-3">
-        C# &#9900; Python &#9900; JavaScript &#9900; Java &#9900; MSSQL &#9900;
-        MySQL &#9900; Asp.NET
-      </p>
-    </section>
+      <div className="flex flex-row flex-wrap mt-5 select-none">
+        {items.map((item) => (
+          <p
+            key={item}
+            className="bg-slate-700 rounded-3xl px-2 py-1 text-base hover:scale-105 font-thin hover:font-normal text-white m-2"
+          >
+            {item}
+          </p>
+        ))}
+      </div>
+    </div>
   );
 }

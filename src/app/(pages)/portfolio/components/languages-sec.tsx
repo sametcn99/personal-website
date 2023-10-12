@@ -27,7 +27,7 @@ export default function LanguagesSec() {
           Languages
         </div>
         <div className="text-4xl font-bold mt-20">Turkish</div>
-        <div className="text-3xl font-thin">Mother Language</div>
+        <div className="text-3xl font-thin">Native Language</div>
         <hr className="w-56 h-1 mx-auto my-4 bg-gray-700 border-0 rounded md:my-10" />
         <div className="text-4xl font-bold mt-20">English</div>
         <div className="text-3xl font-thin mb-4">Secondary Language</div>

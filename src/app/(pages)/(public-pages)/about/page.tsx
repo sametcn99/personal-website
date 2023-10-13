@@ -1,4 +1,4 @@
-import MarkdownComponent from "../../components/markdowncomponent/markdown";
+import MarkdownComponent from "../../../components/markdowncomponent/markdown";
 
 /**
  * Renders the About page component.

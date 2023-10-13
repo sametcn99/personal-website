@@ -26,7 +26,7 @@ export default function EducationSec() {
       <span className="text-white font-bold text-4xl text-center">
         The things I learned at university
       </span>
-      <div className="flex flex-row flex-wrap mt-5 select-none space-x-2">
+      <div className="flex flex-row flex-wrap mt-5 select-none space-x-2 justify-center items-center">
         {items.map((item) => (
           <p
             key={item}

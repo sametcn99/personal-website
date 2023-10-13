@@ -1,7 +1,8 @@
 "use client";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import hello from "../../lib/hello.json";
-import { useEffect, useState } from "react";
+import Tooltip from "@mui/material/Tooltip";
 
 /**
  * Renders the hero section of the portfolio page.
@@ -9,27 +10,29 @@ import { useEffect, useState } from "react";
  */
 export default function HeroSec() {
   const [greeting, setGreeting] = useState("Hello World");
+  const [greetingLanguage, setGreetingLanguage] = useState("English");
+
   const greetingsArray = Object.values(hello.greetings);
+  const greetingLanguageArray = Object.keys(hello.greetings);
+  const [hovering, setHovering] = useState(false); // New state variable
 
   useEffect(() => {
-    /**
-     * Sets a random greeting from an array of greetings every second using setInterval.
-     */
     const interval = setInterval(() => {
-      const randomIndex = Math.floor(Math.random() * greetingsArray.length);
-      const randomGreeting = greetingsArray[randomIndex];
-      setGreeting(randomGreeting);
-    }, 1000);
+      if (!hovering) {
+        // Check if not hovering
+        const randomIndex = Math.floor(Math.random() * greetingsArray.length);
+        const randomGreeting = greetingsArray[randomIndex];
+        const randomGreetingLanguage = greetingLanguageArray[randomIndex];
+        setGreetingLanguage(randomGreetingLanguage);
+        setGreeting(randomGreeting);
+      }
+    }, 800);
     return () => clearInterval(interval);
-  }, [greetingsArray]);
+  }, [greetingLanguageArray, greetingsArray, hovering]);
 
   useEffect(() => {
-    /**
-     * Scrolls the window to a specific position and then back to the top after a delay.
-     * @param {number} delay - The delay in milliseconds before scrolling back to the top.
-     */
     const timeout = setTimeout(() => {
-      window.scrollTo(0, 100);
+      window.scrollTo(0, 150);
       setTimeout(() => {
         window.scrollTo(0, 0);
       }, 1000);
@@ -48,11 +51,18 @@ export default function HeroSec() {
         width={500}
         height={500}
         loading="lazy"
-        className="absolute flex justify-center items-center"
+        className="absolute flex justify-center items-center lg:scale-100 md:scale-75 sm:scale-50 scale-50"
       />
-      <span className="text-white text-center space-y-2 z-10">
+      <span className="text-white text-center space-y-2 z-10 lg:scale-100 md:scale-90 scale-75">
         <h1 className="text-5xl font-bold">
-          <span>{greeting}</span>
+          <Tooltip title={greetingLanguage} followCursor>
+            <span
+              onMouseEnter={() => setHovering(true)}
+              onMouseLeave={() => setHovering(false)}
+            >
+              {greeting}
+            </span>
+          </Tooltip>
           <br />
           <span>I&apos;m a Full-Stack Software Developer</span>
           <br />

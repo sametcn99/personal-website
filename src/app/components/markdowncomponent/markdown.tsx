@@ -35,6 +35,6 @@ export default function MarkdownCompoment() {
       <LinearProgress />
     </Box>
   ) : (
-    <MarkdownPreview className="lg:p-36 pt-32 p-4" source={markdownContent} />
+    <MarkdownPreview className="px-6" source={markdownContent} />
   );
 }

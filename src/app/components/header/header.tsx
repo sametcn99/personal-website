@@ -28,13 +28,13 @@ const Header = () => {
   }
 
   return (
-    <nav className="sticky top-0 flex items-center justify-center space-x-4 scale-75 sm:scale-100 p-4 w-full rounded-full">
+    <nav className="sticky top-0 z-10 flex items-center justify-center">
       {buttons.map((button) => (
         // Create a Link component for each button
         <Link key={button.id} href={button.href}>
           <button
             // Apply CSS classes based on button state
-            className={`rounded-full text-white outline p-2 hover:bg-slate-500 uppercase text-xs ${
+            className={`rounded-full text-white outline p-2 hover:bg-slate-500 uppercase text-xs m-2 ${
               button.active
                 ? "bg-slate-500 text-slate-400 hover:bg-slate-500"
                 : "bg-black"

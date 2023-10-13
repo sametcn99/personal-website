@@ -32,7 +32,7 @@ export default function HeroSec() {
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      window.scrollTo(0, 250);
+      window.scrollTo(0, 175);
       setTimeout(() => {
         window.scrollTo(0, 0);
       }, 1000);

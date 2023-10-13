@@ -19,6 +19,7 @@ export default async function LinkTable() {
             transition-all duration-300"
             target="_blank"
             href={link.href}
+            rel="noopener noreferrer"
           >
             {link.name}
           </a>

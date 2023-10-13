@@ -22,6 +22,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/components/game/tictactoe/TicTacToe.js", "src/app/components/header/header.s", "src/app/components/game/tictactoe/utils/utils.js", "src/app/helpers/gtm.js", "src/app/page.tsx", "src/app/(pages)/admin/login/page.tsx", "src/app/(pages)/admin/get-admin-key.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/components/game/tictactoe/TicTacToe.js", "src/app/components/header/header.s", "src/app/components/game/tictactoe/utils/utils.js", "src/app/helpers/gtm.js", "src/app/page.tsx", "src/app/(pages)/admin/login/page.tsx", "src/app/(pages)/admin/get-admin-key.js", "src/app/components/header/test_header.jsx"],
   "exclude": ["node_modules"]
 }

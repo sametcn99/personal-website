@@ -1,4 +1,5 @@
 import MarkdownComponent from "../../../components/markdowncomponent/markdown";
+import "../../../styles/globals.css";
 
 /**
  * Renders the About page component.
@@ -6,9 +7,8 @@ import MarkdownComponent from "../../../components/markdowncomponent/markdown";
  */
 export default function About() {
   return (
-
-    <main className="mx-40 border-t-8 border-x-8 mt-4 rounded-t-md">
+    <main className="mx-2 md:mx-16 lg:mx-40 pt-4 animated-gradient px-4">
       <MarkdownComponent />
     </main>
-  )
+  );
 }

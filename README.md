@@ -34,3 +34,4 @@ This journey includes mastering HTML, CSS, JavaScript, and TypeScript, as well a
 -   **State Management:** React's useState hook is used for managing state within functional components.
 -   **TypeScript (TS):** The primary programming language used in the project.
 -   **Postgres(SQL):** PostgreSQL  is an open-source database management system.
+##

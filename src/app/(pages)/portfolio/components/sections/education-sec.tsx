@@ -26,11 +26,11 @@ export default function EducationSec() {
       <span className="text-white font-bold text-4xl text-center">
         The things I learned at university
       </span>
-      <div className="flex flex-row flex-wrap mt-5 select-none">
+      <div className="flex flex-row flex-wrap mt-5 select-none space-x-2">
         {items.map((item) => (
           <p
             key={item}
-            className="bg-slate-700 rounded-3xl px-2 py-1 text-base hover:scale-105 font-thin hover:font-normal text-white m-2"
+            className="bg-slate-700 rounded-3xl text-base hover:scale-105 font-thin text-white px-2 "
           >
             {item}
           </p>

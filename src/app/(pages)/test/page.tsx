@@ -1,4 +1,4 @@
-import NavSec from "../portfolio/components/nav-sec";
+import NavSec from "../portfolio/components/sections/nav-sec";
 
 export default function TestPage() {
   return (

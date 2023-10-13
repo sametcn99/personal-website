@@ -1,9 +1,9 @@
-import ContactSec from "./components/contact-sec";
-import EducationSec from "./components/education-sec";
-import ExperienceSec from "./components/experience-sec";
-import HeroSec from "./components/hero-sec";
-import LanguagesSec from "./components/languages-sec";
-import NavSec from "./components/nav-sec";
+import ContactSec from "./components/sections/contact-sec";
+import EducationSec from "./components/sections/education-sec";
+import ExperienceSec from "./components/sections/experience-sec";
+import HeroSec from "./components/sections/hero-sec";
+import LanguagesSec from "./components/sections/languages-sec";
+import NavSec from "./components/sections/nav-sec";
 
 /**
  * Renders the Portfolio page with sections for Education, Experience, Languages, and Contact.

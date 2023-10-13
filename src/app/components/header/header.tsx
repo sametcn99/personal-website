@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import { initialButtons } from "./page-links";
+import { initialButtons } from "./lib/page-links";
 
 const Header = () => {
   // Define state for buttons and a function to update the state

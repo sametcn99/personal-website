@@ -55,7 +55,7 @@ export default function HeroSec() {
       />
       <span className="text-white text-center space-y-2 z-10 lg:scale-100 md:scale-90 scale-75">
         <h1 className="text-5xl font-bold">
-          <Tooltip title={greetingLanguage} followCursor enterTouchDelay={0}>
+          <Tooltip title={greetingLanguage} followCursor enterTouchDelay={0} leaveTouchDelay={5000}>
             <span
               onMouseEnter={() => setHovering(true)}
               onMouseLeave={() => setHovering(false)}

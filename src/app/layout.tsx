@@ -16,6 +16,9 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "sametcc.me",
   description: "This is my personal website. Created with Next.js.",
+  keywords: "personal website, Next.js, web development, ui design, sametcc.me, sametcc, samet can cıncık, sametc0",
+  applicationName: "sametcc.me",
+  creator: "Samet Can Cıncık",
 };
 
 // Define the root layout component.

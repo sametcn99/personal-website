@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-sync-scripts */
 // Import global styles from the "globals.css" file.
 import "./styles/globals.css";
 
@@ -30,16 +31,16 @@ export default function RootLayout({
       {/* Set the shortcut icon for the page. */}
       <link rel="shortcut icon" href="/favicon.png" />
       <head>
+      <script
+      data-project-id="JmE0mkHux7ORm1KAUKK48z6eZd6QjHjiKyJTqg6b"
+      src="https://snippet.meticulous.ai/v1/meticulous.js"
+      />
         {/* Load the Google Tag Manager script asynchronously */}
         <script
           async
           src={`https://www.googletagmanager.com/gtag/js?id=${GTM_ID}`}
         />
-        <script
-          data-project-id={`JmE0mkHux7ORm1KAUKK48z6eZd6QjHjiKyJTqg6b`}
-          src={`https://snippet.meticulous.ai/v1/meticulous.js`}
-          async
-        />
+
         {/* Initialize the dataLayer and configure the Google Tag Manager */}
         <script
           dangerouslySetInnerHTML={{

@@ -30,6 +30,8 @@ export default function RootLayout({
     <html lang="en">
       {/* Set the shortcut icon for the page. */}
       <link rel="shortcut icon" href="/favicon.png" />
+      <meta property="og:image" content="/thumbnail.png" />
+      <meta name="twitter:card" content="/thumbnail.png"></meta>
       <head>
       <script
       data-project-id="JmE0mkHux7ORm1KAUKK48z6eZd6QjHjiKyJTqg6b"

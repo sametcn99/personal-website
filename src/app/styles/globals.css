@@ -25,3 +25,52 @@ html {
     background-position: -200% 0;
   }
 }
+
+list-item-animation:nth-child(1) {
+  animation-delay: 100ms;
+}
+list-item-animation:nth-child(2) {
+  animation-delay: 200ms;
+}
+list-item-animation:nth-child(3) {
+  animation-delay: 300ms;
+}
+list-item-animation:nth-child(4) {
+  animation-delay: 400ms;
+}
+list-item-animation:nth-child(5) {
+  animation-delay: 500ms;
+}
+list-item-animation:nth-child(6) {
+  animation-delay: 500ms;
+}
+list-item-animation:nth-child(6) {
+  animation-delay: 600ms;
+}
+list-item-animation:nth-child(7) {
+  animation-delay: 700ms;
+}
+
+@keyframes listItemFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Listeye animasyonu uygulama */
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  animation: listItemFadeIn 0.5s ease forwards; /* Animasyon süresi ve geçiş efekti ayarları */
+  opacity: 0;
+  transform: translateX(-10px);
+}

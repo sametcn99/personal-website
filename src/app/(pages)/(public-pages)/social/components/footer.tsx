@@ -1,6 +1,7 @@
 import { IconButton, Tooltip } from "@mui/material";
 import EmailIcon from "@mui/icons-material/Email";
 import TelegramIcon from "@mui/icons-material/Telegram";
+import applyDelayedAnimation from "@/app/styles/lib/list-item-delay";
 
 /**
  * Renders the footer component with email and Telegram buttons.
@@ -8,7 +9,7 @@ import TelegramIcon from "@mui/icons-material/Telegram";
  */
 export default function FooterComponent() {
   return (
-    <footer className="space-x-3">
+    <footer className="space-x-3" >
       {/* Email button */}
       <Tooltip title="Send me an email!">
         <a href="mailto:sametcn99@gmail.com">

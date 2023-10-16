@@ -1,6 +1,6 @@
 import { sql } from "@vercel/postgres";
 import "../../../../styles/globals.css";
-import applyDelayedAnimation from "@/app/styles/list-item-delay";
+import applyDelayedAnimation from "@/app/styles/lib/list-item-delay";
 
 
 export default async function LinkTable() {
@@ -12,10 +12,9 @@ export default async function LinkTable() {
   return (
     <ul className="space-y-4">
       {rows.map((link, index) => (
-        <li key={index} style={applyDelayedAnimation(index)}>
+        <li key={index} style={applyDelayedAnimation(index, 0.1)}>
           <a
             className="
-            list-item-animation 
             block rounded-lg px-20 md:px-32 py-1
             outline outline-slate-500 outline-offset-1 
             text-center md:text-xl text-white lowercase select-none whitespace-nowrap

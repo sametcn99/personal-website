@@ -53,9 +53,14 @@ export default function HeroSec() {
         loading="lazy"
         className="absolute flex justify-center items-center lg:scale-100 md:scale-75 sm:scale-50 scale-50"
       />
-      <span className="text-white text-center space-y-2 z-10 lg:scale-100 md:scale-90 scale-75">
+      <span className="text-white text-center space-y-7 z-10 lg:scale-100 md:scale-90 scale-75">
         <h1 className="text-5xl font-bold">
-          <Tooltip title={greetingLanguage} followCursor enterTouchDelay={0} leaveTouchDelay={5000}>
+          <Tooltip
+            title={greetingLanguage}
+            followCursor
+            enterTouchDelay={0}
+            leaveTouchDelay={5000}
+          >
             <span
               onMouseEnter={() => setHovering(true)}
               onMouseLeave={() => setHovering(false)}
@@ -63,7 +68,8 @@ export default function HeroSec() {
               {greeting}
             </span>
           </Tooltip>
-          <br />
+        </h1>
+        <h1 className="text-5xl font-bold">
           <span>I&apos;m a Full-Stack Software Developer</span>
           <br />
           <span className="text-3xl">Welcome to my portfolio!</span>

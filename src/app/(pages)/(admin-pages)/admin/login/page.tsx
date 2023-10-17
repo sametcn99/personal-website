@@ -1,10 +1,13 @@
 "use client";
 import { useState } from "react";
+import Cookies from 'js-cookie'
+import { useRouter } from "next/navigation";
 
 export default function AdminPage() {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const ADMIN_KEY = process.env.NEXT_PUBLIC_ADMIN_KEY;
+  const router = useRouter()
 
   /**
    * Handles the login process.
@@ -16,6 +19,7 @@ export default function AdminPage() {
       case 24:
         if (ADMIN_KEY === password) {
           setErrorMessage("");
+          optIn();
         } else {
           setErrorMessage("Login unsuccessful.");
         }
@@ -27,6 +31,13 @@ export default function AdminPage() {
         setErrorMessage("Please enter a 24-character password.");
     }
   };
+
+
+  const optIn = () => {
+    Cookies.set('admin', 'true')
+    console.log('opted in')
+    router.refresh()
+  }
   return (
     <main className="min-h-screen flex flex-col items-center justify-center text-black select-none bg-black">
       <div className="bg-white bg-opacity-5 p-8 rounded w-96">

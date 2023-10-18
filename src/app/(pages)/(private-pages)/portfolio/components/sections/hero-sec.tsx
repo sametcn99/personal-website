@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import hello from "../../lib/hello.json";
 import Tooltip from "@mui/material/Tooltip";
+import { usePathname } from "next/navigation";
 
 /**
  * Renders the hero section of the portfolio page.
@@ -11,10 +12,23 @@ import Tooltip from "@mui/material/Tooltip";
 export default function HeroSec() {
   const [greeting, setGreeting] = useState("Hello World");
   const [greetingLanguage, setGreetingLanguage] = useState("English");
-
+  const pathname = usePathname();
   const greetingsArray = Object.values(hello.greetings);
   const greetingLanguageArray = Object.keys(hello.greetings);
-  const [hovering, setHovering] = useState(false); // New state variable
+  const [hovering, setHovering] = useState(false);
+
+  useEffect(() => {
+    const pathnames = ["/", "/portfolio"];
+    const timeout = setTimeout(() => {
+      if (pathnames.includes(pathname)) {
+        window.scrollTo(0, 175);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+        }, 1000);
+      }
+    }, 1000);
+    return () => clearTimeout(timeout);
+  }, [pathname]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -29,16 +43,6 @@ export default function HeroSec() {
     }, 800);
     return () => clearInterval(interval);
   }, [greetingLanguageArray, greetingsArray, hovering]);
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      window.scrollTo(0, 175);
-      setTimeout(() => {
-        window.scrollTo(0, 0);
-      }, 1000);
-    }, 1000);
-    return () => clearTimeout(timeout);
-  }, []);
 
   return (
     <div

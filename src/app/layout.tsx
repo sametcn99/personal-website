@@ -7,6 +7,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Header from "./components/header/header";
 import { Analytics } from "@vercel/analytics/react";
+import { GoogleTagManager } from "./lib/gtag-manager";
 // Import custom components.
 
 // Initialize the Inter font with Latin subset.
@@ -16,7 +17,8 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "sametcc.me",
   description: "This is my personal website. Created with Next.js.",
-  keywords: "personal website, Next.js, web development, ui design, sametcc.me, sametcc, samet can cıncık, sametc0",
+  keywords:
+    "personal website, Next.js, web development, ui design, sametcc.me, sametcc, samet can cıncık, sametc0",
   applicationName: "sametcc.me",
   creator: "Samet Can Cıncık",
 };
@@ -36,29 +38,7 @@ export default function RootLayout({
       <meta property="og:image" content="/thumbnail.png" />
       <meta name="twitter:card" content="/thumbnail.png"></meta>
       <head>
-      <script
-      data-project-id="JmE0mkHux7ORm1KAUKK48z6eZd6QjHjiKyJTqg6b"
-      src="https://snippet.meticulous.ai/v1/meticulous.js"
-      />
-        {/* Load the Google Tag Manager script asynchronously */}
-        <script
-          async
-          src={`https://www.googletagmanager.com/gtag/js?id=${GTM_ID}`}
-        />
-
-        {/* Initialize the dataLayer and configure the Google Tag Manager */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag() {
-                dataLayer.push(arguments);
-              }
-              gtag("js", new Date());
-              gtag("config", "${GTM_ID}");
-            `,
-          }}
-        />
+        <GoogleTagManager GTM_ID={GTM_ID} />
       </head>
       {/* Start the page body with the Inter font applied. */}
       <body className={inter.className}>

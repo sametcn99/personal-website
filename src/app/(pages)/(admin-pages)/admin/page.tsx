@@ -1,8 +1,12 @@
-import AdminComponent from "./components/admin-component";
+import StillDevelopment from "@/app/components/stilldevelopment/stilldevelopment";
 /**
  * Renders the Admin page component.
  * @returns JSX element
  */
 export default function AdminPage() {
-  return <AdminComponent />;
+  return (
+    <div>
+      <StillDevelopment />
+    </div>
+  );
 }

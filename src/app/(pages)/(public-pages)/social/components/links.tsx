@@ -2,13 +2,12 @@ import { sql } from "@vercel/postgres";
 import "../../../../styles/globals.css";
 import applyDelayedAnimation from "@/app/styles/lib/list-item-delay";
 
-
 export default async function LinkTable() {
   /**
    * Fetches all social links from the database.
    * @returns {Promise<Object>} A promise that resolves to an object containing the rows of the social_links table.
    */
-  const { rows } = await sql`SELECT * from social_links`;
+  const { rows } = await sql`SELECT * from links ORDER BY id ASC;`;
   return (
     <ul className="space-y-4">
       {rows.map((link, index) => (

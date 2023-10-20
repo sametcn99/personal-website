@@ -1,6 +1,7 @@
 import { sql } from "@vercel/postgres";
 import "../../../../styles/globals.css";
 import applyDelayedAnimation from "@/app/styles/lib/list-item-delay";
+import prisma from "../../../../../../lib/prisma";
 
 export default async function LinkTable() {
   /**

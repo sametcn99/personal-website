@@ -28,3 +28,9 @@ model User {
   posts         Post[]
   @@map(name: "users")
 }
+
+model Links {
+  id    Int    @unique
+  name  String @db.VarChar(50)
+  href String @db.VarChar(200)
+}

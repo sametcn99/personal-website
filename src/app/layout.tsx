@@ -29,7 +29,6 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  let GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
   return (
     // Define the HTML structure of the page with the language set to English.
     <html lang="en">
@@ -38,7 +37,7 @@ export default function RootLayout({
       <meta property="og:image" content="/thumbnail.png" />
       <meta name="twitter:card" content="/thumbnail.png"></meta>
       <head>
-        <GoogleTagManager GTM_ID={GTM_ID} />
+        <GoogleTagManager />
       </head>
       {/* Start the page body with the Inter font applied. */}
       <body className={inter.className}>
@@ -53,3 +52,4 @@ export default function RootLayout({
     </html>
   );
 }
+export const dynamic = "force-dynamic";

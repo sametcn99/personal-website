@@ -1,7 +1,8 @@
 // GoogleTagManager.js or GoogleTagManager.ts
 import React from "react";
 
-export function GoogleTagManager({ GTM_ID }) {
+export function GoogleTagManager() {
+  let GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
   return (
     <>
       <script

@@ -2,7 +2,7 @@ import { IconButton } from "@mui/material";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import EmailIcon from "@mui/icons-material/Email";
-
+import TelegramIcon from '@mui/icons-material/Telegram';
 /**
  * Renders the Contact section of the Portfolio page.
  * @returns JSX.Element
@@ -49,6 +49,19 @@ export default function ContactSec() {
             className="hover:bg-zinc-700 hover:scale-110"
           >
             <GitHubIcon color="primary" />
+          </IconButton>
+        </a>
+        <a
+          href="https://t.me/sametc0"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <IconButton
+            aria-label="delete"
+            size="large"
+            className="hover:bg-zinc-700 hover:scale-110"
+          >
+            <TelegramIcon color="primary" />
           </IconButton>
         </a>
       </footer>

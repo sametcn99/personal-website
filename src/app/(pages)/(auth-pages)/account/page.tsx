@@ -10,12 +10,21 @@ export default async function Account() {
   if (!session) {
     redirect("/login");
   }
+  let { data: profiles, error } = await supabase
+    .from("profiles")
+    .select("*")
+    .eq("id", session.user.id);
+  const profile = profiles?.[0]; // get the first profile from the array if it exists
+
   return (
     <form action="/auth/logout" method="post" className="max-w-sm mx-auto mt-8">
       <div>
-        <label htmlFor="email" className="block text-gray-700">
-          Email
-        </label>
+        {session.user.email}
+        <br />
+        {session.user.id}
+        <br />
+        {profile.role} {/* access the role property of the profile */}
+        <br />
         <button className="w-full bg-blue-500 text-white py-2 rounded-md">
           Logout
         </button>

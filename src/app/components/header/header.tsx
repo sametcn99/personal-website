@@ -18,7 +18,7 @@ const Header = () => {
         ...button,
         // Set the 'active' property to true if the button's href matches the current pathname
         active: button.href === pathname,
-      }))
+      })),
     );
   }, [pathname]);
 

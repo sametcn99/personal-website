@@ -4,6 +4,10 @@
 
 :root {
   background: rgb(3, 3, 41);
-  background: radial-gradient(circle, rgba(3, 3, 41, 1) 0%, rgba(0, 0, 0, 1) 100%);
+  background: radial-gradient(
+    circle,
+    rgba(3, 3, 41, 1) 0%,
+    rgba(0, 0, 0, 1) 100%
+  );
   color: #fff;
 }

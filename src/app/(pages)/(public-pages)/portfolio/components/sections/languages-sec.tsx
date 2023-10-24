@@ -15,7 +15,7 @@ export default function LanguagesSec() {
    * @returns JSX.Element
    */
   function LinearProgressWithLabel(
-    props: LinearProgressProps & { value: number }
+    props: LinearProgressProps & { value: number },
   ) {
     return (
       <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -24,7 +24,7 @@ export default function LanguagesSec() {
         </Box>
         <Box sx={{ minWidth: 35 }}>
           <Typography variant="body2" color="fff">{`${Math.round(
-            props.value
+            props.value,
           )}%`}</Typography>
         </Box>
       </Box>

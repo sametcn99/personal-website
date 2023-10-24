@@ -10,17 +10,21 @@ export default function TestComponent() {
     });
   };
   return (
-      <Tooltip title="Scroll Up" enterDelay={0} className="fixed bottom-4 right-4">
-        <IconButton
-          aria-label="delete"
-          size="large"
-          sx={{
-            color: "white",
-          }}
-          onClick={scrollToTop}
-        >
-          <BsArrowUpCircleFill />
-        </IconButton>
-      </Tooltip>
+    <Tooltip
+      title="Scroll Up"
+      enterDelay={0}
+      className="fixed bottom-4 right-4"
+    >
+      <IconButton
+        aria-label="delete"
+        size="large"
+        sx={{
+          color: "white",
+        }}
+        onClick={scrollToTop}
+      >
+        <BsArrowUpCircleFill />
+      </IconButton>
+    </Tooltip>
   );
 }

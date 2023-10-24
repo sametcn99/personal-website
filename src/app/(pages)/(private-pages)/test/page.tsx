@@ -1,6 +1,10 @@
+import { IconButton } from "@mui/material";
 import Modal from "./components/modal/modal";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
+import ArrowCircleUpIcon from "@mui/icons-material/ArrowCircleUp";
+import { BsArrowUpCircleFill } from "react-icons/bs";
+import TestComponent from "./components/modal/test-component/test-component";
 
 export default async function TestPage() {
   const supabase = createServerComponentClient({ cookies });
@@ -10,9 +14,6 @@ export default async function TestPage() {
   if (!session) {
     return <Modal />;
   }
-  return (
-    <main className="flex justify-center items-center flex-col text-center h-screen">
-      <h1>Test Page</h1>
-    </main>
-  );
+
+  return <TestComponent />;
 }

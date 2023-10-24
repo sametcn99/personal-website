@@ -1,3 +1,5 @@
+import TestPage from "../../(private-pages)/test/page";
+import ScrollToTop from "./components/scroll-up-button/scroll-up-button";
 import ContactSec from "./components/sections/contact-sec";
 import EducationSec from "./components/sections/education-sec";
 import ExperienceSec from "./components/sections/experience-sec";
@@ -12,6 +14,7 @@ import NavSec from "./components/sections/nav-sec";
 export default function Portfolio() {
   return (
     <main className="overflow-hidden">
+      <ScrollToTop />
       <HeroSec />
       <NavSec />
       <section id="Education">

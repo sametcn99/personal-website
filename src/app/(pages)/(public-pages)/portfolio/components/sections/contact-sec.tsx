@@ -9,18 +9,18 @@ import TelegramIcon from "@mui/icons-material/Telegram";
  */
 export default function ContactSec() {
   return (
-    <div className="h-screen flex flex-col justify-center items-center space-y-6">
-      <span className=" text-white text-center">
-        <h1 className=" md:text-8xl lg:text-9xl text-7xl opacity-10 font-bold select-none">
+    <div className="flex flex-col justify-center items-center space-y-6 h-screen">
+      <span className="text-center text-white">
+        <h1 className="text-7xl font-bold opacity-10 select-none md:text-8xl lg:text-9xl">
           Contact
         </h1>
       </span>
-      <footer className="scale-150 space-x-4">
+      <footer className="space-x-4 scale-150">
         <a href="mailto:sametcn99@gmail.com">
           <IconButton
             aria-label="delete"
             size="large"
-            className="hover:bg-zinc-700 hover:scale-110"
+            className="hover:scale-110 hover:bg-zinc-700"
           >
             <EmailIcon color="primary" />
           </IconButton>
@@ -33,7 +33,7 @@ export default function ContactSec() {
           <IconButton
             aria-label="delete"
             size="large"
-            className="hover:bg-zinc-700 hover:scale-110"
+            className="hover:scale-110 hover:bg-zinc-700"
           >
             <LinkedInIcon color="primary" />
           </IconButton>
@@ -46,7 +46,7 @@ export default function ContactSec() {
           <IconButton
             aria-label="delete"
             size="large"
-            className="hover:bg-zinc-700 hover:scale-110"
+            className="hover:scale-110 hover:bg-zinc-700"
           >
             <GitHubIcon color="primary" />
           </IconButton>
@@ -59,7 +59,7 @@ export default function ContactSec() {
           <IconButton
             aria-label="delete"
             size="large"
-            className="hover:bg-zinc-700 hover:scale-110"
+            className="hover:scale-110 hover:bg-zinc-700"
           >
             <TelegramIcon color="primary" />
           </IconButton>

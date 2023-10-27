@@ -8,7 +8,7 @@ import Greeting from "./greeting";
 export default function HeroSec() {
   return (
     <div
-      className="h-screen w-screen flex flex-col justify-center items-center select-none"
+      className="flex flex-col justify-center items-center w-screen h-screen select-none"
       id="hero-sec"
     >
       <Image
@@ -17,9 +17,9 @@ export default function HeroSec() {
         width={500}
         height={500}
         loading="lazy"
-        className="absolute flex justify-center items-center lg:scale-100 md:scale-75 sm:scale-50 scale-50"
+        className="flex absolute justify-center items-center scale-50 sm:scale-50 md:scale-75 lg:scale-100"
       />
-      <span className="text-white text-center space-y-7 z-10 lg:scale-100 md:scale-90 scale-75">
+      <span className="z-10 space-y-7 text-center text-white scale-75 md:scale-90 lg:scale-100">
         <Greeting />
         <h1 className="text-5xl font-bold">
           <span>I&apos;m a Full-Stack Software Developer</span>

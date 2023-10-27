@@ -28,7 +28,7 @@ const Header = () => {
   }
 
   return (
-    <nav className="sticky top-0 z-10 flex items-center justify-center">
+    <nav className="flex sticky top-0 z-10 justify-center items-center">
       {buttons.map((button) => (
         // Create a Link component for each button
         <Link key={button.id} href={button.href}>

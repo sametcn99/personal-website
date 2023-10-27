@@ -17,7 +17,7 @@ export default async function Account() {
   const profile = profiles?.[0]; // get the first profile from the array if it exists
 
   return (
-    <form action="/auth/logout" method="post" className="max-w-sm mx-auto mt-8">
+    <form action="/auth/logout" method="post" className="mx-auto mt-8 max-w-sm">
       <div>
         {session.user.email}
         <br />
@@ -25,7 +25,7 @@ export default async function Account() {
         <br />
         {profile.role} {/* access the role property of the profile */}
         <br />
-        <button className="w-full bg-blue-500 text-white py-2 rounded-md">
+        <button className="py-2 w-full text-white bg-blue-500 rounded-md">
           Logout
         </button>
       </div>

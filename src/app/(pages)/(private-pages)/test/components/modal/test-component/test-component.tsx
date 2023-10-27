@@ -13,7 +13,7 @@ export default function TestComponent() {
     <Tooltip
       title="Scroll Up"
       enterDelay={0}
-      className="fixed bottom-4 right-4"
+      className="fixed right-4 bottom-4"
     >
       <IconButton
         aria-label="delete"

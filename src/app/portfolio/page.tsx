@@ -1,4 +1,3 @@
-import TestPage from "../../(private-pages)/test/page";
 import ScrollToTop from "./components/scroll-up-button/scroll-up-button";
 import ContactSec from "./components/sections/contact-sec";
 import EducationSec from "./components/sections/education-sec";

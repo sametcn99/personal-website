@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Greeting from "./greeting";
+import Greeting from "../greeting/greeting";
 
 /**
  * Renders the hero section of the portfolio page.

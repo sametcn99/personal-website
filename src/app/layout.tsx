@@ -5,7 +5,6 @@ import "./styles/globals.css";
 // Import necessary types from external libraries.
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import Header from "./components/header/header";
 import { Analytics } from "@vercel/analytics/react";
 import { GoogleTagManager } from "./lib/gtag-manager";
 // Import custom components.
@@ -18,7 +17,7 @@ export const metadata: Metadata = {
   title: "sametcc.me",
   description: "This is my personal website. Created with Next.js.",
   keywords:
-    "personal website, Next.js, web development, ui design, sametcc.me, sametcc, samet can cıncık, sametc0",
+    "personal website, Next.js, web development, ui design, sametcc.me, sametcc, samet can cıncık, portfolio",
   applicationName: "sametcc.me",
   creator: "Samet Can Cıncık",
 };
@@ -42,7 +41,6 @@ export default function RootLayout({
       {/* Start the page body with the Inter font applied. */}
       <body className={inter.className}>
         {/* Render the Header component. */}
-        <Header />
 
         {/* Render the children components, which will be the page content. */}
         {children}

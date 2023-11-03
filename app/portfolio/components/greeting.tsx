@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import hello from "../../lib/hello.json";
-import Tooltip from "@mui/material/Tooltip";
+import hello from "@/lib/hello.json";
+import { Tooltip } from "@nextui-org/react";
 
 export default function Greeting() {
   const [greeting, setGreeting] = useState("Hello World");
@@ -24,19 +24,20 @@ export default function Greeting() {
     return () => clearInterval(interval);
   }, [greetingLanguageArray, greetingsArray, hovering]);
   return (
-    <h1 className="text-5xl font-bold">
+    <h1
+      className="text-5xl font-bold z-10 text-center sticky  w-[20rem] h-[10rem] flex justify-center items-center select-none"
+      onMouseEnter={() => setHovering(true)}
+      onMouseLeave={() => setHovering(false)}
+    >
       <Tooltip
-        title={greetingLanguage}
-        followCursor
-        enterTouchDelay={0}
-        leaveTouchDelay={5000}
+        content={greetingLanguage}
+        delay={0}
+        closeDelay={0}
+        color={"primary"}
+        showArrow={true}
+        isOpen={hovering}
       >
-        <span
-          onMouseEnter={() => setHovering(true)}
-          onMouseLeave={() => setHovering(false)}
-        >
-          {greeting}
-        </span>
+        <span>{greeting}</span>
       </Tooltip>
     </h1>
   );

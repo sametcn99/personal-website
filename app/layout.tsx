@@ -31,7 +31,7 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <Providers>
-          <main className="h-screen w-full">{children}</main>
+          <main className="w-full h-screen">{children}</main>
           <Analytics />
         </Providers>
       </body>

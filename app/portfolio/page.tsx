@@ -4,14 +4,14 @@ import Greeting from "./components/greeting";
 
 export default function Portfolio() {
   return (
-    <section className="flex justify-center flex-col items-center h-full space-y-6">
+    <section className="flex flex-col justify-center items-center space-y-6 h-full">
       <Image
         src={"blobanimation.svg"}
         alt="Picture of the author"
         width={500}
         height={500}
         loading="lazy"
-        className="flex absolute justify-center items-center "
+        className="flex absolute justify-center items-center"
       />
       <Greeting />
       <Buttons />

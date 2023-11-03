@@ -25,7 +25,7 @@ export default function Greeting() {
   }, [greetingLanguageArray, greetingsArray, hovering]);
   return (
     <h1
-      className="text-5xl font-bold z-10 text-center sticky  w-[20rem] h-[10rem] flex justify-center items-center select-none"
+      className="flex sticky z-10 justify-center items-center text-5xl font-bold text-center select-none w-[20rem] h-[10rem]"
       onMouseEnter={() => setHovering(true)}
       onMouseLeave={() => setHovering(false)}
     >

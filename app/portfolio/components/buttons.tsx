@@ -4,7 +4,7 @@ import { socialMediaLinks } from "@/lib/contact-links";
 
 export default function Buttons() {
   return (
-    <section className="flex flex-wrap items-center justify-center">
+    <section className="flex flex-wrap justify-center items-center">
       {socialMediaLinks.map((socialMedia, index) => (
         <a
           className="m-2"

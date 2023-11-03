@@ -1,5 +1,10 @@
 import Image from "next/image";
 import Greeting from "../greeting/greeting";
+import { IconButton } from "@mui/material";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import EmailIcon from "@mui/icons-material/Email";
+import TelegramIcon from "@mui/icons-material/Telegram";
 
 /**
  * Renders the hero section of the portfolio page.
@@ -17,16 +22,61 @@ export default function HeroSec() {
         width={500}
         height={500}
         loading="lazy"
-        className="flex absolute justify-center items-center scale-50 sm:scale-50 md:scale-75 lg:scale-100"
+        className="flex absolute justify-center items-center"
       />
-      <span className="z-10 space-y-7 text-center text-white scale-75 md:scale-90 lg:scale-100">
+      <section className="z-10 space-y-7 text-center">
         <Greeting />
-        <h1 className="text-5xl font-bold">
-          <span>I&apos;m a Full-Stack Software Developer</span>
-          <br />
-          <span className="text-3xl">Welcome to my portfolio!</span>
-        </h1>
-      </span>
+        <section>
+          <a href="mailto:sametcn99@gmail.com">
+            <IconButton
+              aria-label="delete"
+              size="large"
+              className="hover:scale-110 hover:bg-zinc-700"
+            >
+              <EmailIcon color="primary" />
+            </IconButton>
+          </a>
+          <a
+            href="https://www.linkedin.com/in/samet-can-c%C4%B1nc%C4%B1k/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <IconButton
+              aria-label="delete"
+              size="large"
+              className="hover:scale-110 hover:bg-zinc-700"
+            >
+              <LinkedInIcon color="primary" />
+            </IconButton>
+          </a>
+          <a
+            href="https://github.com/sametcn99"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <IconButton
+              aria-label="delete"
+              size="large"
+              className="hover:scale-110 hover:bg-zinc-700"
+            >
+              <GitHubIcon color="primary" />
+            </IconButton>
+          </a>
+          <a
+            href="https://t.me/sametc0"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <IconButton
+              aria-label="delete"
+              size="large"
+              className="hover:scale-110 hover:bg-zinc-700"
+            >
+              <TelegramIcon color="primary" />
+            </IconButton>
+          </a>
+        </section>
+      </section>
     </div>
   );
 }

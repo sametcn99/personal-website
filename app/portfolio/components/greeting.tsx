@@ -5,6 +5,7 @@ import { Tooltip } from "@nextui-org/react";
 import hello from "@/lib/hello.json";
 
 export default function Greeting() {
+  const [loading, setLoading] = useState(true);
   const [greeting, setGreeting] = useState("Hello World");
   const [greetingLanguage, setGreetingLanguage] = useState("English");
   const [hovering, setHovering] = useState(false);
@@ -20,6 +21,7 @@ export default function Greeting() {
         const randomGreeting = greetingsArray[randomIndex];
         const randomGreetingLanguage = greetingLanguageArray[randomIndex];
         setGreetingLanguageAndGreeting(randomGreetingLanguage, randomGreeting);
+        setLoading(false); // Set loading to false once content is loaded
       }
     }, 800);
 
@@ -45,7 +47,11 @@ export default function Greeting() {
         showArrow={true}
         isOpen={hovering}
       >
-        <span>{greeting}</span>
+        {loading ? (
+          <span className="animate-pulse">Hello World</span>
+        ) : (
+          <span>{greeting}</span>
+        )}
       </Tooltip>
     </h1>
   );

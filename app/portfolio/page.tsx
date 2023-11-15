@@ -14,7 +14,7 @@ export default function Portfolio() {
   return (
     <section className="flex flex-col justify-center items-center space-y-6 h-full">
       {!imageLoaded && (
-        <div className="bg-zinc-950 flex absolute justify-center items-center animate-pulse rounded-full w-[500px] h-[500px]"></div>
+        <div className="flex absolute justify-center items-center animate-pulse rounded-full w-[500px] h-[500px]"></div>
       )}
       <Image
         src={"/blobanimation.svg"} // Assuming the image path is correct

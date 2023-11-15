@@ -17,6 +17,8 @@ export default function Greeting() {
 
   const [hovering, setHovering] = useState(false); // Initialize a state variable 'hovering' with the initial value 'false' and a function 'setHovering' to update it.
 
+  const [isLoaded, setIsloaded] = useState(false);
+
   useEffect(() => {
     const interval = setInterval(() => {
       if (!hovering) {
@@ -33,22 +35,25 @@ export default function Greeting() {
   }, [greetingLanguageArray, greetingsArray, hovering]); // Dependencies array to control when the effect should re-run.
 
   return (
-    <h1
-      className="flex sticky z-10 justify-center items-center text-5xl font-bold text-center select-none w-[20rem] h-[10rem] break-words"
-      onMouseEnter={() => setHovering(true)} // Set 'hovering' to 'true' when the mouse enters the component.
-      onMouseLeave={() => setHovering(false)} // Set 'hovering' to 'false' when the mouse leaves the component.
-    >
-      <Tooltip
-        content={greetingLanguage} // Display the 'greetingLanguage' in the tooltip content.
-        delay={0}
-        closeDelay={0}
-        color={"primary"} // Set the tooltip color to "primary".
-        showArrow={true} // Show an arrow in the tooltip.
-        isOpen={hovering} // Control the tooltip's visibility based on the 'hovering' state.
+    <>
+      <h1
+        className="flex sticky z-10 justify-center items-center text-5xl font-bold text-center select-none w-[20rem] h-[10rem] break-words"
+        onMouseEnter={() => setHovering(true)} // Set 'hovering' to 'true' when the mouse enters the component.
+        onMouseLeave={() => setHovering(false)} // Set 'hovering' to 'false' when the mouse leaves the component.
+        onLoad={() => setIsloaded(true)} // Use a function for onLoad
       >
-        <span>{greeting}</span>
-        {/* // Display the 'greeting' text within a 'span' element.*/}
-      </Tooltip>
-    </h1>
+        <Tooltip
+          content={greetingLanguage} // Display the 'greetingLanguage' in the tooltip content.
+          delay={0}
+          closeDelay={0}
+          color={"primary"} // Set the tooltip color to "primary".
+          showArrow={true} // Show an arrow in the tooltip.
+          isOpen={hovering} // Control the tooltip's visibility based on the 'hovering' state.
+        >
+          <span>{greeting}</span>
+          {/* // Display the 'greeting' text within a 'span' element.*/}
+        </Tooltip>
+      </h1>
+    </>
   );
 }

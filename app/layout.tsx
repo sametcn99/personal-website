@@ -8,8 +8,6 @@ import { Providers } from "@/providers"; // Import the 'Providers' component fro
 
 import { Analytics } from "@vercel/analytics/react"; // Import the 'Analytics' component from the "@vercel/analytics/react" module.
 
-import { GoogleTagManager } from "@/lib/gtag-manager"; // Import the 'GoogleTagManager' component from the "@/lib/gtag-manager" module.
-
 const inter = Inter({ subsets: ["latin"] }); // Initialize the 'Inter' font with the "latin" subset.
 
 export const metadata: Metadata = {
@@ -35,10 +33,7 @@ export default function RootLayout({
       {/* Define Open Graph image property for social sharing. */}
       <meta name="twitter:card" content="/thumbnail.png" />
       {/* Define Twitter card metadata for social sharing. */}
-      <head>
-        <GoogleTagManager />
-        {/* Include the Google Tag Manager script in the HTML head. */}
-      </head>
+      <head></head>
       <body className={inter.className}>
         {/* Set the body class for using the 'Inter' font. */}
         <Providers>

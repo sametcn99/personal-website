@@ -1,59 +1,52 @@
-"use client"; // This appears to be a comment. It doesn't affect the code's functionality but may serve as a reminder or note for the developer.
+"use client";
 
-import React, { useEffect, useState } from "react"; // Import the necessary modules from the 'react' library, including 'useEffect' and 'useState'.
-
-import hello from "@/lib/hello.json"; // Import data from the 'hello.json' file located in the '@/lib' directory and assign it to the 'hello' variable.
-
-import { Tooltip } from "@nextui-org/react"; // Import the 'Tooltip' component from the '@nextui-org/react' library.
+import React, { useEffect, useState } from "react";
+import { Tooltip } from "@nextui-org/react";
+import hello from "@/lib/hello.json";
 
 export default function Greeting() {
-  const [greeting, setGreeting] = useState("Hello World"); // Initialize a state variable 'greeting' with the initial value "Hello World" and a function 'setGreeting' to update it.
+  const [greeting, setGreeting] = useState("Hello World");
+  const [greetingLanguage, setGreetingLanguage] = useState("English");
+  const [hovering, setHovering] = useState(false);
 
-  const [greetingLanguage, setGreetingLanguage] = useState("English"); // Initialize a state variable 'greetingLanguage' with the initial value "English" and a function 'setGreetingLanguage' to update it.
-
-  const greetingsArray = Object.values(hello.greetings); // Create an array 'greetingsArray' by extracting the values from the 'greetings' property of the 'hello' object.
-
-  const greetingLanguageArray = Object.keys(hello.greetings); // Create an array 'greetingLanguageArray' by extracting the keys from the 'greetings' property of the 'hello' object.
-
-  const [hovering, setHovering] = useState(false); // Initialize a state variable 'hovering' with the initial value 'false' and a function 'setHovering' to update it.
-
-  const [isLoaded, setIsloaded] = useState(false);
+  const { greetings } = hello;
+  const greetingsArray = Object.values(greetings);
+  const greetingLanguageArray = Object.keys(greetings);
 
   useEffect(() => {
     const interval = setInterval(() => {
       if (!hovering) {
-        // Check if not hovering over the component.
-        const randomIndex = Math.floor(Math.random() * greetingsArray.length); // Generate a random index within the range of 'greetingsArray'.
-        const randomGreeting = greetingsArray[randomIndex]; // Retrieve a random greeting from 'greetingsArray'.
-        const randomGreetingLanguage = greetingLanguageArray[randomIndex]; // Retrieve the corresponding language for the random greeting.
-        setGreetingLanguage(randomGreetingLanguage); // Update the 'greetingLanguage' state with the selected language.
-        setGreeting(randomGreeting); // Update the 'greeting' state with the selected greeting.
+        const randomIndex = Math.floor(Math.random() * greetingsArray.length);
+        const randomGreeting = greetingsArray[randomIndex];
+        const randomGreetingLanguage = greetingLanguageArray[randomIndex];
+        setGreetingLanguageAndGreeting(randomGreetingLanguage, randomGreeting);
       }
-    }, 800); // Execute the interval function every 800 milliseconds.
+    }, 800);
 
-    return () => clearInterval(interval); // Clean up the interval when the component unmounts.
-  }, [greetingLanguageArray, greetingsArray, hovering]); // Dependencies array to control when the effect should re-run.
+    return () => clearInterval(interval);
+  }, [greetingLanguageArray, greetingsArray, hovering]);
+
+  const setGreetingLanguageAndGreeting = (language: any, greeting: any) => {
+    setGreetingLanguage(language);
+    setGreeting(greeting);
+  };
 
   return (
-    <>
-      <h1
-        className="flex sticky z-10 justify-center items-center text-5xl font-bold text-center select-none w-[20rem] h-[10rem] break-words"
-        onMouseEnter={() => setHovering(true)} // Set 'hovering' to 'true' when the mouse enters the component.
-        onMouseLeave={() => setHovering(false)} // Set 'hovering' to 'false' when the mouse leaves the component.
-        onLoad={() => setIsloaded(true)} // Use a function for onLoad
+    <h1
+      className="flex sticky z-10 justify-center items-center text-5xl font-bold text-center select-none w-[20rem] h-[10rem] break-words"
+      onMouseEnter={() => setHovering(true)}
+      onMouseLeave={() => setHovering(false)}
+    >
+      <Tooltip
+        content={greetingLanguage}
+        delay={0}
+        closeDelay={0}
+        color="primary"
+        showArrow={true}
+        isOpen={hovering}
       >
-        <Tooltip
-          content={greetingLanguage} // Display the 'greetingLanguage' in the tooltip content.
-          delay={0}
-          closeDelay={0}
-          color={"primary"} // Set the tooltip color to "primary".
-          showArrow={true} // Show an arrow in the tooltip.
-          isOpen={hovering} // Control the tooltip's visibility based on the 'hovering' state.
-        >
-          <span>{greeting}</span>
-          {/* // Display the 'greeting' text within a 'span' element.*/}
-        </Tooltip>
-      </h1>
-    </>
+        <span>{greeting}</span>
+      </Tooltip>
+    </h1>
   );
 }

@@ -22,6 +22,7 @@ export default function Portfolio() {
         width={500}
         height={500}
         priority
+        loading="eager"
         className={`flex absolute justify-center items-center ${
           imageLoaded ? "opacity-100" : "opacity-0"
         }`}

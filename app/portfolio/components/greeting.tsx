@@ -1,18 +1,28 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { Tooltip } from "@nextui-org/react";
 import hello from "@/lib/hello.json";
 
+interface GreetingData {
+  loading: boolean;
+  greeting: string;
+  greetingLanguage: string;
+}
 export default function Greeting() {
-  const [loading, setLoading] = useState(true);
-  const [greeting, setGreeting] = useState("Hello World");
-  const [greetingLanguage, setGreetingLanguage] = useState("English");
-  const [hovering, setHovering] = useState(false);
+  const [greetingData, setGreetingData] = useState<GreetingData>({
+    loading: true,
+    greeting: "Hello World",
+    greetingLanguage: "English",
+  });
 
   const { greetings } = hello;
-  const greetingsArray = Object.values(greetings);
-  const greetingLanguageArray = Object.keys(greetings);
+  const greetingsArray = useMemo(() => Object.values(greetings), [greetings]);
+  const greetingLanguageArray = useMemo(
+    () => Object.keys(greetings),
+    [greetings]
+  );
+  const [hovering, setHovering] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -21,17 +31,25 @@ export default function Greeting() {
         const randomGreeting = greetingsArray[randomIndex];
         const randomGreetingLanguage = greetingLanguageArray[randomIndex];
         setGreetingLanguageAndGreeting(randomGreetingLanguage, randomGreeting);
-        setLoading(false); // Set loading to false once content is loaded
+        setGreetingData((prevData) => ({
+          ...prevData,
+          loading: false,
+        }));
       }
     }, 800);
 
     return () => clearInterval(interval);
   }, [greetingLanguageArray, greetingsArray, hovering]);
 
-  const setGreetingLanguageAndGreeting = (language: any, greeting: any) => {
-    setGreetingLanguage(language);
-    setGreeting(greeting);
-  };
+  const setGreetingLanguageAndGreeting = useMemo(() => {
+    return (language: string, greeting: string) => {
+      setGreetingData((prevData) => ({
+        ...prevData,
+        greetingLanguage: language,
+        greeting: greeting,
+      }));
+    };
+  }, []);
 
   return (
     <h1
@@ -40,17 +58,17 @@ export default function Greeting() {
       onMouseLeave={() => setHovering(false)}
     >
       <Tooltip
-        content={greetingLanguage}
+        content={greetingData.greetingLanguage}
         delay={0}
         closeDelay={0}
         color="primary"
         showArrow={true}
         isOpen={hovering}
       >
-        {loading ? (
-          <span className="animate-pulse">Hello World</span>
+        {greetingData.loading ? (
+          <span className="animate-pulse">{greetingData.greeting}</span>
         ) : (
-          <span>{greeting}</span>
+          <span>{greetingData.greeting}</span>
         )}
       </Tooltip>
     </h1>

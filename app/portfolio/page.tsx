@@ -21,6 +21,7 @@ export default function Portfolio() {
         alt="Picture of the author"
         width={500}
         height={500}
+        priority
         className={`flex absolute justify-center items-center ${
           imageLoaded ? "opacity-100" : "opacity-0"
         }`}

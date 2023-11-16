@@ -25,15 +25,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      {/* Define the HTML document with a language attribute set to "en". */}
-      <link rel="shortcut icon" href="/favicon.png" />
-      {/* Set the shortcut icon (favicon) for the page. */}
-      <meta property="og:image" content="/thumbnail.png" />
-      {/* Define Open Graph image property for social sharing. */}
-      <meta name="twitter:card" content="/thumbnail.png" />
-      {/* Define Twitter card metadata for social sharing. */}
-      <head></head>
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="theme-color" content="#2196f3" />
+        {/* Define the HTML document with a language attribute set to "en". */}
+        <link rel="shortcut icon" href="/favicon.png" />
+        {/* Set the shortcut icon (favicon) for the page. */}
+        <meta property="og:image" content="/thumbnail.png" />
+        {/* Define Open Graph image property for social sharing. */}
+        <meta name="twitter:card" content="/thumbnail.png" />
+        {/* Define Twitter card metadata for social sharing. */}
+      </head>
       <body className={inter.className}>
         {/* Set the body class for using the 'Inter' font. */}
         <Providers>

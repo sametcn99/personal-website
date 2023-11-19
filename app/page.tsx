@@ -14,7 +14,7 @@ export default function Home() {
   return (
     <section className="flex flex-col justify-center items-center h-full">
       {!imageLoaded && (
-        <div className="flex absolute justify-center items-center rounded-full animate-pulse w-[500px] h-[500px]"></div>
+        <div className="flex absolute justify-center items-center rounded-full animate-pulse w-[500px] h-[500px] "></div>
       )}
       <Image
         src={"/blobanimation.svg"} // Assuming the image path is correct
@@ -23,13 +23,16 @@ export default function Home() {
         height={500}
         priority
         loading="eager"
-        className={`flex absolute justify-center items-center select-none ${
+        className={`flex absolute justify-center items-center select-none  ${
           imageLoaded ? "opacity-100" : "opacity-0"
         }`}
         onLoad={handleImageLoad}
         onDragStart={(e) => e.preventDefault()} // Prevent dragging
       />
       <Greeting />
+      <div className="z-10 text-sm font-extralight select-none">
+        I&apos;m a Web Developer from Turkey
+      </div>
       <Buttons />
     </section>
   );

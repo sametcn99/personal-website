@@ -33,6 +33,18 @@ export default function Greeting() {
   // Use state to track hovering
   const [hovering, setHovering] = useState(false);
 
+  // Declare the setGreetingLanguageAndGreeting function
+  const setGreetingLanguageAndGreeting = useMemo(() => {
+    return (language: string, greeting: string) => {
+      // Use a functional update to ensure the latest state is used
+      setGreetingData((prevData) => ({
+        ...prevData,
+        greetingLanguage: language,
+        greeting: greeting,
+      }));
+    };
+  }, []);
+
   // Use useEffect to update the greeting periodically
   useEffect(() => {
     // Set an interval to update the greeting if not hovering
@@ -56,19 +68,12 @@ export default function Greeting() {
 
     // Clear the interval on component unmount or dependency change
     return () => clearInterval(interval);
-  }, [greetingLanguageArray, greetingsArray, hovering]);
-
-  // Use useMemo to memoize the setGreetingLanguageAndGreeting function
-  const setGreetingLanguageAndGreeting = useMemo(() => {
-    return (language: string, greeting: string) => {
-      // Use a functional update to ensure the latest state is used
-      setGreetingData((prevData) => ({
-        ...prevData,
-        greetingLanguage: language,
-        greeting: greeting,
-      }));
-    };
-  }, []);
+  }, [
+    greetingLanguageArray,
+    greetingsArray,
+    hovering,
+    setGreetingLanguageAndGreeting,
+  ]);
 
   // Render the component
   return (
@@ -85,6 +90,7 @@ export default function Greeting() {
         color="primary"
         showArrow={true}
         isOpen={hovering}
+        className="select-none"
       >
         {/* Use conditional rendering based on loading state */}
         {greetingData.loading ? (

@@ -22,6 +22,7 @@
     "next-themes": "^0.2.1",
     "react": "^18",
     "react-dom": "^18",
+    "schema-dts": "^1.1.2",
     "sharp": "^0.32.6",
     "source-map-explorer": "^2.5.3"
   },

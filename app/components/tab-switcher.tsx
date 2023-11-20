@@ -26,7 +26,7 @@ export default function TabSwitcher() {
   };
   return (
     <>
-      <div className="flex z-10 flex-col items-center w-full min-h-screen p-5">
+      <div className="flex z-10 flex-col items-center w-full min-h-screen p-5 select-none ">
         <Tabs
           aria-label="Options"
           className={`w-full flex items-center justify-center z-50 p-2 ${

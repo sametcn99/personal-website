@@ -3,8 +3,8 @@ import { Tabs, Tab, Card, CardBody, CardHeader } from "@nextui-org/react";
 
 export default function About() {
   return (
-    <Card className="z-10 gap-11 space-y-4 text-white bg-opacity-50 select-none hover:scale-105 max-w-[35rem] w-full text-sm">
-      <CardBody className="text-center w-full text-wrap break-words">
+    <Card className="z-10 gap-11 space-y-4 w-full text-sm text-white bg-opacity-50 select-none hover:scale-105 max-w-[35rem]">
+      <CardBody className="w-full text-center break-words text-wrap">
         As a Software Developer with a associate degree in computer programming
         from Gazi University, I am passionate about developing innovative and
         user-friendly applications. I am currently working on enhancing my

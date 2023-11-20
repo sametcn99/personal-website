@@ -35,7 +35,7 @@ export default function Home() {
     <>
       <section className="flex z-10 flex-col justify-center items-center min-h-screen mb-[-5rem]">
         {!imageLoaded && (
-          <div className="flex absolute justify-center items-center rounded-full animate-pulse w-[500px] h-[500px] "></div>
+          <div className="flex absolute justify-center items-center rounded-full animate-pulse w-[500px] h-[500px]"></div>
         )}
         <Image
           src={"/blobanimation.svg"} // Assuming the image path is correct

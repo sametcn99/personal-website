@@ -9,7 +9,7 @@ export default function TabSwitcher() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const shouldFixTabs = window.scrollY > 300;
+      const shouldFixTabs = window.scrollY > 1000;
       setIsTabsFixed(shouldFixTabs);
     };
 
@@ -20,17 +20,21 @@ export default function TabSwitcher() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
+  const handleTabChange = () => {
+    // Scroll to the top when a tab is clicked
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
   return (
     <>
-      <div className="flex z-10 flex-col items-center w-full">
+      <div className="flex z-10 flex-col items-center w-full min-h-screen">
         <Tabs
           aria-label="Options"
-          className={`w-full flex items-center justify-center z-50  p-2 ${
+          className={`w-full flex items-center justify-center z-50 p-2 ${
             isTabsFixed
               ? "fixed top-0 bg-black bg-transparent backdrop-blur-sm "
               : ""
           }`}
+          onClick={handleTabChange}
         >
           <Tab key="projects" title="Projects">
             <Projects />

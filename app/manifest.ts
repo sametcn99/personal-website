@@ -4,7 +4,6 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "sametcc.me",
     short_name: "sametcc",
-    id: "https://www.sametcc.me/",
     dir: "auto",
     description: "This is my personal website. Created with Next.js.",
     categories: ["personal", "portfolio"],

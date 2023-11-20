@@ -56,6 +56,7 @@ export default function RootLayout({
         <meta property="og:image" content="/thumbnail.png" />
         <meta name="twitter:card" content="/thumbnail.png" />
         <meta property="og:title" content="sametcc.me" />
+        <meta property="og:type" content="website" />
         <meta
           property="og:description"
           content="This is my personal website. Created with Next.js. I'm a Web Developer from Turkey."

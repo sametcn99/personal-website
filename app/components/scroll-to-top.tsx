@@ -34,14 +34,23 @@ export default function ScrollToTop() {
 
   // Render the "scroll to top" button, which is visible or hidden based on the 'visible' state
   return (
-    <div
-      className={`fixed bottom-4 right-4 ${
-        visible ? "visible" : "hidden"
-      } hover:pb-1`}
-    >
-      <Button isIconOnly aria-label="Scroll to Top" onClick={scrollToTop}>
-        <ArrowUpwardIcon />
-      </Button>
-    </div>
+    <>
+      {visible && (
+        <div
+          className={`fixed bottom-4 right-4 z-10  ${
+            visible ? "visible" : "hidden"
+          } hover:pb-1`}
+        >
+          <Button
+            isIconOnly
+            aria-label="Scroll to Top"
+            onClick={scrollToTop}
+            className="bg-opacity-30"
+          >
+            <ArrowUpwardIcon />
+          </Button>
+        </div>
+      )}
+    </>
   );
 }

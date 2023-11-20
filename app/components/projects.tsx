@@ -51,11 +51,11 @@ const Projects = () => {
   }, []);
 
   return (
-    <section className="z-10 m-5 space-y-4 text-white select-none">
+    <>
       {Array.isArray(data) &&
         data.map((project, index) => (
           <Card
-            className="bg-opacity-50 hover:scale-105 max-w-[35rem]"
+            className="z-10 m-5 space-y-4 text-white bg-opacity-50 select-none hover:scale-105 max-w-[35rem]"
             key={`${project.id}-${index}`}
           >
             <CardHeader className="justify-between">
@@ -79,7 +79,7 @@ const Projects = () => {
                   )}
                 </div>
               </div>
-              <div className="justify-end  flex flex-wrap  items-center gap-1">
+              <div className="flex flex-wrap gap-1 justify-end items-center">
                 {project.home_page && (
                   <a href={project.home_page} target="_blank">
                     <Button
@@ -91,7 +91,7 @@ const Projects = () => {
                       variant={"bordered"}
                     >
                       Demo
-                      <OpenInNewIcon className="fill-white text-sm" />
+                      <OpenInNewIcon className="text-sm fill-white" />
                     </Button>
                   </a>
                 )}
@@ -105,7 +105,7 @@ const Projects = () => {
                     variant={"bordered"}
                   >
                     Source Code
-                    <GitHubIcon className="fill-white text-sm" />
+                    <GitHubIcon className="text-sm fill-white" />
                   </Button>
                 </a>
               </div>
@@ -139,7 +139,7 @@ const Projects = () => {
             </CardFooter>
           </Card>
         ))}
-    </section>
+    </>
   );
 };
 

@@ -22,6 +22,11 @@ type GitHubRepo = {
   created_at: string;
   updated_at: string;
   topics: string[];
+  license_name: string;
+  license_url: string;
+  language: string;
+  license_key: string;
+  license_spdx_id: string;
 };
 // Projects component
 const Projects = () => {
@@ -114,16 +119,18 @@ const Projects = () => {
               {project.description}
             </CardBody>
             <CardFooter className="flex flex-col gap-3 items-start">
-              <div className="flex flex-row flex-wrap gap-1">
-                <p className="text-left text-default-600 text-small">
+              <div className="flex flex-col flex-wrap gap-1 text-xs text-left item">
+                <p>{project.license_spdx_id}</p>
+                <p>
+                  {project.language ? `Language: ${project.language}` : null}
+                </p>
+                <p>
                   Created at:{" "}
                   {new Date(project.created_at).toLocaleDateString()}
-                  {new Date(project.created_at).toLocaleTimeString()}
                 </p>
-                <p className="text-left text-default-600 text-small">
+                <p>
                   Last update:{" "}
                   {new Date(project.updated_at).toLocaleDateString()}
-                  {new Date(project.updated_at).toLocaleTimeString()}
                 </p>
               </div>
               <div className="flex flex-row flex-wrap jus">

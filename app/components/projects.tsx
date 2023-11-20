@@ -59,9 +59,9 @@ const Projects = () => {
             <CardHeader className="justify-between">
               <div className="flex gap-5">
                 <div className="flex flex-row flex-wrap items-center">
-                  <h4 className="font-semibold leading-none hover:font-bold text-small text-default-600">
+                  <h1 className="font-semibold leading-none hover:font-bold text-small text-default-600">
                     {project.name}
-                  </h4>
+                  </h1>
                   {project.stars > 0 && (
                     <Tooltip
                       content="Give a star to help!"

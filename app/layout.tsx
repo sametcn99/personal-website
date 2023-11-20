@@ -61,7 +61,7 @@ export default function RootLayout({
         {/* Set the body class for using the 'Inter' font. */}
         <Providers>
           {/* Wrap the main content in a 'Providers' component. */}
-          <main className="flex flex-col items-center w-full min-h-screen">
+          <main className="flex flex-col items-center w-full min-h-screen scroll-smooth">
             {children}
             <script
               id="json-ld"

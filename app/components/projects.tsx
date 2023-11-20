@@ -67,7 +67,6 @@ const Projects = () => {
                       content="Give a star to help!"
                       delay={0}
                       closeDelay={0}
-                      color="primary"
                       className="bg-black bg-opacity-60 select-none"
                     >
                       <div className="flex gap-2 items-center font-bold scale-85">
@@ -81,15 +80,14 @@ const Projects = () => {
               <a href={project.html_url} target="_blank">
                 <Button
                   className={
-                    "text-foreground border border-opacity-50 border-white  hover:bg-zinc-700 transition-all duration-1000"
+                    "text-foreground border border-opacity-50 border-white  hover:bg-zinc-700 transition-all duration-1000 fill-white"
                   }
-                  color="primary"
                   radius="full"
                   size="sm"
                   variant={"bordered"}
                 >
                   Source Code
-                  <GitHubIcon color="primary" className="fill-white scale-85" />
+                  <GitHubIcon className="fill-white scale-85" />
                 </Button>
               </a>
             </CardHeader>

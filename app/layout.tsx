@@ -8,6 +8,7 @@ import { Providers } from "@/providers"; // Import the 'Providers' component fro
 
 import { Analytics } from "@vercel/analytics/react"; // Import the 'Analytics' component from the "@vercel/analytics/react" module.
 import { Person, WithContext } from "schema-dts";
+import ScrollToTop from "./components/scroll-to-top";
 
 const inter = Inter({ subsets: ["latin"] }); // Initialize the 'Inter' font with the "latin" subset.
 
@@ -73,6 +74,7 @@ export default function RootLayout({
           <Analytics />
           {/* Include analytics tracking with the 'Analytics' component. */}
         </Providers>
+        <ScrollToTop />
       </body>
     </html>
   );

@@ -5,35 +5,38 @@ import Projects from "./projects";
 import About from "./about";
 
 export default function TabSwitcher() {
-  const [isTabsFixed, setIsTabsFixed] = useState(false);
+  // const [isTabsFixed, setIsTabsFixed] = useState(false);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const shouldFixTabs = window.scrollY > 1000;
-      setIsTabsFixed(shouldFixTabs);
-    };
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     const shouldFixTabs = window.scrollY > 1000;
+  //     setIsTabsFixed(shouldFixTabs);
+  //   };
 
-    window.addEventListener("scroll", handleScroll);
+  //   window.addEventListener("scroll", handleScroll);
 
-    // Cleanup the event listener on component unmount
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-  const handleTabChange = () => {
-    // Scroll to the top when a tab is clicked
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+  //   // Cleanup the event listener on component unmount
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScroll);
+  //   };
+  // }, []);
+  // const handleTabChange = () => {
+  //   // Scroll to the top when a tab is clicked
+  //   window.scrollTo({ top: 0, behavior: "smooth" });
+  // };
+
+  /* ${
+        isTabsFixed ? "sticky top-0  " : ""
+      }
+  */
   return (
     <>
       <div className="flex z-10 flex-col items-center p-5 w-full min-h-screen select-none">
         <Tabs
           defaultSelectedKey={"projects"}
           aria-label="Options"
-          className={`w-full flex items-center justify-center z-50 p-2 sticky top-0 ${
-            isTabsFixed ? "sticky top-0  " : ""
-          }`}
-          onClick={handleTabChange}
+          className={`w-full flex items-center justify-center z-50 p-2 sticky top-0 `}
+          //onChange={handleTabChange}
         >
           <Tab key="blog" title="Blog">
             <Card className="z-10 gap-11 space-y-4 w-full text-sm text-white bg-opacity-50 select-none hover:scale-105 max-w-[35rem]">

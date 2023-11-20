@@ -51,7 +51,7 @@ const Projects = () => {
   }, []);
 
   return (
-    <div className="z-10 m-5 space-y-4 text-white select-none">
+    <section className="z-10 m-5 space-y-4 text-white select-none">
       {Array.isArray(data) &&
         data.map((project, index) => (
           <Card
@@ -84,7 +84,7 @@ const Projects = () => {
                   <a href={project.home_page} target="_blank">
                     <Button
                       className={
-                        "text-foreground border border-opacity-50 border-white  hover:bg-zinc-700 transition-all duration-1000 fill-white "
+                        "text-foreground border border-opacity-50 border-white hover:bg-opacity-50 hover:bg-zinc-700 transition-all duration-1000 fill-white "
                       }
                       radius="full"
                       size="sm"
@@ -98,7 +98,7 @@ const Projects = () => {
                 <a href={project.html_url} target="_blank">
                   <Button
                     className={
-                      "text-foreground border border-opacity-50 border-white  hover:bg-zinc-700 transition-all duration-1000 fill-white"
+                      "text-foreground border border-opacity-50 border-white hover:bg-opacity-50 hover:bg-zinc-700 transition-all duration-1000 fill-white "
                     }
                     radius="full"
                     size="sm"
@@ -139,7 +139,7 @@ const Projects = () => {
             </CardFooter>
           </Card>
         ))}
-    </div>
+    </section>
   );
 };
 

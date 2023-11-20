@@ -20,6 +20,15 @@ export const metadata: Metadata = {
     "personal website, Next.js, web development, ui design, sametcc.me, sametcc, samet can cıncık, portfolio", // Define keywords for the page.
   applicationName: "sametcc.me", // Define the application name metadata.
   creator: "https://github.com/sametcn99", // Define the creator's information.
+
+  openGraph: {
+    title: "sametcc.me",
+    description:
+      "This is my personal website. Created with Next.js. I'm a Web Developer from Turkey.",
+    url: "https://www.sametcc.me/",
+    siteName: "sametcc.me",
+    locale: "en_US",
+  },
 };
 const jsonLd: WithContext<Person> = {
   "@context": "https://schema.org",

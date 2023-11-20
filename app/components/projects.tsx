@@ -10,12 +10,14 @@ import {
 } from "@nextui-org/react";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import StarIcon from "@mui/icons-material/Star";
+import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 
 type GitHubRepo = {
   id: number;
   name: string;
   stars: number;
   html_url: string;
+  home_page: string;
   description: string;
   created_at: string;
   updated_at: string;
@@ -49,7 +51,7 @@ const Projects = () => {
   }, []);
 
   return (
-    <div className="z-10 m-4 space-y-4 text-white select-none">
+    <div className="z-10 m-5 space-y-4 text-white select-none">
       {Array.isArray(data) &&
         data.map((project, index) => (
           <Card
@@ -77,19 +79,36 @@ const Projects = () => {
                   )}
                 </div>
               </div>
-              <a href={project.html_url} target="_blank">
-                <Button
-                  className={
-                    "text-foreground border border-opacity-50 border-white  hover:bg-zinc-700 transition-all duration-1000 fill-white"
-                  }
-                  radius="full"
-                  size="sm"
-                  variant={"bordered"}
-                >
-                  Source Code
-                  <GitHubIcon className="fill-white scale-85" />
-                </Button>
-              </a>
+              <div className="justify-end  flex flex-wrap  items-center gap-1">
+                {project.home_page && (
+                  <a href={project.home_page} target="_blank">
+                    <Button
+                      className={
+                        "text-foreground border border-opacity-50 border-white  hover:bg-zinc-700 transition-all duration-1000 fill-white "
+                      }
+                      radius="full"
+                      size="sm"
+                      variant={"bordered"}
+                    >
+                      Demo
+                      <OpenInNewIcon className="fill-white text-sm" />
+                    </Button>
+                  </a>
+                )}
+                <a href={project.html_url} target="_blank">
+                  <Button
+                    className={
+                      "text-foreground border border-opacity-50 border-white  hover:bg-zinc-700 transition-all duration-1000 fill-white"
+                    }
+                    radius="full"
+                    size="sm"
+                    variant={"bordered"}
+                  >
+                    Source Code
+                    <GitHubIcon className="fill-white text-sm" />
+                  </Button>
+                </a>
+              </div>
             </CardHeader>
             <CardBody className="py-0 px-3 text-small text-default-600">
               {project.description}
@@ -111,7 +130,7 @@ const Projects = () => {
                 {project.topics.map((topic, index) => (
                   <p
                     key={index}
-                    className="p-1 mb-1 text-xs font-thin bg-opacity-5 rounded-2xl select-none hover:font-bold m-[0.063rem] bg-slate-400 dark:bg-slate-900"
+                    className="p-1 mb-1 text-xs font-thin bg-opacity-5 rounded-2xl select-none hover:font-normal m-[0.063rem] bg-slate-400 dark:bg-slate-900"
                   >
                     {topic}
                   </p>

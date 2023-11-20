@@ -45,7 +45,7 @@ export default function Home() {
         />
         <section
           style={{ opacity: sectionOpacity }}
-          className="transition duration-1000"
+          className="transition duration-1000 flex justify-center items-center flex-col"
         >
           <Greeting />
           <div className="z-0 text-sm font-extralight select-none text-white">

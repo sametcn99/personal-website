@@ -55,7 +55,7 @@ const Projects = () => {
       {Array.isArray(data) &&
         data.map((project, index) => (
           <Card
-            className="z-10 m-5 space-y-4 text-white bg-opacity-50 select-none hover:scale-105 max-w-[35rem]"
+            className="z-10 space-y-4 text-white bg-opacity-50 select-none hover:scale-105 max-w-[35rem]"
             key={`${project.id}-${index}`}
           >
             <CardHeader className="justify-between">

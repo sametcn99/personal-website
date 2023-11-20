@@ -78,7 +78,7 @@ export default function Greeting() {
   // Render the component
   return (
     <h1
-      className="flex sticky z-10 justify-center items-center text-5xl font-bold text-center break-words select-none w-[18rem] h-[12rem]"
+      className="flex sticky z-10 justify-center items-center text-5xl font-bold text-center text-white break-words select-none w-[18rem] h-[12rem]"
       onMouseEnter={() => setHovering(true)}
       onMouseLeave={() => setHovering(false)}
     >
@@ -88,9 +88,8 @@ export default function Greeting() {
         delay={0}
         closeDelay={0}
         color="primary"
-        showArrow={true}
         isOpen={hovering}
-        className="select-none"
+        className="select-none bg-black bg-opacity-50"
       >
         {/* Use conditional rendering based on loading state */}
         {greetingData.loading ? (

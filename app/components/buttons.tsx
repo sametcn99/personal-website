@@ -45,7 +45,12 @@ export default function Buttons() {
             aria-label={socialMedia.label} // Provide an accessibility label for screen readers.
             variants={item}
           >
-            <Button aria-label={socialMedia.label}>{socialMedia.icon}</Button>
+            <Button
+              aria-label={socialMedia.label}
+              className="bg-opacity-70"
+            >
+              {socialMedia.icon}
+            </Button>
             {/* Create a button with an accessibility label and the social media icon. */}
           </motion.a>
         )

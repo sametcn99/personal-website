@@ -13,23 +13,15 @@ import ScrollToTop from "./components/scroll-to-top";
 const inter = Inter({ subsets: ["latin"] }); // Initialize the 'Inter' font with the "latin" subset.
 
 export const metadata: Metadata = {
-  title: "sametcc.me", // Define the title metadata for the page.
+  title: "sametcc.me",
   description:
-    "This is my personal website. Created with Next.js. I'm a Web Developer from Turkey.", // Define the description metadata for the page.
+    "This is my personal website. Created with Next.js. I'm a Web Developer from Turkey.",
   keywords:
-    "personal website, Next.js, web development, ui design, sametcc.me, sametcc, samet can cıncık, portfolio", // Define keywords for the page.
-  applicationName: "sametcc.me", // Define the application name metadata.
-  creator: "https://github.com/sametcn99", // Define the creator's information.
-
-  openGraph: {
-    title: "sametcc.me",
-    description:
-      "This is my personal website. Created with Next.js. I'm a Web Developer from Turkey.",
-    url: "https://www.sametcc.me/",
-    siteName: "sametcc.me",
-    locale: "en_US",
-  },
+    "personal website, Next.js, web development, ui design, sametcc.me, sametcc, samet can cıncık, portfolio",
+  applicationName: "sametcc.me",
+  creator: "https://github.com/sametcn99",
 };
+
 const jsonLd: WithContext<Person> = {
   "@context": "https://schema.org",
   "@type": "Person",
@@ -61,11 +53,16 @@ export default function RootLayout({
         <meta charSet="utf-8" />
         {/* Define the HTML document with a language attribute set to "en". */}
         <link rel="shortcut icon" href="/favicon.png" />
-        {/* Set the shortcut icon (favicon) for the page. */}
         <meta property="og:image" content="/thumbnail.png" />
-        {/* Define Open Graph image property for social sharing. */}
         <meta name="twitter:card" content="/thumbnail.png" />
-        {/* Define Twitter card metadata for social sharing. */}
+        <meta property="og:title" content="sametcc.me" />
+        <meta
+          property="og:description"
+          content="This is my personal website. Created with Next.js. I'm a Web Developer from Turkey."
+        />
+        <meta property="og:url" content="https://www.sametcc.me/" />
+        <meta property="og:site_name" content="sametcc.me" />
+        <meta property="og:locale" content="en_US" />
       </head>
       <body className={inter.className}>
         {/* Set the body class for using the 'Inter' font. */}

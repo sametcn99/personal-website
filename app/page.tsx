@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Greeting from "./components/greeting";
 import Buttons from "./components/buttons";
-import Projects from "./components/projects";
 import TabSwitcher from "./components/tab-switcher";
 
 export default function Home() {

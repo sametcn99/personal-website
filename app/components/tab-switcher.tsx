@@ -1,34 +1,9 @@
 "use client";
-import React, { useState, useEffect } from "react";
 import { Tabs, Tab, Card, CardBody } from "@nextui-org/react";
 import Projects from "./projects";
 import About from "./about";
 
 export default function TabSwitcher() {
-  // const [isTabsFixed, setIsTabsFixed] = useState(false);
-
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     const shouldFixTabs = window.scrollY > 1000;
-  //     setIsTabsFixed(shouldFixTabs);
-  //   };
-
-  //   window.addEventListener("scroll", handleScroll);
-
-  //   // Cleanup the event listener on component unmount
-  //   return () => {
-  //     window.removeEventListener("scroll", handleScroll);
-  //   };
-  // }, []);
-  // const handleTabChange = () => {
-  //   // Scroll to the top when a tab is clicked
-  //   window.scrollTo({ top: 0, behavior: "smooth" });
-  // };
-
-  /* ${
-        isTabsFixed ? "sticky top-0  " : ""
-      }
-  */
   return (
     <>
       <div className="flex z-10 flex-col items-center p-5 w-full min-h-screen select-none">

@@ -2,6 +2,7 @@
 import { Tabs, Tab, Card, CardBody } from "@nextui-org/react";
 import Projects from "./projects";
 import About from "./about";
+import Gists from "./gists";
 
 export default function TabSwitcher() {
   return (
@@ -27,6 +28,9 @@ export default function TabSwitcher() {
           </Tab>
           <Tab key="projects" title="Projects">
             <Projects />
+          </Tab>
+          <Tab key="gists" title="Gists">
+            <Gists />
           </Tab>
           <Tab key="about" title="About">
             <About />

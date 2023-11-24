@@ -39,7 +39,7 @@ const Gists = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("api/gists");
+        const response = await fetch("api/gists?username=sametcn99");
         if (!response.ok) {
           throw new Error(`HTTP hata! Durum kodu: ${response.status}`);
         }

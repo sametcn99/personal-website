@@ -13,7 +13,7 @@ import ScrollToTop from "./components/scroll-to-top";
 const inter = Inter({ subsets: ["latin"] }); // Initialize the 'Inter' font with the "latin" subset.
 
 export const metadata: Metadata = {
-  title: "Personal Website | sametcc.me/",
+  title: "Personal Website | sametcc.me",
   description:
     "I'm a Web Developer from Turkey. My passion lies in creating compelling and user-friendly web experiences in the digital realm. ",
   keywords:

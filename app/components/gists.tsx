@@ -47,10 +47,16 @@ const Gists = () => {
         }
         const fetchedData = await response.json();
 
-        // sort data by stars
-        //const sortedData = fetchedData.sort((a, b) => b.stars - a.stars);
+        // Sort the gists by updated_at in descending order
+        const sortedData = Array.isArray(fetchedData)
+          ? fetchedData.sort(
+              (a, b) =>
+                new Date(b.updated_at).getTime() -
+                new Date(a.updated_at).getTime()
+            )
+          : null;
 
-        setData(fetchedData);
+        setData(sortedData);
         setIsLoading(false);
       } catch (error) {
         console.error("Veri alınamadı:", error);

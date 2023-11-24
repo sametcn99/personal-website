@@ -38,7 +38,7 @@ const Projects = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("api/repos?username=sametcn99");
+        const response = await fetch("api/repos");
         if (!response.ok) {
           throw new Error(`HTTP hata! Durum kodu: ${response.status}`);
         }

@@ -13,11 +13,11 @@ import ScrollToTop from "./components/scroll-to-top";
 const inter = Inter({ subsets: ["latin"] }); // Initialize the 'Inter' font with the "latin" subset.
 
 export const metadata: Metadata = {
-  title: "sametcc.me",
+  title: "Personal Website | sametcc.me/",
   description:
-    "This is my personal website. Created with Next.js. I'm a Web Developer from Turkey.",
+    "I'm a Web Developer from Turkey. My passion lies in creating compelling and user-friendly web experiences in the digital realm. ",
   keywords:
-    "personal website, Next.js, web development, ui design, sametcc.me, sametcc, samet can cıncık, portfolio",
+    "personal website, Next.js, web development, ui design, sametcc.me, sametcc, samet can cıncık, portfolio, web developer",
   applicationName: "sametcc.me",
   creator: "https://github.com/sametcn99",
 };

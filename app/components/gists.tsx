@@ -1,3 +1,4 @@
+"use client";
 // gists component
 import { useEffect, useState } from "react";
 import {
@@ -43,7 +44,7 @@ const Gists = () => {
           throw new Error(`HTTP hata! Durum kodu: ${response.status}`);
         }
         const fetchedData = await response.json();
-        console.log(fetchedData);
+
         // sort data by stars
         //const sortedData = fetchedData.sort((a, b) => b.stars - a.stars);
 

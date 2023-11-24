@@ -1,3 +1,4 @@
+"use client";
 // Projects component
 import { useEffect, useState } from "react";
 import {

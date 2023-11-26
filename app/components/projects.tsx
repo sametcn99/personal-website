@@ -13,6 +13,7 @@ import Loading from "@/app/loading";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import StarIcon from "@mui/icons-material/Star";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
+import RateErrorComponent from "./RateError";
 
 type GitHubRepo = {
   id: number;
@@ -47,7 +48,7 @@ const Projects = () => {
         const fetchedData = await response.json();
         if (fetchedData.error) {
           // If there is an error in the data, set the error state
-          setError(fetchedData.error);
+          setError(fetchedData);
         }
 
         // Sort the data by updated_at in descending order
@@ -76,9 +77,7 @@ const Projects = () => {
         <section className="">
           {error && (
             // Display error message in a div
-            <div className="mb-4 text-center font-bold text-red-500">
-              Error: {error}
-            </div>
+            <RateErrorComponent errorJson={error} />
           )}
           {Array.isArray(data) &&
             data.map((project, index) => (

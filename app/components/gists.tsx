@@ -13,6 +13,7 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import StarIcon from "@mui/icons-material/Star";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import Loading from "../loading";
+import ErrorComponent from "./RateError";
 
 type GitHubRepo = {
   id: number;
@@ -36,6 +37,7 @@ const Gists = () => {
   // State to store GitHub API data
   const [data, setData] = useState<GitHubRepo[] | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null); // New state for error message
 
   // Fetch data from GitHub API
   useEffect(() => {
@@ -46,7 +48,10 @@ const Gists = () => {
           throw new Error(`HTTP hata! Durum kodu: ${response.status}`);
         }
         const fetchedData = await response.json();
-
+        if (fetchedData.error) {
+          // If there is an error in the data, set the error state
+          setError(fetchedData.error);
+        }
         // Sort the gists by updated_at in descending order
         const sortedData = Array.isArray(fetchedData)
           ? fetchedData.sort(
@@ -72,6 +77,10 @@ const Gists = () => {
         <Loading />
       ) : (
         <>
+          {error && (
+            // Display error message in a div
+            <ErrorComponent text={error} />
+          )}
           {Array.isArray(data) &&
             data.map((gist, index) => (
               <Card

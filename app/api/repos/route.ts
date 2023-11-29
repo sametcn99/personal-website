@@ -40,6 +40,9 @@ export async function GET(request: NextRequest) {
     const userRepos = await octokit.rest.repos.listForUser({
       username,
       per_page: 100,
+      next: {
+        revalidate: 3600,
+      },
     });
 
     return NextResponse.json(userRepos);

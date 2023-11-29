@@ -13,7 +13,9 @@ export async function GET() {
 
   try {
     // Fetch rate limit status
-    const rateLimitResponse = await octokit.request("GET /rate_limit");
+    const rateLimitResponse = await octokit.request("GET /rate_limit", {
+      next: { revalidate: 3600 },
+    });
     return NextResponse.json(rateLimitResponse);
   } catch (error) {
     // return a JSON response

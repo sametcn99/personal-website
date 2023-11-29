@@ -22,7 +22,9 @@ export async function GET(request: NextRequest) {
 
   try {
     // Fetch rate limit status
-    const rateLimitResponse = await octokit.request("GET /rate_limit");
+    const rateLimitResponse = await octokit.request("GET /rate_limit", {
+      next: { revalidate: 3600 },
+    });
     const rateLimitRemaining = rateLimitResponse.data.resources.core.remaining;
 
     // Check if the rate limit allows making the request

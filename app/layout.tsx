@@ -64,6 +64,10 @@ export default function RootLayout({
         <meta property="og:url" content="https://www.sametcc.me/" />
         <meta property="og:site_name" content="sametcc.me" />
         <meta property="og:locale" content="en_US" />
+        <meta
+          name="google-site-verification"
+          content="YSbWeWN_f4RYnaxt__FUvujMbabAMnjmSzaJldja4Nk"
+        />
       </head>
       <body className={inter.className}>
         {/* Set the body class for using the 'Inter' font. */}

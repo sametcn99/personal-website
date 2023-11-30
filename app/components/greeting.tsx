@@ -64,7 +64,7 @@ export default function Greeting() {
           loading: false,
         }));
       }
-    }, 800);
+    }, 1500);
 
     // Clear the interval on component unmount or dependency change
     return () => clearInterval(interval);

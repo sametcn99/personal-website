@@ -20,6 +20,8 @@ export const metadata: Metadata = {
     "personal website, Next.js, web development, ui design, sametcc.me, sametcc, samet can cıncık, portfolio, web developer",
   applicationName: "sametcc.me",
   creator: "https://github.com/sametcn99",
+  authors: [{ name: "samet can cıncık", url: "https://www.sametcc.me/" }],
+  metadataBase: new URL("https://www.sametcc.me"),
 };
 
 const jsonLd: WithContext<Person> = {
@@ -53,20 +55,25 @@ export default function RootLayout({
         <meta charSet="utf-8" />
         {/* Define the HTML document with a language attribute set to "en". */}
         <link rel="shortcut icon" href="/favicon.png" />
-        <meta property="og:image" content="/thumbnail.png" />
         <meta name="twitter:card" content="/thumbnail.png" />
+        <meta
+          name="google-site-verification"
+          content="YSbWeWN_f4RYnaxt__FUvujMbabAMnjmSzaJldja4Nk"
+        />
         <meta property="og:title" content="sametcc.me" />
         <meta property="og:type" content="website" />
+        <meta name="robots" content="index, follow" />
         <meta
           property="og:description"
           content="This is my personal website. Created with Next.js. I'm a Web Developer from Turkey."
         />
+        <meta property="og:image" content="/thumbnail.png" />
         <meta property="og:url" content="https://www.sametcc.me/" />
         <meta property="og:site_name" content="sametcc.me" />
         <meta property="og:locale" content="en_US" />
-        <meta
-          name="google-site-verification"
-          content="YSbWeWN_f4RYnaxt__FUvujMbabAMnjmSzaJldja4Nk"
+        <link
+          rel="manifest"
+          href="https://www.sametcc.me/manifest.webmanifest"
         />
       </head>
       <body className={inter.className}>

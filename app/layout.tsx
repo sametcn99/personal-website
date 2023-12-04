@@ -29,7 +29,7 @@ const jsonLd: WithContext<Person> = {
   url: "https://www.sametcc.me/",
   sameAs: [
     "https://www.linkedin.com/in/samet-can-c%C4%B1nc%C4%B1k",
-    "http://instagram.com/sametc0",
+    "http://instagram.com/sametc.0",
     "https://github.com/sametcn99",
     "https://www.youtube.com/channel/UCgXu7EZ76uMqPW8i4ZCL72Q",
   ],

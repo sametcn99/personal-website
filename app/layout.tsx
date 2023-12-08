@@ -9,6 +9,7 @@ import { Providers } from "@/providers"; // Import the 'Providers' component fro
 import { Analytics } from "@vercel/analytics/react"; // Import the 'Analytics' component from the "@vercel/analytics/react" module.
 import { Person, WithContext } from "schema-dts";
 import ScrollToTop from "./components/scroll-to-top";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const inter = Inter({ subsets: ["latin"] }); // Initialize the 'Inter' font with the "latin" subset.
 
@@ -53,7 +54,6 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <meta charSet="utf-8" />
-        {/* Define the HTML document with a language attribute set to "en". */}
         <link rel="shortcut icon" href="/favicon.png" />
         <meta name="twitter:card" content="/thumbnail.png" />
         <meta
@@ -76,10 +76,11 @@ export default function RootLayout({
           href="https://www.sametcc.me/manifest.webmanifest"
         />
       </head>
+      {/* Set the body class for using the 'Inter' font. */}
       <body className={inter.className}>
-        {/* Set the body class for using the 'Inter' font. */}
+        {/* Wrap the main content in a 'Providers' component. */}
         <Providers>
-          {/* Wrap the main content in a 'Providers' component. */}
+          {/* Define the main content area. */}
           <main className="flex flex-col items-center w-full min-h-screen scroll-smooth">
             {children}
             <script
@@ -88,9 +89,9 @@ export default function RootLayout({
               dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
             />
           </main>
-          {/* Define the main content area. */}
-          <Analytics />
           {/* Include analytics tracking with the 'Analytics' component. */}
+          <Analytics />
+          <SpeedInsights />
         </Providers>
         <ScrollToTop />
       </body>

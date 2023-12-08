@@ -14,6 +14,7 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import StarIcon from "@mui/icons-material/Star";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import RateErrorComponent from "./RateError";
+import CardButtons from "./ui/CardButtons";
 
 type GitHubRepo = {
   id: number;
@@ -108,33 +109,20 @@ const Projects = () => {
                   </div>
                   <div className="flex flex-wrap items-center justify-end gap-1">
                     {project.homepage && (
-                      <a href={project.homepage} target="_blank">
-                        <Button
-                          className={
-                            "border border-opacity-50 fill-white text-foreground transition-all duration-1000 hover:bg-zinc-700 hover:bg-opacity-50 light:fill-black dark:fill-white "
-                          }
-                          radius="full"
-                          size="sm"
-                          variant={"bordered"}
-                        >
-                          Website
+                      <CardButtons
+                        href={project.homepage}
+                        title="Website"
+                        logo={
                           <OpenInNewIcon className="text-sm light:fill-black dark:fill-white" />
-                        </Button>
-                      </a>
-                    )}
-                    <a href={project.html_url} target="_blank">
-                      <Button
-                        className={
-                          "border border-opacity-50 fill-white text-foreground transition-all duration-1000 hover:bg-zinc-700 hover:bg-opacity-50 light:fill-black dark:fill-white "
                         }
-                        radius="full"
-                        size="sm"
-                        variant={"bordered"}
-                      >
-                        Source Code
-                        <GitHubIcon className="text-sm light:fill-black dark:fill-white" />
-                      </Button>
-                    </a>
+                      />
+                    )}
+
+                    <CardButtons
+                      href={project.html_url}
+                      title="Source Code"
+                      logo={<GitHubIcon className="text-sm fill-white" />}
+                    />
                   </div>
                 </CardHeader>
                 <CardBody className="px-3 py-0 text-small text-default-600">

@@ -14,6 +14,7 @@ import StarIcon from "@mui/icons-material/Star";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import Loading from "../loading";
 import ErrorComponent from "./RateError";
+import SourceCode from "./ui/CardButtons";
 
 type GitHubRepo = {
   id: number;
@@ -93,21 +94,11 @@ const Gists = () => {
                       <div key={index}>{filename}</div>
                     ))}
                   </div>
-                  <div>
-                    <a href={gist.html_url} target="_blank">
-                      <Button
-                        className={
-                          "text-foreground border border-opacity-50 border-white hover:bg-opacity-50 hover:bg-zinc-700 transition-all duration-1000 fill-white "
-                        }
-                        radius="full"
-                        size="sm"
-                        variant={"bordered"}
-                      >
-                        Source Code
-                        <GitHubIcon className="text-sm fill-white" />
-                      </Button>
-                    </a>
-                  </div>
+                  <SourceCode
+                    href={gist.html_url}
+                    title="Source Code"
+                    logo={<GitHubIcon className="text-sm fill-white" />}
+                  />
                 </CardHeader>
                 <CardBody className="py-0 px-3 text-small text-default-600">
                   {gist.description}

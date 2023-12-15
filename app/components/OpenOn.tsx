@@ -29,7 +29,7 @@ export default function OpenOn({ ...props }) {
         >
           Github IDE
         </DropdownItem>
-        {props.demo ? (
+        {props.demo && (
           <DropdownItem
             key="open on github ide"
             href={props.demo}
@@ -37,8 +37,6 @@ export default function OpenOn({ ...props }) {
           >
             Website(DEMO)
           </DropdownItem>
-        ) : (
-          <></>
         )}
       </DropdownMenu>
     </Dropdown>

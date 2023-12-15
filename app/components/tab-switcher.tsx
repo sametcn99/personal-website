@@ -1,5 +1,5 @@
 "use client";
-import { Tabs, Tab, Card, CardBody } from "@nextui-org/react";
+import { Tabs, Tab } from "@nextui-org/react";
 import Projects from "./projects";
 import About from "./about";
 import Gists from "./gists";

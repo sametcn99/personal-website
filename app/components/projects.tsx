@@ -6,7 +6,6 @@ import {
   CardHeader,
   CardBody,
   CardFooter,
-  Button,
   Tooltip,
 } from "@nextui-org/react";
 import Loading from "@/app/loading";
@@ -15,23 +14,9 @@ import StarIcon from "@mui/icons-material/Star";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import RateErrorComponent from "./RateError";
 import CardButtons from "./ui/CardButtons";
+import { GitHubRepo } from "@/types";
+import OpenOn from "./OpenOn";
 
-type GitHubRepo = {
-  id: number;
-  name: string;
-  stargazers_count: number;
-  html_url: string;
-  homepage: string;
-  description: string;
-  created_at: string;
-  updated_at: string;
-  topics: string[];
-  license_name: string;
-  license_url: string;
-  language: string;
-  license_key: string;
-  license: any;
-};
 // Projects component
 const Projects = () => {
   // State to store GitHub API data
@@ -107,23 +92,14 @@ const Projects = () => {
                       )}
                     </div>
                   </div>
-                  <div className="flex flex-wrap items-center justify-end gap-1">
-                    {project.homepage && (
-                      <CardButtons
-                        href={project.homepage}
-                        title="Website"
-                        logo={
-                          <OpenInNewIcon className="text-sm light:fill-black dark:fill-white" />
-                        }
-                      />
+                  <OpenOn
+                    demo={project.homepage ? project.homepage : null}
+                    github={project.html_url}
+                    githubide={project.html_url.replace(
+                      "github.com",
+                      "github.dev"
                     )}
-
-                    <CardButtons
-                      href={project.html_url}
-                      title="Source Code"
-                      logo={<GitHubIcon className="text-sm fill-white" />}
-                    />
-                  </div>
+                  ></OpenOn>
                 </CardHeader>
                 <CardBody className="px-3 py-0 text-small text-default-600">
                   {project.description}

@@ -1,38 +1,13 @@
 "use client";
 // gists component
 import { useEffect, useState } from "react";
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Button,
-  Tooltip,
-} from "@nextui-org/react";
+import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/react";
 import GitHubIcon from "@mui/icons-material/GitHub";
-import StarIcon from "@mui/icons-material/Star";
-import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import Loading from "../loading";
 import ErrorComponent from "./RateError";
 import SourceCode from "./ui/CardButtons";
+import { GitHubRepo } from "@/types";
 
-type GitHubRepo = {
-  id: number;
-  name: string;
-  stars: number;
-  html_url: string;
-  home_page: string;
-  description: string;
-  created_at: string;
-  updated_at: string;
-  topics: string[];
-  license_name: string;
-  license_url: string;
-  language: string;
-  license_key: string;
-  license_spdx_id: string;
-  files: string[];
-};
 // Gistss component
 const Gists = () => {
   // State to store GitHub API data

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import { Octokit } from "octokit";
 import type { NextRequest } from "next/server";
+import { octokit } from "@/lib/octokit";
 
 // Define an asynchronous function named GET
 export async function GET(request: NextRequest) {
@@ -13,13 +13,6 @@ export async function GET(request: NextRequest) {
       error: "Username parameter is missing in the URL.",
     });
   }
-  const octokit = new Octokit({
-    auth: process.env.GH_TOKEN,
-    headers: {
-      "X-GitHub-Api-Version": "2022-11-28", // Specify the GitHub API version
-    },
-    userAgent: "Github Profile Next UI", // Specify the user agent for the request
-  });
 
   try {
     // Fetch rate limit status

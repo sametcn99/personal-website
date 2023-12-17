@@ -41,8 +41,8 @@ const Projects = () => {
         const sortedData = Array.isArray(fetchedData.data)
           ? fetchedData.data.sort(
               (a: any, b: any) =>
-                new Date(b.updated_at).getTime() -
-                new Date(a.updated_at).getTime()
+                new Date(b.pushed_at).getTime() -
+                new Date(a.pushed_at).getTime()
             )
           : null;
 
@@ -118,7 +118,7 @@ const Projects = () => {
                     </p>
                     <p>
                       Last update:{" "}
-                      {new Date(project.updated_at).toLocaleDateString()}
+                      {new Date(project.pushed_at).toLocaleDateString()}
                     </p>
                   </div>
                   <div className="jus flex flex-row flex-wrap">

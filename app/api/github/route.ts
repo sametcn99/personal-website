@@ -1,10 +1,12 @@
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 import { octokit } from "@/lib/octokit";
-import { NextRequest, NextResponse } from "next/server";
 
 // Define an asynchronous function named GET
 export async function GET(request: NextRequest) {
   const nextUrl = request.nextUrl;
   const username = nextUrl.searchParams.get("username");
+  const option = nextUrl.searchParams.get("option");
 
   if (username === null) {
     // Handle the case where "username" is not provided in the URL
@@ -12,6 +14,7 @@ export async function GET(request: NextRequest) {
       error: "Username parameter is missing in the URL.",
     });
   }
+
   try {
     // Fetch rate limit status
     const rateLimitResponse = await octokit.request("GET /rate_limit");
@@ -28,19 +31,36 @@ export async function GET(request: NextRequest) {
       });
     }
 
-    // Replace 'username' with the GitHub username whose repositories you want to fetch
-    // Fetch all repositories for the specified user
-    const userGists = await octokit.rest.gists.listForUser({
-      username,
-      per_page: 100,
-    });
+    let responseData;
 
-    // Log userRepos to the console (commented out)
-    // console.log("User Repositories:", userRepos.url);
+    switch (option) {
+      case "gists":
+        // Fetch all gists for the specified user
+        responseData = await octokit.rest.gists.listForUser({
+          username,
+          per_page: 100,
+        });
+        responseData = responseData.data;
+        break;
+      case "repos":
+        // Fetch all repositories for the specified user
+        responseData = await octokit.rest.repos.listForUser({
+          username,
+          per_page: 100,
+        });
+        break;
+      default:
+        return NextResponse.json({
+          error: `Invalid option "${option}".`,
+        });
+    }
 
-    return NextResponse.json(userGists.data);
+    return NextResponse.json(responseData);
   } catch (error) {
-    // return a JSON response
-    return NextResponse.json(error);
+    // Return a JSON response
+    return NextResponse.json({
+      error: "An error occurred while fetching data from GitHub API.",
+      details: error,
+    });
   }
 }

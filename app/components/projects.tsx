@@ -31,7 +31,7 @@ const Projects = () => {
           `/api/github?username=sametcn99&option=repos`,
           {
             cache: "no-store" && "no-cache",
-          }
+          },
         );
         if (!response.ok) {
           throw new Error(`HTTP hata! Durum kodu: ${response.status}`);
@@ -47,7 +47,7 @@ const Projects = () => {
           ? fetchedData.data.sort(
               (a: any, b: any) =>
                 new Date(b.pushed_at).getTime() -
-                new Date(a.pushed_at).getTime()
+                new Date(a.pushed_at).getTime(),
             )
           : null;
 
@@ -72,44 +72,37 @@ const Projects = () => {
           )}
           {Array.isArray(data) &&
             data.map((project, index) => (
-              <Card
-                className="z-10 mb-3 flex max-w-[35rem] select-none flex-col bg-opacity-50 hover:scale-105"
-                key={`${project.id}-${index}`}
-              >
-                <CardHeader className="justify-between">
-                  <div className="flex gap-5">
-                    <div className="flex flex-row flex-wrap items-center">
-                      <h1 className="text-small font-semibold leading-none text-default-600 hover:font-bold">
-                        {project.name}
-                      </h1>
-                      {project.stargazers_count > 0 && (
-                        <Tooltip
-                          content="Total Stars"
-                          delay={0}
-                          closeDelay={0}
-                          className="select-none bg-opacity-60 light:bg-black dark:bg-white"
-                        >
-                          <div className="flex scale-85 items-center gap-2 font-bold">
-                            <StarIcon />
-                            {project.stargazers_count}
-                          </div>
-                        </Tooltip>
-                      )}
-                    </div>
+              <Card className="card-container" key={`${project.id}-${index}`}>
+                <CardHeader className="card-header">
+                  <div className="flex flex-row flex-wrap items-center">
+                    <h1 className="text-small font-semibold leading-none text-default-600 hover:font-bold">
+                      {project.name}
+                    </h1>
+                    {project.stargazers_count > 0 && (
+                      <Tooltip
+                        content="Total Stars"
+                        delay={0}
+                        closeDelay={0}
+                        className="select-none bg-opacity-60 light:bg-black dark:bg-white"
+                      >
+                        <div className="flex scale-85 items-center gap-2 font-bold">
+                          <StarIcon />
+                          {project.stargazers_count}
+                        </div>
+                      </Tooltip>
+                    )}
                   </div>
                   <OpenOn
                     demo={project.homepage ? project.homepage : null}
                     github={project.html_url}
                     githubide={project.html_url.replace(
                       "github.com",
-                      "github.dev"
+                      "github.dev",
                     )}
                   ></OpenOn>
                 </CardHeader>
-                <CardBody className="px-3 py-0 text-small text-default-600">
-                  {project.description}
-                </CardBody>
-                <CardFooter className="flex flex-col items-start gap-3">
+                <CardBody className="card-body">{project.description}</CardBody>
+                <CardFooter className="card-footer">
                   <div className="item flex flex-col flex-wrap gap-1 text-left text-xs">
                     <p>{project.license?.spdx_id}</p>
                     <p>

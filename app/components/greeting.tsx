@@ -27,7 +27,7 @@ export default function Greeting() {
   const greetingsArray = useMemo(() => Object.values(greetings), [greetings]);
   const greetingLanguageArray = useMemo(
     () => Object.keys(greetings),
-    [greetings]
+    [greetings],
   );
 
   // Use state to track hovering
@@ -78,7 +78,7 @@ export default function Greeting() {
   // Render the component
   return (
     <h1
-      className="flex sticky z-10 justify-center items-center text-5xl font-bold text-center text-white break-words select-none w-[18rem] h-[12rem]"
+      className="sticky z-10 flex h-[12rem] w-[18rem] select-none items-center justify-center break-words text-center text-5xl font-bold text-white"
       onMouseEnter={() => setHovering(true)}
       onMouseLeave={() => setHovering(false)}
     >
@@ -89,7 +89,7 @@ export default function Greeting() {
         closeDelay={0}
         color="primary"
         isOpen={hovering}
-        className="bg-black bg-opacity-50 select-none"
+        className="select-none bg-black bg-opacity-50"
       >
         {/* Use conditional rendering based on loading state */}
         {greetingData.loading ? (

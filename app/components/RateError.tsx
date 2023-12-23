@@ -18,7 +18,7 @@ const RateErrorComponent = ({ errorJson }: any) => {
   const minutesRemaining = calculateRemainingTime();
 
   return (
-    <div className="mb-4 text-center font-bold bg-red-600 p-2 w-fit h-fit rounded-2xl">
+    <div className="mb-4 h-fit w-fit rounded-2xl bg-red-600 p-2 text-center font-bold">
       Error: {errorJson.error}
       <br />
       Come Back: {errorJson.resetTime} (GMT)

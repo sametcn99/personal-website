@@ -23,7 +23,7 @@ const Gists = () => {
           "/api/github?username=sametcn99&option=gists",
           {
             cache: "no-store" && "no-cache",
-          }
+          },
         );
         if (!response.ok) {
           throw new Error(`HTTP hata! Durum kodu: ${response.status}`);
@@ -38,7 +38,7 @@ const Gists = () => {
           ? fetchedData.sort(
               (a, b) =>
                 new Date(b.updated_at).getTime() -
-                new Date(a.updated_at).getTime()
+                new Date(a.updated_at).getTime(),
             )
           : null;
 
@@ -64,11 +64,8 @@ const Gists = () => {
           )}
           {Array.isArray(data) &&
             data.map((gist, index) => (
-              <Card
-                className="z-10 mb-3 flex max-w-[35rem] select-none flex-col bg-opacity-50 hover:scale-105"
-                key={`${gist.id}-${index}`}
-              >
-                <CardHeader className="justify-between">
+              <Card className="card-container" key={`${gist.id}-${index}`}>
+                <CardHeader className="card-header">
                   <div className="flex flex-col items-start">
                     {Object.keys(gist.files).map((filename, index) => (
                       <div key={index}>{filename}</div>
@@ -77,23 +74,18 @@ const Gists = () => {
                   <SourceCode
                     href={gist.html_url}
                     title="Source Code"
-                    logo={<GitHubIcon className="text-sm fill-white" />}
+                    logo={<GitHubIcon className="fill-white text-sm" />}
                   />
                 </CardHeader>
-                <CardBody className="py-0 px-3 text-small text-default-600">
-                  {gist.description}
-                </CardBody>
-                <CardFooter className="flex flex-col gap-3 items-start">
-                  <div className="flex flex-col flex-wrap gap-1 text-xs text-left item">
-                    <p>
-                      Created at:{" "}
-                      {new Date(gist.created_at).toLocaleDateString()}
-                    </p>
-                    <p>
-                      Last update:{" "}
-                      {new Date(gist.updated_at).toLocaleDateString()}
-                    </p>
-                  </div>
+                <CardBody className="card-body">{gist.description}</CardBody>
+                <CardFooter className="card-footer">
+                  <p>
+                    Created at: {new Date(gist.created_at).toLocaleDateString()}
+                  </p>
+                  <p>
+                    Last update:{" "}
+                    {new Date(gist.updated_at).toLocaleDateString()}
+                  </p>
                 </CardFooter>
               </Card>
             ))}

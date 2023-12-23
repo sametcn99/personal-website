@@ -7,7 +7,7 @@ export default function CardButtons({ ...props }) {
     <Link href={props.href} target="_blank">
       <Button
         className={
-          "text-foreground border border-opacity-50 border-white hover:bg-opacity-50 hover:bg-zinc-700 transition-all duration-1000 fill-white"
+          "border border-white border-opacity-50 fill-white text-foreground transition-all duration-1000 hover:bg-zinc-700 hover:bg-opacity-50"
         }
         radius="sm"
         size="sm"

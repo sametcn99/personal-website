@@ -25,7 +25,7 @@ export default function Buttons() {
   };
   return (
     <motion.section
-      className="flex flex-wrap justify-center items-center"
+      className="flex flex-wrap items-center justify-center"
       variants={container}
       initial="hidden"
       animate="visible"
@@ -34,7 +34,7 @@ export default function Buttons() {
       {socialMediaLinks.map(
         (
           socialMedia,
-          index // Map over the 'socialMediaLinks' array and create a link for each social media entry.
+          index, // Map over the 'socialMediaLinks' array and create a link for each social media entry.
         ) => (
           <motion.a
             className="m-1" // Apply CSS margin to the link.
@@ -45,15 +45,12 @@ export default function Buttons() {
             aria-label={socialMedia.label} // Provide an accessibility label for screen readers.
             variants={item}
           >
-            <Button
-              aria-label={socialMedia.label}
-              className="bg-opacity-70"
-            >
+            <Button aria-label={socialMedia.label} className="bg-opacity-70">
               {socialMedia.icon}
             </Button>
             {/* Create a button with an accessibility label and the social media icon. */}
           </motion.a>
-        )
+        ),
       )}
     </motion.section>
   );

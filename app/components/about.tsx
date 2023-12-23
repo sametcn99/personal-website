@@ -2,8 +2,8 @@ import { Card, CardBody } from "@nextui-org/react";
 
 export default function About() {
   return (
-    <Card className="z-10 gap-11 space-y-4 w-full text-sm text-white bg-opacity-50 select-none hover:scale-105 max-w-[35rem]">
-      <CardBody className="w-full text-center break-words text-wrap">
+    <Card className="z-10 w-full max-w-[35rem] select-none gap-11 space-y-4 bg-opacity-50 text-sm text-white hover:scale-105">
+      <CardBody className="text-wrap w-full break-words text-center">
         As a Software Developer with a associate degree in computer programming
         from Gazi University, I am passionate about developing innovative and
         user-friendly applications. I am currently working on enhancing my

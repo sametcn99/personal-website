@@ -32,9 +32,9 @@ export default function Home() {
   }, [scrollY]);
   return (
     <>
-      <section className="flex z-10 flex-col justify-center items-center min-h-screen mb-[-5rem]">
+      <section className="z-10 mb-[-5rem] flex min-h-screen flex-col items-center justify-center">
         {!imageLoaded && (
-          <div className="flex absolute justify-center items-center rounded-full animate-pulse w-[500px] h-[500px]"></div>
+          <div className="absolute flex h-[500px] w-[500px] animate-pulse items-center justify-center rounded-full"></div>
         )}
         <Image
           src={"/blobanimation.svg"} // Assuming the image path is correct
@@ -43,7 +43,7 @@ export default function Home() {
           height={600}
           priority
           loading="eager"
-          className={`flex  justify-center items-center select-none fixed  z--10 ${
+          className={`fixed  z--10 flex select-none items-center  justify-center ${
             imageLoaded ? "opacity-100" : "opacity-0"
           }`}
           onLoad={handleImageLoad}
@@ -53,10 +53,10 @@ export default function Home() {
           <>
             <section
               style={{ opacity: sectionOpacity }}
-              className="flex flex-col justify-center items-center transition duration-1000"
+              className="flex flex-col items-center justify-center transition duration-1000"
             >
               <Greeting />
-              <div className="z-0 text-sm font-extralight text-white select-none">
+              <div className="z-0 select-none text-sm font-extralight text-white">
                 I&apos;m a Web Developer from Turkey
               </div>
               <Buttons />

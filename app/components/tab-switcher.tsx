@@ -7,11 +7,11 @@ import Gists from "./gists";
 export default function TabSwitcher() {
   return (
     <>
-      <div className="flex z-10 flex-col items-center p-5 w-full min-h-screen select-none">
+      <div className="z-10 flex min-h-screen w-full select-none flex-col items-center p-5">
         <Tabs
           defaultSelectedKey={"projects"}
           aria-label="Options"
-          className={`w-full flex items-center justify-center z-50 p-2 sticky top-0 `}
+          className={`sticky top-0 z-50 flex w-full items-center justify-center p-2 `}
         >
           <Tab key="projects" title="Projects">
             <Projects />

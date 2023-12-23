@@ -18,7 +18,24 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(to bottom,
+  background: linear-gradient(
+      to bottom,
       transparent,
-      rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+.card-container {
+  @apply z-10 mb-3 flex max-w-[35rem] select-none flex-col bg-opacity-50 transition-all duration-1000 hover:scale-105;
+}
+.card-header {
+  @apply flex flex-row flex-wrap items-center justify-between gap-5;
+}
+.card-body {
+  @apply px-3 py-0 text-small text-default-600;
+}
+
+.card-footer {
+  @apply flex flex-col flex-wrap items-start gap-3 text-left text-xs;
 }

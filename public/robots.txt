@@ -1,9 +1,9 @@
-# User-agent
+# *
 User-agent: *
 Allow: /
 
 # Host
-Host: sametcc.me
+Host: sametcc.me/
 
 # Sitemaps
-Sitemap: https://sametcc.me/sitemap.xml
+Sitemap: sametcc.me/sitemap.xml

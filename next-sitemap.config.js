@@ -1,5 +1,5 @@
 module.exports = {
-  siteUrl: "https://sametcc.me/",
+  siteUrl: "sametcc.me/",
   generateRobotsTxt: true,
   sitemapSize: 7000,
 };

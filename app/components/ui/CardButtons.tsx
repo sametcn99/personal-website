@@ -9,7 +9,7 @@ export default function CardButtons({ ...props }) {
         className={
           "text-foreground border border-opacity-50 border-white hover:bg-opacity-50 hover:bg-zinc-700 transition-all duration-1000 fill-white"
         }
-        radius="full"
+        radius="sm"
         size="sm"
         variant={"bordered"}
       >

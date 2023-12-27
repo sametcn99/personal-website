@@ -1,6 +1,6 @@
 export const siteConfig = {
   metadata: {
-    title: "Personal Website | sametcc.me",
+    title: "Samet Can Cıncık | sametcc.me",
     description:
       "I'm a Web Developer from Turkey. My passion lies in creating compelling and user-friendly web experiences in the digital realm.",
     keywords:
@@ -15,7 +15,7 @@ export const siteConfig = {
     ],
     metadataBase: new URL("https://www.sametcc.me"),
     openGraph: {
-      title: "Personal Website | sametcc.me",
+      title: "Samet Can Cıncık | sametcc.me",
       description:
         "I'm a Web Developer from Turkey. My passion lies in creating compelling and user-friendly web experiences in the digital realm.",
       url: "https://www.sametcc.me/",

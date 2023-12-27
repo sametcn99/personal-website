@@ -1,20 +1,16 @@
 import type { Metadata, Viewport } from "next"; // Import the 'Metadata' type from the "next" module.
-
 import { Inter } from "next/font/google"; // Import the 'Inter' font from the "next/font/google" module.
-
 import "./globals.css"; // Import global CSS styles from the "globals.css" file.
-
 import { Providers } from "@/providers"; // Import the 'Providers' component from the "@/providers" module.
-
 import { Analytics } from "@vercel/analytics/react"; // Import the 'Analytics' component from the "@vercel/analytics/react" module.
 import ScrollToTop from "./components/scroll-to-top";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { siteConfig } from "@/site-config";
 
 const inter = Inter({ subsets: ["latin"] }); // Initialize the 'Inter' font with the "latin" subset.
+const jsonLd = siteConfig.jsonLd;
 
 export const metadata: Metadata = siteConfig.metadata;
-const jsonLd = siteConfig.jsonLd;
 export const viewport: Viewport = siteConfig.viewport;
 
 export default function RootLayout({

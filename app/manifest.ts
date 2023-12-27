@@ -2,7 +2,7 @@ import { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "sametcc.me",
+    name: "Samet Can Cıncık",
     short_name: "sametcc",
     dir: "auto",
     description: "This is my personal website. Created with Next.js.",

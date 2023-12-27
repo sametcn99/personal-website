@@ -1,9 +1,0 @@
-# *
-User-agent: *
-Allow: /
-
-# Host
-Host: sametcc.me/
-
-# Sitemaps
-Sitemap: sametcc.me/sitemap.xml

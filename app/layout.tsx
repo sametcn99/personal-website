@@ -23,6 +23,8 @@ export default function RootLayout({
       <head>
         <link rel="shortcut icon" href="/favicon.png" />
         <meta name="twitter:card" content="/thumbnail.png" />
+        <meta property="twitter:image" content="/thumbnail.png"></meta>
+        <meta property="og:image" content="/thumbnail.png"></meta>
         <meta
           name="google-site-verification"
           content="YSbWeWN_f4RYnaxt__FUvujMbabAMnjmSzaJldja4Nk"

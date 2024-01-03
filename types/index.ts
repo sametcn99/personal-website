@@ -18,4 +18,5 @@ export type GitHubRepo = {
   home_page: string;
   license_spdx_id: string;
   files: string[];
+  owner: any;
 };

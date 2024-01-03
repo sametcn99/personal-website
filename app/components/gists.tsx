@@ -57,7 +57,7 @@ const Gists = () => {
       {isLoading ? (
         <Loading />
       ) : (
-        <>
+        <section>
           {error && (
             // Display error message in a div
             <ErrorComponent text={error} />
@@ -89,7 +89,7 @@ const Gists = () => {
                 </CardFooter>
               </Card>
             ))}
-        </>
+        </section>
       )}
     </>
   );

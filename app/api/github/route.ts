@@ -7,6 +7,7 @@ export async function GET(request: NextRequest) {
   const nextUrl = request.nextUrl;
   const username = nextUrl.searchParams.get("username");
   const option = nextUrl.searchParams.get("option");
+  const reponame = nextUrl.searchParams.get("reponame");
 
   if (username === null) {
     // Handle the case where "username" is not provided in the URL
@@ -47,6 +48,18 @@ export async function GET(request: NextRequest) {
         responseData = await octokit.rest.repos.listForUser({
           username,
           per_page: 100,
+        });
+        break;
+      case "repo":
+        if (!reponame) {
+          return NextResponse.json({
+            error: "Reponame parameter is missing in the URL.",
+          });
+        }
+        // Fetch all repositories for the specified user
+        responseData = await octokit.rest.repos.get({
+          owner: username,
+          repo: reponame,
         });
         break;
       default:

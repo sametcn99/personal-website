@@ -9,11 +9,8 @@ import {
   Tooltip,
 } from "@nextui-org/react";
 import Loading from "@/app/loading";
-import GitHubIcon from "@mui/icons-material/GitHub";
 import StarIcon from "@mui/icons-material/Star";
-import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import RateErrorComponent from "./RateError";
-import CardButtons from "./ui/CardButtons";
 import { GitHubRepo } from "@/types";
 import OpenOn from "./OpenOn";
 
@@ -50,7 +47,6 @@ const Projects = () => {
                 new Date(a.pushed_at).getTime(),
             )
           : null;
-
         setData(sortedData);
         setIsLoading(false);
       } catch (error) {

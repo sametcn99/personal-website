@@ -19,22 +19,17 @@ export default function OpenOn({ ...props }) {
         </Button>
       </DropdownTrigger>
       <DropdownMenu aria-label="Static Actions">
-        <DropdownItem key="open on github" href={props.github} target="_blank">
+        <DropdownItem key="open on github" href={props.github}>
           Github
         </DropdownItem>
         <DropdownItem
           key="open on github ide"
           href={`/redirect?url=${props.githubide}`}
-          target="_blank"
         >
           Github IDE
         </DropdownItem>
         {props.demo && (
-          <DropdownItem
-            key="open demo"
-            href={`/redirect?url=${props.demo}`}
-            target="_blank"
-          >
+          <DropdownItem key="open demo" href={`/redirect?url=${props.demo}`}>
             Website(DEMO)
           </DropdownItem>
         )}

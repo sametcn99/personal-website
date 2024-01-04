@@ -44,13 +44,8 @@ export default function RootLayout({
         {/* Wrap the main content in a 'Providers' component. */}
         <Providers>
           {/* Define the main content area. */}
-          <main className="flex min-h-screen w-full flex-col items-center scroll-smooth">
+          <main className="flex min-h-screen w-full flex-col items-center scroll-smooth antialiased">
             {children}
-            <script
-              id="json-ld"
-              type="application/ld+json"
-              dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-            />
           </main>
           {/* Include analytics tracking with the 'Analytics' component. */}
           <Analytics />

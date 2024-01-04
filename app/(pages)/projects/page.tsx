@@ -91,7 +91,7 @@ const Projects = () => {
                   </div>
                   <OpenOn
                     demo={project.homepage ? project.homepage : null}
-                    github={`${siteUrl}/projects/${project.name}`}
+                    github={`${siteUrl}/${project.name}`}
                     githubide={project.html_url.replace(
                       "github.com",
                       "github.dev",

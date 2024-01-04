@@ -3,9 +3,9 @@ import { Inter } from "next/font/google"; // Import the 'Inter' font from the "n
 import "./globals.css"; // Import global CSS styles from the "globals.css" file.
 import { Providers } from "@/providers"; // Import the 'Providers' component from the "@/providers" module.
 import { Analytics } from "@vercel/analytics/react"; // Import the 'Analytics' component from the "@vercel/analytics/react" module.
-import ScrollToTop from "./components/scroll-to-top";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { siteConfig } from "@/site-config";
+import ScrollToTop from "./components/ScrollToTop";
 
 const inter = Inter({ subsets: ["latin"] }); // Initialize the 'Inter' font with the "latin" subset.
 const jsonLd = siteConfig.jsonLd;

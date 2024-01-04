@@ -1,8 +1,8 @@
 "use client";
 import { Tabs, Tab } from "@nextui-org/react";
-import Projects from "./projects";
-import About from "./about";
-import Gists from "./gists";
+import About from "../(pages)/about/page";
+import Projects from "../(pages)/projects/page";
+import Gists from "../(pages)/gists/page";
 
 export default function TabSwitcher() {
   return (

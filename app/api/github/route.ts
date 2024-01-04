@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { octokit } from "@/lib/octokit";
+import { Octokit } from "octokit";
 
 // Define an asynchronous function named GET
 export async function GET(request: NextRequest) {
@@ -8,6 +8,13 @@ export async function GET(request: NextRequest) {
   const username = nextUrl.searchParams.get("username");
   const option = nextUrl.searchParams.get("option");
   const reponame = nextUrl.searchParams.get("reponame");
+
+  const octokit = new Octokit({
+    auth: process.env.GH_TOKEN, // GitHub token obtained from environment variables
+    headers: {
+      "X-GitHub-Api-Version": "2022-11-28", // Specify the GitHub API version
+    },
+  });
 
   if (username === null) {
     // Handle the case where "username" is not provided in the URL
@@ -67,7 +74,6 @@ export async function GET(request: NextRequest) {
           error: `Invalid option "${option}".`,
         });
     }
-
     return NextResponse.json(responseData);
   } catch (error) {
     // Return a JSON response

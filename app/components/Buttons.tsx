@@ -39,7 +39,7 @@ export default function Buttons() {
           <motion.a
             className="m-1" // Apply CSS margin to the link.
             key={index} // Set a unique 'key' for React to identify each link element.
-            href={socialMedia.link} // Set the 'href' attribute of the link to the social media URL.
+            href={`/redirect?url=${socialMedia.link}`} // Set the 'href' attribute of the link to the social media URL.
             target="_blank" // Open the link in a new browser tab or window.
             rel="noopener noreferrer" // Specify security attributes for the link.
             aria-label={socialMedia.label} // Provide an accessibility label for screen readers.

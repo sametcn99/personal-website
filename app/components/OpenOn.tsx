@@ -24,15 +24,15 @@ export default function OpenOn({ ...props }) {
         </DropdownItem>
         <DropdownItem
           key="open on github ide"
-          href={props.githubide}
+          href={`/redirect?url=${props.githubide}`}
           target="_blank"
         >
           Github IDE
         </DropdownItem>
         {props.demo && (
           <DropdownItem
-            key="open on github ide"
-            href={props.demo}
+            key="open demo"
+            href={`/redirect?url=${props.demo}`}
             target="_blank"
           >
             Website(DEMO)

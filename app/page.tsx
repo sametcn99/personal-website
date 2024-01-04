@@ -1,9 +1,9 @@
 "use client";
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import Greeting from "./components/greeting";
-import Buttons from "./components/buttons";
-import TabSwitcher from "./components/tab-switcher";
+import Greeting from "./components/Greeting";
+import Buttons from "./components/Buttons";
+import TabSwitcher from "./components/ TabSwitcher";
 
 export default function Home() {
   const [imageLoaded, setImageLoaded] = useState(false);

@@ -10,9 +10,10 @@ import {
 } from "@nextui-org/react";
 import Loading from "@/app/loading";
 import StarIcon from "@mui/icons-material/Star";
-import RateErrorComponent from "./RateError";
 import { GitHubRepo } from "@/types";
-import OpenOn from "./OpenOn";
+import { siteUrl } from "@/utils/utils";
+import RateErrorComponent from "@/app/components/RateError";
+import OpenOn from "@/app/components/OpenOn";
 
 // Projects component
 const Projects = () => {
@@ -90,7 +91,7 @@ const Projects = () => {
                   </div>
                   <OpenOn
                     demo={project.homepage ? project.homepage : null}
-                    github={project.html_url}
+                    github={`${siteUrl}/projects/${project.name}`}
                     githubide={project.html_url.replace(
                       "github.com",
                       "github.dev",

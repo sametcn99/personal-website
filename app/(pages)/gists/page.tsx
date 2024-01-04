@@ -3,10 +3,10 @@
 import { useEffect, useState } from "react";
 import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/react";
 import GitHubIcon from "@mui/icons-material/GitHub";
-import Loading from "../loading";
-import ErrorComponent from "./RateError";
-import SourceCode from "./ui/CardButtons";
 import { GitHubRepo } from "@/types";
+import Loading from "@/app/loading";
+import RateErrorComponent from "@/app/components/RateError";
+import CardButton from "@/app/components/CardButton";
 
 // Gistss component
 const Gists = () => {
@@ -60,7 +60,7 @@ const Gists = () => {
         <section>
           {error && (
             // Display error message in a div
-            <ErrorComponent text={error} />
+            <RateErrorComponent text={error} />
           )}
           {Array.isArray(data) &&
             data.map((gist, index) => (
@@ -71,7 +71,7 @@ const Gists = () => {
                       <div key={index}>{filename}</div>
                     ))}
                   </div>
-                  <SourceCode
+                  <CardButton
                     href={gist.html_url}
                     title="Source Code"
                     logo={<GitHubIcon className="fill-white text-sm" />}

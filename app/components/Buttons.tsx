@@ -1,5 +1,4 @@
 import { Button } from "@nextui-org/react"; // Import the 'Button' component from the '@nextui-org/react' library.
-
 import { socialMediaLinks } from "@/lib/contact-links"; // Import the 'socialMediaLinks' array from the '@/lib/contact-links' module.
 import { motion } from "framer-motion";
 

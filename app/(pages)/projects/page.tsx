@@ -13,7 +13,13 @@ import StarIcon from "@mui/icons-material/Star";
 import { GitHubRepo } from "@/types";
 import { siteUrl } from "@/utils/utils";
 import RateErrorComponent from "@/app/components/RateError";
-import OpenOn from "@/app/components/OpenOn";
+import {
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownItem,
+  Button,
+} from "@nextui-org/react";
 
 // Projects component
 const Projects = () => {
@@ -89,14 +95,41 @@ const Projects = () => {
                       </Tooltip>
                     )}
                   </div>
-                  <OpenOn
-                    demo={project.homepage ? project.homepage : null}
-                    github={`${siteUrl}/${project.name}`}
-                    githubide={project.html_url.replace(
-                      "github.com",
-                      "github.dev",
-                    )}
-                  ></OpenOn>
+                  <Dropdown>
+                    <DropdownTrigger>
+                      <Button
+                        variant="bordered"
+                        className="h-10 hover:bg-zinc-700 hover:bg-opacity-50"
+                      >
+                        Open
+                      </Button>
+                    </DropdownTrigger>
+                    <DropdownMenu aria-label="Static Actions">
+                      <DropdownItem
+                        key="open on github"
+                        href={`${siteUrl}/${project.name}`}
+                      >
+                        Github
+                      </DropdownItem>
+                      <DropdownItem
+                        key="open on github ide"
+                        href={`/redirect?url=${project.html_url.replace(
+                          "github.com",
+                          "github.dev",
+                        )}`}
+                      >
+                        Github IDE
+                      </DropdownItem>
+                      <DropdownItem
+                        key="open demo"
+                        href={`/redirect?url=${
+                          project.homepage ? project.homepage : null
+                        }`}
+                      >
+                        Website(DEMO)
+                      </DropdownItem>
+                    </DropdownMenu>
+                  </Dropdown>
                 </CardHeader>
                 <CardBody className="card-body">{project.description}</CardBody>
                 <CardFooter className="card-footer">

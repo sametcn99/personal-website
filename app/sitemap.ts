@@ -45,7 +45,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 1,
     })),
     ...repos.map((repo: any) => ({
-      url: `${siteUrl}/${repo.name}}`,
+      url: `${siteUrl}/${repo.name}`,
       lastModified: new Date(),
       changeFrequency: "monthly", // Update this based on your desired frequency
       priority: 1,

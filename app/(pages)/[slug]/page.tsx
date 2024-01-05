@@ -1,9 +1,6 @@
-import Loading from "@/app/loading";
 import NotFound from "@/app/not-found";
 import { GitHubRepo } from "@/types";
 import { siteUrl } from "@/utils/utils";
-import { Error } from "@mui/icons-material";
-import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/react";
 import { redirect } from "next/navigation";
 
 // Function to generate page metadata

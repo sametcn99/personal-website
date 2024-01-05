@@ -6,6 +6,7 @@ import { Analytics } from "@vercel/analytics/react"; // Import the 'Analytics' c
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { siteConfig } from "@/site-config";
 import ScrollToTop from "./components/ScrollToTop";
+import React from "react";
 
 const inter = Inter({ subsets: ["latin"] }); // Initialize the 'Inter' font with the "latin" subset.
 const jsonLd = siteConfig.jsonLd;

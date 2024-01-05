@@ -1,21 +1,20 @@
+import { siteConfig } from "@/site-config";
 import { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Samet Can Cıncık",
-    short_name: "sametcc",
+    name: siteConfig.name,
+    short_name: siteConfig.short_name,
     dir: "auto",
-    description: "This is my personal website. Created with Next.js.",
-    categories: ["personal", "portfolio"],
-    theme_color: "#000000",
-    background_color: "#000000",
+    description: siteConfig.description,
+    categories: siteConfig.categories,
+    theme_color: siteConfig.theme_color,
+    background_color: siteConfig.background_color,
     display: "standalone",
-    scope: "/",
-    lang: "en-US",
-    launch_handler: {
-      url: "https://www.sametcc.me/",
-    },
-    start_url: "/",
+    scope: siteConfig.scope,
+    lang: siteConfig.locale,
+    launch_handler: siteConfig.launch_handler,
+    start_url: siteConfig.start_url,
     orientation: "portrait",
     icons: [
       {

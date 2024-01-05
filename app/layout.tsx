@@ -4,15 +4,15 @@ import "./globals.css"; // Import global CSS styles from the "globals.css" file.
 import { Providers } from "@/providers"; // Import the 'Providers' component from the "@/providers" module.
 import { Analytics } from "@vercel/analytics/react"; // Import the 'Analytics' component from the "@vercel/analytics/react" module.
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { siteConfig } from "@/site-config";
 import ScrollToTop from "../components/ScrollToTop";
 import React from "react";
+import { metaData } from "@/metadata";
 
 const inter = Inter({ subsets: ["latin"] }); // Initialize the 'Inter' font with the "latin" subset.
-const jsonLd = siteConfig.jsonLd;
+const jsonLd = metaData.jsonLd;
 
-export const metadata: Metadata = siteConfig.metadata;
-export const viewport: Viewport = siteConfig.viewport;
+export const metadata: Metadata = metaData.metadata;
+export const viewport: Viewport = metaData.viewport;
 
 export default function RootLayout({
   children,

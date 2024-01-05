@@ -5,7 +5,7 @@ import { Providers } from "@/providers"; // Import the 'Providers' component fro
 import { Analytics } from "@vercel/analytics/react"; // Import the 'Analytics' component from the "@vercel/analytics/react" module.
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { siteConfig } from "@/site-config";
-import ScrollToTop from "./components/ScrollToTop";
+import ScrollToTop from "../components/ScrollToTop";
 import React from "react";
 
 const inter = Inter({ subsets: ["latin"] }); // Initialize the 'Inter' font with the "latin" subset.

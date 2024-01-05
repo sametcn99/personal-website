@@ -1,25 +1,25 @@
+const commonMetadata = {
+  title: "Samet Can Cıncık | sametcc.me",
+  description:
+    "Web Developer passionate about creating compelling and user-friendly web experiences.",
+  keywords:
+    "personal website, Next.js, web development, ui design, portfolio, web developer",
+  applicationName: "sametcc.me",
+  creator: "https://github.com/sametcn99",
+  authors: [
+    {
+      name: "Samet Can Cıncık",
+      url: "https://www.sametcc.me/",
+    },
+  ],
+};
+
 export const siteConfig = {
   metadata: {
-    title: "Samet Can Cıncık | sametcc.me",
-    description:
-      "I'm a Web Developer from Turkey. My passion lies in creating compelling and user-friendly web experiences in the digital realm.",
-    keywords:
-      "personal website, Next.js, web development, ui design, sametcc.me, sametcc, samet can cıncık, portfolio, web developer",
-    applicationName: "sametcc.me",
-    creator: "https://github.com/sametcn99",
-    authors: [
-      {
-        name: "samet can cıncık",
-        url: "https://www.sametcc.me/",
-      },
-    ],
+    ...commonMetadata,
     metadataBase: new URL("https://www.sametcc.me"),
     openGraph: {
-      title: "Samet Can Cıncık | sametcc.me",
-      description:
-        "I'm a Web Developer from Turkey. My passion lies in creating compelling and user-friendly web experiences in the digital realm.",
-      url: "https://www.sametcc.me/",
-      siteName: "sametcc.me",
+      ...commonMetadata,
       type: "website",
       image: "/thumbnail.png",
       locale: "en_US",

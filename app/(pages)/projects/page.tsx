@@ -7,19 +7,17 @@ import {
   CardBody,
   CardFooter,
   Tooltip,
-} from "@nextui-org/react";
-import Loading from "@/app/loading";
-import StarIcon from "@mui/icons-material/Star";
-import { GitHubRepo } from "@/types";
-import { siteUrl } from "@/utils/utils";
-import RateErrorComponent from "@/app/components/RateError";
-import {
   Dropdown,
   DropdownTrigger,
   DropdownMenu,
   DropdownItem,
   Button,
 } from "@nextui-org/react";
+import Loading from "@/app/loading";
+import StarIcon from "@mui/icons-material/Star";
+import { GitHubRepo } from "@/types";
+import { siteUrl } from "@/utils/utils";
+import RateErrorComponent from "@/components/RateError";
 
 // Projects component
 const Projects = () => {

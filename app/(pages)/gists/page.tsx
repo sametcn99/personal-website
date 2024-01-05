@@ -1,12 +1,18 @@
 "use client";
 // gists component
 import { useEffect, useState } from "react";
-import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/react";
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  Button,
+} from "@nextui-org/react";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import { GitHubRepo } from "@/types";
 import Loading from "@/app/loading";
-import RateErrorComponent from "@/app/components/RateError";
-import CardButton from "@/app/components/CardButton";
+import RateErrorComponent from "@/components/RateError";
+import Link from "next/link";
 
 // Gistss component
 const Gists = () => {
@@ -71,11 +77,22 @@ const Gists = () => {
                       <div key={index}>{filename}</div>
                     ))}
                   </div>
-                  <CardButton
-                    href={gist.html_url}
-                    title="Source Code"
-                    logo={<GitHubIcon className="fill-white text-sm" />}
-                  />
+                  <Link
+                    href={`/redirect?url=${gist.html_url}`} // Set the 'href' attribute of the link to the social media URL.
+                    target="_blank"
+                  >
+                    <Button
+                      className={
+                        "border border-white border-opacity-50 fill-white text-foreground transition-all duration-1000 hover:bg-zinc-700 hover:bg-opacity-50"
+                      }
+                      radius="sm"
+                      size="sm"
+                      variant={"bordered"}
+                    >
+                      <span>Source Code</span>
+                      <GitHubIcon className="fill-white text-sm" />
+                    </Button>
+                  </Link>
                 </CardHeader>
                 <CardBody className="card-body">{gist.description}</CardBody>
                 <CardFooter className="card-footer">

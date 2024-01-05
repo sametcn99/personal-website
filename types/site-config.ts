@@ -10,10 +10,11 @@ interface Language {
 
 interface Icon {
   src: string;
-  sizes: string;
-  type: string;
-  purpose: string;
+  type?: string | undefined;
+  sizes?: string | undefined;
+  purpose?: "any" | "maskable" | "monochrome" | "badge" | undefined;
 }
+[];
 
 interface LaunchHandler {
   url: string;
@@ -38,15 +39,24 @@ interface SiteConfig {
   initialScale: number;
   userScalable: boolean;
   short_name: string;
-  dir: string;
+  dir: "ltr" | "rtl" | "auto" | undefined;
   categories: string[];
   theme_color: string;
   background_color: string;
-  display: string;
+  display: "fullscreen" | "standalone" | "minimal-ui" | "browser" | undefined;
   scope: string;
   launch_handler: LaunchHandler;
   start_url: string;
-  orientation: string;
+  orientation:
+    | "any"
+    | "natural"
+    | "landscape"
+    | "portrait"
+    | "portrait-primary"
+    | "portrait-secondary"
+    | "landscape-primary"
+    | "landscape-secondary"
+    | undefined;
   icons: Icon[];
 }
 

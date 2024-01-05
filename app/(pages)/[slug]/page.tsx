@@ -1,7 +1,7 @@
 import NotFound from "@/app/not-found";
 import { socialMediaLinks } from "@/lib/contact-links";
 import { GitHubRepo } from "@/types";
-import { siteUrl } from "@/utils/utils";
+import { fetchRepo } from "@/utils/utils";
 import { redirect } from "next/navigation";
 
 export async function generateMetadata({
@@ -68,29 +68,6 @@ export default async function Page({ params }: { params: { slug: string } }) {
     }
   } catch (error) {
     console.error("Error processing page:", error);
-    throw error;
-  }
-}
-
-async function fetchRepo(slug: string) {
-  try {
-    const response = await fetch(
-      `${siteUrl}/api/github?username=sametcn99&option=repo&reponame=${slug}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      },
-    );
-
-    if (!response.ok) {
-      throw new Error(`Failed to fetch repository: ${response.status}`);
-    }
-
-    return await response.json();
-  } catch (error) {
-    console.error("Error fetching repository:", error);
     throw error;
   }
 }

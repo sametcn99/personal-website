@@ -1,7 +1,10 @@
 import { siteConfig } from "./site-config";
 
 const commonMetadata = {
-  title: siteConfig.title,
+  title: {
+    default: siteConfig.title,
+    template: `%s - ${siteConfig.title}`,
+  },
   description: siteConfig.description,
   keywords: siteConfig.keywords,
   applicationName: siteConfig.applicationName,

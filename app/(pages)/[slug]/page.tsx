@@ -3,6 +3,7 @@ import { socialMediaLinks } from "@/lib/contact-links";
 import { GitHubRepo } from "@/types";
 import { fetchRepo } from "@/utils/utils";
 import { redirect } from "next/navigation";
+import { cache } from "react";
 
 export async function generateMetadata({
   params,
@@ -16,21 +17,21 @@ export async function generateMetadata({
     if (socialMediaLink) {
       const { label } = socialMediaLink;
       return {
-        title: `${label} | Samet Can Cıncık`,
+        title: `${label}`,
         description: `My ${label} Profile`,
         openGraph: {
-          title: `${label} | Samet Can Cıncık`,
+          title: `${label}`,
           description: `My ${label} Profile`,
         },
       };
     }
 
-    const repo = await fetchRepo(params.slug);
+    const repo = cache(await fetchRepo(params.slug));
     const data: GitHubRepo = repo.data;
 
     if (!repo.error) {
       const { name, description, topics } = data;
-      const title = `${name} | Samet Can Cıncık`;
+      const title = `${name}`;
       return {
         title,
         description,
@@ -38,7 +39,7 @@ export async function generateMetadata({
         openGraph: { title, description },
       };
     } else {
-      return { title: `Not Found | Samet Can Cıncık` };
+      return { title: `Not Found` };
     }
   } catch (error) {
     console.error("Error generating metadata:", error);
@@ -57,7 +58,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
       return null; // Ensure to return null after redirect
     }
 
-    const repo = await fetchRepo(params.slug);
+    const repo = cache(await fetchRepo(params.slug));
     const data: GitHubRepo = repo.data;
 
     if (!repo.error) {

@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import React from "react";
 
 const meta = {
-  title: "Projects | Samet Can Cıncık",
+  title: "Projects",
   description: "My Github projects",
 };
 

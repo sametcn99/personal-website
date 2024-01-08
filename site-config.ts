@@ -1,7 +1,7 @@
 import SiteConfig from "./types/site-config";
 
 export const siteConfig: SiteConfig = {
-  title: "Samet Can Cıncık | sametcc.me",
+  title: "Samet Can Cıncık",
   name: "Samet Can Cıncık",
   description:
     "Web Developer passionate about creating compelling and user-friendly web experiences.",

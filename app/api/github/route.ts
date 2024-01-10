@@ -56,6 +56,7 @@ export async function GET(request: NextRequest) {
           username,
           per_page: 100,
         });
+        responseData = responseData.data;
         break;
       case "repo":
         if (!reponame) {

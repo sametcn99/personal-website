@@ -1,6 +1,6 @@
 "use client";
 // gists component
-import { useEffect, useState } from "react";
+import { useContext } from "react";
 import {
   Card,
   CardHeader,
@@ -9,67 +9,23 @@ import {
   Button,
 } from "@nextui-org/react";
 import GitHubIcon from "@mui/icons-material/GitHub";
-import { GitHubRepo } from "@/types";
 import Loading from "@/app/loading";
-import RateErrorComponent from "@/components/RateError";
 import Link from "next/link";
+import { GithubContext } from "@/app/context/githubContext";
 
 // Gistss component
 const Gists = () => {
   // State to store GitHub API data
-  const [data, setData] = useState<GitHubRepo[] | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null); // New state for error message
-
-  // Fetch data from GitHub API
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          "/api/github?username=sametcn99&option=gists",
-          {
-            cache: "no-store" && "no-cache",
-          },
-        );
-        if (!response.ok) {
-          throw new Error(`HTTP hata! Durum kodu: ${response.status}`);
-        }
-        const fetchedData = await response.json();
-        if (fetchedData.error) {
-          // If there is an error in the data, set the error state
-          setError(fetchedData.error);
-        }
-        // Sort the gists by updated_at in descending order
-        const sortedData = Array.isArray(fetchedData)
-          ? fetchedData.sort(
-              (a, b) =>
-                new Date(b.updated_at).getTime() -
-                new Date(a.updated_at).getTime(),
-            )
-          : null;
-
-        setData(sortedData);
-        setIsLoading(false);
-      } catch (error) {
-        console.error("Veri alınamadı:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
+  const { gists, loading } = useContext(GithubContext) || { repos: null };
 
   return (
     <>
-      {isLoading ? (
+      {loading ? (
         <Loading />
       ) : (
         <section>
-          {error && (
-            // Display error message in a div
-            <RateErrorComponent text={error} />
-          )}
-          {Array.isArray(data) &&
-            data.map((gist, index) => (
+          {Array.isArray(gists) &&
+            gists.map((gist, index) => (
               <Card className="card-container" key={`${gist.id}-${index}`}>
                 <CardHeader className="card-header">
                   <div className="flex flex-col items-start">

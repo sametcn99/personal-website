@@ -59,20 +59,15 @@ export async function GET(request: NextRequest) {
         responseData = responseData.data;
         break;
       case "repo":
-        if (!reponame) {
-          return NextResponse.json({
-            error: "Reponame parameter is missing in the URL.",
-          });
-        }
         // Fetch all repositories for the specified user
         responseData = await octokit.rest.repos.get({
           owner: username,
-          repo: reponame,
+          repo: reponame || "",
         });
         break;
       default:
         return NextResponse.json({
-          error: `Invalid option "${option}".`,
+          error: `Invalid option "${option}"`,
         });
     }
     return NextResponse.json(responseData);

@@ -14,22 +14,15 @@ export const siteUrl: string = isProduction
   : "http://localhost:3000";
 
 export async function fetchRepo(slug: string) {
+  const url = `${siteUrl}/api/github?username=sametcn99&option=repo&reponame=${slug}`;
+  console.log("url", url);
   try {
-    const response = await fetch(
-      `${siteUrl}/api/github?username=sametcn99&option=repo&reponame=${slug}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      },
-    );
-
+    const response = await fetch(url, {});
     if (!response.ok) {
       throw new Error(`Failed to fetch repository: ${response.status}`);
     }
-
-    return await response.json();
+    const data = await response.json();
+    return data;
   } catch (error) {
     console.error("Error fetching repository:", error);
     throw error;

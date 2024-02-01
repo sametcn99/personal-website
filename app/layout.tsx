@@ -4,7 +4,6 @@ import "./globals.css"; // Import global CSS styles from the "globals.css" file.
 import { Providers } from "@/providers"; // Import the 'Providers' component from the "@/providers" module.
 import { Analytics } from "@vercel/analytics/react"; // Import the 'Analytics' component from the "@vercel/analytics/react" module.
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import ScrollToTop from "../components/ScrollToTop";
 import React from "react";
 import { metaData } from "@/metadata";
 
@@ -45,14 +44,13 @@ export default function RootLayout({
         {/* Wrap the main content in a 'Providers' component. */}
         <Providers>
           {/* Define the main content area. */}
-          <main className="flex min-h-screen w-full flex-col items-center scroll-smooth antialiased">
+          <main className="flex min-h-screen w-full select-none flex-col items-center justify-center scroll-smooth antialiased">
             {children}
           </main>
           {/* Include analytics tracking with the 'Analytics' component. */}
           <Analytics />
           <SpeedInsights />
         </Providers>
-        <ScrollToTop />
       </body>
     </html>
   );

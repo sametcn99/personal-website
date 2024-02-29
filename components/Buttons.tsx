@@ -1,5 +1,5 @@
 "use client";
-import { Button } from "@nextui-org/react"; // Import the 'Button' component from the '@nextui-org/react' library.
+import { Button, Tooltip } from "@nextui-org/react"; // Import the 'Button' component from the '@nextui-org/react' library.
 import { socialMediaLinks } from "@/lib/contact-links"; // Import the 'socialMediaLinks' array from the '@/lib/contact-links' module.
 import { motion } from "framer-motion";
 
@@ -25,7 +25,7 @@ export default function Buttons() {
   };
   return (
     <motion.section
-      className="flex flex-wrap items-center justify-center"
+      className="flex max-w-[20rem] flex-wrap items-center justify-center"
       variants={container}
       initial="hidden"
       animate="visible"
@@ -45,9 +45,17 @@ export default function Buttons() {
             aria-label={socialMedia.label} // Provide an accessibility label for screen readers.
             variants={item}
           >
-            <Button aria-label={socialMedia.label} className="bg-opacity-70">
-              {socialMedia.icon}
-            </Button>
+            <Tooltip
+              content={socialMedia.label}
+              delay={0}
+              closeDelay={0}
+              color="primary"
+              className="select-none bg-black"
+            >
+              <Button aria-label={socialMedia.label} className="bg-opacity-70">
+                {socialMedia.icon}
+              </Button>
+            </Tooltip>
             {/* Create a button with an accessibility label and the social media icon. */}
           </motion.a>
         ),

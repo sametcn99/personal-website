@@ -2,6 +2,9 @@
 const nextConfig = {
   /* config options here */
   productionBrowserSourceMaps: true,
+  images: {
+    domains: ['raw.githubusercontent.com', 'githubprofileviewer.com'],
+  }
 };
 
 module.exports = nextConfig;

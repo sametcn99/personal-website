@@ -21,6 +21,7 @@
     "octokit": "^3.1.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-icons": "^5.0.1",
     "schema-dts": "^1.1.2",
     "sharp": "^0.33.2",
     "source-map-explorer": "^2.5.3"

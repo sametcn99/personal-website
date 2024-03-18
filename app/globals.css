@@ -5,17 +5,3 @@
 :root {
   background: #090006;
 }
-
-.card-container {
-  @apply z-10 mb-3 flex max-w-[35rem] select-none flex-col bg-opacity-50 transition-all duration-1000 hover:scale-105;
-}
-.card-header {
-  @apply flex flex-row flex-wrap items-center justify-between gap-5;
-}
-.card-body {
-  @apply text-small text-default-600 px-3 py-0;
-}
-
-.card-footer {
-  @apply flex flex-col flex-wrap items-start gap-3 text-left text-xs;
-}

@@ -12,7 +12,7 @@ const jsonLd = metaData.jsonLd;
 
 export const metadata: Metadata = metaData.metadata;
 export const viewport: Viewport = metaData.viewport;
-
+export const revalidate = 3600;
 export default function RootLayout({
   children,
 }: {
@@ -44,7 +44,7 @@ export default function RootLayout({
         {/* Wrap the main content in a 'Providers' component. */}
         <Providers>
           {/* Define the main content area. */}
-          <main className="flex min-h-screen w-full select-none flex-col items-center justify-center scroll-smooth antialiased">
+          <main className="flex min-h-screen w-full flex-col items-center justify-center scroll-smooth antialiased hover:cursor-default">
             {children}
           </main>
           {/* Include analytics tracking with the 'Analytics' component. */}

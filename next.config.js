@@ -3,7 +3,7 @@ const nextConfig = {
   /* config options here */
   productionBrowserSourceMaps: true,
   images: {
-    domains: ['raw.githubusercontent.com', 'githubprofileviewer.com'],
+    domains: ['raw.githubusercontent.com', 'githubprofileviewer.com', "avatars.githubusercontent.com"],
   }
 };
 

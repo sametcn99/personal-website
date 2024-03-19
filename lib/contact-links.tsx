@@ -18,7 +18,7 @@ type SocialMediaLink = {
 export const socialMediaLinks: SocialMediaLink[] = [
   {
     type: ["linkedin", "li"],
-    link: new URL("https://www.linkedin.com/in/samet-can-c%C4%B1nc%C4%B1k/"),
+    link: new URL("https://www.linkedin.com/in/sametc0/"),
     icon: <LinkedInIcon className="fill-white" />,
     label: "LinkedIn",
   },

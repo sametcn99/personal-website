@@ -12,48 +12,48 @@ type SocialMediaLink = {
   link: URL;
   icon: ReactElement;
   label: string;
-  type: string;
+  type: string[];
 };
 
 export const socialMediaLinks: SocialMediaLink[] = [
   {
-    type: "linkedin",
+    type: ["linkedin", "li"],
     link: new URL("https://www.linkedin.com/in/samet-can-c%C4%B1nc%C4%B1k/"),
     icon: <LinkedInIcon className="fill-white" />,
     label: "LinkedIn",
   },
   {
-    type: "github",
+    type: ["github", "gh"],
     link: new URL("https://github.com/sametcn99"),
     icon: <GitHubIcon className="fill-white" />,
     label: "GitHub",
   },
   {
-    type: "leetcode",
+    type: ["leetcode", "lc"],
     link: new URL("https://leetcode.com/sametcn99"),
     icon: <SiLeetcode className="fill-white" size={20} />,
     label: "LeetCode",
   },
   {
-    type: "telegram",
+    type: ["telegram", "tg"],
     link: new URL("https://t.me/sametc0"),
     icon: <TelegramIcon className="fill-white" />,
     label: "Telegram",
   },
   {
-    type: "whatsapp",
+    type: ["whatsapp", "wa", "wp"],
     link: new URL("https://wa.me/905303790565"),
     icon: <FaWhatsapp className="fill-white" size={22} />,
     label: "WhatsApp",
   },
   {
-    type: "mail",
+    type: ["mail", "email", "gmail", "mail", "e-mail", "e-mail", "e-mail"],
     link: new URL("mailto:sametcn99@gmail.com"),
     icon: <EmailIcon className="fill-white" />,
     label: "Mail",
   },
   {
-    type: "GPV",
+    type: ["gpv", "githubprofileviewer"],
     link: new URL("https://githubprofileviewer.com/sametcn99"),
     icon: (
       <Image
@@ -66,7 +66,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
     label: "GPV",
   },
   {
-    type: "resume",
+    type: ["resume", "cv", "ozgecmis"],
     link: new URL(
       "https://docs.google.com/document/d/1lYhA_7M2-g0JzlqlZlDibM_bksowBTuSqkrVF-7moKs/edit?usp=sharing",
     ),

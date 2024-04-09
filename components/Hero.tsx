@@ -1,4 +1,3 @@
-import { siteUrl } from "@/utils/utils";
 import { GetResponseTypeFromEndpointMethod } from "@octokit/types";
 import Image from "next/image";
 import { Octokit } from "octokit";
@@ -8,9 +7,9 @@ export default async function Hero() {
   const octokit = new Octokit();
   const data: GetResponseTypeFromEndpointMethod<
     typeof octokit.rest.users.getAuthenticated
-  > = await fetch(`${siteUrl}/api/github?option=profile`).then((res) =>
-    res.json(),
-  );
+  > = await fetch(
+    `${process.env.NEXT_PUBLIC_SITE_URL}/api/github?option=profile`,
+  ).then((res) => res.json());
   return (
     <section className="mx-auto flex max-w-[25rem] flex-col items-center justify-center gap-4 py-4 text-center font-sans">
       <Image

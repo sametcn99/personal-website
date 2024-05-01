@@ -3,8 +3,24 @@ const nextConfig = {
   /* config options here */
   productionBrowserSourceMaps: true,
   images: {
-    domains: ['raw.githubusercontent.com', 'githubprofileviewer.com', "avatars.githubusercontent.com"],
-  }
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "raw.githubusercontent.com",
+        pathname: "**",
+      },
+      {
+        protocol: "https",
+        hostname: "avatars.githubusercontent.com",
+        pathname: "**",
+      },
+      {
+        protocol: "https",
+        hostname: "githubprofileviewer.com",
+        pathname: "**",
+      },
+    ],
+  },
 };
 
 module.exports = nextConfig;

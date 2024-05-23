@@ -20,7 +20,6 @@ export default async function Hero() {
         className="rounded-full"
       />
       <div className="select-none">
-        <h1 className="text-xl font-bold">Samet Can Cıncık</h1>
         <p>{data?.data?.bio}</p>
       </div>
     </section>

@@ -18,7 +18,7 @@ type SocialMediaLink = {
 export const socialMediaLinks: SocialMediaLink[] = [
   {
     type: ["linkedin", "li"],
-    link: new URL("https://www.linkedin.com/in/sametc0/"),
+    link: new URL("https://www.linkedin.com/in/sametc0"),
     icon: <LinkedInIcon className="fill-white" />,
     label: "LinkedIn",
   },
@@ -53,7 +53,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
     label: "Mail",
   },
   {
-    type: ["gpv", "githubprofileviewer"],
+    type: ["gpv", "githubprofileviewer", "gitpv"],
     link: new URL("https://githubprofileviewer.com/sametcn99"),
     icon: (
       <Image
@@ -66,10 +66,8 @@ export const socialMediaLinks: SocialMediaLink[] = [
     label: "GPV",
   },
   {
-    type: ["resume", "cv", "ozgecmis"],
-    link: new URL(
-      "https://docs.google.com/document/d/1lYhA_7M2-g0JzlqlZlDibM_bksowBTuSqkrVF-7moKs/edit?usp=sharing",
-    ),
+    type: ["resume", "cv", "ozgecmis", "letter"],
+    link: new URL("https://rxresu.me/sametcn99/samet-can-cincik"),
     icon: <DescriptionIcon className="fill-white" />,
     label: "Resume",
   },

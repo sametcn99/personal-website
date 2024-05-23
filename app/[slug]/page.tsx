@@ -2,7 +2,7 @@ import NotFound from "@/app/not-found";
 import { socialMediaLinks } from "@/lib/contact-links";
 import { GitHubRepo } from "@/types";
 import { fetchRepo } from "@/utils/utils";
-import { redirect } from "next/navigation";
+import { permanentRedirect } from "next/navigation";
 
 export async function generateMetadata({
   params,
@@ -51,12 +51,12 @@ export default async function Page({ params }: { params: { slug: string } }) {
     link.type.includes(params.slug),
   );
   if (socialMediaLink) {
-    redirect(`${socialMediaLink.link}`);
+    permanentRedirect(`${socialMediaLink.link}`);
   }
   const repo = await fetchRepo(params.slug);
   const data: GitHubRepo = repo.data;
   if (!repo.error) {
-    redirect(`${data.html_url}`);
+    permanentRedirect(`${data.html_url}`);
   } else {
     return <NotFound />;
   }

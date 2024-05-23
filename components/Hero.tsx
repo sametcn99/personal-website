@@ -19,7 +19,7 @@ export default async function Hero() {
         height={120}
         className="rounded-full"
       />
-      <div className="">
+      <div className="select-none">
         <h1 className="text-xl font-bold">Samet Can Cıncık</h1>
         <p>{data?.data?.bio}</p>
       </div>

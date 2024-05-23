@@ -13,7 +13,7 @@ export default function Home() {
           height={600}
           priority
           loading="eager"
-          className={`absolute -z-50 flex select-none items-center justify-center`}
+          className={`pointer-events-none absolute -z-50 flex select-none items-center justify-center`}
         />
         <Hero />
         <Buttons />

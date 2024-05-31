@@ -1,5 +1,4 @@
 "use client";
-import { Button, Tooltip } from "@nextui-org/react"; // Import the 'Button' component from the '@nextui-org/react' library.
 import { socialMediaLinks } from "@/lib/contact-links"; // Import the 'socialMediaLinks' array from the '@/lib/contact-links' module.
 import { motion } from "framer-motion";
 
@@ -12,6 +11,7 @@ export default function Buttons() {
       transition: {
         delayChildren: 0.3,
         staggerChildren: 0.2,
+        
       },
     },
   };
@@ -37,7 +37,7 @@ export default function Buttons() {
           index, // Map over the 'socialMediaLinks' array and create a link for each social media entry.
         ) => (
           <motion.a
-            className="m-1 inline-flex gap-2" // Apply CSS margin to the link.
+            className="m-1 inline-flex select-none gap-2 transition-all duration-700" // Apply CSS margin to the link.
             key={index} // Set a unique 'key' for React to identify each link element.
             href={`/${socialMedia.type[0]}`} // Set the 'href' attribute of the link to the social media URL.
             target="_blank" // Open the link in a new browser tab or window.
@@ -45,8 +45,7 @@ export default function Buttons() {
             aria-label={socialMedia.label} // Provide an accessibility label for screen readers.
             variants={item}
           >
-           
-                {socialMedia.icon} {socialMedia.label}
+            {socialMedia.icon} {socialMedia.label}
             {/* Create a button with an accessibility label and the social media icon. */}
           </motion.a>
         ),

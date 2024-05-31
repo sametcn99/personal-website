@@ -13,6 +13,3 @@ export async function fetchRepo(slug: string) {
     throw error;
   }
 }
-
-export const sortByDateDesc = (property: string) => (a: any, b: any) =>
-  new Date(b[property]).getTime() - new Date(a[property]).getTime();

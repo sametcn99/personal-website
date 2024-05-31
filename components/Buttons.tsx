@@ -25,7 +25,7 @@ export default function Buttons() {
   };
   return (
     <motion.section
-      className="flex max-w-[20rem] flex-wrap items-center justify-center"
+      className="flex flex-wrap items-center justify-center gap-4"
       variants={container}
       initial="hidden"
       animate="visible"
@@ -37,7 +37,7 @@ export default function Buttons() {
           index, // Map over the 'socialMediaLinks' array and create a link for each social media entry.
         ) => (
           <motion.a
-            className="m-1" // Apply CSS margin to the link.
+            className="m-1 inline-flex gap-2" // Apply CSS margin to the link.
             key={index} // Set a unique 'key' for React to identify each link element.
             href={`/${socialMedia.type[0]}`} // Set the 'href' attribute of the link to the social media URL.
             target="_blank" // Open the link in a new browser tab or window.
@@ -45,17 +45,8 @@ export default function Buttons() {
             aria-label={socialMedia.label} // Provide an accessibility label for screen readers.
             variants={item}
           >
-            <Tooltip
-              content={socialMedia.label}
-              delay={0}
-              closeDelay={0}
-              color="primary"
-              className="select-none bg-black"
-            >
-              <Button aria-label={socialMedia.label} className="bg-opacity-70">
-                {socialMedia.icon}
-              </Button>
-            </Tooltip>
+           
+                {socialMedia.icon} {socialMedia.label}
             {/* Create a button with an accessibility label and the social media icon. */}
           </motion.a>
         ),

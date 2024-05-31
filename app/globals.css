@@ -3,9 +3,5 @@
 @tailwind utilities;
 
 :root {
-  background: #090006;
-}
-
-.tech-stack-card {
-  @apply grid grid-cols-3 gap-2;
+  background: #0c0c0c;
 }

@@ -29,6 +29,12 @@ export const socialMediaLinks: SocialMediaLink[] = [
     label: "GitHub",
   },
   {
+    type: ["gists", "gist", "ghg", "ghgist", "ghgists"],
+    link: new URL("https://gist.github.com/sametcn99"),
+    icon: <GitHubIcon className="fill-white" />,
+    label: "Gists",
+  },
+  {
     type: ["leetcode", "lc"],
     link: new URL("https://leetcode.com/sametcn99"),
     icon: <SiLeetcode className="fill-white" size={20} />,
@@ -47,7 +53,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
     label: "WhatsApp",
   },
   {
-    type: ["mail", "email", "gmail", "mail", "e-mail", "e-mail", "e-mail"],
+    type: ["mail", "email", "gmail", "e-mail", "gmail"],
     link: new URL("mailto:sametcn99@gmail.com"),
     icon: <EmailIcon className="fill-white" />,
     label: "Mail",

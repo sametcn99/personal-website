@@ -44,7 +44,7 @@ export default function RootLayout({
         {/* Wrap the main content in a 'Providers' component. */}
         <Providers>
           {/* Define the main content area. */}
-          <main className="flex min-h-screen max-w-[25rem] mx-auto flex-col items-center justify-center scroll-smooth antialiased hover:cursor-default">
+          <main className="flex min-h-screen max-w-[25rem] mx-auto flex-col items-center justify-center scroll-smooth antialiased hover:cursor-default selection:text-gray-950 selection:bg-gray-300">
             {children}
           </main>
           {/* Include analytics tracking with the 'Analytics' component. */}

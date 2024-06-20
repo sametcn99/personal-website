@@ -3,9 +3,9 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import TelegramIcon from "@mui/icons-material/Telegram";
 import DescriptionIcon from "@mui/icons-material/Description";
-import { SiLeetcode } from "react-icons/si";
+import { SiLeetcode, SiYoutubemusic } from "react-icons/si";
 import Image from "next/image";
-import { FaWhatsapp } from "react-icons/fa";
+import { FaWhatsapp, FaYoutube } from "react-icons/fa";
 import { ReactElement } from "react";
 
 type SocialMediaLink = {
@@ -13,6 +13,7 @@ type SocialMediaLink = {
   icon: ReactElement;
   label: string;
   type: string[];
+  visible: boolean;
 };
 
 export const socialMediaLinks: SocialMediaLink[] = [
@@ -21,42 +22,49 @@ export const socialMediaLinks: SocialMediaLink[] = [
     link: new URL("https://www.linkedin.com/in/sametc0"),
     icon: <LinkedInIcon className="fill-white" />,
     label: "LinkedIn",
+    visible: true,
   },
   {
     type: ["github", "gh"],
     link: new URL("https://github.com/sametcn99"),
     icon: <GitHubIcon className="fill-white" />,
     label: "GitHub",
+    visible: true,
   },
   {
     type: ["gists", "gist", "ghg", "ghgist", "ghgists"],
     link: new URL("https://gist.github.com/sametcn99"),
     icon: <GitHubIcon className="fill-white" />,
     label: "Gists",
+    visible: true,
   },
   {
     type: ["leetcode", "lc"],
     link: new URL("https://leetcode.com/sametcn99"),
     icon: <SiLeetcode className="fill-white" size={20} />,
     label: "LeetCode",
+    visible: true,
   },
   {
     type: ["telegram", "tg"],
     link: new URL("https://t.me/sametc0"),
     icon: <TelegramIcon className="fill-white" />,
     label: "Telegram",
+    visible: true,
   },
   {
     type: ["whatsapp", "wa", "wp"],
     link: new URL("https://wa.me/905303790565"),
     icon: <FaWhatsapp className="fill-white" size={22} />,
     label: "WhatsApp",
+    visible: true,
   },
   {
     type: ["mail", "email", "gmail", "e-mail", "gmail"],
     link: new URL("mailto:sametcn99@gmail.com"),
     icon: <EmailIcon className="fill-white" />,
     label: "Mail",
+    visible: true,
   },
   {
     type: ["gpv", "githubprofileviewer", "gitpv"],
@@ -70,11 +78,36 @@ export const socialMediaLinks: SocialMediaLink[] = [
       />
     ),
     label: "GPV",
+    visible: true,
   },
   {
     type: ["resume", "cv", "ozgecmis", "letter"],
     link: new URL("https://rxresu.me/sametcn99/samet-can-cincik"),
     icon: <DescriptionIcon className="fill-white" />,
     label: "Resume",
+    visible: true,
+  },
+  {
+    type: ["youtube", "yt", "ytb", "ytube", "ytbchannel", "ytchannel"],
+    link: new URL("https://youtube.com/@sametc001"),
+    icon: <FaYoutube className="fill-white" />,
+    label: "YouTube",
+    visible: true,
+  },
+  {
+    type: [
+      "youtubemusic",
+      "ytmusic",
+      "ytbmusic",
+      "ytmusicchannel",
+      "ymusic",
+      "ytm",
+    ],
+    link: new URL(
+      "https://music.youtube.com/channel/UCgXu7EZ76uMqPW8i4ZCL72Q?si=1aNE6Zya_1t9ACFl",
+    ),
+    icon: <SiYoutubemusic className="fill-white" />,
+    label: "YouTubeMusic",
+    visible: false,
   },
 ];

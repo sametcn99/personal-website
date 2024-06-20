@@ -90,7 +90,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
   {
     type: ["youtube", "yt", "ytb", "ytube", "ytbchannel", "ytchannel"],
     link: new URL("https://youtube.com/@sametc001"),
-    icon: <FaYoutube className="fill-white" />,
+    icon: <FaYoutube className="fill-white" size={22}/>,
     label: "YouTube",
     visible: true,
   },

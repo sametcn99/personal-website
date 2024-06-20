@@ -30,26 +30,28 @@ export default function Buttons() {
       animate="visible"
     >
       {/* Define a section element with CSS classes for layout and alignment. */}
-      {socialMediaLinks.map(
-        (
-          socialMedia,
-          index, // Map over the 'socialMediaLinks' array and create a link for each social media entry.
-        ) =>
-          socialMedia.visible && (
-            <motion.a
-              className="m-1 inline-flex select-none gap-2 transition-all duration-700" // Apply CSS margin to the link.
-              key={index} // Set a unique 'key' for React to identify each link element.
-              href={`/${socialMedia.type[0]}`} // Set the 'href' attribute of the link to the social media URL.
-              target="_blank" // Open the link in a new browser tab or window.
-              rel="noopener noreferrer" // Specify security attributes for the link.
-              aria-label={socialMedia.label} // Provide an accessibility label for screen readers.
-              variants={item}
-            >
-              {socialMedia.icon} {socialMedia.label}
-              {/* Create a button with an accessibility label and the social media icon. */}
-            </motion.a>
-          ),
-      )}
+      {socialMediaLinks
+        .sort((a, b) => a.label.localeCompare(b.label))
+        .map(
+          (
+            socialMedia,
+            index, // Map over the 'socialMediaLinks' array and create a link for each social media entry.
+          ) =>
+            socialMedia.visible && (
+              <motion.a
+                className="m-1 inline-flex select-none gap-2 transition-all duration-700" // Apply CSS margin to the link.
+                key={index} // Set a unique 'key' for React to identify each link element.
+                href={`/${socialMedia.type[0]}`} // Set the 'href' attribute of the link to the social media URL.
+                target="_blank" // Open the link in a new browser tab or window.
+                rel="noopener noreferrer" // Specify security attributes for the link.
+                aria-label={socialMedia.label} // Provide an accessibility label for screen readers.
+                variants={item}
+              >
+                {socialMedia.icon} {socialMedia.label}
+                {/* Create a button with an accessibility label and the social media icon. */}
+              </motion.a>
+            ),
+        )}
     </motion.section>
   );
 }

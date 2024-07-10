@@ -5,7 +5,7 @@ import TelegramIcon from "@mui/icons-material/Telegram";
 import DescriptionIcon from "@mui/icons-material/Description";
 import { SiLeetcode, SiYoutubemusic } from "react-icons/si";
 import Image from "next/image";
-import { FaWhatsapp, FaYoutube } from "react-icons/fa";
+import { FaDiscord, FaWhatsapp, FaYoutube } from "react-icons/fa";
 import { ReactElement } from "react";
 
 type SocialMediaLink = {
@@ -50,6 +50,13 @@ export const socialMediaLinks: SocialMediaLink[] = [
     link: new URL("https://t.me/sametc0"),
     icon: <TelegramIcon className="fill-white" />,
     label: "Telegram",
+    visible: true,
+  },
+  {
+    type: ["discord", "dc"],
+    link: new URL("https://discord.com/users/1120483504535392327"),
+    icon: <FaDiscord className="fill-white" size={22}/>,
+    label: "Discord",
     visible: true,
   },
   {

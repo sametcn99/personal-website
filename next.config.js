@@ -11,6 +11,12 @@ const nextConfig = {
       },
       {
         protocol: "https",
+        hostname: "codenest.app",
+        pathname: "**",
+      },
+
+      {
+        protocol: "https",
         hostname: "avatars.githubusercontent.com",
         pathname: "**",
       },

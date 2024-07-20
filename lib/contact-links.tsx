@@ -39,6 +39,20 @@ export const socialMediaLinks: SocialMediaLink[] = [
     visible: true,
   },
   {
+    type: ["codenest", "cn"],
+    link: new URL("https://codenest.app/user/1120483504535392327"),
+    icon: (
+      <Image
+        src="https://codenest.app/icons/favicon.ico"
+        width={22}
+        height={22}
+        alt="CodeNest"
+      />
+    ),
+    label: "CodeNest",
+    visible: true,
+  },
+  {
     type: ["leetcode", "lc"],
     link: new URL("https://leetcode.com/sametcn99"),
     icon: <SiLeetcode className="fill-white" size={20} />,
@@ -55,7 +69,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
   {
     type: ["discord", "dc"],
     link: new URL("https://discord.com/users/1120483504535392327"),
-    icon: <FaDiscord className="fill-white" size={22}/>,
+    icon: <FaDiscord className="fill-white" size={22} />,
     label: "Discord",
     visible: true,
   },
@@ -97,7 +111,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
   {
     type: ["youtube", "yt", "ytb", "ytube", "ytbchannel", "ytchannel"],
     link: new URL("https://youtube.com/@sametc001"),
-    icon: <FaYoutube className="fill-white" size={22}/>,
+    icon: <FaYoutube className="fill-white" size={22} />,
     label: "YouTube",
     visible: true,
   },

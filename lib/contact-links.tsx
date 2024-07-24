@@ -40,10 +40,10 @@ export const socialMediaLinks: SocialMediaLink[] = [
   },
   {
     type: ["codenest", "cn"],
-    link: new URL("https://codenest.app/user/1120483504535392327"),
+    link: new URL("https://codenest.app/user/92addc02-ac45-466b-baf9-6e71f85d88b7"),
     icon: (
       <Image
-        src="https://codenest.app/icons/favicon.ico"
+        src="https://codenest.app/user/92addc02-ac45-466b-baf9-6e71f85d88b7"
         width={22}
         height={22}
         alt="CodeNest"

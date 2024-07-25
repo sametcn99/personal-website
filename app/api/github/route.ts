@@ -1,6 +1,6 @@
 import { GetResponseTypeFromEndpointMethod } from "@octokit/types";
-import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 import { Octokit } from "octokit";
 
 export async function GET(request: NextRequest) {

@@ -1,25 +1,33 @@
 import { GetResponseTypeFromEndpointMethod } from "@octokit/types";
 import Image from "next/image";
+import { notFound } from "next/navigation";
 import { Octokit } from "octokit";
-import React from "react";
+import { SVGs } from "./PulseBeam";
 
 export default async function Hero() {
   const octokit = new Octokit();
-  const data: GetResponseTypeFromEndpointMethod<
-    typeof octokit.rest.users.getAuthenticated
-  > = await fetch(
+  const datares = await fetch(
     `${process.env.NEXT_PUBLIC_SITE_URL}/api/github?option=profile`,
-  ).then((res) => res.json());
+  );
+  const data = (await datares.json()) as GetResponseTypeFromEndpointMethod<
+    typeof octokit.rest.users.getAuthenticated
+  >;
+
+  if (!data) notFound();
+
   return (
-    <section className="mx-auto flex flex-col items-center justify-center gap-4 py-4 text-center font-sans pointer-events-none select-none">
+    <section className="pointer-events-none  mx-auto flex select-none flex-col items-center justify-center gap-4 py-4 text-center font-sans">
       <Image
-        src={data?.data?.avatar_url ? data.data.avatar_url : ""}
+        src={data.data.avatar_url ? data.data.avatar_url : ""}
         alt="Profile Picture from GitHub"
         width={120}
         height={120}
         className="rounded-full"
       />
-        <p>{data?.data?.bio}</p>
+      <div className="absolute z--10 flex items-center justify-center ">
+        <SVGs />
+      </div>
+      <p>{data.data.bio}</p>
     </section>
   );
 }

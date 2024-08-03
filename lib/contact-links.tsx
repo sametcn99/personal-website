@@ -89,7 +89,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
   },
   {
     type: ["gpv", "githubprofileviewer", "gitpv"],
-    link: new URL("https://githubprofileviewer.com/sametcn99"),
+    link: new URL("https://githubprofileviewer.com/p/sametcn99"),
     icon: (
       <Image
         src="https://raw.githubusercontent.com/sametcn99/github-profile-viewer/master/public/icons/icon32.png"

@@ -17,17 +17,16 @@ export default async function Hero() {
 
   return (
     <section className="pointer-events-none  mx-auto flex select-none flex-col items-center justify-center gap-4 py-4 text-center font-sans">
-      <Image
-        src={data.data.avatar_url ? data.data.avatar_url : ""}
-        alt="Profile Picture from GitHub"
-        width={120}
-        height={120}
-        className="rounded-full"
-      />
-      <div className="absolute z--10 flex items-center justify-center ">
-        <SVGs />
-      </div>
-      <p>{data.data.bio}</p>
+      {data.data?.avatar_url && (
+        <Image
+          src={data.data?.avatar_url || ""}
+          alt="Profile Picture from GitHub"
+          width={120}
+          height={120}
+          className="rounded-full"
+        />
+      )}
+      <p>{data.data?.bio}</p>
     </section>
   );
 }

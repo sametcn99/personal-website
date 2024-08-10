@@ -50,14 +50,8 @@ export default async function Page({ params }: { params: { slug: string } }) {
   const socialMediaLink = socialMediaLinks.find((link) =>
     link.type.includes(params.slug),
   );
-  if (socialMediaLink) {
-    permanentRedirect(`${socialMediaLink.link}`);
-  }
+  socialMediaLink ? permanentRedirect(`${socialMediaLink.link}`) : null;
   const repo = await fetchRepo(params.slug);
   const data: GitHubRepo = repo.data;
-  if (!repo.error) {
-    permanentRedirect(`${data.html_url}`);
-  } else {
-    return <NotFound />;
-  }
+  return !repo.error ? permanentRedirect(`${data.html_url}`) : <NotFound />;
 }

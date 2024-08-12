@@ -18,6 +18,18 @@ export const socialMediaLinks: SocialMediaLink[] = [
 		visible: true,
 	},
 	{
+		type: ['instagram', 'ig'],
+		link: new URL('https://instagram.com/sametc.0'),
+		label: 'Instagram',
+		visible: false,
+	},
+	{
+		type: ['statsfm', 'sfm', 'sf'],
+		link: new URL('https://stats.fm/sametc001'),
+		label: 'Stats.FM',
+		visible: false,
+	},
+	{
 		type: ['codenest', 'cn'],
 		link: new URL(
 			'https://codenest.app/user/92addc02-ac45-466b-baf9-6e71f85d88b7'
@@ -77,8 +89,6 @@ export const socialMediaLinks: SocialMediaLink[] = [
 		type: [
 			'youtubemusic',
 			'ytmusic',
-			'ytbmusic',
-			'ytmusicchannel',
 			'ymusic',
 			'ytm',
 		],

@@ -69,7 +69,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
 	},
 	{
 		type: ['gpv', 'githubprofileviewer', 'gitpv'],
-		link: new URL('https://githubprofileviewer.com/p/sametcn99'),
+		link: new URL('https://github-profile-viewer.azurewebsites.net/p/sametcn99'),
 		label: 'GPV',
 		visible: true,
 	},

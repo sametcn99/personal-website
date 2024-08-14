@@ -11,7 +11,11 @@
 		"lint": "next lint"
 	},
 	"dependencies": {
+		"@mdx-js/loader": "^3.0.1",
+		"@mdx-js/react": "^3.0.1",
+		"@next/mdx": "^14.2.5",
 		"@octokit/types": "^13.5.0",
+		"@types/mdx": "^2.0.13",
 		"@vercel/analytics": "^1.3.1",
 		"clsx": "^2.1.1",
 		"framer-motion": "^11.3.24",
@@ -19,10 +23,12 @@
 		"octokit": "^4.0.2",
 		"react": "^18.3.1",
 		"react-dom": "^18.3.1",
+		"remark-gfm": "^4.0.0",
 		"tailwind-merge": "^2.5.0",
 		"ts-node": "^10.9.2"
 	},
 	"devDependencies": {
+		"@tailwindcss/typography": "^0.5.14",
 		"@types/jest": "^29.5.12",
 		"@types/node": "^20.14.15",
 		"@types/react": "^18.3.3",

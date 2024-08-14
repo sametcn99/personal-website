@@ -69,13 +69,15 @@ export const socialMediaLinks: SocialMediaLink[] = [
 	},
 	{
 		type: ['gpv', 'githubprofileviewer', 'gitpv'],
-		link: new URL('https://github-profile-viewer.azurewebsites.net/p/sametcn99'),
+		link: new URL(
+			'https://github-profile-viewer.azurewebsites.net/p/sametcn99'
+		),
 		label: 'GPV',
 		visible: true,
 	},
 	{
-		type: ['resume', 'cv', 'ozgecmis', 'letter'],
-		link: new URL('https://rxresu.me/sametcn99/samet-can-cincik'),
+		type: ['cv', 'ozgecmis', 'letter', 'resume'],
+		link: new URL('https://sametcc.me/cv'),
 		label: 'Resume',
 		visible: true,
 	},
@@ -86,12 +88,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
 		visible: true,
 	},
 	{
-		type: [
-			'youtubemusic',
-			'ytmusic',
-			'ymusic',
-			'ytm',
-		],
+		type: ['youtubemusic', 'ytmusic', 'ymusic', 'ytm'],
 		link: new URL(
 			'https://music.youtube.com/channel/UCgXu7EZ76uMqPW8i4ZCL72Q?si=1aNE6Zya_1t9ACFl'
 		),

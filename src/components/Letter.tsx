@@ -7,7 +7,7 @@ export default function Letter({
 }) {
 	return (
 		<section
-			className='print:min-h-screen'
+			className='print:h-a4 print:w-a4'
 			id={id}
 		>
 			{children}

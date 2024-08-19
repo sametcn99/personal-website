@@ -1,5 +1,5 @@
 'use client'
-import { socialMediaLinks } from '@/lib/social'
+import { categoryOrder, socialMediaLinks } from '@/lib/social'
 import { motion } from 'framer-motion'
 
 export default function Buttons() {
@@ -22,6 +22,7 @@ export default function Buttons() {
 			opacity: 1,
 		},
 	}
+
 	return (
 		<motion.section
 			className='flex flex-wrap items-center justify-center gap-4'
@@ -30,7 +31,15 @@ export default function Buttons() {
 			animate='visible'
 		>
 			{socialMediaLinks
-				.sort((a, b) => a.label.localeCompare(b.label))
+				.sort((a, b) => {
+					const categoryAIndex = categoryOrder[a.category]
+					const categoryBIndex = categoryOrder[b.category]
+
+					if (categoryAIndex === categoryBIndex) {
+						return a.label.localeCompare(b.label)
+					}
+					return categoryAIndex - categoryBIndex
+				})
 				.map(
 					(socialMedia, index) =>
 						socialMedia.visible && (
@@ -42,6 +51,7 @@ export default function Buttons() {
 								rel='noopener noreferrer'
 								aria-label={socialMedia.label}
 								variants={item}
+								onMouseDown={(e) => e.preventDefault()}
 							>
 								{socialMedia.label}
 							</motion.a>

@@ -1,4 +1,4 @@
-import { socialMediaLinks } from '@/lib/social'
+import { categoryOrder, socialMediaLinks } from '@/lib/social'
 
 const findDuplicates = (occurrences: Map<string, number>): string[] => {
 	return Array.from(occurrences.entries())
@@ -30,5 +30,13 @@ describe('SocialMediaLinks', () => {
 		const { types, labels } = validateUniqueTypesAndLabels(socialMediaLinks)
 		expect(types).toHaveLength(0)
 		expect(labels).toHaveLength(0)
+	})
+})
+
+describe('categoryOrder', () => {
+	it('should have unique numbers', () => {
+		const values = Object.values(categoryOrder)
+		const uniqueValues = new Set(values)
+		expect(uniqueValues.size).toBe(values.length)
 	})
 })

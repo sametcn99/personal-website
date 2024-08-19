@@ -13,7 +13,12 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang='en'>
-			<body className={cn(inter.className, 'antialiased')}>
+			<body
+				className={cn(
+					inter.className,
+					'antialiased selection:bg-slate-300 selection:text-purple-900 selection:dark:bg-slate-900 selection:dark:text-purple-500'
+				)}
+			>
 				{children}
 				<Analytics />
 			</body>

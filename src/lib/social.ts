@@ -26,6 +26,12 @@ export const socialMediaLinks: SocialMediaLink[] = [
 		label: 'Instagram',
 		visible: true,
 		category: 'Social Media',
+	}, {
+		type: ['twitter', 'x', 'tw'],
+		link: new URL('https://x.com/samet1178062'),
+		label: 'X/Twitter',
+		visible: true,
+		category: 'Social Media',
 	},
 	{
 		type: ['statsfm', 'sfm', 'sf'],

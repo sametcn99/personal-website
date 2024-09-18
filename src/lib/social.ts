@@ -71,13 +71,6 @@ export const socialMediaLinks: SocialMediaLink[] = [
 		category: 'Social Media',
 	},
 	{
-		type: ['whatsapp', 'wa', 'wp'],
-		link: new URL('https://wa.me/905303790565'),
-		label: 'WhatsApp',
-		visible: true,
-		category: 'Contact',
-	},
-	{
 		type: ['mail', 'email', 'gmail', 'e-mail'],
 		link: new URL('mailto:sametcn99@gmail.com'),
 		label: 'Mail',

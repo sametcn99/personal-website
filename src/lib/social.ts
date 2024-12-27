@@ -46,7 +46,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
 			'https://codenest.app/user/92addc02-ac45-466b-baf9-6e71f85d88b7'
 		),
 		label: 'CodeNest',
-		visible: true,
+		visible: false,
 		category: 'Development Platforms',
 	},
 	{
@@ -83,7 +83,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
 			'https://github-profile-viewer.azurewebsites.net/p/sametcn99'
 		),
 		label: 'GPV',
-		visible: true,
+		visible: false,
 		category: 'Development Platforms',
 	},
 	{
@@ -112,7 +112,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
 	{
 		type: ['spotify', 'sp'],
 		label: 'Spotify',
-		visible: false,
+		visible: true,
 		link: new URL('https://open.spotify.com/user/31qg3kutxxwdq5lzydjx6md534cq'),
 		category: 'Social Media',
 	},
@@ -126,7 +126,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
 	{
 		type: ['letterboxd', 'lbxd', 'lb'],
 		label: 'Letterboxd',
-		visible: false,
+		visible: true,
 		link: new URL('https://letterboxd.com/sametc001'),
 		category: 'Social Media',
 	},

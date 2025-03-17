@@ -26,7 +26,8 @@ export const socialMediaLinks: SocialMediaLink[] = [
 		label: 'Instagram',
 		visible: false,
 		category: 'Social Media',
-	}, {
+	},
+	{
 		type: ['twitter', 'x', 'tw'],
 		link: new URL('https://x.com/samet1178062'),
 		label: 'X/Twitter',
@@ -92,6 +93,13 @@ export const socialMediaLinks: SocialMediaLink[] = [
 		label: 'Resume',
 		visible: true,
 		category: 'Professional Networks',
+	},
+	{
+		type: ['WhatsApp', 'whatsapp', 'wp'],
+		link: new URL('https://wa.me/+905303790565'),
+		label: 'WhatsApp',
+		category: 'Contact',
+		visible: false,
 	},
 	{
 		type: ['youtube', 'yt', 'ytb', 'ytube', 'ytbchannel', 'ytchannel'],

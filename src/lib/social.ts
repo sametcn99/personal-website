@@ -26,7 +26,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
 		],
 		link: new URL('https://gist.sametcc.me'),
 		label: 'Snippet Library',
-		visible: false,
+		visible: true,
 		category: 'Development Platforms',
 	},
 	{

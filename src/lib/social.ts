@@ -14,22 +14,6 @@ export const socialMediaLinks: SocialMediaLink[] = [
 		category: 'Development Platforms',
 	},
 	{
-		type: [
-			'gists',
-			'gist',
-			'ghg',
-			'ghgist',
-			'ghgists',
-			'code-library',
-			'cl',
-			'snippet',
-		],
-		link: new URL('https://gist.sametcc.me'),
-		label: 'Snippet Library',
-		visible: true,
-		category: 'Development Platforms',
-	},
-	{
 		type: ['instagram', 'ig'],
 		link: new URL('https://instagram.com/sametc.0'),
 		label: 'Instagram',

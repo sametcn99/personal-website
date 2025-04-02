@@ -1,189 +1,275 @@
+'use client'
 import { type ReactNode } from 'react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { cn } from '@/utils/cn'
-import Breadcrumb from '@/components/Breadcrumb'
+import {
+	Sidebar,
+	SidebarContent,
+	SidebarHeader,
+	SidebarFooter,
+	SidebarGroup,
+	SidebarGroupLabel,
+	SidebarGroupContent,
+	SidebarMenu,
+	SidebarMenuItem,
+	SidebarMenuButton,
+	SidebarTrigger,
+	SidebarSeparator,
+	SidebarProvider,
+} from '@/components/ui/sidebar'
+import { Button } from '@/components/ui/button'
+import { ScrollArea } from '@/components/ui/scroll-area'
+import {
+	MoonIcon,
+	SunIcon,
+	CodeIcon,
+	HomeIcon,
+	SearchIcon,
+	FolderIcon,
+} from 'lucide-react'
+import {
+	Breadcrumb,
+	BreadcrumbItem,
+	BreadcrumbLink,
+	BreadcrumbList,
+	BreadcrumbPage,
+	BreadcrumbSeparator,
+} from '@/components/ui/breadcrumb'
+import { Input } from '@/components/ui/input'
 
 // Group links by category
 const sidebarCategories = {
-  "API Routes": [
-    { title: 'GitHub API Route', href: '/gist/github-api-route' },
-    { title: 'GitHub Profile API', href: '/gist/github-profile-api' },
-  ],
-  "Components": [
-    { title: 'Theme Switcher', href: '/gist/theme-switcher-component' },
-    { title: 'Scroll To Top', href: '/gist/scroll-to-top-component' },
-  ],
-  "Utilities": [
-    { title: 'Date Utility', href: '/gist/date-utility' },
-    { title: 'Format Date Utility', href: '/gist/format-date-utility' },
-    { title: 'Text Cleaner', href: '/gist/text-cleaner' },
-    { title: 'Site URL Utility', href: '/gist/site-url-utility' },
-    { title: 'Copy Directory Utility', href: '/gist/copy-directory-utility' },
-    { title: 'Delete Folder', href: '/gist/delete-folder' },
-    { title: 'Random Color Generator', href: '/gist/random-color-generator' },
-    { title: 'Regex Text Utility', href: '/gist/regex-text-utility' },
-    { title: 'Convert Time to Milliseconds', href: '/gist/convert-time-to-milliseconds' },
-    { title: 'Markdown File Renamer', href: '/gist/markdown-file-renamer' },
-    { title: 'Profile Age Calculator', href: '/gist/profile-age-calculator' },
-  ],
-  "GitHub": [
-    { title: 'GitHub Data Store', href: '/gist/github-data-store' },
-    { title: 'GitHub Repo Filter', href: '/gist/github-repo-filter' },
-    { title: 'GitHub Repo Model', href: '/gist/github-repo-model' },
-    { title: 'GitHub Repo Stats', href: '/gist/github-repo-stats' },
-    { title: 'GitHub User Model', href: '/gist/github-user-model' },
-    { title: 'Git Tag Push Utility', href: '/gist/git-tag-push-utility' },
-  ],
-  "Configuration": [
-    { title: 'Next.js Manifest Config', href: '/gist/nextjs-manifest-config' },
-    { title: 'Website Configuration', href: '/gist/website-configuration' },
-    { title: 'Tailwind Page Setup', href: '/gist/tailwind-page-setup' },
-    { title: 'Service Configuration Guide', href: '/gist/service-configuration-guide' },
-    { title: 'Dotnet API Setup', href: '/gist/dotnet-api-setup' },
-  ],
-  "State Management": [
-    { title: 'Redux Root Reducer Setup', href: '/gist/redux-root-reducer-setup' },
-    { title: 'Dictionary Context Provider', href: '/gist/dictionary-context-provider' },
-  ],
-  "UI & Styling": [
-    { title: 'Article Heading Styles', href: '/gist/article-heading-styles' },
-  ],
-  "Electron": [
-    { title: 'Electron Window Manager', href: '/gist/electron-window-manager-utility' },
-  ],
-  "Miscellaneous": [
-    { title: 'Audio Lyrics Writer', href: '/gist/audio-lyrics-writer' },
-    { title: 'Auth Verifier', href: '/gist/auth-verifier' },
-    { title: 'Combine Locales', href: '/gist/combine-locales' },
-    { title: 'Contact Form Handler', href: '/gist/contact-form-handler' },
-    { title: 'Date Range Slicer', href: '/gist/date-range-slicer' },
-    { title: 'Fetch Hook', href: '/gist/fetch-hook' },
-    { title: 'Hello World Translations', href: '/gist/hello-world-translations' },
-    { title: 'TypeScript Glob Patterns', href: '/gist/typescript-glob-patterns' },
-  ],
-}
-
-function DocHeader() {
-  return (
-    <header className="sticky top-0 z-40 w-full border-b border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-950">
-      <div className="flex h-16 items-center px-6">
-        <Link href="/gist" className="font-bold text-lg flex items-center gap-2">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
-            <path d="M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5c0 1.1.9 2 2 2h1" />
-            <path d="M16 3h1a2 2 0 0 1 2 2v5c0 1.1.9 2 2 2a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2h-1" />
-          </svg>
-          <span>Code Snippets</span>
-        </Link>
-        <div className="ml-auto flex items-center gap-2">
-          <ThemeToggle />
-        </div>
-      </div>
-    </header>
-  )
+	'API Routes': [
+		{ title: 'GitHub API Route', href: '/gist/github-api-route' },
+		{ title: 'GitHub Profile API', href: '/gist/github-profile-api' },
+	],
+	Components: [
+		{ title: 'Theme Switcher', href: '/gist/theme-switcher-component' },
+		{ title: 'Scroll To Top', href: '/gist/scroll-to-top-component' },
+	],
+	Utilities: [
+		{ title: 'Date Utility', href: '/gist/date-utility' },
+		{ title: 'Format Date Utility', href: '/gist/format-date-utility' },
+		{ title: 'Text Cleaner', href: '/gist/text-cleaner' },
+		{ title: 'Site URL Utility', href: '/gist/site-url-utility' },
+		{ title: 'Copy Directory Utility', href: '/gist/copy-directory-utility' },
+		{ title: 'Delete Folder', href: '/gist/delete-folder' },
+		{ title: 'Random Color Generator', href: '/gist/random-color-generator' },
+		{ title: 'Regex Text Utility', href: '/gist/regex-text-utility' },
+		{
+			title: 'Convert Time to Milliseconds',
+			href: '/gist/convert-time-to-milliseconds',
+		},
+		{ title: 'Markdown File Renamer', href: '/gist/markdown-file-renamer' },
+		{ title: 'Profile Age Calculator', href: '/gist/profile-age-calculator' },
+	],
+	GitHub: [
+		{ title: 'GitHub Data Store', href: '/gist/github-data-store' },
+		{ title: 'GitHub Repo Filter', href: '/gist/github-repo-filter' },
+		{ title: 'GitHub Repo Model', href: '/gist/github-repo-model' },
+		{ title: 'GitHub Repo Stats', href: '/gist/github-repo-stats' },
+		{ title: 'GitHub User Model', href: '/gist/github-user-model' },
+		{ title: 'Git Tag Push Utility', href: '/gist/git-tag-push-utility' },
+	],
+	Configuration: [
+		{ title: 'Next.js Manifest Config', href: '/gist/nextjs-manifest-config' },
+		{ title: 'Website Configuration', href: '/gist/website-configuration' },
+		{ title: 'Tailwind Page Setup', href: '/gist/tailwind-page-setup' },
+		{
+			title: 'Service Configuration Guide',
+			href: '/gist/service-configuration-guide',
+		},
+		{ title: 'Dotnet API Setup', href: '/gist/dotnet-api-setup' },
+	],
+	'State Management': [
+		{
+			title: 'Redux Root Reducer Setup',
+			href: '/gist/redux-root-reducer-setup',
+		},
+		{
+			title: 'Dictionary Context Provider',
+			href: '/gist/dictionary-context-provider',
+		},
+	],
+	'UI & Styling': [
+		{ title: 'Article Heading Styles', href: '/gist/article-heading-styles' },
+	],
+	Electron: [
+		{
+			title: 'Electron Window Manager',
+			href: '/gist/electron-window-manager-utility',
+		},
+	],
+	Miscellaneous: [
+		{ title: 'Audio Lyrics Writer', href: '/gist/audio-lyrics-writer' },
+		{ title: 'Auth Verifier', href: '/gist/auth-verifier' },
+		{ title: 'Combine Locales', href: '/gist/combine-locales' },
+		{ title: 'Contact Form Handler', href: '/gist/contact-form-handler' },
+		{ title: 'Date Range Slicer', href: '/gist/date-range-slicer' },
+		{ title: 'Fetch Hook', href: '/gist/fetch-hook' },
+		{
+			title: 'Hello World Translations',
+			href: '/gist/hello-world-translations',
+		},
+		{
+			title: 'TypeScript Glob Patterns',
+			href: '/gist/typescript-glob-patterns',
+		},
+	],
 }
 
 function ThemeToggle() {
-  return (
-    <button 
-      className="inline-flex items-center justify-center rounded-md p-2.5 text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800"
-      aria-label="Toggle theme"
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="hidden h-5 w-5 dark:block">
-        <circle cx="12" cy="12" r="4"></circle>
-        <path d="M12 2v2"></path>
-        <path d="M12 20v2"></path>
-        <path d="m4.93 4.93 1.41 1.41"></path>
-        <path d="m17.66 17.66 1.41 1.41"></path>
-        <path d="M2 12h2"></path>
-        <path d="M20 12h2"></path>
-        <path d="m6.34 17.66-1.41 1.41"></path>
-        <path d="m19.07 4.93-1.41 1.41"></path>
-      </svg>
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="block h-5 w-5 dark:hidden">
-        <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
-      </svg>
-    </button>
-  )
+	return (
+		<Button
+			variant='ghost'
+			size='icon'
+			className='h-9 w-9 rounded-md'
+		>
+			<SunIcon className='h-4 w-4 scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90' />
+			<MoonIcon className='absolute h-4 w-4 scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0' />
+			<span className='sr-only'>Toggle theme</span>
+		</Button>
+	)
 }
 
-function Sidebar() {
-  return (
-    <aside className="fixed inset-y-0 left-0 z-30 hidden w-72 flex-col border-r border-gray-200 bg-white pt-16 dark:border-gray-800 dark:bg-gray-950 lg:flex">
-      <nav className="h-[calc(100vh-4rem)] overflow-y-auto p-6">
-        <div className="mb-4">
-          <Link href="/gist" className="flex items-center gap-2 font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4">
-              <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-              <polyline points="9 22 9 12 15 12 15 22"></polyline>
-            </svg>
-            <span>Overview</span>
-          </Link>
-        </div>
-        
-        {Object.entries(sidebarCategories).map(([category, links]) => (
-          <div key={category} className="mb-6">
-            <h2 className="mb-2 text-sm font-semibold text-gray-900 dark:text-gray-100">{category}</h2>
-            <div className="space-y-1">
-              {links.map((link, i) => (
-                <Link
-                  key={i}
-                  href={link.href}
-                  className="block rounded-md px-3 py-2 text-sm text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800"
-                >
-                  {link.title}
-                </Link>
-              ))}
-            </div>
-          </div>
-        ))}
-      </nav>
-    </aside>
-  )
+function PageBreadcrumb({ path }: { path: string }) {
+	// Remove trailing slash and split path
+	const pathSegments = path.replace(/\/$/, '').split('/').filter(Boolean)
+
+	if (pathSegments.length === 0) return null
+
+	return (
+		<Breadcrumb className='mb-6'>
+			<BreadcrumbList>
+				<BreadcrumbItem>
+					<BreadcrumbLink href='/'>Home</BreadcrumbLink>
+				</BreadcrumbItem>
+				<BreadcrumbSeparator />
+
+				{pathSegments.map((segment, i) => {
+					const isLast = i === pathSegments.length - 1
+					const href = `/${pathSegments.slice(0, i + 1).join('/')}`
+
+					return (
+						<BreadcrumbItem key={segment}>
+							{isLast ? (
+								<BreadcrumbPage>{segment.replace(/-/g, ' ')}</BreadcrumbPage>
+							) : (
+								<BreadcrumbLink href={href}>
+									{segment.replace(/-/g, ' ')}
+								</BreadcrumbLink>
+							)}
+							{!isLast && <BreadcrumbSeparator />}
+						</BreadcrumbItem>
+					)
+				})}
+			</BreadcrumbList>
+		</Breadcrumb>
+	)
 }
 
-function MobileNav() {
-  return (
-    <div className="fixed inset-x-0 bottom-0 z-50 border-t border-gray-200 bg-white p-2 dark:border-gray-800 dark:bg-gray-950 lg:hidden">
-      <nav className="mx-auto flex max-w-md items-center justify-around">
-        <Link href="/gist" className="flex flex-col items-center gap-1 text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
-            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-            <polyline points="9 22 9 12 15 12 15 22"></polyline>
-          </svg>
-          <span className="text-xs">Home</span>
-        </Link>
-        <button className="flex flex-col items-center gap-1 text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
-            <path d="M15.5 3H5a2 2 0 0 0-2 2v14c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2V8.5L15.5 3Z"></path>
-            <path d="M15 3v6h6"></path>
-          </svg>
-          <span className="text-xs">Categories</span>
-        </button>
-        <button className="flex flex-col items-center gap-1 text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
-            <path d="m21 21-5.197-5.197M15.5 10.5a5 5 0 1 1-10 0 5 5 0 0 1 10 0Z"></path>
-          </svg>
-          <span className="text-xs">Search</span>
-        </button>
-      </nav>
-    </div>
-  )
-}
+export default function GistLayout({ children }: { children: ReactNode }) {
+	const pathname = usePathname()
 
-export default function DocsLayout({ children }: { children: ReactNode }) {
-  return (
-    <div className="min-h-screen bg-white dark:bg-gray-950">
-      <DocHeader />
-      <Sidebar />
-      <MobileNav />
-      <main className="pb-16 pt-16 lg:pl-72">
-        <div className="mx-auto max-w-4xl px-4 py-8 lg:px-8">
-          <Breadcrumb />
-          <article className="prose prose-gray max-w-none dark:prose-invert">
-            {children}
-          </article>
-        </div>
-      </main>
-    </div>
-  )
+	return (
+		<SidebarProvider defaultOpen={true}>
+			<div className='flex min-h-screen w-full flex-col'>
+				<header className='bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 flex h-16 items-center gap-4 border-b px-4 backdrop-blur sm:px-6'>
+					<div className='flex items-center gap-2 md:hidden'>
+						<SidebarTrigger />
+					</div>
+					<Link
+						href='/gist'
+						className='flex items-center gap-2 font-semibold'
+					>
+						<CodeIcon className='h-5 w-5' />
+						<span>Code Snippets</span>
+					</Link>
+					<div className='ml-auto flex items-center gap-2'>
+						<ThemeToggle />
+					</div>
+				</header>
+
+				<div className='flex-1 items-start md:grid md:grid-cols-[220px_minmax(0,1fr)] lg:grid-cols-[240px_minmax(0,1fr)]'>
+					<aside className='fixed top-16 z-30 -ml-2 hidden h-[calc(100vh-4rem)] w-full shrink-0 overflow-y-auto border-r md:sticky md:block'>
+						<Sidebar className='p-2'>
+							<SidebarHeader>
+								<div className='px-2 py-2'>
+									<Link
+										href='/gist'
+										className='flex items-center gap-2 text-sm font-medium'
+									>
+										<HomeIcon className='h-4 w-4' />
+										<span>Overview</span>
+									</Link>
+								</div>
+								<div className='px-2 py-2'>
+									<div className='relative'>
+										<SearchIcon className='text-muted-foreground absolute top-2.5 left-2.5 h-4 w-4' />
+										<Input
+											type='search'
+											placeholder='Search snippets...'
+											className='bg-background w-full pl-8 text-sm'
+										/>
+									</div>
+								</div>
+							</SidebarHeader>
+
+							<SidebarContent>
+								<ScrollArea className='h-[calc(100vh-10rem)]'>
+									{Object.entries(sidebarCategories).map(
+										([category, links]) => (
+											<SidebarGroup key={category}>
+												<SidebarGroupLabel>{category}</SidebarGroupLabel>
+												<SidebarSeparator />
+												<SidebarGroupContent>
+													<SidebarMenu>
+														{links.map((link) => (
+															<SidebarMenuItem key={link.href}>
+																<SidebarMenuButton
+																	asChild
+																	data-active={pathname === link.href}
+																>
+																	<Link href={link.href}>
+																		<FolderIcon className='mr-2 h-4 w-4 shrink-0' />
+																		<span>{link.title}</span>
+																	</Link>
+																</SidebarMenuButton>
+															</SidebarMenuItem>
+														))}
+													</SidebarMenu>
+												</SidebarGroupContent>
+											</SidebarGroup>
+										)
+									)}
+								</ScrollArea>
+							</SidebarContent>
+
+							<SidebarFooter>
+								<div className='px-3 py-2'>
+									<p className='text-muted-foreground text-xs'>
+										Last updated: April 2, 2025
+									</p>
+								</div>
+							</SidebarFooter>
+						</Sidebar>
+					</aside>
+
+					<main className='flex-1'>
+						<div className='relative flex min-h-screen flex-col'>
+							<div className='flex-1 space-y-4 p-6 lg:p-8'>
+								<PageBreadcrumb path={pathname} />
+								<div className='mx-auto max-w-4xl'>
+									<article className='prose prose-gray dark:prose-invert max-w-none break-words'>
+										{children}
+									</article>
+								</div>
+							</div>
+						</div>
+					</main>
+				</div>
+			</div>
+		</SidebarProvider>
+	)
 }

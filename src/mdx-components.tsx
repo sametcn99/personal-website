@@ -1,19 +1,12 @@
-import React from 'react'
 import type { MDXComponents } from 'mdx/types'
-import Pre from './components/Pre'
+import Pre from '@/components/Pre'
 import Link from 'next/link'
 
 function generateId(text: string): string {
 	return text
 		.toLowerCase()
-		.replace(/ğ/g, 'g')
-		.replace(/ü/g, 'u')
-		.replace(/ş/g, 's')
-		.replace(/ı/g, 'i')
-		.replace(/ö/g, 'o')
-		.replace(/ç/g, 'c')
-		.replace(/[^a-z0-9\s-]/g, '')
-		.replace(/\s+/g, '-')
+		.replace(/[^a-z0-9 ]/g, '')
+		.replace(/[ ]/g, '-')
 }
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
@@ -47,9 +40,9 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
 			</h3>
 		),
 		p: ({ children, ...props }) => (
-			<p className="leading-7 [&:not(:first-child)]:mt-4" {...props}>
+			<div className="leading-7 [&:not(:first-child)]:mt-4" {...props}>
 				{children}
-			</p>
+			</div>
 		),
 		ul: ({ children, ...props }) => (
 			<ul className="my-6 ml-6 list-disc [&>li]:mt-2" {...props}>

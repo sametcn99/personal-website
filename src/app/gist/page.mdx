@@ -1,77 +1,365 @@
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { buttonVariants } from "@/components/ui/button"
+import { InfoIcon, CopyIcon, TypeIcon, LibraryIcon, FileCode2, Code2, ExternalLink, LayoutGrid, Database, GitBranch, Settings, Puzzle, PaletteIcon, Atom } from "lucide-react"
+
 # Code Snippets
 
 Welcome to the code snippets documentation. This section contains a collection of reusable code snippets, utilities, and components that you can use in your projects.
 
-## API Routes
+<Tabs defaultValue="all" className="mt-6">
+	<TabsList className="mb-4">
+		<TabsTrigger value="all">All Snippets</TabsTrigger>
+		<TabsTrigger value="api">API Routes</TabsTrigger>
+		<TabsTrigger value="components">Components</TabsTrigger>
+		<TabsTrigger value="utilities">Utilities</TabsTrigger>
+	</TabsList>
 
-<div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-  <a href="/gist/github-api-route" className="group flex flex-col rounded-lg border border-gray-200 bg-white p-5 shadow-sm transition-all hover:shadow-md dark:border-gray-800 dark:bg-gray-950">
-    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">GitHub API Route</h3>
-    <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">Comprehensive Next.js handler for GitHub API requests with multiple endpoints and pagination support.</p>
-  </a>
-  <a href="/gist/github-profile-api" className="group flex flex-col rounded-lg border border-gray-200 bg-white p-5 shadow-sm transition-all hover:shadow-md dark:border-gray-800 dark:bg-gray-950">
-    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">GitHub Profile API</h3>
-    <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">TypeScript API route for fetching GitHub user repositories with Octokit integration.</p>
-  </a>
-</div>
+	<TabsContent value="all" className="space-y-8">
+		<div>
+			<h2 className="text-2xl font-bold tracking-tight mb-4">API Routes</h2>
+			<div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+				<Card className="transition-all hover:shadow-md">
+					<CardHeader>
+						<CardTitle className="flex items-center gap-2">
+							<Database className="h-5 w-5 text-primary" />
+							GitHub API Route
+						</CardTitle>
+						<CardDescription>Comprehensive Next.js handler for GitHub API requests with multiple endpoints and pagination support.</CardDescription>
+					</CardHeader>
+					<CardFooter>
+						<a href="/gist/github-api-route" className={buttonVariants({ variant: "outline", size: "sm" })}>
+							View Snippet
+						</a>
+					</CardFooter>
+				</Card>
 
-## Components
+				<Card className="transition-all hover:shadow-md">
+					<CardHeader>
+						<CardTitle className="flex items-center gap-2">
+							<GitBranch className="h-5 w-5 text-primary" />
+							GitHub Profile API
+						</CardTitle>
+						<CardDescription>TypeScript API route for fetching GitHub user repositories with Octokit integration.</CardDescription>
+					</CardHeader>
+					<CardFooter>
+						<a href="/gist/github-profile-api" className={buttonVariants({ variant: "outline", size: "sm" })}>
+							View Snippet
+						</a>
+					</CardFooter>
+				</Card>
+			</div>
+		</div>
 
-<div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-  <a href="/gist/theme-switcher-component" className="group flex flex-col rounded-lg border border-gray-200 bg-white p-5 shadow-sm transition-all hover:shadow-md dark:border-gray-800 dark:bg-gray-950">
-    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Theme Switcher</h3>
-    <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">React component for switching between light and dark themes with local storage persistence.</p>
-  </a>
-  <a href="/gist/scroll-to-top-component" className="group flex flex-col rounded-lg border border-gray-200 bg-white p-5 shadow-sm transition-all hover:shadow-md dark:border-gray-800 dark:bg-gray-950">
-    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Scroll To Top</h3>
-    <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">Smooth scroll-to-top button component for long-scrolling pages with React Router integration.</p>
-  </a>
-</div>
+		<div>
+			<h2 className="mb-4 text-2xl font-bold tracking-tight">Components</h2>
+			<div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+				<Card className="transition-all hover:shadow-md">
+					<CardHeader>
+						<CardTitle className="flex items-center gap-2">
+							<Atom className="h-5 w-5 text-primary" />
+							Theme Switcher
+						</CardTitle>
+						<CardDescription>React component for switching between light and dark themes with local storage persistence.</CardDescription>
+					</CardHeader>
+					<CardFooter>
+						<a href="/gist/theme-switcher-component" className={buttonVariants({ variant: "outline", size: "sm" })}>
+							View Snippet
+						</a>
+					</CardFooter>
+				</Card>
 
-## Utilities
+				<Card className="transition-all hover:shadow-md">
+					<CardHeader>
+						<CardTitle className="flex items-center gap-2">
+							<LayoutGrid className="h-5 w-5 text-primary" />
+							Scroll To Top
+						</CardTitle>
+						<CardDescription>Smooth scroll-to-top button component for long-scrolling pages with React Router integration.</CardDescription>
+					</CardHeader>
+					<CardFooter>
+						<a href="/gist/scroll-to-top-component" className={buttonVariants({ variant: "outline", size: "sm" })}>
+							View Snippet
+						</a>
+					</CardFooter>
+				</Card>
+			</div>
+		</div>
 
-<div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-  <a href="/gist/date-utility" className="group flex flex-col rounded-lg border border-gray-200 bg-white p-5 shadow-sm transition-all hover:shadow-md dark:border-gray-800 dark:bg-gray-950">
-    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Date Utility</h3>
-    <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">Date manipulation functions for handling date ranges, formatting, and calculations.</p>
-  </a>
-  <a href="/gist/format-date-utility" className="group flex flex-col rounded-lg border border-gray-200 bg-white p-5 shadow-sm transition-all hover:shadow-md dark:border-gray-800 dark:bg-gray-950">
-    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Format Date Utility</h3>
-    <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">Flexible date formatting utilities with localization support and custom patterns.</p>
-  </a>
-  <a href="/gist/text-cleaner" className="group flex flex-col rounded-lg border border-gray-200 bg-white p-5 shadow-sm transition-all hover:shadow-md dark:border-gray-800 dark:bg-gray-950">
-    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Text Cleaner</h3>
-    <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">String cleaning and sanitization utilities for user input and text processing.</p>
-  </a>
-  <a href="/gist/site-url-utility" className="group flex flex-col rounded-lg border border-gray-200 bg-white p-5 shadow-sm transition-all hover:shadow-md dark:border-gray-800 dark:bg-gray-950">
-    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Site URL Utility</h3>
-    <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">Environment-aware URL generation for multi-environment web applications.</p>
-  </a>
-  <a href="/gist/regex-text-utility" className="group flex flex-col rounded-lg border border-gray-200 bg-white p-5 shadow-sm transition-all hover:shadow-md dark:border-gray-800 dark:bg-gray-950">
-    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Regex Text Utility</h3>
-    <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">Common regular expression patterns for validating emails, URLs, and more.</p>
-  </a>
-  <a href="/gist/convert-time-to-milliseconds" className="group flex flex-col rounded-lg border border-gray-200 bg-white p-5 shadow-sm transition-all hover:shadow-md dark:border-gray-800 dark:bg-gray-950">
-    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Convert Time to Milliseconds</h3>
-    <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">Utility for converting human-readable time strings to milliseconds.</p>
-  </a>
-</div>
+		<div>
+			<h2 className="mb-4 text-2xl font-bold tracking-tight">Utilities</h2>
+			<div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+				<Card className="transition-all hover:shadow-md">
+					<CardHeader>
+						<CardTitle className="flex items-center gap-2 text-base">
+							<FileCode2 className="h-4 w-4 text-primary" />
+							Date Utility
+						</CardTitle>
+						<CardDescription className="text-xs">Date manipulation functions for handling date ranges, formatting, and calculations.</CardDescription>
+					</CardHeader>
+					<CardFooter>
+						<a href="/gist/date-utility" className={buttonVariants({ variant: "outline", size: "sm" })}>
+							View Snippet
+						</a>
+					</CardFooter>
+				</Card>
 
-<div className="mt-8 rounded-lg border border-blue-100 bg-blue-50 p-4 dark:border-blue-900 dark:bg-blue-950">
-  <div className="flex items-start">
-    <div className="mr-4 flex-shrink-0 text-blue-500">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
-        <circle cx="12" cy="12" r="10"></circle>
-        <path d="M12 16v-4"></path>
-        <path d="M12 8h.01"></path>
-      </svg>
-    </div>
-    <div>
-      <h4 className="font-medium text-blue-900 dark:text-blue-400">Looking for more code snippets?</h4>
-      <p className="mt-1 text-sm text-blue-800 dark:text-blue-300">Browse through all categories in the sidebar to discover more utilities, components, and configuration examples.</p>
-    </div>
-  </div>
-</div>
+				<Card className="transition-all hover:shadow-md">
+					<CardHeader>
+						<CardTitle className="flex items-center gap-2 text-base">
+							<FileCode2 className="h-4 w-4 text-primary" />
+							Format Date Utility
+						</CardTitle>
+						<CardDescription className="text-xs">Flexible date formatting utilities with localization support and custom patterns.</CardDescription>
+					</CardHeader>
+					<CardFooter>
+						<a href="/gist/format-date-utility" className={buttonVariants({ variant: "outline", size: "sm" })}>
+							View Snippet
+						</a>
+					</CardFooter>
+				</Card>
+
+				<Card className="transition-all hover:shadow-md">
+					<CardHeader>
+						<CardTitle className="flex items-center gap-2 text-base">
+							<FileCode2 className="h-4 w-4 text-primary" />
+							Text Cleaner
+						</CardTitle>
+						<CardDescription className="text-xs">String cleaning and sanitization utilities for user input and text processing.</CardDescription>
+					</CardHeader>
+					<CardFooter>
+						<a href="/gist/text-cleaner" className={buttonVariants({ variant: "outline", size: "sm" })}>
+							View Snippet
+						</a>
+					</CardFooter>
+				</Card>
+
+				<Card className="transition-all hover:shadow-md">
+					<CardHeader>
+						<CardTitle className="flex items-center gap-2 text-base">
+							<FileCode2 className="h-4 w-4 text-primary" />
+							Site URL Utility
+						</CardTitle>
+						<CardDescription className="text-xs">Environment-aware URL generation for multi-environment web applications.</CardDescription>
+					</CardHeader>
+					<CardFooter>
+						<a href="/gist/site-url-utility" className={buttonVariants({ variant: "outline", size: "sm" })}>
+							View Snippet
+						</a>
+					</CardFooter>
+				</Card>
+
+				<Card className="transition-all hover:shadow-md">
+					<CardHeader>
+						<CardTitle className="flex items-center gap-2 text-base">
+							<Code2 className="h-4 w-4 text-primary" />
+							Regex Text Utility
+						</CardTitle>
+						<CardDescription className="text-xs">Common regular expression patterns for validating emails, URLs, and more.</CardDescription>
+					</CardHeader>
+					<CardFooter>
+						<a href="/gist/regex-text-utility" className={buttonVariants({ variant: "outline", size: "sm" })}>
+							View Snippet
+						</a>
+					</CardFooter>
+				</Card>
+
+				<Card className="transition-all hover:shadow-md">
+					<CardHeader>
+						<CardTitle className="flex items-center gap-2 text-base">
+							<FileCode2 className="h-4 w-4 text-primary" />
+							Convert Time to Milliseconds
+						</CardTitle>
+						<CardDescription className="text-xs">Utility for converting human-readable time strings to milliseconds.</CardDescription>
+					</CardHeader>
+					<CardFooter>
+						<a href="/gist/convert-time-to-milliseconds" className={buttonVariants({ variant: "outline", size: "sm" })}>
+							View Snippet
+						</a>
+					</CardFooter>
+				</Card>
+			</div>
+		</div>
+
+		<Card className="bg-primary/5 border-primary/20">
+			<CardHeader>
+				<CardTitle className="flex items-center gap-2">
+					<InfoIcon className="h-5 w-5 text-primary" />
+					Looking for more code snippets?
+				</CardTitle>
+				<CardDescription>
+					Browse through all categories in the sidebar to discover more utilities, components, and configuration examples.
+				</CardDescription>
+			</CardHeader>
+		</Card>
+	</TabsContent>
+
+	<TabsContent value="api" className="space-y-4">
+		<h2 className="mb-4 text-2xl font-bold tracking-tight">API Routes</h2>
+		<div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+			<Card className="transition-all hover:shadow-md">
+				<CardHeader>
+					<CardTitle className="flex items-center gap-2">
+						<Database className="h-5 w-5 text-primary" />
+						GitHub API Route
+					</CardTitle>
+					<CardDescription>Comprehensive Next.js handler for GitHub API requests with multiple endpoints and pagination support.</CardDescription>
+				</CardHeader>
+				<CardFooter>
+					<a href="/gist/github-api-route" className={buttonVariants({ variant: "outline", size: "sm" })}>
+						View Snippet
+					</a>
+				</CardFooter>
+			</Card>
+
+			<Card className="transition-all hover:shadow-md">
+				<CardHeader>
+					<CardTitle className="flex items-center gap-2">
+						<GitBranch className="h-5 w-5 text-primary" />
+						GitHub Profile API
+					</CardTitle>
+					<CardDescription>TypeScript API route for fetching GitHub user repositories with Octokit integration.</CardDescription>
+				</CardHeader>
+				<CardFooter>
+					<a href="/gist/github-profile-api" className={buttonVariants({ variant: "outline", size: "sm" })}>
+						View Snippet
+					</a>
+				</CardFooter>
+			</Card>
+		</div>
+	</TabsContent>
+
+	<TabsContent value="components" className="space-y-4">
+		<h2 className="mb-4 text-2xl font-bold tracking-tight">Components</h2>
+		<div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+			<Card className="transition-all hover:shadow-md">
+				<CardHeader>
+					<CardTitle className="flex items-center gap-2">
+						<Atom className="h-5 w-5 text-primary" />
+						Theme Switcher
+					</CardTitle>
+					<CardDescription>React component for switching between light and dark themes with local storage persistence.</CardDescription>
+				</CardHeader>
+				<CardFooter>
+					<a href="/gist/theme-switcher-component" className={buttonVariants({ variant: "outline", size: "sm" })}>
+						View Snippet
+					</a>
+				</CardFooter>
+			</Card>
+
+			<Card className="transition-all hover:shadow-md">
+				<CardHeader>
+					<CardTitle className="flex items-center gap-2">
+						<LayoutGrid className="h-5 w-5 text-primary" />
+						Scroll To Top
+					</CardTitle>
+					<CardDescription>Smooth scroll-to-top button component for long-scrolling pages with React Router integration.</CardDescription>
+				</CardHeader>
+				<CardFooter>
+					<a href="/gist/scroll-to-top-component" className={buttonVariants({ variant: "outline", size: "sm" })}>
+						View Snippet
+					</a>
+				</CardFooter>
+			</Card>
+		</div>
+	</TabsContent>
+
+	<TabsContent value="utilities" className="space-y-4">
+		<h2 className="mb-4 text-2xl font-bold tracking-tight">Utilities</h2>
+		<div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+			<Card className="transition-all hover:shadow-md">
+				<CardHeader>
+					<CardTitle className="flex items-center gap-2 text-base">
+						<FileCode2 className="h-4 w-4 text-primary" />
+						Date Utility
+					</CardTitle>
+					<CardDescription className="text-xs">Date manipulation functions for handling date ranges, formatting, and calculations.</CardDescription>
+				</CardHeader>
+				<CardFooter>
+					<a href="/gist/date-utility" className={buttonVariants({ variant: "outline", size: "sm" })}>
+						View Snippet
+					</a>
+				</CardFooter>
+			</Card>
+
+			<Card className="transition-all hover:shadow-md">
+				<CardHeader>
+					<CardTitle className="flex items-center gap-2 text-base">
+						<FileCode2 className="h-4 w-4 text-primary" />
+						Format Date Utility
+					</CardTitle>
+					<CardDescription className="text-xs">Flexible date formatting utilities with localization support and custom patterns.</CardDescription>
+				</CardHeader>
+				<CardFooter>
+					<a href="/gist/format-date-utility" className={buttonVariants({ variant: "outline", size: "sm" })}>
+						View Snippet
+					</a>
+				</CardFooter>
+			</Card>
+
+			<Card className="transition-all hover:shadow-md">
+				<CardHeader>
+					<CardTitle className="flex items-center gap-2 text-base">
+						<FileCode2 className="h-4 w-4 text-primary" />
+						Text Cleaner
+					</CardTitle>
+					<CardDescription className="text-xs">String cleaning and sanitization utilities for user input and text processing.</CardDescription>
+				</CardHeader>
+				<CardFooter>
+					<a href="/gist/text-cleaner" className={buttonVariants({ variant: "outline", size: "sm" })}>
+						View Snippet
+					</a>
+				</CardFooter>
+			</Card>
+
+			<Card className="transition-all hover:shadow-md">
+				<CardHeader>
+					<CardTitle className="flex items-center gap-2 text-base">
+						<FileCode2 className="h-4 w-4 text-primary" />
+						Site URL Utility
+					</CardTitle>
+					<CardDescription className="text-xs">Environment-aware URL generation for multi-environment web applications.</CardDescription>
+				</CardHeader>
+				<CardFooter>
+					<a href="/gist/site-url-utility" className={buttonVariants({ variant: "outline", size: "sm" })}>
+						View Snippet
+					</a>
+				</CardFooter>
+			</Card>
+
+			<Card className="transition-all hover:shadow-md">
+				<CardHeader>
+					<CardTitle className="flex items-center gap-2 text-base">
+						<Code2 className="h-4 w-4 text-primary" />
+						Regex Text Utility
+					</CardTitle>
+					<CardDescription className="text-xs">Common regular expression patterns for validating emails, URLs, and more.</CardDescription>
+				</CardHeader>
+				<CardFooter>
+					<a href="/gist/regex-text-utility" className={buttonVariants({ variant: "outline", size: "sm" })}>
+						View Snippet
+					</a>
+				</CardFooter>
+			</Card>
+
+			<Card className="transition-all hover:shadow-md">
+				<CardHeader>
+					<CardTitle className="flex items-center gap-2 text-base">
+						<FileCode2 className="h-4 w-4 text-primary" />
+						Convert Time to Milliseconds
+					</CardTitle>
+					<CardDescription className="text-xs">Utility for converting human-readable time strings to milliseconds.</CardDescription>
+				</CardHeader>
+				<CardFooter>
+					<a href="/gist/convert-time-to-milliseconds" className={buttonVariants({ variant: "outline", size: "sm" })}>
+						View Snippet
+					</a>
+				</CardFooter>
+			</Card>
+		</div>
+	</TabsContent>
+</Tabs>
 
 ## Getting Started
 
@@ -82,37 +370,40 @@ Each snippet page includes:
 - **Parameters and options** - Documentation of available options and configurations
 - **Usage instructions** - Step-by-step guidance on how to integrate the snippet
 
-<div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
-  <div className="flex flex-col items-center rounded-lg border border-gray-200 bg-white p-6 text-center shadow-sm dark:border-gray-800 dark:bg-gray-950">
-    <div className="mb-3 rounded-full bg-gray-100 p-3 dark:bg-gray-800">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6 text-gray-600 dark:text-gray-300">
-        <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
-        <polyline points="14 2 14 8 20 8" />
-      </svg>
-    </div>
-    <h3 className="mb-1 text-base font-medium text-gray-900 dark:text-white">Copy & Paste</h3>
-    <p className="text-sm text-gray-600 dark:text-gray-400">All snippets are ready to use directly in your projects.</p>
-  </div>
-  <div className="flex flex-col items-center rounded-lg border border-gray-200 bg-white p-6 text-center shadow-sm dark:border-gray-800 dark:bg-gray-950">
-    <div className="mb-3 rounded-full bg-gray-100 p-3 dark:bg-gray-800">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6 text-gray-600 dark:text-gray-300">
-        <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
-        <path d="M3 9h18" />
-        <path d="M3 15h18" />
-        <path d="M9 3v18" />
-        <path d="M15 3v18" />
-      </svg>
-    </div>
-    <h3 className="mb-1 text-base font-medium text-gray-900 dark:text-white">TypeScript Support</h3>
-    <p className="text-sm text-gray-600 dark:text-gray-400">Full type safety with TypeScript interfaces and definitions.</p>
-  </div>
-  <div className="flex flex-col items-center rounded-lg border border-gray-200 bg-white p-6 text-center shadow-sm dark:border-gray-800 dark:bg-gray-950">
-    <div className="mb-3 rounded-full bg-gray-100 p-3 dark:bg-gray-800">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6 text-gray-600 dark:text-gray-300">
-        <path d="m15 5-5 5 5 5" />
-      </svg>
-    </div>
-    <h3 className="mb-1 text-base font-medium text-gray-900 dark:text-white">Modern Practices</h3>
-    <p className="text-sm text-gray-600 dark:text-gray-400">Updated code examples following best practices.</p>
-  </div>
+<div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
+	<Card className="text-center">
+		<CardHeader className="flex flex-col items-center pb-2">
+			<div className="mb-2 rounded-full bg-primary/10 p-3">
+				<CopyIcon className="h-6 w-6 text-primary" />
+			</div>
+			<CardTitle className="text-base">Copy & Paste</CardTitle>
+		</CardHeader>
+		<CardContent>
+			<div className="text-sm text-muted-foreground">All snippets are ready to use directly in your projects.</div>
+		</CardContent>
+	</Card>
+
+	<Card className="text-center">
+		<CardHeader className="flex flex-col items-center pb-2">
+			<div className="mb-2 rounded-full bg-primary/10 p-3">
+				<TypeIcon className="h-6 w-6 text-primary" />
+			</div>
+			<CardTitle className="text-base">TypeScript Support</CardTitle>
+		</CardHeader>
+		<CardContent>
+			<div className="text-sm text-muted-foreground">Full type safety with TypeScript interfaces and definitions.</div>
+		</CardContent>
+	</Card>
+
+	<Card className="text-center">
+		<CardHeader className="flex flex-col items-center pb-2">
+			<div className="mb-2 rounded-full bg-primary/10 p-3">
+				<LibraryIcon className="h-6 w-6 text-primary" />
+			</div>
+			<CardTitle className="text-base">Framework Agnostic</CardTitle>
+		</CardHeader>
+		<CardContent>
+			<div className="text-sm text-muted-foreground">Compatible with React, Next.js, and other modern frameworks.</div>
+		</CardContent>
+	</Card>
 </div>

@@ -175,36 +175,20 @@ export default function GistLayout({ children }: { children: ReactNode }) {
 	return (
 		<SidebarProvider defaultOpen={true}>
 			<div className='flex min-h-screen w-full flex-col'>
-				<header className='bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 flex h-16 items-center gap-4 border-b px-4 backdrop-blur sm:px-6'>
-					<div className='flex items-center gap-2 md:hidden'>
-						<SidebarTrigger />
-					</div>
-					<Link
-						href='/gist'
-						className='flex items-center gap-2 font-semibold'
-					>
-						<CodeIcon className='h-5 w-5' />
-						<span>Code Snippets</span>
-					</Link>
-					<div className='ml-auto flex items-center gap-2'>
-						<ThemeToggle />
-					</div>
-				</header>
-
-				<div className='flex-1 items-start md:grid md:grid-cols-[220px_minmax(0,1fr)] lg:grid-cols-[240px_minmax(0,1fr)]'>
-					<aside className='fixed top-16 z-30 -ml-2 hidden h-[calc(100vh-4rem)] w-full shrink-0 overflow-y-auto border-r md:sticky md:block'>
-						<Sidebar className='p-2'>
-							<SidebarHeader>
-								<div className='px-2 py-2'>
-									<Link
-										href='/gist'
-										className='flex items-center gap-2 text-sm font-medium'
-									>
-										<HomeIcon className='h-4 w-4' />
-										<span>Overview</span>
-									</Link>
-								</div>
-								<div className='px-2 py-2'>
+				<div className='container mx-auto flex flex-1'>
+					<aside className='fixed top-16 z-30 hidden h-[calc(100vh-4rem)] w-[220px] shrink-0 border-r md:sticky md:block lg:w-[240px]'>
+						<div className='h-full overflow-hidden'>
+							<Sidebar className='h-full'>
+								<SidebarHeader className='px-2 py-4'>
+									<div className='mb-2'>
+										<Link
+											href='/gist'
+											className='flex items-center gap-2 text-sm font-medium'
+										>
+											<HomeIcon className='h-4 w-4' />
+											<span>Overview</span>
+										</Link>
+									</div>
 									<div className='relative'>
 										<SearchIcon className='text-muted-foreground absolute top-2.5 left-2.5 h-4 w-4' />
 										<Input
@@ -213,59 +197,62 @@ export default function GistLayout({ children }: { children: ReactNode }) {
 											className='bg-background w-full pl-8 text-sm'
 										/>
 									</div>
-								</div>
-							</SidebarHeader>
+								</SidebarHeader>
 
-							<SidebarContent>
-								<ScrollArea className='h-[calc(100vh-10rem)]'>
-									{Object.entries(sidebarCategories).map(
-										([category, links]) => (
-											<SidebarGroup key={category}>
-												<SidebarGroupLabel>{category}</SidebarGroupLabel>
-												<SidebarSeparator />
-												<SidebarGroupContent>
-													<SidebarMenu>
-														{links.map((link) => (
-															<SidebarMenuItem key={link.href}>
-																<SidebarMenuButton
-																	asChild
-																	data-active={pathname === link.href}
-																>
-																	<Link href={link.href}>
-																		<FolderIcon className='mr-2 h-4 w-4 shrink-0' />
-																		<span>{link.title}</span>
-																	</Link>
-																</SidebarMenuButton>
-															</SidebarMenuItem>
-														))}
-													</SidebarMenu>
-												</SidebarGroupContent>
-											</SidebarGroup>
-										)
-									)}
-								</ScrollArea>
-							</SidebarContent>
+								<SidebarContent className='px-2'>
+									<ScrollArea className='h-[calc(100vh-11rem)]'>
+										<div className='space-y-4'>
+											{Object.entries(sidebarCategories).map(
+												([category, links]) => (
+													<SidebarGroup key={category}>
+														<SidebarGroupLabel className='px-2'>
+															{category}
+														</SidebarGroupLabel>
+														<SidebarSeparator className='my-2' />
+														<SidebarGroupContent>
+															<SidebarMenu>
+																{links.map((link) => (
+																	<SidebarMenuItem key={link.href}>
+																		<SidebarMenuButton
+																			asChild
+																			data-active={pathname === link.href}
+																		>
+																			<Link
+																				href={link.href}
+																				className='w-full'
+																			>
+																				<FolderIcon className='mr-2 h-4 w-4 shrink-0' />
+																				<span className='truncate'>
+																					{link.title}
+																				</span>
+																			</Link>
+																		</SidebarMenuButton>
+																	</SidebarMenuItem>
+																))}
+															</SidebarMenu>
+														</SidebarGroupContent>
+													</SidebarGroup>
+												)
+											)}
+										</div>
+									</ScrollArea>
+								</SidebarContent>
 
-							<SidebarFooter>
-								<div className='px-3 py-2'>
+								<SidebarFooter className='border-t p-4'>
 									<p className='text-muted-foreground text-xs'>
 										Last updated: April 2, 2025
 									</p>
-								</div>
-							</SidebarFooter>
-						</Sidebar>
+								</SidebarFooter>
+							</Sidebar>
+						</div>
 					</aside>
 
-					<main className='flex-1'>
-						<div className='relative flex min-h-screen flex-col'>
-							<div className='flex-1 space-y-4 p-6 lg:p-8'>
-								<PageBreadcrumb path={pathname} />
-								<div className='mx-auto max-w-4xl'>
-									<article className='prose prose-gray dark:prose-invert max-w-none break-words'>
-										{children}
-									</article>
-								</div>
-							</div>
+					<main className='min-w-0 flex-1'>
+						<div className='container mx-auto max-w-4xl px-4 py-6 md:px-8'>
+							<PageBreadcrumb path={pathname} />
+							<article className='prose prose-invert break-words'>
+								{children}
+							</article>
 						</div>
 					</main>
 				</div>

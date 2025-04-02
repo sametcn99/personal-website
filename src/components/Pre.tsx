@@ -1,10 +1,20 @@
 'use client'
 
-import { Children, ReactNode, isValidElement, cloneElement } from 'react'
+import { Children, ReactNode, isValidElement, cloneElement, ReactElement } from 'react'
 import CopyButton from './CopyButton'
 
 interface PreProps {
   children: ReactNode
+}
+
+interface CodeProps {
+  children: ReactNode
+}
+
+// Define a more generic element props interface
+interface ElementProps {
+  children?: ReactNode
+  [key: string]: any
 }
 
 export default function Pre({ children, ...props }: PreProps) {
@@ -14,7 +24,10 @@ export default function Pre({ children, ...props }: PreProps) {
   // Find the code element and extract its content
   Children.forEach(children, (child) => {
     if (isValidElement(child) && child.type === 'code') {
-      code = child.props.children
+      // Cast to ReactElement with CodeProps to avoid TypeScript errors
+      const codeElement = child as ReactElement<CodeProps>
+      code = codeElement.props.children as string
+      
       if (typeof code !== 'string') {
         // If code is not a string (e.g., it contains elements like spans for syntax highlighting)
         // Try to extract the text content from it
@@ -25,11 +38,13 @@ export default function Pre({ children, ...props }: PreProps) {
           } else if (Array.isArray(node)) {
             node.forEach(extractText)
           } else if (isValidElement(node)) {
-            extractText(node.props.children)
+            // Cast to ReactElement with ElementProps to avoid TypeScript errors
+            const element = node as ReactElement<ElementProps>
+            extractText(element.props.children)
           }
         }
         
-        extractText(child.props.children)
+        extractText(codeElement.props.children)
       }
     }
   })

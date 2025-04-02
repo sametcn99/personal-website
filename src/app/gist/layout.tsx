@@ -176,7 +176,7 @@ export default function GistLayout({ children }: { children: ReactNode }) {
 		<SidebarProvider defaultOpen={true}>
 			<div className='flex min-h-screen w-full flex-col'>
 				<div className='container mx-auto flex flex-1'>
-					<aside className='fixed top-16 z-30 hidden h-[calc(100vh-4rem)] w-[220px] shrink-0 border-r md:sticky md:block lg:w-[240px]'>
+					<aside className='fixed top-16 z-30 hidden h-[calc(100vh-4rem)] w-[220px] shrink-0 md:sticky md:block lg:w-[240px]'>
 						<div className='h-full overflow-hidden'>
 							<Sidebar className='h-full'>
 								<SidebarHeader className='px-2 py-4'>

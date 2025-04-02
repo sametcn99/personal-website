@@ -9,7 +9,7 @@ export default function DownloadButton() {
 	return (
 		<button
 			onClick={handleDownload}
-			className='fixed bottom-4 right-4 inline-flex gap-2 rounded-xl border border-white/30 p-3 text-white backdrop-blur-sm transition-all duration-700 hover:bg-black/10 dark:hover:bg-white/10 print:hidden hover:cursor-pointer'
+			className='fixed right-4 bottom-4 inline-flex gap-2 rounded-xl border border-white/30 p-3 text-white backdrop-blur-sm transition-all duration-700 hover:cursor-pointer hover:bg-black/10 dark:hover:bg-white/10 print:hidden'
 		>
 			<FaRegFilePdf
 				className='inline'

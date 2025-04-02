@@ -44,7 +44,7 @@ export default function Buttons() {
 					(socialMedia, index) =>
 						socialMedia.visible && (
 							<motion.a
-								className='m-1 inline-flex select-none items-center gap-1 rounded-xl p-2 transition-all duration-700 hover:bg-black/30 dark:hover:bg-white/30'
+								className='m-1 inline-flex items-center gap-1 rounded-xl p-2 transition-all duration-700 select-none hover:bg-black/30 dark:hover:bg-white/30'
 								key={index}
 								href={`/${socialMedia.type[0]}`}
 								target='_blank'

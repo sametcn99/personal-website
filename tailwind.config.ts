@@ -16,10 +16,10 @@ const config: Config = {
 			},
 			width: {
 				a4: '210mm',
-			 },
-			 height: {
-			   a4: '297mm',
-			 },
+			},
+			height: {
+				a4: '297mm',
+			},
 		},
 	},
 	plugins: [typographyPlugin()],

@@ -133,7 +133,7 @@ export default function RootLayout({
 										<SidebarHeader className='px-2 py-4'>
 											<div className='mb-2'>
 												<Link
-													href='/gist'
+													href='/'
 													className='flex items-center gap-2 text-sm font-medium'
 												>
 													<HomeIcon className='h-4 w-4' />

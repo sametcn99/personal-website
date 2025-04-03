@@ -1,7 +1,8 @@
+import { Mermaid } from '@/components/ui/mermaid'
 import type { MDXComponents } from 'mdx/types'
 import Pre from '@/components/Pre'
-import Link from 'next/link'
 import { cn } from '@/lib/utils'
+import Link from 'next/link'
 
 function generateId(text: string): string {
 	return text
@@ -99,26 +100,39 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
 		},
 		pre: (props) => <Pre {...props} />,
 		code: ({ children, className, ...props }) => {
-			const isMultiline = children?.toString().includes('\n');
-			
-			// Eğer kod zaten bir kod bloğu içindeyse (rehype-pretty-code tarafından işlenmiş)
-			// veya birden fazla satırsa, basit bir <code> etiketi kullanılır
+			// Check if this is a Mermaid diagram
+			if (className === 'language-mermaid') {
+				return (
+					<Mermaid
+						code={children?.toString() ?? ''}
+						className='my-6'
+						{...props}
+					/>
+				)
+			}
+
+			const isMultiline = children?.toString().includes('\n')
+
+			// If code is already in a code block or multiline, use simple code tag
 			if (className?.includes('language-') || isMultiline) {
 				return (
-					<code className={cn(className)} {...props}>
+					<code
+						className={cn(className)}
+						{...props}
+					>
 						{children}
 					</code>
-				);
+				)
 			}
-			
-			// Inline kod için gelişmiş görünüm
+
+			// Inline code styling
 			return (
 				<code
 					className={cn(
 						'relative my-0.5 inline-flex items-center justify-center rounded px-[0.4em] py-[0.2em]',
 						'font-mono text-sm font-medium',
-						'bg-gray-800 text-gray-200',
-						'border border-gray-700',
+						'bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-gray-200',
+						'border border-gray-200 dark:border-gray-700',
 						'shadow-sm transition-colors duration-100',
 						className
 					)}
@@ -126,7 +140,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
 				>
 					{children}
 				</code>
-			);
+			)
 		},
 		table: ({ children, ...props }) => (
 			<div className='my-6 w-full overflow-y-auto'>

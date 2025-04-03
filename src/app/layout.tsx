@@ -109,7 +109,10 @@ export default function RootLayout({
 	}
 
 	return (
-		<html lang='en'>
+		<html
+			lang='en'
+			data-theme='dark'
+		>
 			<body
 				className={cn(
 					inter.className,

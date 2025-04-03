@@ -3,6 +3,7 @@ import { type ReactNode, useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/utils/cn'
+import { useIsMobile } from '@/hooks/use-mobile'
 import {
 	Sidebar,
 	SidebarContent,
@@ -28,6 +29,7 @@ import {
 	SearchIcon,
 	FolderIcon,
 	MenuIcon,
+	CommandIcon,
 } from 'lucide-react'
 import {
 	Breadcrumb,
@@ -37,8 +39,16 @@ import {
 	BreadcrumbPage,
 	BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb'
-import { Input } from '@/components/ui/input'
-import { useIsMobile } from '@/hooks/use-mobile'
+import {
+	Command,
+	CommandDialog,
+	CommandEmpty,
+	CommandGroup,
+	CommandInput,
+	CommandItem,
+	CommandList,
+	CommandSeparator,
+} from '@/components/ui/command'
 
 // Group links by category
 const sidebarCategories = {
@@ -175,7 +185,22 @@ export default function GistLayout({ children }: { children: ReactNode }) {
 	const pathname = usePathname()
 	const isMobile = useIsMobile()
 	const [searchQuery, setSearchQuery] = useState('')
-	const [filteredCategories, setFilteredCategories] = useState<typeof sidebarCategories>(sidebarCategories)
+	const [filteredCategories, setFilteredCategories] =
+		useState<typeof sidebarCategories>(sidebarCategories)
+	const [open, setOpen] = useState(false)
+
+	// Use effect to handle keyboard shortcut
+	useEffect(() => {
+		const down = (e: KeyboardEvent) => {
+			if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
+				e.preventDefault()
+				setOpen((open) => !open)
+			}
+		}
+
+		document.addEventListener('keydown', down)
+		return () => document.removeEventListener('keydown', down)
+	}, [])
 
 	useEffect(() => {
 		if (!searchQuery.trim()) {
@@ -224,22 +249,25 @@ export default function GistLayout({ children }: { children: ReactNode }) {
 										</Link>
 									</div>
 									<div className='relative'>
-										<SearchIcon className='text-muted-foreground absolute top-2.5 left-2.5 h-4 w-4' />
-										<Input
-											type='search'
-											placeholder='Search snippets...'
-											className='bg-background w-full pl-8 text-sm'
-											value={searchQuery}
-											onChange={(e) => setSearchQuery(e.target.value)}
-										/>
+										<Button
+											variant='outline'
+											className='text-muted-foreground relative w-full justify-start text-sm'
+											onClick={() => setOpen(true)}
+										>
+											<SearchIcon className='mr-2 h-4 w-4' />
+											Search snippets...
+											<kbd className='bg-muted pointer-events-none absolute top-1.5 right-1.5 hidden h-5 items-center gap-1 rounded border px-1.5 font-mono text-[10px] font-medium opacity-100 select-none sm:flex'>
+												<span className='text-xs'>⌘</span>K
+											</kbd>
+										</Button>
 									</div>
 								</SidebarHeader>
 
 								<SidebarContent className='px-2'>
 									<ScrollArea className='h-[calc(100vh-11rem)]'>
 										<div className='space-y-4'>
-											{Object.entries(filteredCategories).length > 0 ? (
-												Object.entries(filteredCategories).map(
+											{Object.entries(sidebarCategories).length > 0 ? (
+												Object.entries(sidebarCategories).map(
 													([category, links]) => (
 														<SidebarGroup key={category}>
 															<SidebarGroupLabel className='px-2'>
@@ -262,7 +290,7 @@ export default function GistLayout({ children }: { children: ReactNode }) {
 																					<span className='truncate'>
 																						{link.title}
 																					</span>
-																					</Link>
+																				</Link>
 																			</SidebarMenuButton>
 																		</SidebarMenuItem>
 																	))}
@@ -310,6 +338,40 @@ export default function GistLayout({ children }: { children: ReactNode }) {
 						</div>
 					</main>
 				</div>
+
+				<CommandDialog
+					open={open}
+					onOpenChange={setOpen}
+				>
+					<CommandInput
+						placeholder='Type to search for snippets...'
+						value={searchQuery}
+						onValueChange={setSearchQuery}
+					/>
+					<CommandList>
+						<CommandEmpty>No results found.</CommandEmpty>
+						{Object.entries(filteredCategories).map(([category, links]) => (
+							<CommandGroup
+								key={category}
+								heading={category}
+							>
+								{links.map((link) => (
+									<CommandItem
+										key={link.href}
+										value={link.title}
+										onSelect={() => {
+											window.location.href = link.href
+											setOpen(false)
+										}}
+									>
+										<FolderIcon className='mr-2 h-4 w-4' />
+										{link.title}
+									</CommandItem>
+								))}
+							</CommandGroup>
+						))}
+					</CommandList>
+				</CommandDialog>
 			</div>
 		</SidebarProvider>
 	)

@@ -177,7 +177,12 @@ export default function RootLayout({
 
 										<SidebarFooter className='border-t p-4'>
 											<p className='text-muted-foreground text-xs'>
-												Last updated: April 2, 2025
+												Last updated:{' '}
+												{new Date().toLocaleDateString('en-US', {
+													year: 'numeric',
+													month: 'long',
+													day: 'numeric',
+												})}
 											</p>
 										</SidebarFooter>
 									</Sidebar>

@@ -1,5 +1,5 @@
 'use client'
-import { type ReactNode } from 'react'
+import { type ReactNode, useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/utils/cn'
@@ -27,6 +27,7 @@ import {
 	HomeIcon,
 	SearchIcon,
 	FolderIcon,
+	MenuIcon,
 } from 'lucide-react'
 import {
 	Breadcrumb,
@@ -37,6 +38,7 @@ import {
 	BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb'
 import { Input } from '@/components/ui/input'
+import { useIsMobile } from '@/hooks/use-mobile'
 
 // Group links by category
 const sidebarCategories = {
@@ -171,12 +173,44 @@ function PageBreadcrumb({ path }: { path: string }) {
 
 export default function GistLayout({ children }: { children: ReactNode }) {
 	const pathname = usePathname()
+	const isMobile = useIsMobile()
+	const [searchQuery, setSearchQuery] = useState('')
+	const [filteredCategories, setFilteredCategories] = useState<typeof sidebarCategories>(sidebarCategories)
+
+	useEffect(() => {
+		if (!searchQuery.trim()) {
+			setFilteredCategories(sidebarCategories)
+			return
+		}
+
+		const lowercaseQuery = searchQuery.toLowerCase()
+		const filtered = { ...sidebarCategories }
+
+		Object.keys(filtered).forEach((category) => {
+			const key = category as keyof typeof sidebarCategories
+			filtered[key] = sidebarCategories[key].filter((link) =>
+				link.title.toLowerCase().includes(lowercaseQuery)
+			)
+		})
+
+		// Only keep categories that have matching items
+		const result = Object.fromEntries(
+			Object.entries(filtered).filter(([_, links]) => links.length > 0)
+		) as typeof sidebarCategories
+
+		setFilteredCategories(result)
+	}, [searchQuery])
 
 	return (
-		<SidebarProvider defaultOpen={true}>
+		<SidebarProvider defaultOpen={!isMobile}>
 			<div className='flex min-h-screen w-full flex-col'>
 				<div className='container mx-auto flex flex-1'>
-					<aside className='fixed top-16 z-30 hidden h-[calc(100vh-4rem)] w-[220px] shrink-0 md:sticky md:block lg:w-[240px]'>
+					<aside
+						className={cn(
+							'fixed top-16 z-30 h-[calc(100vh-4rem)] w-[220px] shrink-0 md:sticky md:block lg:w-[240px]',
+							isMobile ? 'hidden' : ''
+						)}
+					>
 						<div className='h-full overflow-hidden'>
 							<Sidebar className='h-full'>
 								<SidebarHeader className='px-2 py-4'>
@@ -195,6 +229,8 @@ export default function GistLayout({ children }: { children: ReactNode }) {
 											type='search'
 											placeholder='Search snippets...'
 											className='bg-background w-full pl-8 text-sm'
+											value={searchQuery}
+											onChange={(e) => setSearchQuery(e.target.value)}
 										/>
 									</div>
 								</SidebarHeader>
@@ -202,37 +238,43 @@ export default function GistLayout({ children }: { children: ReactNode }) {
 								<SidebarContent className='px-2'>
 									<ScrollArea className='h-[calc(100vh-11rem)]'>
 										<div className='space-y-4'>
-											{Object.entries(sidebarCategories).map(
-												([category, links]) => (
-													<SidebarGroup key={category}>
-														<SidebarGroupLabel className='px-2'>
-															{category}
-														</SidebarGroupLabel>
-														<SidebarSeparator className='my-2' />
-														<SidebarGroupContent>
-															<SidebarMenu>
-																{links.map((link) => (
-																	<SidebarMenuItem key={link.href}>
-																		<SidebarMenuButton
-																			asChild
-																			data-active={pathname === link.href}
-																		>
-																			<Link
-																				href={link.href}
-																				className='w-full'
+											{Object.entries(filteredCategories).length > 0 ? (
+												Object.entries(filteredCategories).map(
+													([category, links]) => (
+														<SidebarGroup key={category}>
+															<SidebarGroupLabel className='px-2'>
+																{category}
+															</SidebarGroupLabel>
+															<SidebarSeparator className='my-2' />
+															<SidebarGroupContent>
+																<SidebarMenu>
+																	{links.map((link) => (
+																		<SidebarMenuItem key={link.href}>
+																			<SidebarMenuButton
+																				asChild
+																				data-active={pathname === link.href}
 																			>
-																				<FolderIcon className='mr-2 h-4 w-4 shrink-0' />
-																				<span className='truncate'>
-																					{link.title}
-																				</span>
-																			</Link>
-																		</SidebarMenuButton>
-																	</SidebarMenuItem>
-																))}
-															</SidebarMenu>
-														</SidebarGroupContent>
-													</SidebarGroup>
+																				<Link
+																					href={link.href}
+																					className='w-full'
+																				>
+																					<FolderIcon className='mr-2 h-4 w-4 shrink-0' />
+																					<span className='truncate'>
+																						{link.title}
+																					</span>
+																					</Link>
+																			</SidebarMenuButton>
+																		</SidebarMenuItem>
+																	))}
+																</SidebarMenu>
+															</SidebarGroupContent>
+														</SidebarGroup>
+													)
 												)
+											) : (
+												<div className='text-muted-foreground py-4 text-center'>
+													No results found for "{searchQuery}"
+												</div>
 											)}
 										</div>
 									</ScrollArea>
@@ -249,6 +291,18 @@ export default function GistLayout({ children }: { children: ReactNode }) {
 
 					<main className='min-w-0 flex-1'>
 						<div className='container mx-auto max-w-4xl px-4 py-6 md:px-8'>
+							{isMobile && (
+								<div className='mb-6'>
+									<SidebarTrigger asChild>
+										<Button
+											variant='outline'
+											size='icon'
+										>
+											<MenuIcon className='h-4 w-4' />
+										</Button>
+									</SidebarTrigger>
+								</div>
+							)}
 							<PageBreadcrumb path={pathname} />
 							<article className='prose prose-invert break-words'>
 								{children}

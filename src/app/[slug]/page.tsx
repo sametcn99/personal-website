@@ -1,6 +1,6 @@
+import { notFound, permanentRedirect } from 'next/navigation'
 import { socialMediaLinks } from '@/lib/social'
 import { getRepo } from '@/utils/utils'
-import { notFound, permanentRedirect } from 'next/navigation'
 import { Metadata } from 'next'
 
 type Props = {

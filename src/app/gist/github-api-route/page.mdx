@@ -58,10 +58,10 @@ Handles various GitHub API requests based on the specified `option` parameter.
 ## GitHub API Route Handler
 
 ```typescript
-import { GitHubRepo } from '@/types/types'
-import type { NextRequest } from 'next/server'
-import { NextResponse } from 'next/server'
 import createOctokitInstance from './createOctokitInstance'
+import type { NextRequest } from 'next/server'
+import { GitHubRepo } from '@/types/types'
+import { NextResponse } from 'next/server'
 
 /**
  * Handles GitHub API requests and responses.

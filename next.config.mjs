@@ -1,6 +1,6 @@
-import createMDX from '@next/mdx'
-import remarkGfm from 'remark-gfm'
 import rehypePrettyCode from 'rehype-pretty-code'
+import remarkGfm from 'remark-gfm'
+import createMDX from '@next/mdx'
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {

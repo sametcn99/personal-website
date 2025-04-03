@@ -1,12 +1,4 @@
 'use client'
-import { Analytics } from '@vercel/analytics/react'
-import { Inter, Fira_Code } from 'next/font/google'
-import './globals.css'
-import { type ReactNode, useState, useEffect } from 'react'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import { cn } from '@/utils/cn'
-import { useIsMobile } from '@/hooks/use-mobile'
 import {
 	Sidebar,
 	SidebarContent,
@@ -22,41 +14,29 @@ import {
 	SidebarSeparator,
 	SidebarProvider,
 } from '@/components/ui/sidebar'
-import { Button } from '@/components/ui/button'
-import { ScrollArea } from '@/components/ui/scroll-area'
 import {
-	MoonIcon,
-	SunIcon,
-	CodeIcon,
-	HomeIcon,
-	SearchIcon,
-	FolderIcon,
-	MenuIcon,
-	CommandIcon,
-} from 'lucide-react'
-import {
-	Breadcrumb,
-	BreadcrumbItem,
-	BreadcrumbLink,
-	BreadcrumbList,
-	BreadcrumbPage,
-	BreadcrumbSeparator,
-} from '@/components/ui/breadcrumb'
-import {
-	Command,
 	CommandDialog,
 	CommandEmpty,
 	CommandGroup,
 	CommandInput,
 	CommandItem,
 	CommandList,
-	CommandSeparator,
 } from '@/components/ui/command'
-import { sidebarCategories } from '@/lib/sidebar'
+import { HomeIcon, SearchIcon, FolderIcon, MenuIcon } from 'lucide-react'
+import { ScrollArea } from '@/components/ui/scroll-area'
 import PageBreadcrumb from '@/components/PageBreadCrumb'
+import { Analytics } from '@vercel/analytics/react'
+import { Inter, Fira_Code } from 'next/font/google'
+import { sidebarCategories } from '@/lib/sidebar'
+import { useIsMobile } from '@/hooks/use-mobile'
+import { Button } from '@/components/ui/button'
+import { usePathname } from 'next/navigation'
+import { useState, useEffect } from 'react'
+import { cn } from '@/utils/cn'
+import Link from 'next/link'
+import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
-const firaCode = Fira_Code({ subsets: ['latin'] })
 
 export default function RootLayout({
 	children,
@@ -188,7 +168,7 @@ export default function RootLayout({
 														)
 													) : (
 														<div className='text-muted-foreground py-4 text-center'>
-															No results found for "{searchQuery}"
+															No results found for &quot;{searchQuery}&quot;
 														</div>
 													)}
 												</div>

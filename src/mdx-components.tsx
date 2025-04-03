@@ -1,6 +1,7 @@
 import type { MDXComponents } from 'mdx/types'
 import Pre from '@/components/Pre'
 import Link from 'next/link'
+import { cn } from '@/lib/utils'
 
 function generateId(text: string): string {
 	return text
@@ -66,7 +67,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
 		li: ({ children, ...props }) => <li {...props}>{children}</li>,
 		blockquote: ({ children, ...props }) => (
 			<blockquote
-				className='border-l-4 border-gray-300 pl-4 dark:border-gray-700'
+				className='border-l-4  pl-4 border-gray-700'
 				{...props}
 			>
 				{children}
@@ -77,7 +78,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
 				return (
 					<Link
 						href={href}
-						className='font-medium text-blue-600 underline underline-offset-4 dark:text-blue-400'
+						className='font-medium  underline underline-offset-4 dark:text-blue-400'
 						{...props}
 					>
 						{children}
@@ -87,7 +88,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
 			return (
 				<a
 					href={href}
-					className='font-medium text-blue-600 underline underline-offset-4 dark:text-blue-400'
+					className='font-medium  underline underline-offset-4 :text-blue-400'
 					target='_blank'
 					rel='noopener noreferrer'
 					{...props}
@@ -97,14 +98,36 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
 			)
 		},
 		pre: (props) => <Pre {...props} />,
-		code: ({ children, ...props }) => (
-			<code
-				className='relative rounded bg-gray-800 px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold text-gray-100'
-				{...props}
-			>
-				{children}
-			</code>
-		),
+		code: ({ children, className, ...props }) => {
+			const isMultiline = children?.toString().includes('\n');
+			
+			// Eğer kod zaten bir kod bloğu içindeyse (rehype-pretty-code tarafından işlenmiş)
+			// veya birden fazla satırsa, basit bir <code> etiketi kullanılır
+			if (className?.includes('language-') || isMultiline) {
+				return (
+					<code className={cn(className)} {...props}>
+						{children}
+					</code>
+				);
+			}
+			
+			// Inline kod için gelişmiş görünüm
+			return (
+				<code
+					className={cn(
+						'relative my-0.5 inline-flex items-center justify-center rounded px-[0.4em] py-[0.2em]',
+						'font-mono text-sm font-medium',
+						'bg-gray-800 text-gray-200',
+						'border border-gray-700',
+						'shadow-sm transition-colors duration-100',
+						className
+					)}
+					{...props}
+				>
+					{children}
+				</code>
+			);
+		},
 		table: ({ children, ...props }) => (
 			<div className='my-6 w-full overflow-y-auto'>
 				<table
@@ -117,7 +140,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
 		),
 		th: ({ children, ...props }) => (
 			<th
-				className='border border-gray-200 px-4 py-2 text-left font-bold dark:border-gray-800'
+				className='border  px-4 py-2 text-left font-bold border-gray-800'
 				{...props}
 			>
 				{children}
@@ -125,7 +148,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
 		),
 		td: ({ children, ...props }) => (
 			<td
-				className='border border-gray-200 px-4 py-2 text-left dark:border-gray-800'
+				className='border  px-4 py-2 text-left border-gray-800'
 				{...props}
 			>
 				{children}
@@ -133,7 +156,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
 		),
 		hr: (props) => (
 			<hr
-				className='my-6 border-gray-200 dark:border-gray-800'
+				className='my-6 border-gray-800'
 				{...props}
 			/>
 		),

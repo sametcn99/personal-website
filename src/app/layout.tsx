@@ -22,7 +22,18 @@ import {
 	CommandItem,
 	CommandList,
 } from '@/components/ui/command'
-import { HomeIcon, SearchIcon, FolderIcon, MenuIcon } from 'lucide-react'
+import {
+	Collapsible,
+	CollapsibleTrigger,
+	CollapsibleContent,
+} from '@/components/ui/collapsible'
+import {
+	HomeIcon,
+	SearchIcon,
+	FolderIcon,
+	MenuIcon,
+	ChevronDownIcon,
+} from 'lucide-react'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import PageBreadcrumb from '@/components/PageBreadCrumb'
 import { Analytics } from '@vercel/analytics/react'
@@ -49,6 +60,9 @@ export default function RootLayout({
 	const [filteredCategories, setFilteredCategories] =
 		useState<typeof sidebarCategories>(sidebarCategories)
 	const [open, setOpen] = useState(false)
+	const [collapsedCategories, setCollapsedCategories] = useState<
+		Record<string, boolean>
+	>({})
 
 	// Use effect to handle keyboard shortcut
 	useEffect(() => {
@@ -86,6 +100,14 @@ export default function RootLayout({
 
 		setFilteredCategories(result)
 	}, [searchQuery])
+
+	const toggleCategory = (category: string) => {
+		setCollapsedCategories((prev) => ({
+			...prev,
+			[category]: !prev[category],
+		}))
+	}
+
 	return (
 		<html lang='en'>
 			<body
@@ -133,37 +155,59 @@ export default function RootLayout({
 										<SidebarContent className='px-2'>
 											<ScrollArea className='h-[calc(100vh-11rem)]'>
 												<div className='space-y-4'>
-													{Object.entries(sidebarCategories).length > 0 ? (
-														Object.entries(sidebarCategories).map(
+													{Object.entries(filteredCategories).length > 0 ? (
+														Object.entries(filteredCategories).map(
 															([category, links]) => (
-																<SidebarGroup key={category}>
-																	<SidebarGroupLabel className='px-2'>
-																		{category}
-																	</SidebarGroupLabel>
-																	<SidebarSeparator className='my-2' />
-																	<SidebarGroupContent>
-																		<SidebarMenu>
-																			{links.map((link) => (
-																				<SidebarMenuItem key={link.href}>
-																					<SidebarMenuButton
-																						asChild
-																						data-active={pathname === link.href}
-																					>
-																						<Link
-																							href={link.href}
-																							className='w-full'
-																						>
-																							<FolderIcon className='mr-2 h-4 w-4 shrink-0' />
-																							<span className='truncate'>
-																								{link.title}
-																							</span>
-																						</Link>
-																					</SidebarMenuButton>
-																				</SidebarMenuItem>
-																			))}
-																		</SidebarMenu>
-																	</SidebarGroupContent>
-																</SidebarGroup>
+																<Collapsible
+																	key={category}
+																	defaultOpen={!collapsedCategories[category]}
+																	onOpenChange={(isOpen) =>
+																		toggleCategory(category)
+																	}
+																>
+																	<SidebarGroup>
+																		<CollapsibleTrigger className='w-full'>
+																			<SidebarGroupLabel className='px-2 flex items-center justify-between'>
+																				{category}
+																				<ChevronDownIcon
+																					className={cn(
+																						'h-4 w-4 transition-transform',
+																						collapsedCategories[category]
+																							? '-rotate-90'
+																							: ''
+																					)}
+																				/>
+																			</SidebarGroupLabel>
+																		</CollapsibleTrigger>
+																		<SidebarSeparator className='my-2' />
+																		<CollapsibleContent>
+																			<SidebarGroupContent>
+																				<SidebarMenu>
+																					{links.map((link) => (
+																						<SidebarMenuItem key={link.href}>
+																							<SidebarMenuButton
+																								asChild
+																								data-active={
+																									pathname === link.href
+																								}
+																							>
+																								<Link
+																									href={link.href}
+																									className='w-full'
+																								>
+																									<FolderIcon className='mr-2 h-4 w-4 shrink-0' />
+																									<span className='truncate'>
+																										{link.title}
+																									</span>
+																								</Link>
+																							</SidebarMenuButton>
+																						</SidebarMenuItem>
+																					))}
+																				</SidebarMenu>
+																			</SidebarGroupContent>
+																		</CollapsibleContent>
+																	</SidebarGroup>
+																</Collapsible>
 															)
 														)
 													) : (

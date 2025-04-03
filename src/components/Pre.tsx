@@ -59,7 +59,7 @@ export default function Pre({ children, ...props }: PreProps) {
 		<div className='group relative'>
 			<pre
 				{...props}
-				className='relative overflow-auto rounded-lg !bg-gray-50 p-4 dark:!bg-gray-900'
+				className='relative overflow-auto rounded-lg  p-4 !bg-gray-900'
 			>
 				{children}
 			</pre>

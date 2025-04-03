@@ -1,0 +1,41 @@
+# Welcome
+
+import { socialMediaLinks } from '@/lib/social'
+
+{(() => {
+const grouped = socialMediaLinks
+.filter(link => link.visible)
+.sort((a, b) => {
+const categoryOrder = {
+'Professional Networks': 1,
+'Development Platforms': 2,
+'Contact': 3,
+'Social Media': 4,
+'Other': 5
+};
+return categoryOrder[a.category] - categoryOrder[b.category];
+})
+.reduce((acc, link) => {
+if (!acc[link.category]) {
+acc[link.category] = [];
+}
+acc[link.category].push(link);
+return acc;
+}, {});
+
+return Object.entries(grouped).map(([category, links]) => (
+
+<div key={category}>
+	{links.map((link) => (
+		<div key={link.link.toString()}>
+			<a
+				href={link.link.toString()}
+				target='_blank'
+				rel='noopener noreferrer'
+			>
+				{link.label}
+			</a>
+		</div>
+	))}
+</div>
+)); })()}

@@ -1,5 +1,6 @@
 # Hello World!
 
+import { Mermaid } from '@/components/ui/mermaid'
 import { socialMediaLinks } from '@/lib/social'
 
 {(() => {
@@ -40,7 +41,8 @@ return Object.entries(grouped).map(([category, links]) => (
 </div>
 )); })()}
 
-```mermaid
+<Mermaid
+	code={`
 mindmap
   root((Tech Stack))
     Programming Languages
@@ -74,7 +76,8 @@ mindmap
       Vite.js["Vite.js"]
       TailwindCSS["TailwindCSS"]
       Figma["Figma"]
-```
+`}
+/>
 
 ![GitHub stats](https://github-readme-stats.vercel.app/api?username=sametcn99&show_icons=true&theme=dark)
 

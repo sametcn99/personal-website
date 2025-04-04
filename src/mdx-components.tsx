@@ -14,6 +14,7 @@ function generateId(text: string): string {
 export function useMDXComponents(components: MDXComponents): MDXComponents {
 	return {
 		...components,
+		Mermaid,
 		h1: ({ children, ...props }) => (
 			<h1
 				id={generateId(String(children))}

@@ -80,7 +80,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
 				return (
 					<Link
 						href={href}
-						className='font-medium  underline underline-offset-4 dark:text-blue-400'
+						className='font-medium hover:underline text-blue-400'
 						{...props}
 					>
 						{children}
@@ -132,8 +132,8 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
 					className={cn(
 						'relative my-0.5 inline-flex items-center justify-center rounded px-[0.4em] py-[0.2em]',
 						'font-mono text-sm font-medium',
-						'bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-gray-200',
-						'border border-gray-200 dark:border-gray-700',
+						'  bg-gray-800 text-gray-200',
+						'border  border-gray-700',
 						'shadow-sm transition-colors duration-100',
 						className
 					)}

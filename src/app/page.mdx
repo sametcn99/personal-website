@@ -1,6 +1,8 @@
 # Hello World!
 
 import { socialMediaLinks } from '@/lib/social'
+import { readdirSync, statSync } from 'fs'
+import { join } from 'path'
 
 {(() => {
 const grouped = socialMediaLinks
@@ -26,19 +28,48 @@ return acc;
 return Object.entries(grouped).map(([category, links]) => (
 
 <div key={category}>
-	{links.map((link) => (
-		<div key={link.link.toString()}>
-			<a
-				href={link.link.toString()}
-				target='_blank'
-				rel='noopener noreferrer'
-			>
-				{link.label}
-			</a>
-		</div>
-	))}
+	<h2>{category}</h2>
+	<ul>
+		{links.map((link) => (
+			<li key={link.link.toString()}>
+				<a href={link.link.toString()}>{link.label}</a>
+			</li>
+		))}
+	</ul>
 </div>
-)); })()}
+)) })()}
+
+## Recently Updated Gists
+
+{(() => {
+const gistPath = join(process.cwd(), 'src', 'app', 'gist');
+const gistDirs = readdirSync(gistPath, { withFileTypes: true })
+.filter(dirent => dirent.isDirectory())
+.map(dirent => ({
+name: dirent.name,
+path: join(gistPath, dirent.name),
+mtime: statSync(join(gistPath, dirent.name, 'page.mdx')).mtime
+}))
+.sort((a, b) => b.mtime.getTime() - a.mtime.getTime())
+.slice(0, 5);
+
+return (
+
+<ul>
+	{gistDirs.map((gist) => (
+		<li key={gist.name}>
+			<a href={`/gist/${gist.name}`}>
+				{gist.name
+					.split('-')
+					.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+					.join(' ')}
+			</a>
+			{' - '}
+			{gist.mtime.toLocaleDateString()}
+		</li>
+	))}
+</ul>
+) })()}
 
 ```mermaid
 mindmap

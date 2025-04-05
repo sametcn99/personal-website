@@ -1,6 +1,7 @@
-import { Mermaid } from '@/components/ui/mermaid'
+import MermaidWrapper from './components/ui/MermaidWrapper'
 import type { MDXComponents } from 'mdx/types'
 import Pre from '@/components/Pre'
+import dynamic from 'next/dynamic'
 import { cn } from '@/lib/utils'
 import Link from 'next/link'
 
@@ -14,7 +15,7 @@ function generateId(text: string): string {
 export function useMDXComponents(components: MDXComponents): MDXComponents {
 	return {
 		...components,
-		Mermaid,
+		Mermaid: MermaidWrapper,
 		h1: ({ children, ...props }) => (
 			<h1
 				id={generateId(String(children))}
@@ -101,29 +102,8 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
 		},
 		pre: (props) => <Pre {...props} />,
 		code: ({ children, className, ...props }) => {
-			// Check if this is a Mermaid diagram
-			if (className === 'language-mermaid') {
-				return (
-					<Mermaid
-						code={children?.toString() ?? ''}
-						className='my-6'
-						{...props}
-					/>
-				)
-			}
-
-			const isMultiline = children?.toString().includes('\n')
-
-			// If code is already in a code block or multiline, use simple code tag
-			if (className?.includes('language-') || isMultiline) {
-				return (
-					<code
-						className={cn(className)}
-						{...props}
-					>
-						{children}
-					</code>
-				)
+			if (props['data-language'] === 'mermaid') {
+				return <MermaidWrapper code={children} />
 			}
 
 			// Inline code styling

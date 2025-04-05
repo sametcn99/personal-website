@@ -6,21 +6,6 @@ import createMDX from '@next/mdx'
 const nextConfig = {
 	productionBrowserSourceMaps: true,
 	pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
-	async redirects() {
-		return [
-			{
-				source: '/:path*',
-				has: [
-					{
-						type: 'host',
-						value: 'www.sametcc.me',
-					},
-				],
-				destination: 'https://sametcc.me/:path*',
-				permanent: true,
-			},
-		]
-	},
 }
 
 const prettyCodeOptions = {

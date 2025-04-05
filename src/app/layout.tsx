@@ -159,7 +159,7 @@ export default function RootLayout({
 				/>
 				<meta
 					property='og:url'
-					content='https://www.sametcc.me'
+					content='https://sametcc.me'
 				/>
 				<meta
 					property='og:site_name'
@@ -188,7 +188,7 @@ export default function RootLayout({
 				/>
 			
 
-				<base href='https://www.sametcc.me' />
+				<base href='https://sametcc.me' />
 			</head>
 			<body
 				className={cn(

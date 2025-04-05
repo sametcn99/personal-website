@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 	],
 	referrer: 'no-referrer',
 	category: 'personal',
-	metadataBase: new URL('https://www.sametcc.me/'),
+	metadataBase: new URL('https://sametcc.me/'),
 	publisher: 'Samet Can Cıncık',
 	verification: {
 		google: 'YSbWeWN_f4RYnaxt__FUvujMbabAMnjmSzaJldja4Nk',
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
 	},
 	openGraph: {
 		type: 'website',
-		url: 'https://www.sametcc.me/',
+		url: 'https://sametcc.me/',
 		title: 'Samet Can Cıncık',
 		description:
 			'Web Developer passionate about creating compelling and user-friendly web experiences.',

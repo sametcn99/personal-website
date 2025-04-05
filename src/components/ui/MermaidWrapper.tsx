@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils'
 const Mermaid = dynamic(() => import('./mermaid'), {
 	ssr: false,
 	loading: () => (
-		<div className='flex justify-center items-center p-4 border border-gray-200 rounded bg-gray-50'>
+		<div className='flex justify-center items-center p-4 border border-gray-200 rounded bg-gray-50 overflow-hidden'>
 			<div className='animate-pulse text-gray-500'>
 				Loading Mermaid renderer...
 			</div>
@@ -156,7 +156,7 @@ const MermaidWrapper: React.FC<MermaidWrapperProps> = ({
 	// Show loading state while component is mounting
 	if (!isMounted) {
 		return (
-			<div className='flex justify-center items-center p-4 border border-gray-200 rounded bg-gray-50'>
+			<div className='flex justify-center items-center p-4 border border-gray-200 rounded bg-gray-50 overflow-hidden'>
 				<div className='animate-pulse text-gray-500'>
 					{errorMessages.loading}
 				</div>
@@ -167,7 +167,7 @@ const MermaidWrapper: React.FC<MermaidWrapperProps> = ({
 	// Show error state if no valid code was found
 	if (!processedCode) {
 		return (
-			<div className='p-4 border border-yellow-300 rounded bg-yellow-50 text-yellow-800'>
+			<div className='p-4 border border-yellow-300 rounded bg-yellow-50 text-yellow-800 overflow-hidden'>
 				<p>{processingError || errorMessages.noValidCode}</p>
 			</div>
 		)

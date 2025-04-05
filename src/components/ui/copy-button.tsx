@@ -1,5 +1,6 @@
 'use client'
 
+import { toast, useSonner } from 'sonner'
 import { cn } from '@/lib/utils'
 import { useState } from 'react'
 
@@ -14,7 +15,16 @@ export function CopyButton({ text, className }: CopyButtonProps) {
 	const copy = async () => {
 		await navigator.clipboard.writeText(text)
 		setIsCopied(true)
-		setTimeout(() => setIsCopied(false), 2000)
+		toast.success('Code copied to clipboard', {
+			duration: 2000,
+			action: {
+				label: 'Dismiss',
+				onClick: () => toast.dismiss(),
+			},
+		})
+		setTimeout(() => {
+			setIsCopied(false)
+		}, 2000)
 	}
 
 	return (

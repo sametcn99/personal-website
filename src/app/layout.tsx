@@ -158,10 +158,6 @@ export default function RootLayout({
 					content='Web Developer passionate about creating compelling and user-friendly web experiences.'
 				/>
 				<meta
-					property='og:url'
-					content='https://sametcc.me'
-				/>
-				<meta
 					property='og:site_name'
 					content='Samet Can Cıncık'
 				/>
@@ -186,9 +182,6 @@ export default function RootLayout({
 					name='twitter:description'
 					content='Web Developer passionate about creating compelling and user-friendly web experiences.'
 				/>
-			
-
-				<base href='https://sametcc.me' />
 			</head>
 			<body
 				className={cn(

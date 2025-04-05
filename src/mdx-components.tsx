@@ -78,13 +78,13 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
 		a: ({ children, href, ...props }) => {
 			if (href && href.startsWith('/')) {
 				return (
-					<Link
+					<a
 						href={href}
 						className='font-medium hover:underline text-blue-400'
 						{...props}
 					>
 						{children}
-					</Link>
+					</a>
 				)
 			}
 			return (

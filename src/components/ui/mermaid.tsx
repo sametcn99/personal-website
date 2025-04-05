@@ -715,7 +715,7 @@ const Mermaid = memo(
 					<div
 						ref={wrapperRef}
 						className={cn(
-							'overflow-auto',
+							'overflow-hidden',
 							enableZoom && state.status === 'success' ? 'cursor-grab' : '',
 							zoomPan.isDragging ? 'cursor-grabbing' : ''
 						)}

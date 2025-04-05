@@ -10,6 +10,7 @@ import React, {
 	ErrorInfo,
 } from 'react'
 import mermaid, { MermaidConfig } from 'mermaid'
+import { CopyButton } from './copy-button'
 import { v4 as uuidv4 } from 'uuid'
 import { cn } from '@/lib/utils'
 
@@ -29,6 +30,17 @@ interface MermaidRendererProps {
 	}
 	onRenderSuccess?: () => void
 	onRenderError?: (error: Error) => void
+	enableZoom?: boolean
+}
+
+// Add new types for zoom and pan state
+interface ZoomPanState {
+	scale: number
+	translateX: number
+	translateY: number
+	isDragging: boolean
+	startX: number
+	startY: number
 }
 
 type RenderStatus = 'idle' | 'loading' | 'success' | 'error'
@@ -371,7 +383,7 @@ const ErrorState = memo(
 			</pre>
 			<button
 				onClick={onRetry}
-				className='px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded transition-colors'
+				className='px-4 py-2 bg-gray-800 hover:bg-gray-700 text-white rounded-lg shadow-sm transition-colors duration-200 font-medium text-sm'
 				aria-label={retryButtonText}
 			>
 				{retryButtonText}
@@ -381,6 +393,128 @@ const ErrorState = memo(
 )
 
 ErrorState.displayName = 'MermaidErrorState'
+
+// Zoom and Pan Controls Component
+const ZoomControls = memo(
+	({
+		onZoomIn,
+		onZoomOut,
+		onReset,
+		scale,
+	}: {
+		onZoomIn: () => void
+		onZoomOut: () => void
+		onReset: () => void
+		scale: number
+	}) => (
+		<div className='flex items-center gap-2 absolute top-2 right-2 bg-gray-800 dark:bg-gray-900 p-1.5 rounded-lg shadow-md z-10'>
+			<button
+				onClick={onZoomOut}
+				className='p-1.5 rounded-lg text-gray-200 hover:bg-gray-700 dark:hover:bg-gray-800 transition-colors duration-200'
+				title='Zoom out'
+				type='button'
+			>
+				<svg
+					xmlns='http://www.w3.org/2000/svg'
+					width='16'
+					height='16'
+					viewBox='0 0 24 24'
+					fill='none'
+					stroke='currentColor'
+					strokeWidth='2'
+					strokeLinecap='round'
+					strokeLinejoin='round'
+				>
+					<circle
+						cx='11'
+						cy='11'
+						r='8'
+					/>
+					<line
+						x1='21'
+						y1='21'
+						x2='16.65'
+						y2='16.65'
+					/>
+					<line
+						x1='8'
+						y1='11'
+						x2='14'
+						y2='11'
+					/>
+				</svg>
+			</button>
+			<span className='text-xs text-gray-200 dark:text-gray-300 font-medium'>
+				{Math.round(scale * 100)}%
+			</span>
+			<button
+				onClick={onZoomIn}
+				className='p-1.5 rounded-lg text-gray-200 hover:bg-gray-700 dark:hover:bg-gray-800 transition-colors duration-200'
+				title='Zoom in'
+				type='button'
+			>
+				<svg
+					xmlns='http://www.w3.org/2000/svg'
+					width='16'
+					height='16'
+					viewBox='0 0 24 24'
+					fill='none'
+					stroke='currentColor'
+					strokeWidth='2'
+					strokeLinecap='round'
+					strokeLinejoin='round'
+				>
+					<circle
+						cx='11'
+						cy='11'
+						r='8'
+					/>
+					<line
+						x1='21'
+						y1='21'
+						x2='16.65'
+						y2='16.65'
+					/>
+					<line
+						x1='11'
+						y1='8'
+						x2='11'
+						y2='14'
+					/>
+					<line
+						x1='8'
+						y1='11'
+						x2='14'
+						y2='11'
+					/>
+				</svg>
+			</button>
+			<button
+				onClick={onReset}
+				className='p-1.5 rounded-lg text-gray-200 hover:bg-gray-700 dark:hover:bg-gray-800 transition-colors duration-200'
+				title='Reset view'
+				type='button'
+			>
+				<svg
+					xmlns='http://www.w3.org/2000/svg'
+					width='16'
+					height='16'
+					viewBox='0 0 24 24'
+					fill='none'
+					stroke='currentColor'
+					strokeWidth='2'
+					strokeLinecap='round'
+					strokeLinejoin='round'
+				>
+					<path d='M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8' />
+					<path d='M3 3v5h5' />
+				</svg>
+			</button>
+		</div>
+	)
+)
+
+ZoomControls.displayName = 'ZoomControls'
 
 // Main component (memoized for performance)
 const Mermaid = memo(
@@ -399,6 +533,7 @@ const Mermaid = memo(
 		},
 		onRenderSuccess,
 		onRenderError,
+		enableZoom = true,
 	}: MermaidRendererProps) => {
 		const { containerRef, state, renderDiagram, handleError } = useMermaid({
 			code,
@@ -411,12 +546,144 @@ const Mermaid = memo(
 			onRenderError,
 		})
 
+		// Add state for zoom and pan
+		const [zoomPan, setZoomPan] = useState<ZoomPanState>({
+			scale: 1,
+			translateX: 0,
+			translateY: 0,
+			isDragging: false,
+			startX: 0,
+			startY: 0,
+		})
+
+		const svgRef = useRef<SVGSVGElement | null>(null)
+		const wrapperRef = useRef<HTMLDivElement | null>(null)
+
+		// Update svgRef when diagram is rendered
+		useEffect(() => {
+			if (state.status === 'success' && containerRef.current) {
+				svgRef.current = containerRef.current.querySelector('svg')
+			}
+		}, [state.status])
+
 		const handleRetry = useCallback(() => {
 			renderDiagram(0)
 		}, [renderDiagram])
 
+		// Zoom handlers
+		const handleZoomIn = useCallback(() => {
+			setZoomPan((prev) => ({
+				...prev,
+				scale: Math.min(prev.scale * 1.2, 3),
+			}))
+		}, [])
+
+		const handleZoomOut = useCallback(() => {
+			setZoomPan((prev) => ({
+				...prev,
+				scale: Math.max(prev.scale / 1.2, 0.5),
+			}))
+		}, [])
+
+		const handleReset = useCallback(() => {
+			setZoomPan({
+				scale: 1,
+				translateX: 0,
+				translateY: 0,
+				isDragging: false,
+				startX: 0,
+				startY: 0,
+			})
+		}, [])
+
+		// Mouse and touch event handlers for panning
+		const handleMouseDown = useCallback(
+			(e: React.MouseEvent) => {
+				if (!enableZoom) return
+				setZoomPan((prev) => ({
+					...prev,
+					isDragging: true,
+					startX: e.clientX - prev.translateX,
+					startY: e.clientY - prev.translateY,
+				}))
+			},
+			[enableZoom]
+		)
+
+		const handleMouseMove = useCallback(
+			(e: MouseEvent) => {
+				if (!enableZoom) return
+				setZoomPan((prev) => {
+					if (!prev.isDragging) return prev
+					return {
+						...prev,
+						translateX: e.clientX - prev.startX,
+						translateY: e.clientY - prev.startY,
+					}
+				})
+			},
+			[enableZoom]
+		)
+
+		const handleMouseUp = useCallback(() => {
+			if (!enableZoom) return
+			setZoomPan((prev) => ({ ...prev, isDragging: false }))
+		}, [enableZoom])
+
+		// Handle wheel event for zooming
+		const handleWheel = useCallback(
+			(e: WheelEvent) => {
+				if (!enableZoom) return
+				e.preventDefault()
+
+				const delta = e.deltaY > 0 ? 0.9 : 1.1
+
+				setZoomPan((prev) => {
+					const newScale = Math.max(0.5, Math.min(3, prev.scale * delta))
+					return {
+						...prev,
+						scale: newScale,
+					}
+				})
+			},
+			[enableZoom]
+		)
+
+		// Set up event listeners
+		useEffect(() => {
+			if (!enableZoom) return
+
+			const wrapper = wrapperRef.current
+			if (!wrapper) return
+
+			// For dragging
+			document.addEventListener('mousemove', handleMouseMove)
+			document.addEventListener('mouseup', handleMouseUp)
+
+			// For wheel zooming
+			wrapper.addEventListener('wheel', handleWheel, { passive: false })
+
+			return () => {
+				document.removeEventListener('mousemove', handleMouseMove)
+				document.removeEventListener('mouseup', handleMouseUp)
+				wrapper?.removeEventListener('wheel', handleWheel)
+			}
+		}, [handleMouseMove, handleMouseUp, handleWheel, enableZoom])
+
+		// Apply the transformation to the SVG
+		useEffect(() => {
+			if (state.status === 'success' && svgRef.current && enableZoom) {
+				const svg = svgRef.current
+				svg.style.transform = `translate(${zoomPan.translateX}px, ${zoomPan.translateY}px) scale(${zoomPan.scale})`
+				svg.style.transformOrigin = 'center'
+				svg.style.transition = zoomPan.isDragging
+					? 'none'
+					: 'transform 0.2s ease-out'
+			}
+		}, [zoomPan, state.status, enableZoom])
+
 		return (
-			<div className={cn('mermaid-wrapper my-4', className)}>
+			<div className={cn('mermaid-wrapper my-4 relative', className)}>
 				<MermaidErrorBoundary onError={handleError}>
 					{state.status === 'loading' && (
 						<LoadingState message={errorMessages.loading} />
@@ -431,17 +698,47 @@ const Mermaid = memo(
 						/>
 					)}
 
+					{state.status === 'success' && enableZoom && (
+						<>
+							<div className='absolute top-2 left-2 z-10'>
+								<CopyButton text={code} />
+							</div>
+							<ZoomControls
+								onZoomIn={handleZoomIn}
+								onZoomOut={handleZoomOut}
+								onReset={handleReset}
+								scale={zoomPan.scale}
+							/>
+						</>
+					)}
+
 					<div
-						ref={containerRef}
-						className={cn('overflow-auto')}
+						ref={wrapperRef}
+						className={cn(
+							'overflow-auto',
+							enableZoom && state.status === 'success' ? 'cursor-grab' : '',
+							zoomPan.isDragging ? 'cursor-grabbing' : ''
+						)}
 						style={{
 							minHeight: '50px',
-							display: 'block', // Her zaman göster
+							display: 'block',
 							width: '100%',
+							position: 'relative',
 						}}
-						aria-hidden={state.status !== 'success'}
-						data-testid='mermaid-container'
-					/>
+						onMouseDown={handleMouseDown}
+					>
+						<div
+							ref={containerRef}
+							className='overflow-visible'
+							style={{
+								minHeight: '50px',
+								display: 'block',
+								width: '100%',
+							}}
+							aria-hidden={state.status !== 'success'}
+							data-testid='mermaid-container'
+						/>
+					</div>
 				</MermaidErrorBoundary>
 			</div>
 		)

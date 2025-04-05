@@ -40,6 +40,7 @@ import PageBreadcrumb from '@/components/PageBreadCrumb'
 import { Analytics } from '@vercel/analytics/react'
 import { Inter, Fira_Code } from 'next/font/google'
 import { sidebarCategories } from '@/lib/sidebar'
+import { Toaster } from '@/components/ui/sonner'
 import { useIsMobile } from '@/hooks/use-mobile'
 import { Button } from '@/components/ui/button'
 import { usePathname } from 'next/navigation'
@@ -47,7 +48,6 @@ import { useState, useEffect } from 'react'
 import { cn } from '@/utils/cn'
 import Link from 'next/link'
 import './globals.css'
-import { Toaster } from '@/components/ui/sonner'
 
 const inter = Inter({ subsets: ['latin'] })
 

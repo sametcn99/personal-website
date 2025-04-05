@@ -11,6 +11,8 @@ import CopyButton from './CopyButton'
 
 interface PreProps {
 	children: ReactNode
+	'data-language'?: string
+	[key: string]: any // Allow other props
 }
 
 interface CodeProps {
@@ -26,6 +28,12 @@ interface ElementProps {
 export default function Pre({ children, ...props }: PreProps) {
 	// Extract the code content from the child element
 	let code = ''
+	let isMermaid = false
+
+	// Check if the pre element has mermaid language
+	if (props['data-language'] === 'mermaid') {
+		isMermaid = true
+	}
 
 	// Find the code element and extract its content
 	Children.forEach(children, (child) => {
@@ -63,7 +71,7 @@ export default function Pre({ children, ...props }: PreProps) {
 			>
 				{children}
 			</pre>
-			<CopyButton text={code} />
+			{!isMermaid && <CopyButton text={code} />}
 		</div>
 	)
 }

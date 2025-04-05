@@ -1,48 +1,85 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import dynamic from 'next/dynamic'
+import { cn } from '@/lib/utils'
 
+// Use dynamic import for client-side rendering of the Mermaid component
 const Mermaid = dynamic(() => import('./mermaid'), {
 	ssr: false,
-	loading: () => <p>Loading Mermaid diagram...</p>,
+	loading: () => (
+		<div className='flex justify-center items-center p-4 border border-gray-200 rounded bg-gray-50'>
+			<div className='animate-pulse text-gray-500'>
+				Loading Mermaid renderer...
+			</div>
+		</div>
+	),
 })
 
+// Define comprehensive types
 interface MermaidWrapperProps {
-	code: any // Accept any type since we'll handle conversion
+	code: any // Accept any type since we'll handle complex MDX structures
+	theme?: 'default' | 'forest' | 'dark' | 'neutral' | 'base'
+	maxRetries?: number
+	className?: string
+	errorMessages?: {
+		emptyCode?: string
+		renderFailed?: string
+		retryButton?: string
+		loading?: string
+		noValidCode?: string
+	}
 }
 
-const MermaidWrapper: React.FC<MermaidWrapperProps> = ({ code }) => {
+/**
+ * MermaidWrapper component handles processing MDX content to extract Mermaid diagram code
+ * and renders it using the Mermaid component.
+ */
+const MermaidWrapper: React.FC<MermaidWrapperProps> = ({
+	code,
+	theme = 'default',
+	maxRetries = 5,
+	className,
+	errorMessages = {
+		emptyCode: 'Diagram code is empty or missing',
+		renderFailed: 'Failed to render diagram',
+		retryButton: 'Retry',
+		loading: 'Loading diagram...',
+		noValidCode: 'No valid Mermaid diagram code found',
+	},
+}) => {
 	const [isMounted, setIsMounted] = useState(false)
 	const [processedCode, setProcessedCode] = useState<string>('')
+	const [processingError, setProcessingError] = useState<string | null>(null)
 
-	useEffect(() => {
-		const extractMermaidCode = (mdxCode: any): string => {
+	// Extract Mermaid code from potentially complex MDX structures
+	const extractMermaidCode = useCallback((mdxCode: any): string => {
+		try {
 			// Direct string code
 			if (typeof mdxCode === 'string') return mdxCode.trim()
-			
+
 			// Not an array or object, return empty
 			if (!Array.isArray(mdxCode) && typeof mdxCode !== 'object') return ''
-			
+
 			// Handle array structure (common in MDX)
 			if (Array.isArray(mdxCode)) {
 				return mdxCode
 					.map((item) => {
 						// Direct string content
 						if (typeof item === 'string') return item
-						
+
 						// Handle MDX structure with nested props
 						if (item?.props?.children) {
 							// If children is a string
 							if (typeof item.props.children === 'string') {
 								return item.props.children
 							}
-							
+
 							// If children has props (more nesting)
 							if (item.props.children?.props?.children) {
 								const nestedChildren = item.props.children.props.children
-								return typeof nestedChildren === 'string' 
-									? nestedChildren 
+								return typeof nestedChildren === 'string'
+									? nestedChildren
 									: extractMermaidCode(nestedChildren) // Recursively extract
 							}
 						}
@@ -51,31 +88,103 @@ const MermaidWrapper: React.FC<MermaidWrapperProps> = ({ code }) => {
 					.join('')
 					.trim()
 			}
-			
+
 			// Handle object with props directly
 			if (mdxCode?.props?.children) {
 				return extractMermaidCode(mdxCode.props.children)
 			}
-			
+
+			return ''
+		} catch (error) {
+			// Handle any errors during extraction
+			console.error('Error extracting Mermaid code:', error)
+			setProcessingError('Error processing the diagram code')
 			return ''
 		}
+	}, [])
 
-		// Extract and process the code
-		const mermaidCode = extractMermaidCode(code)
-		console.log('Extracted Mermaid code:', mermaidCode) // Debug
-		setProcessedCode(mermaidCode)
-		setIsMounted(true)
-	}, [code])
+	// Handle render events
+	const handleRenderSuccess = useCallback(() => {
+		// Could implement analytics tracking or other success behaviors here
+		if (process.env.NODE_ENV !== 'production') {
+			console.log('Mermaid diagram rendered successfully')
+		}
+	}, [])
 
+	const handleRenderError = useCallback((error: Error) => {
+		setProcessingError(error.message)
+		if (process.env.NODE_ENV !== 'production') {
+			console.error('Mermaid render error:', error)
+		}
+	}, [])
+
+	// Process the code on component mount or when code prop changes
+	useEffect(() => {
+		try {
+			// Extract and process the code
+			const mermaidCode = extractMermaidCode(code)
+
+			// Debug: Log the extracted code for troubleshooting
+			if (process.env.NODE_ENV !== 'production') {
+				console.log(
+					'Extracted Mermaid code:',
+					mermaidCode
+						? mermaidCode.substring(0, 100) +
+								(mermaidCode.length > 100 ? '...' : '')
+						: 'empty'
+				)
+			}
+
+			setProcessedCode(mermaidCode)
+
+			if (!mermaidCode) {
+				setProcessingError(
+					errorMessages.noValidCode || 'No valid diagram code found'
+				)
+				console.warn('No valid Mermaid code was extracted from the input')
+			} else {
+				setProcessingError(null)
+			}
+		} catch (error) {
+			setProcessingError('Failed to process diagram code')
+			console.error('Error in Mermaid code processing:', error)
+		} finally {
+			setIsMounted(true)
+		}
+	}, [code, extractMermaidCode, errorMessages.noValidCode])
+
+	// Show loading state while component is mounting
 	if (!isMounted) {
-		return <p>Loading Mermaid diagram...</p>
+		return (
+			<div className='flex justify-center items-center p-4 border border-gray-200 rounded bg-gray-50'>
+				<div className='animate-pulse text-gray-500'>
+					{errorMessages.loading}
+				</div>
+			</div>
+		)
 	}
 
+	// Show error state if no valid code was found
 	if (!processedCode) {
-		return <p>No valid Mermaid diagram code found</p>
+		return (
+			<div className='p-4 border border-yellow-300 rounded bg-yellow-50 text-yellow-800'>
+				<p>{processingError || errorMessages.noValidCode}</p>
+			</div>
+		)
 	}
 
-	return <Mermaid code={processedCode} />
+	// Render the Mermaid component with the processed code
+	return (
+		<Mermaid
+			code={processedCode}
+			theme={theme}
+			maxRetries={maxRetries}
+			className={className}
+			errorMessages={errorMessages}
+			onRenderSuccess={handleRenderSuccess}
+			onRenderError={handleRenderError}
+		/>
+	)
 }
 
 export default MermaidWrapper

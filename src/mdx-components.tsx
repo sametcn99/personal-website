@@ -105,18 +105,9 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
 			if (props['data-language'] === 'mermaid') {
 				return <MermaidWrapper code={children} />
 			}
-
-			// Inline code styling
 			return (
 				<code
-					className={cn(
-						'relative my-0.5 inline-flex items-center justify-center rounded px-[0.4em] py-[0.2em]',
-						'font-mono text-sm font-medium',
-						'  bg-gray-800 text-gray-200',
-						'border  border-gray-700',
-						'shadow-sm transition-colors duration-100',
-						className
-					)}
+					className={cn()}
 					{...props}
 				>
 					{children}

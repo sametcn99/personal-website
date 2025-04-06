@@ -32,8 +32,8 @@ export function CopyButton({ text, className }: CopyButtonProps) {
 			disabled={isCopied}
 			onClick={copy}
 			className={cn(
-				'p-1.5 rounded-md text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800',
-				'transition-colors duration-200',
+				'p-1.5  text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800',
+				'transition-colors duration-200 hover:rounded-2xl',
 				className
 			)}
 			title='Copy code'

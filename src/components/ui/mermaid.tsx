@@ -348,11 +348,16 @@ const useMermaid = (props: MermaidRendererProps) => {
 const LoadingState = memo(
 	({ message = 'Loading diagram...' }: { message?: string }) => (
 		<div
-			className='flex justify-center items-center p-4 border border-gray-200 rounded bg-gray-50'
+			className='flex justify-center items-center p-6 border border-gray-800 rounded-lg bg-gray-900 dark:bg-black overflow-hidden shadow-md'
 			role='status'
 			aria-live='polite'
 		>
-			<div className='animate-pulse text-gray-500'>{message}</div>
+			<div className='flex flex-col items-center gap-3'>
+				<div className='h-6 w-6 border-2 border-gray-400 border-t-gray-200 dark:border-gray-700 dark:border-t-gray-500 rounded-full animate-spin'></div>
+				<div className='text-gray-300 dark:text-gray-400 font-medium'>
+					{message}
+				</div>
+			</div>
 		</div>
 	)
 )

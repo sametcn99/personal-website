@@ -8,9 +8,12 @@ import { cn } from '@/lib/utils'
 const Mermaid = dynamic(() => import('./mermaid'), {
 	ssr: false,
 	loading: () => (
-		<div className='flex justify-center items-center p-4 border border-gray-200 rounded bg-gray-50 overflow-hidden'>
-			<div className='animate-pulse text-gray-500'>
-				Loading Mermaid renderer...
+		<div className='flex justify-center items-center p-6 border border-gray-800 rounded-lg bg-gray-900 dark:bg-black overflow-hidden shadow-md'>
+			<div className='flex flex-col items-center gap-3'>
+				<div className='h-6 w-6 border-2 border-gray-400 border-t-gray-200 dark:border-gray-700 dark:border-t-gray-500 rounded-full animate-spin'></div>
+				<div className='text-gray-300 dark:text-gray-400 font-medium'>
+					Loading Mermaid diagram...
+				</div>
 			</div>
 		</div>
 	),
@@ -156,9 +159,12 @@ const MermaidWrapper: React.FC<MermaidWrapperProps> = ({
 	// Show loading state while component is mounting
 	if (!isMounted) {
 		return (
-			<div className='flex justify-center items-center p-4 border border-gray-200 rounded bg-gray-50 overflow-hidden'>
-				<div className='animate-pulse text-gray-500'>
-					{errorMessages.loading}
+			<div className='flex justify-center items-center p-6 border border-gray-800 rounded-lg bg-gray-900 dark:bg-black overflow-hidden shadow-md'>
+				<div className='flex flex-col items-center gap-3'>
+					<div className='h-6 w-6 border-2 border-gray-400 border-t-gray-200 dark:border-gray-700 dark:border-t-gray-500 rounded-full animate-spin'></div>
+					<div className='text-gray-300 dark:text-gray-400 font-medium'>
+						{errorMessages.loading}
+					</div>
 				</div>
 			</div>
 		)

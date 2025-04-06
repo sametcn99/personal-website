@@ -15,7 +15,7 @@ export default function PageBreadcrumb({ path }: { path: string }) {
 	if (pathSegments.length === 0) return null
 
 	return (
-		<Breadcrumb className='mb-6'>
+		<Breadcrumb className='mb-6 print:hidden'>
 			<BreadcrumbList>
 				<BreadcrumbItem>
 					<BreadcrumbLink href='/'>Home</BreadcrumbLink>

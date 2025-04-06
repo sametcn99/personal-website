@@ -171,14 +171,14 @@ const SidebarComponent: React.FC<SidebarProps> = ({
 	return (
 		<aside
 			className={cn(
-				'fixed top-16 z-30 h-[calc(100vh-4rem)] w-[220px] shrink-0 transition-all duration-200 ease-in-out md:sticky lg:w-[240px]',
+				'print:hidden fixed top-16 z-30 h-[calc(100vh-4rem)] w-[220px] shrink-0 transition-all duration-200 ease-in-out md:sticky lg:w-[240px]',
 				{
 					hidden: !isOpen && isMobile,
 					'md:block': !isMobile,
 				}
 			)}
 		>
-			<div className='h-full overflow-hidden'>
+			<div className='h-full overflow-hidden '>
 				<Sidebar className='h-full'>
 					<SidebarHeaderComponent setOpen={setOpen} />
 					<SidebarContent className='px-2'>

@@ -34,9 +34,10 @@ export default function RootLayout({
 	>({})
 	const { isOpen, setIsOpen } = useSidebarStore()
 
+	// Only close sidebar on mobile
 	useEffect(() => {
-		if (isMobile) {
-			setIsOpen(false)
+		if (!isMobile) {
+			setIsOpen(true)
 		}
 	}, [isMobile, setIsOpen])
 
@@ -164,21 +165,12 @@ export default function RootLayout({
 					'antialiased selection:bg-slate-300 selection:text-purple-900 selection:dark:bg-slate-900 selection:dark:text-purple-500'
 				)}
 			>
-				<SidebarProvider
-					defaultOpen={isOpen}
-					open={isOpen}
-					onOpenChange={setIsOpen}
-				>
+				<SidebarProvider defaultOpen={true}>
 					<div className='flex min-h-screen w-full flex-col'>
-						<div
-							className={cn(
-								'container mx-auto flex flex-1',
-								!isOpen && 'md:pl-0'
-							)}
-						>
+						<div className='container mx-auto flex flex-1'>
 							<SidebarComponent
 								isMobile={isMobile}
-								filteredCategories={filteredCategories}
+								filteredCategories={sidebarCategories}
 								collapsedCategories={collapsedCategories}
 								searchQuery={searchQuery}
 								pathname={pathname}

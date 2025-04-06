@@ -171,8 +171,11 @@ const SidebarComponent: React.FC<SidebarProps> = ({
 	return (
 		<aside
 			className={cn(
-				'fixed top-16 z-30 h-[calc(100vh-4rem)] w-[220px] shrink-0 transition-all duration-200 ease-in-out md:sticky md:block lg:w-[240px]',
-				!isOpen && 'hidden md:hidden'
+				'fixed top-16 z-30 h-[calc(100vh-4rem)] w-[220px] shrink-0 transition-all duration-200 ease-in-out md:sticky lg:w-[240px]',
+				{
+					hidden: !isOpen && isMobile,
+					'md:block': !isMobile,
+				}
 			)}
 		>
 			<div className='h-full overflow-hidden'>

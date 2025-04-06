@@ -31,7 +31,12 @@ const CommandDialogComponent: React.FC<CommandDialogProps> = ({
 	return (
 		<CommandDialog
 			open={open}
-			onOpenChange={setOpen}
+			onOpenChange={(isOpen) => {
+				setOpen(isOpen)
+				if (!isOpen) {
+					setSearchQuery('')
+				}
+			}}
 		>
 			<CommandInput
 				placeholder='Type to search for snippets...'

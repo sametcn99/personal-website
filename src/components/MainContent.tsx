@@ -1,12 +1,16 @@
+'use client'
+
+import { usePageTransition } from '@/hooks/use-page-transition'
 import PageBreadcrumb from '@/components/PageBreadCrumb'
 import { SidebarTrigger } from '@/components/ui/sidebar'
 import { Button } from '@/components/ui/button'
+import React, { ReactNode } from 'react'
 import { MenuIcon } from 'lucide-react'
 
 interface MainContentProps {
 	isMobile: boolean
 	pathname: string
-	children: React.ReactNode
+	children: ReactNode
 }
 
 const MainContent: React.FC<MainContentProps> = ({
@@ -14,8 +18,10 @@ const MainContent: React.FC<MainContentProps> = ({
 	pathname,
 	children,
 }) => {
+	const { transitionClass } = usePageTransition()
+
 	return (
-		<main className='min-w-0 flex-1'>
+		<main className={`${transitionClass} min-w-0 flex-1`}>
 			<div className='container mx-auto max-w-4xl px-4 py-6 md:px-8'>
 				{isMobile && (
 					<div className='mb-6'>

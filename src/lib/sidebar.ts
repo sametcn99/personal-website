@@ -1,3 +1,3 @@
-import sidebarData from '../data/sidebar-links.json';
+import sidebarData from '../data/sidebar-links.json'
 
-export const sidebarCategories = sidebarData;
+export const sidebarCategories = sidebarData

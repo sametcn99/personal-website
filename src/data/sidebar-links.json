@@ -1,166 +1,166 @@
 {
-  "Personal": [
-    {
-      "title": "Home",
-      "href": "/"
-    },
-    {
-      "title": "CV",
-      "href": "/cv"
-    }
-  ],
-  "Gists": [
-    {
-      "title": "Article Heading Styles",
-      "href": "/gist/article-heading-styles"
-    },
-    {
-      "title": "Audio Lyrics Writer",
-      "href": "/gist/audio-lyrics-writer"
-    },
-    {
-      "title": "Auth Verifier",
-      "href": "/gist/auth-verifier"
-    },
-    {
-      "title": "Combine Locales",
-      "href": "/gist/combine-locales"
-    },
-    {
-      "title": "Contact Form Handler",
-      "href": "/gist/contact-form-handler"
-    },
-    {
-      "title": "Convert Time To Milliseconds",
-      "href": "/gist/convert-time-to-milliseconds"
-    },
-    {
-      "title": "Copy Directory Utility",
-      "href": "/gist/copy-directory-utility"
-    },
-    {
-      "title": "Date Range Slicer",
-      "href": "/gist/date-range-slicer"
-    },
-    {
-      "title": "Date Utility",
-      "href": "/gist/date-utility"
-    },
-    {
-      "title": "Delete Folder",
-      "href": "/gist/delete-folder"
-    },
-    {
-      "title": "Dictionary Context Provider",
-      "href": "/gist/dictionary-context-provider"
-    },
-    {
-      "title": "Dotnet Api Setup",
-      "href": "/gist/dotnet-api-setup"
-    },
-    {
-      "title": "Electron Window Manager Utility",
-      "href": "/gist/electron-window-manager-utility"
-    },
-    {
-      "title": "Fetch Hook",
-      "href": "/gist/fetch-hook"
-    },
-    {
-      "title": "Format Date Utility",
-      "href": "/gist/format-date-utility"
-    },
-    {
-      "title": "Git Tag Push Utility",
-      "href": "/gist/git-tag-push-utility"
-    },
-    {
-      "title": "Github Api Route",
-      "href": "/gist/github-api-route"
-    },
-    {
-      "title": "Github Data Store",
-      "href": "/gist/github-data-store"
-    },
-    {
-      "title": "Github Profile Api",
-      "href": "/gist/github-profile-api"
-    },
-    {
-      "title": "Github Repo Filter",
-      "href": "/gist/github-repo-filter"
-    },
-    {
-      "title": "Github Repo Model",
-      "href": "/gist/github-repo-model"
-    },
-    {
-      "title": "Github Repo Stats",
-      "href": "/gist/github-repo-stats"
-    },
-    {
-      "title": "Github User Model",
-      "href": "/gist/github-user-model"
-    },
-    {
-      "title": "Hello World Translations",
-      "href": "/gist/hello-world-translations"
-    },
-    {
-      "title": "Markdown File Renamer",
-      "href": "/gist/markdown-file-renamer"
-    },
-    {
-      "title": "Nextjs Manifest Config",
-      "href": "/gist/nextjs-manifest-config"
-    },
-    {
-      "title": "Profile Age Calculator",
-      "href": "/gist/profile-age-calculator"
-    },
-    {
-      "title": "Random Color Generator",
-      "href": "/gist/random-color-generator"
-    },
-    {
-      "title": "Redux Root Reducer Setup",
-      "href": "/gist/redux-root-reducer-setup"
-    },
-    {
-      "title": "Regex Text Utility",
-      "href": "/gist/regex-text-utility"
-    },
-    {
-      "title": "Scroll To Top Component",
-      "href": "/gist/scroll-to-top-component"
-    },
-    {
-      "title": "Service Configuration Guide",
-      "href": "/gist/service-configuration-guide"
-    },
-    {
-      "title": "Site Url Utility",
-      "href": "/gist/site-url-utility"
-    },
-    {
-      "title": "Tailwind Page Setup",
-      "href": "/gist/tailwind-page-setup"
-    },
-    {
-      "title": "Text Cleaner",
-      "href": "/gist/text-cleaner"
-    },
-    {
-      "title": "Theme Switcher Component",
-      "href": "/gist/theme-switcher-component"
-    },
-    {
-      "title": "Typescript Glob Patterns",
-      "href": "/gist/typescript-glob-patterns"
-    },
-    {
-      "title": "Website Configuration",
-      "href": "/gist/website-configuration"
-    }
-  ]
+	"Personal": [
+		{
+			"title": "Home",
+			"href": "/"
+		},
+		{
+			"title": "CV",
+			"href": "/cv"
+		}
+	],
+	"Gists": [
+		{
+			"title": "Article Heading Styles",
+			"href": "/gist/article-heading-styles"
+		},
+		{
+			"title": "Audio Lyrics Writer",
+			"href": "/gist/audio-lyrics-writer"
+		},
+		{
+			"title": "Auth Verifier",
+			"href": "/gist/auth-verifier"
+		},
+		{
+			"title": "Combine Locales",
+			"href": "/gist/combine-locales"
+		},
+		{
+			"title": "Contact Form Handler",
+			"href": "/gist/contact-form-handler"
+		},
+		{
+			"title": "Convert Time To Milliseconds",
+			"href": "/gist/convert-time-to-milliseconds"
+		},
+		{
+			"title": "Copy Directory Utility",
+			"href": "/gist/copy-directory-utility"
+		},
+		{
+			"title": "Date Range Slicer",
+			"href": "/gist/date-range-slicer"
+		},
+		{
+			"title": "Date Utility",
+			"href": "/gist/date-utility"
+		},
+		{
+			"title": "Delete Folder",
+			"href": "/gist/delete-folder"
+		},
+		{
+			"title": "Dictionary Context Provider",
+			"href": "/gist/dictionary-context-provider"
+		},
+		{
+			"title": "Dotnet Api Setup",
+			"href": "/gist/dotnet-api-setup"
+		},
+		{
+			"title": "Electron Window Manager Utility",
+			"href": "/gist/electron-window-manager-utility"
+		},
+		{
+			"title": "Fetch Hook",
+			"href": "/gist/fetch-hook"
+		},
+		{
+			"title": "Format Date Utility",
+			"href": "/gist/format-date-utility"
+		},
+		{
+			"title": "Git Tag Push Utility",
+			"href": "/gist/git-tag-push-utility"
+		},
+		{
+			"title": "Github Api Route",
+			"href": "/gist/github-api-route"
+		},
+		{
+			"title": "Github Data Store",
+			"href": "/gist/github-data-store"
+		},
+		{
+			"title": "Github Profile Api",
+			"href": "/gist/github-profile-api"
+		},
+		{
+			"title": "Github Repo Filter",
+			"href": "/gist/github-repo-filter"
+		},
+		{
+			"title": "Github Repo Model",
+			"href": "/gist/github-repo-model"
+		},
+		{
+			"title": "Github Repo Stats",
+			"href": "/gist/github-repo-stats"
+		},
+		{
+			"title": "Github User Model",
+			"href": "/gist/github-user-model"
+		},
+		{
+			"title": "Hello World Translations",
+			"href": "/gist/hello-world-translations"
+		},
+		{
+			"title": "Markdown File Renamer",
+			"href": "/gist/markdown-file-renamer"
+		},
+		{
+			"title": "Nextjs Manifest Config",
+			"href": "/gist/nextjs-manifest-config"
+		},
+		{
+			"title": "Profile Age Calculator",
+			"href": "/gist/profile-age-calculator"
+		},
+		{
+			"title": "Random Color Generator",
+			"href": "/gist/random-color-generator"
+		},
+		{
+			"title": "Redux Root Reducer Setup",
+			"href": "/gist/redux-root-reducer-setup"
+		},
+		{
+			"title": "Regex Text Utility",
+			"href": "/gist/regex-text-utility"
+		},
+		{
+			"title": "Scroll To Top Component",
+			"href": "/gist/scroll-to-top-component"
+		},
+		{
+			"title": "Service Configuration Guide",
+			"href": "/gist/service-configuration-guide"
+		},
+		{
+			"title": "Site Url Utility",
+			"href": "/gist/site-url-utility"
+		},
+		{
+			"title": "Tailwind Page Setup",
+			"href": "/gist/tailwind-page-setup"
+		},
+		{
+			"title": "Text Cleaner",
+			"href": "/gist/text-cleaner"
+		},
+		{
+			"title": "Theme Switcher Component",
+			"href": "/gist/theme-switcher-component"
+		},
+		{
+			"title": "Typescript Glob Patterns",
+			"href": "/gist/typescript-glob-patterns"
+		},
+		{
+			"title": "Website Configuration",
+			"href": "/gist/website-configuration"
+		}
+	]
 }

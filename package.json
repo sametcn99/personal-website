@@ -9,7 +9,8 @@
 		"build": "jest && next build",
 		"start": "next start",
 		"lint": "next lint",
-		"format": "prettier --write ."
+		"format": "prettier --write .",
+		"generate-sidebar": "bun run scripts/generate-sidebar.js"
 	},
 	"dependencies": {
 		"@hookform/resolvers": "^5.0.1",

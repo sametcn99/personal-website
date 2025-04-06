@@ -10,7 +10,7 @@
 		"start": "next start",
 		"lint": "next lint",
 		"format": "prettier --write .",
-		"generate-sidebar": "bun run scripts/generate-sidebar.js"
+		"generate-sidebar": "bun run scripts/generate-sidebar.ts"
 	},
 	"dependencies": {
 		"@hookform/resolvers": "^5.0.1",

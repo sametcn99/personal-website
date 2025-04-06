@@ -1,12 +1,22 @@
-const fs = require('fs');
-const path = require('path');
+import * as fs from 'fs';
+import * as path from 'path';
+
+interface SidebarLink {
+  title: string;
+  href: string;
+}
+
+interface SidebarData {
+  Personal: SidebarLink[];
+  Gists: SidebarLink[];
+}
 
 const gistDir = path.join(__dirname, '../src/app/gist');
 
-function generateSidebarLinks(dir) {
+function generateSidebarLinks(dir: string): void {
   const items = fs.readdirSync(dir, { withFileTypes: true });
   
-  const links = items
+  const links: SidebarLink[] = items
     .filter(item => item.isDirectory())
     .map(folder => {
       const title = folder.name
@@ -21,7 +31,7 @@ function generateSidebarLinks(dir) {
     })
     .sort((a, b) => a.title.localeCompare(b.title));
 
-  const sidebarData = {
+  const sidebarData: SidebarData = {
     Personal: [
       { title: 'Home', href: '/' },
       { title: 'CV', href: '/cv' }
@@ -29,16 +39,16 @@ function generateSidebarLinks(dir) {
     Gists: links
   };
 
+  // Create data directory if it doesn't exist
+  const dataDir = path.join(__dirname, '../src/data');
+  if (!fs.existsSync(dataDir)) {
+    fs.mkdirSync(dataDir, { recursive: true });
+  }
+
   fs.writeFileSync(
     path.join(__dirname, '../src/data/sidebar-links.json'),
     JSON.stringify(sidebarData, null, 2)
   );
-}
-
-// Create data directory if it doesn't exist
-const dataDir = path.join(__dirname, '../src/data');
-if (!fs.existsSync(dataDir)) {
-  fs.mkdirSync(dataDir, { recursive: true });
 }
 
 generateSidebarLinks(gistDir);

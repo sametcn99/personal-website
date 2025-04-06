@@ -1,4 +1,6 @@
 import { Octokit } from 'octokit'
+import fs from 'fs'
+import path from 'path'
 
 /**
  * Retrieves repository information from GitHub.
@@ -33,4 +35,23 @@ export async function getUser() {
 	})
 	const data = await octokit.rest.users.getAuthenticated()
 	return data
+}
+
+export function generateSidebarLinks(dir: string) {
+  const items = fs.readdirSync(dir, { withFileTypes: true })
+  
+  return items
+    .filter(item => item.isDirectory())
+    .map(folder => {
+      const title = folder.name
+        .split('-')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ')
+      
+      return {
+        title,
+        href: `/gist/${folder.name}`
+      }
+    })
+    .sort((a, b) => a.title.localeCompare(b.title))
 }

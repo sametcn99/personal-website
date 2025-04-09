@@ -6,7 +6,10 @@ import {
 	CommandItem,
 	CommandList,
 } from '@/components/ui/command'
+import { DialogTitle } from '@/components/ui/dialog'
 import { FolderIcon } from 'lucide-react'
+
+const srOnlyStyles = 'sr-only'
 
 interface Link {
 	href: string
@@ -38,6 +41,7 @@ const CommandDialogComponent: React.FC<CommandDialogProps> = ({
 				}
 			}}
 		>
+				<DialogTitle className={srOnlyStyles}>Search snippets</DialogTitle>
 			<CommandInput
 				placeholder='Type to search for snippets...'
 				value={searchQuery}

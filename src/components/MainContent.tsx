@@ -1,45 +1,26 @@
-'use client'
+"use client"
 
-import { usePageTransition } from '@/hooks/use-page-transition'
-import PageBreadcrumb from '@/components/PageBreadCrumb'
-import { SidebarTrigger } from '@/components/ui/sidebar'
-import { Button } from '@/components/ui/button'
-import React, { ReactNode } from 'react'
-import { MenuIcon } from 'lucide-react'
+import type React from "react"
+
+import { cn } from "@/utils/cn"
 
 interface MainContentProps {
-	isMobile: boolean
-	pathname: string
-	children: ReactNode
+  children: React.ReactNode
+  isMobile: boolean
+  pathname: string
 }
 
-const MainContent: React.FC<MainContentProps> = ({
-	isMobile,
-	pathname,
-	children,
-}) => {
-	const { transitionClass } = usePageTransition()
-
-	return (
-		<main className={`${transitionClass} min-w-0 flex-1`}>
-			<div className='container mx-auto max-w-4xl px-4 py-6 md:px-8'>
-				{isMobile && (
-					<div className='mb-6'>
-						<SidebarTrigger asChild>
-							<Button
-								variant='outline'
-								size='icon'
-							>
-								<MenuIcon className='h-4 w-4' />
-							</Button>
-						</SidebarTrigger>
-					</div>
-				)}
-				<PageBreadcrumb path={pathname} />
-				<article className='prose prose-invert break-words'>{children}</article>
-			</div>
-		</main>
-	)
+const MainContent: React.FC<MainContentProps> = ({ children, pathname }) => {
+  return (
+    <main className="flex-1 overflow-hidden px-4 py-8 md:px-8">
+      <div className="mx-auto max-w-4xl">
+        <div className="mb-4 flex items-center md:hidden">
+          {/* Mobile sidebar trigger is now inside the MobileSidebar component */}
+        </div>
+        <div className={cn("prose prose-slate dark:prose-invert max-w-none")}>{children}</div>
+      </div>
+    </main>
+  )
 }
 
 export default MainContent

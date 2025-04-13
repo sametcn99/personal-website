@@ -150,7 +150,29 @@ export default function Layout({ children }: { children: ReactNode }) {
 					borderRight: `1px solid ${alpha(theme.palette.divider, 0.1)}`,
 				}}
 			>
-				<Box sx={{ flex: 1, overflowY: 'auto', px: 1 }}>
+				{' '}
+				<Box
+					sx={{
+						flex: 1,
+						overflowY: 'auto',
+						px: 1,
+						'&::-webkit-scrollbar': {
+							width: '6px',
+						},
+						'&::-webkit-scrollbar-track': {
+							background: 'transparent',
+						},
+						'&::-webkit-scrollbar-thumb': {
+							background: alpha(theme.palette.primary.main, 0.3),
+							borderRadius: '3px',
+						},
+						'&::-webkit-scrollbar-thumb:hover': {
+							background: alpha(theme.palette.primary.main, 0.5),
+						},
+						scrollbarWidth: 'thin',
+						scrollbarColor: `${alpha(theme.palette.primary.main, 0.3)} transparent`,
+					}}
+				>
 					{Object.entries(sidebarLinks).map(([category, links]) => (
 						<React.Fragment key={category}>
 							<Typography

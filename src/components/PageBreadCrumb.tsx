@@ -1,12 +1,11 @@
 'use client'
 import {
-	Breadcrumb,
-	BreadcrumbItem,
-	BreadcrumbLink,
-	BreadcrumbList,
-	BreadcrumbPage,
-	BreadcrumbSeparator,
-} from '@/components/ui/breadcrumb'
+	Breadcrumbs,
+	Link,
+	Typography,
+	Box,
+} from '@mui/material'
+import NextLink from 'next/link'
 
 export default function PageBreadcrumb({ path }: { path: string }) {
 	// Remove trailing slash and split path
@@ -15,31 +14,43 @@ export default function PageBreadcrumb({ path }: { path: string }) {
 	if (pathSegments.length === 0) return null
 
 	return (
-		<Breadcrumb className='mb-6 print:hidden'>
-			<BreadcrumbList>
-				<BreadcrumbItem>
-					<BreadcrumbLink href='/'>Home</BreadcrumbLink>
-				</BreadcrumbItem>
-				<BreadcrumbSeparator />
-
+		<Box
+			className='print:hidden'
+			sx={{ mb: 2 }}
+		>
+			<Breadcrumbs aria-label='breadcrumb'>
+				<Link
+					component={NextLink}
+					underline='hover'
+					color='inherit'
+					href='/'
+				>
+					Home
+				</Link>
 				{pathSegments.map((segment, i) => {
 					const isLast = i === pathSegments.length - 1
 					const href = `/${pathSegments.slice(0, i + 1).join('/')}`
 
-					return (
-						<BreadcrumbItem key={segment}>
-							{isLast ? (
-								<BreadcrumbPage>{segment.replace(/-/g, ' ')}</BreadcrumbPage>
-							) : (
-								<BreadcrumbLink href={href}>
-									{segment.replace(/-/g, ' ')}
-								</BreadcrumbLink>
-							)}
-							{!isLast && <BreadcrumbSeparator />}
-						</BreadcrumbItem>
+					return isLast ? (
+						<Typography
+							key={segment}
+							color='text.primary'
+						>
+							{segment.replace(/-/g, ' ')}
+						</Typography>
+					) : (
+						<Link
+							component={NextLink}
+							underline='hover'
+							color='inherit'
+							href={href}
+							key={segment}
+						>
+							{segment.replace(/-/g, ' ')}
+						</Link>
 					)
 				})}
-			</BreadcrumbList>
-		</Breadcrumb>
+			</Breadcrumbs>
+		</Box>
 	)
 }

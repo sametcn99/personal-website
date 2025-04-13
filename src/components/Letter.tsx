@@ -1,3 +1,5 @@
+import { Box } from '@mui/material'
+
 export default function Letter({
 	children,
 	id,
@@ -6,11 +8,16 @@ export default function Letter({
 	id: string
 }) {
 	return (
-		<section
-			className='print:h-a4 print:w-a4'
+		<Box
 			id={id}
+			sx={{
+				'@media print': {
+					height: '210mm',
+					width: '297mm',
+				},
+			}}
 		>
 			{children}
-		</section>
+		</Box>
 	)
 }

@@ -2,20 +2,33 @@
 
 import { useEffect, useState, useCallback } from 'react'
 import dynamic from 'next/dynamic'
-import { cn } from '@/lib/utils'
+import { Box, CircularProgress, Typography, Alert } from '@mui/material'
 
 // Use dynamic import for client-side rendering of the Mermaid component
 const Mermaid = dynamic(() => import('./mermaid'), {
 	ssr: false,
 	loading: () => (
-		<div className='flex justify-center items-center p-6 border border-gray-800 rounded-lg bg-gray-900 dark:bg-black overflow-hidden shadow-md'>
-			<div className='flex flex-col items-center gap-3'>
-				<div className='h-6 w-6 border-2 border-gray-400 border-t-gray-200 dark:border-gray-700 dark:border-t-gray-500 rounded-full animate-spin'></div>
-				<div className='text-gray-300 dark:text-gray-400 font-medium'>
+		<Box
+			sx={{
+				display: 'flex',
+				justifyContent: 'center',
+				alignItems: 'center',
+				p: 3,
+				border: 1,
+				borderColor: 'grey.800',
+				borderRadius: 1,
+				bgcolor: 'background.paper',
+				overflow: 'hidden',
+				boxShadow: 1,
+			}}
+		>
+			<Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
+				<CircularProgress size={24} />
+				<Typography variant="body2" color="text.secondary">
 					Loading Mermaid diagram...
-				</div>
-			</div>
-		</div>
+				</Typography>
+			</Box>
+		</Box>
 	),
 })
 
@@ -159,23 +172,36 @@ const MermaidWrapper: React.FC<MermaidWrapperProps> = ({
 	// Show loading state while component is mounting
 	if (!isMounted) {
 		return (
-			<div className='flex justify-center items-center p-6 border border-gray-800 rounded-lg bg-gray-900 dark:bg-black overflow-hidden shadow-md'>
-				<div className='flex flex-col items-center gap-3'>
-					<div className='h-6 w-6 border-2 border-gray-400 border-t-gray-200 dark:border-gray-700 dark:border-t-gray-500 rounded-full animate-spin'></div>
-					<div className='text-gray-300 dark:text-gray-400 font-medium'>
+			<Box
+				sx={{
+					display: 'flex',
+					justifyContent: 'center',
+					alignItems: 'center',
+					p: 3,
+					border: 1,
+					borderColor: 'grey.800',
+					borderRadius: 1,
+					bgcolor: 'background.paper',
+					overflow: 'hidden',
+					boxShadow: 1,
+				}}
+			>
+				<Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
+					<CircularProgress size={24} />
+					<Typography variant="body2" color="text.secondary">
 						{errorMessages.loading}
-					</div>
-				</div>
-			</div>
+					</Typography>
+				</Box>
+			</Box>
 		)
 	}
 
 	// Show error state if no valid code was found
 	if (!processedCode) {
 		return (
-			<div className='p-4 border border-yellow-300 rounded bg-yellow-50 text-yellow-800 overflow-hidden'>
-				<p>{processingError || errorMessages.noValidCode}</p>
-			</div>
+			<Alert severity="warning" sx={{ mt: 2 }}>
+				{processingError || errorMessages.noValidCode}
+			</Alert>
 		)
 	}
 

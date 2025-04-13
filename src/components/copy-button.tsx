@@ -4,26 +4,21 @@ import { useState } from 'react'
 import { IconButton, Tooltip } from '@mui/material'
 import ContentCopyIcon from '@mui/icons-material/ContentCopy'
 import CheckIcon from '@mui/icons-material/Check'
-import { toast } from 'sonner'
 
 interface CopyButtonProps {
 	text: string
+	className?: string
 }
 
-export default function CopyButton({ text }: { text: string }) {
+export function CopyButton({ text, className }: CopyButtonProps) {
 	const [isCopied, setIsCopied] = useState(false)
 
 	const copy = async () => {
 		await navigator.clipboard.writeText(text)
 		setIsCopied(true)
-		toast.success('Code copied to clipboard', {
-			duration: 2000,
-			action: {
-				label: 'Dismiss',
-				onClick: () => toast.dismiss(),
-			},
-		})
-		setTimeout(() => setIsCopied(false), 2000)
+		setTimeout(() => {
+			setIsCopied(false)
+		}, 2000)
 	}
 
 	return (
@@ -36,7 +31,7 @@ export default function CopyButton({ text }: { text: string }) {
 				aria-label='copy'
 				onClick={copy}
 				disabled={isCopied}
-				className='absolute top-3 right-3 rounded-md p-2 transition-colors   text-gray-400 hover:bg-gray-800 hover:text-gray-50'
+				className={className}
 			>
 				{isCopied ? (
 					<CheckIcon sx={{ color: 'success.main' }} />

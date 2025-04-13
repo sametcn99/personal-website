@@ -8,6 +8,7 @@ import {
 	ReactElement,
 } from 'react'
 import CopyButton from './CopyButton'
+import { Box } from '@mui/material'
 
 interface PreProps {
 	children: ReactNode
@@ -64,14 +65,26 @@ export default function Pre({ children, ...props }: PreProps) {
 	})
 
 	return (
-		<div className='group relative'>
-			<pre
+		<Box
+			className='group'
+			sx={{
+				position: 'relative',
+			}}
+		>
+			<Box
+				component='pre'
 				{...props}
-				className='relative overflow-auto rounded-lg  p-4 !bg-gray-900'
+				sx={{
+					position: 'relative',
+					overflow: 'auto',
+					borderRadius: 1,
+					p: 2,
+					bgcolor: 'grey.900',
+				}}
 			>
 				{children}
-			</pre>
+			</Box>
 			{!isMermaid && <CopyButton text={code} />}
-		</div>
+		</Box>
 	)
 }

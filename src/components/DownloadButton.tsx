@@ -1,6 +1,6 @@
 'use client'
 import { FaRegFilePdf } from 'react-icons/fa6'
-import { Button } from './ui/button'
+import { Button, Box } from '@mui/material'
 
 export default function DownloadButton() {
 	const handleDownload = () => {
@@ -10,13 +10,24 @@ export default function DownloadButton() {
 	return (
 		<Button
 			onClick={handleDownload}
-			className='fixed right-4 bottom-4 print:hidden '
+			sx={{
+				position: 'fixed',
+				right: 4,
+				bottom: 4,
+				'@media print': {
+					display: 'none',
+				},
+			}}
+			startIcon={<FaRegFilePdf size={24} />}
 		>
-			<FaRegFilePdf
-				className='inline'
-				size={24}
-			/>
-			<span className='hidden font-semibold md:block'>PDF</span>
+			<Box
+				sx={{
+					display: { xs: 'none', md: 'block' },
+					fontWeight: 600,
+				}}
+			>
+				PDF
+			</Box>
 		</Button>
 	)
 }

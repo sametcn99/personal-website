@@ -1,26 +1,39 @@
-"use client"
+'use client'
 
-import type React from "react"
-
-import { cn } from "@/utils/cn"
+import { Box, Container } from '@mui/material'
+import type React from 'react'
 
 interface MainContentProps {
-  children: React.ReactNode
-  isMobile: boolean
-  pathname: string
+	children: React.ReactNode
+	isMobile: boolean
+	pathname: string
 }
 
 const MainContent: React.FC<MainContentProps> = ({ children, pathname }) => {
-  return (
-    <main className="flex-1 overflow-hidden px-4 py-8 md:px-8">
-      <div className="mx-auto max-w-4xl">
-        <div className="mb-4 flex items-center md:hidden">
-          {/* Mobile sidebar trigger is now inside the MobileSidebar component */}
-        </div>
-        <div className={cn("prose prose-slate dark:prose-invert max-w-none")}>{children}</div>
-      </div>
-    </main>
-  )
+	return (
+		<Box
+			component='main'
+			sx={{
+				flexGrow: 1,
+				overflow: 'hidden',
+				px: { xs: 2, md: 4 },
+				py: 4,
+			}}
+		>
+			<Container maxWidth='lg'>
+				<Box
+					sx={{
+						display: { xs: 'flex', md: 'none' },
+						mb: 2,
+						alignItems: 'center',
+					}}
+				>
+					{/* Mobile sidebar trigger is now inside the MobileSidebar component */}
+				</Box>
+				<Box>{children}</Box>
+			</Container>
+		</Box>
+	)
 }
 
 export default MainContent

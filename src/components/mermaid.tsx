@@ -10,9 +10,19 @@ import React, {
 	ErrorInfo,
 } from 'react'
 import mermaid, { MermaidConfig } from 'mermaid'
-import { CopyButton } from './copy-button'
 import { v4 as uuidv4 } from 'uuid'
-import { cn } from '@/lib/utils'
+import {
+	CircularProgress,
+	Typography,
+	Button,
+	Box,
+	IconButton,
+	Tooltip,
+} from '@mui/material'
+import ZoomInIcon from '@mui/icons-material/ZoomIn'
+import ZoomOutIcon from '@mui/icons-material/ZoomOut'
+import RefreshIcon from '@mui/icons-material/Refresh'
+import CopyButton from './CopyButton'
 
 // Define comprehensive types for better type safety
 interface MermaidRendererProps {
@@ -347,18 +357,28 @@ const useMermaid = (props: MermaidRendererProps) => {
 // UI Components for different states (memoized for performance)
 const LoadingState = memo(
 	({ message = 'Loading diagram...' }: { message?: string }) => (
-		<div
-			className='flex justify-center items-center p-6 border border-gray-800 rounded-lg bg-gray-900 dark:bg-black overflow-hidden shadow-md'
+		<Box
+			display='flex'
+			justifyContent='center'
+			alignItems='center'
+			padding={6}
+			border='1px solid'
+			borderColor='grey.800'
+			borderRadius='8px'
+			bgcolor='grey.900'
+			color='white'
+			overflow='hidden'
+			boxShadow={3}
 			role='status'
 			aria-live='polite'
 		>
-			<div className='flex flex-col items-center gap-3'>
-				<div className='h-6 w-6 border-2 border-gray-400 border-t-gray-200 dark:border-gray-700 dark:border-t-gray-500 rounded-full animate-spin'></div>
-				<div className='text-gray-300 dark:text-gray-400 font-medium'>
+			<Box display='flex' flexDirection='column' alignItems='center' gap={3}>
+				<CircularProgress size={24} color='inherit' />
+				<Typography variant='subtitle1' color='grey.300'>
 					{message}
-				</div>
-			</div>
-		</div>
+				</Typography>
+			</Box>
+		</Box>
 	)
 )
 
@@ -376,24 +396,43 @@ const ErrorState = memo(
 		onRetry: () => void
 		retryButtonText?: string
 	}) => (
-		<div
-			className='mermaid-error p-4 border border-red-300 rounded bg-red-50 text-red-800'
+		<Box
+			padding={4}
+			border='1px solid'
+			borderColor='red.300'
+			borderRadius='4px'
+			bgcolor='red.50'
+			color='red.800'
 			role='alert'
 			aria-live='assertive'
 		>
-			<p className='font-bold mb-2'>Diagram rendering failed</p>
-			<p className='text-sm mb-2'>{error}</p>
-			<pre className='text-xs p-2 bg-gray-100 overflow-auto rounded mb-2 whitespace-pre-wrap'>
+			<Typography variant='h6' fontWeight='bold' mb={2}>
+				Diagram rendering failed
+			</Typography>
+			<Typography variant='body2' mb={2}>
+				{error}
+			</Typography>
+			<pre
+				style={{
+					fontSize: '12px',
+					padding: '8px',
+					backgroundColor: '#f5f5f5',
+					overflow: 'auto',
+					borderRadius: '4px',
+					whiteSpace: 'pre-wrap',
+				}}
+			>
 				{code}
 			</pre>
-			<button
+			<Button
 				onClick={onRetry}
-				className='px-4 py-2 bg-gray-800 hover:bg-gray-700 text-white rounded-lg shadow-sm transition-colors duration-200 font-medium text-sm'
+				variant='contained'
+				color='primary'
 				aria-label={retryButtonText}
 			>
 				{retryButtonText}
-			</button>
-		</div>
+			</Button>
+		</Box>
 	)
 )
 
@@ -412,110 +451,38 @@ const ZoomControls = memo(
 		onReset: () => void
 		scale: number
 	}) => (
-		<div className='flex items-center gap-2 absolute top-2 right-2 bg-gray-800 dark:bg-gray-900 p-1.5 rounded-lg shadow-md z-10'>
-			<button
-				onClick={onZoomOut}
-				className='p-1.5 rounded-lg text-gray-200 hover:bg-gray-700 dark:hover:bg-gray-800 transition-colors duration-200'
-				title='Zoom out'
-				type='button'
-			>
-				<svg
-					xmlns='http://www.w3.org/2000/svg'
-					width='16'
-					height='16'
-					viewBox='0 0 24 24'
-					fill='none'
-					stroke='currentColor'
-					strokeWidth='2'
-					strokeLinecap='round'
-					strokeLinejoin='round'
-				>
-					<circle
-						cx='11'
-						cy='11'
-						r='8'
-					/>
-					<line
-						x1='21'
-						y1='21'
-						x2='16.65'
-						y2='16.65'
-					/>
-					<line
-						x1='8'
-						y1='11'
-						x2='14'
-						y2='11'
-					/>
-				</svg>
-			</button>
-			<span className='text-xs text-gray-200 dark:text-gray-300 font-medium'>
+		<Box
+			display='flex'
+			alignItems='center'
+			gap={1}
+			position='absolute'
+			top={2}
+			right={2}
+			bgcolor='rgba(0, 0, 0, 0.7)'
+			padding={0.5}
+			borderRadius={1}
+			boxShadow={3}
+			zIndex={10}
+		>
+			<Tooltip title='Zoom out' placement='top' arrow>
+				<IconButton color='inherit' onClick={onZoomOut} aria-label='zoom out'>
+					<ZoomOutIcon />
+				</IconButton>
+			</Tooltip>
+			<Typography variant='caption' color='white'>
 				{Math.round(scale * 100)}%
-			</span>
-			<button
-				onClick={onZoomIn}
-				className='p-1.5 rounded-lg text-gray-200 hover:bg-gray-700 dark:hover:bg-gray-800 transition-colors duration-200'
-				title='Zoom in'
-				type='button'
-			>
-				<svg
-					xmlns='http://www.w3.org/2000/svg'
-					width='16'
-					height='16'
-					viewBox='0 0 24 24'
-					fill='none'
-					stroke='currentColor'
-					strokeWidth='2'
-					strokeLinecap='round'
-					strokeLinejoin='round'
-				>
-					<circle
-						cx='11'
-						cy='11'
-						r='8'
-					/>
-					<line
-						x1='21'
-						y1='21'
-						x2='16.65'
-						y2='16.65'
-					/>
-					<line
-						x1='11'
-						y1='8'
-						x2='11'
-						y2='14'
-					/>
-					<line
-						x1='8'
-						y1='11'
-						x2='14'
-						y2='11'
-					/>
-				</svg>
-			</button>
-			<button
-				onClick={onReset}
-				className='p-1.5 rounded-lg text-gray-200 hover:bg-gray-700 dark:hover:bg-gray-800 transition-colors duration-200'
-				title='Reset view'
-				type='button'
-			>
-				<svg
-					xmlns='http://www.w3.org/2000/svg'
-					width='16'
-					height='16'
-					viewBox='0 0 24 24'
-					fill='none'
-					stroke='currentColor'
-					strokeWidth='2'
-					strokeLinecap='round'
-					strokeLinejoin='round'
-				>
-					<path d='M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8' />
-					<path d='M3 3v5h5' />
-				</svg>
-			</button>
-		</div>
+			</Typography>
+			<Tooltip title='Zoom in' placement='top' arrow>
+				<IconButton color='inherit' onClick={onZoomIn} aria-label='zoom in'>
+					<ZoomInIcon />
+				</IconButton>
+			</Tooltip>
+			<Tooltip title='Reset view' placement='top' arrow>
+				<IconButton color='inherit' onClick={onReset} aria-label='reset view'>
+					<RefreshIcon />
+				</IconButton>
+			</Tooltip>
+		</Box>
 	)
 )
 
@@ -540,19 +507,19 @@ const Mermaid = memo(
 		onRenderError,
 		enableZoom = true,
 	}: MermaidRendererProps) => {
-		const { containerRef, state, renderDiagram, handleError } = useMermaid({
-			code,
-			id,
-			maxRetries,
-			retryDelay,
-			theme,
-			errorMessages,
-			onRenderSuccess,
-			onRenderError,
-		})
+		const { containerRef, state, uniqueId, renderDiagram, handleError } =
+			useMermaid({
+				code,
+				id,
+				maxRetries,
+				retryDelay,
+				theme,
+				onRenderSuccess,
+				onRenderError,
+				errorMessages,
+			})
 
-		// Add state for zoom and pan
-		const [zoomPan, setZoomPan] = useState<ZoomPanState>({
+		const [zoomPanState, setZoomPanState] = useState<ZoomPanState>({
 			scale: 1,
 			translateX: 0,
 			translateY: 0,
@@ -561,37 +528,26 @@ const Mermaid = memo(
 			startY: 0,
 		})
 
-		const svgRef = useRef<SVGSVGElement | null>(null)
-		const wrapperRef = useRef<HTMLDivElement | null>(null)
+		const zoomStep = 0.2
+		const minZoom = 0.2
+		const maxZoom = 2
 
-		// Update svgRef when diagram is rendered
-		useEffect(() => {
-			if (state.status === 'success' && containerRef.current) {
-				svgRef.current = containerRef.current.querySelector('svg')
-			}
-		}, [state.status])
-
-		const handleRetry = useCallback(() => {
-			renderDiagram(0)
-		}, [renderDiagram])
-
-		// Zoom handlers
-		const handleZoomIn = useCallback(() => {
-			setZoomPan((prev) => ({
-				...prev,
-				scale: Math.min(prev.scale * 1.2, 3),
+		const onZoomIn = useCallback(() => {
+			setZoomPanState((prevState) => ({
+				...prevState,
+				scale: Math.min(prevState.scale + zoomStep, maxZoom),
 			}))
-		}, [])
+		}, [zoomStep, maxZoom])
 
-		const handleZoomOut = useCallback(() => {
-			setZoomPan((prev) => ({
-				...prev,
-				scale: Math.max(prev.scale / 1.2, 0.5),
+		const onZoomOut = useCallback(() => {
+			setZoomPanState((prevState) => ({
+				...prevState,
+				scale: Math.max(prevState.scale - zoomStep, minZoom),
 			}))
-		}, [])
+		}, [zoomStep, minZoom])
 
-		const handleReset = useCallback(() => {
-			setZoomPan({
+		const onReset = useCallback(() => {
+			setZoomPanState({
 				scale: 1,
 				translateX: 0,
 				translateY: 0,
@@ -601,156 +557,123 @@ const Mermaid = memo(
 			})
 		}, [])
 
-		// Mouse and touch event handlers for panning
-		const handleMouseDown = useCallback(
-			(e: React.MouseEvent) => {
-				if (!enableZoom) return
-				setZoomPan((prev) => ({
-					...prev,
-					isDragging: true,
-					startX: e.clientX - prev.translateX,
-					startY: e.clientY - prev.translateY,
-				}))
-			},
-			[enableZoom]
-		)
+		const handleMouseDown = useCallback((event: React.MouseEvent) => {
+			setZoomPanState((prevState) => ({
+				...prevState,
+				isDragging: true,
+				startX: event.clientX - prevState.translateX,
+				startY: event.clientY - prevState.translateY,
+			}))
+		}, [])
 
-		const handleMouseMove = useCallback(
-			(e: MouseEvent) => {
-				if (!enableZoom) return
-				setZoomPan((prev) => {
-					if (!prev.isDragging) return prev
-					return {
-						...prev,
-						translateX: e.clientX - prev.startX,
-						translateY: e.clientY - prev.startY,
-					}
-				})
-			},
-			[enableZoom]
-		)
+		const handleMouseMove = useCallback((event: React.MouseEvent) => {
+			if (!zoomPanState.isDragging) return
+			setZoomPanState((prevState) => ({
+				...prevState,
+				translateX: event.clientX - prevState.startX,
+				translateY: event.clientY - prevState.startY,
+			}))
+		}, [zoomPanState.isDragging])
 
 		const handleMouseUp = useCallback(() => {
-			if (!enableZoom) return
-			setZoomPan((prev) => ({ ...prev, isDragging: false }))
-		}, [enableZoom])
+			setZoomPanState((prevState) => ({
+				...prevState,
+				isDragging: false,
+			}))
+		}, [])
 
-		// Handle wheel event for zooming
-		const handleWheel = useCallback(
-			(e: WheelEvent) => {
-				if (!enableZoom) return
-				e.preventDefault()
+		const handleMouseLeave = useCallback(() => {
+			setZoomPanState((prevState) => ({
+				...prevState,
+				isDragging: false,
+			}))
+		}, [])
 
-				const delta = e.deltaY > 0 ? 0.9 : 1.1
-
-				setZoomPan((prev) => {
-					const newScale = Math.max(0.5, Math.min(3, prev.scale * delta))
-					return {
-						...prev,
-						scale: newScale,
-					}
-				})
-			},
-			[enableZoom]
+		const diagramStyle = useMemo(
+			() => ({
+				transform: `translate(${zoomPanState.translateX}px, ${zoomPanState.translateY}px) scale(${zoomPanState.scale})`,
+				transformOrigin: '0 0',
+				transition: 'transform 0.3s ease-out',
+				width: '100%',
+				height: '100%',
+				display: 'block',
+			}),
+			[zoomPanState.scale, zoomPanState.translateX, zoomPanState.translateY]
 		)
 
-		// Set up event listeners
-		useEffect(() => {
-			if (!enableZoom) return
-
-			const wrapper = wrapperRef.current
-			if (!wrapper) return
-
-			// For dragging
-			document.addEventListener('mousemove', handleMouseMove)
-			document.addEventListener('mouseup', handleMouseUp)
-
-			// For wheel zooming
-			wrapper.addEventListener('wheel', handleWheel, { passive: false })
-
-			return () => {
-				document.removeEventListener('mousemove', handleMouseMove)
-				document.removeEventListener('mouseup', handleMouseUp)
-				wrapper?.removeEventListener('wheel', handleWheel)
+		const getStatusComponent = () => {
+			switch (state.status) {
+				case 'loading':
+					return (
+						<LoadingState message={errorMessages?.loading || 'Loading diagram...'} />
+					)
+				case 'error':
+					return (
+						<ErrorState
+							error={state.error || errorMessages?.renderFailed || 'Render failed'}
+							code={code}
+							onRetry={renderDiagram}
+							retryButtonText={errorMessages?.retryButton || 'Retry'}
+						/>
+					)
+				case 'success':
+					return null // Diagram is rendered directly
+				default:
+					return null
 			}
-		}, [handleMouseMove, handleMouseUp, handleWheel, enableZoom])
+		}
 
-		// Apply the transformation to the SVG
-		useEffect(() => {
-			if (state.status === 'success' && svgRef.current && enableZoom) {
-				const svg = svgRef.current
-				svg.style.transform = `translate(${zoomPan.translateX}px, ${zoomPan.translateY}px) scale(${zoomPan.scale})`
-				svg.style.transformOrigin = 'center'
-				svg.style.transition = zoomPan.isDragging
-					? 'none'
-					: 'transform 0.2s ease-out'
-			}
-		}, [zoomPan, state.status, enableZoom])
+		const svgElement = containerRef.current?.querySelector('svg')
 
 		return (
-			<div className={cn('mermaid-wrapper my-4 relative', className)}>
-				<MermaidErrorBoundary onError={handleError}>
-					{state.status === 'loading' && (
-						<LoadingState message={errorMessages.loading} />
-					)}
+			<Box
+				className={className}
+				position='relative'
+				width='100%'
+				height='100%'
+				overflow='hidden'
+				bgcolor='grey.50'
+				borderRadius={1}
+				boxShadow={2}
+			>
+				{enableZoom && state.status === 'success' && (
+					<ZoomControls
+						onZoomIn={onZoomIn}
+						onZoomOut={onZoomOut}
+						onReset={onReset}
+						scale={zoomPanState.scale}
+					/>
+				)}
 
-					{state.status === 'error' && (
-						<ErrorState
-							error={state.error || ''}
-							code={code}
-							onRetry={handleRetry}
-							retryButtonText={errorMessages.retryButton}
-						/>
-					)}
-
-					{state.status === 'success' && enableZoom && (
-						<>
-							<div className='absolute top-2 left-2 z-10'>
-								<CopyButton text={code} />
-							</div>
-							<ZoomControls
-								onZoomIn={handleZoomIn}
-								onZoomOut={handleZoomOut}
-								onReset={handleReset}
-								scale={zoomPan.scale}
-							/>
-						</>
-					)}
-
-					<div
-						ref={wrapperRef}
-						className={cn(
-							'overflow-hidden',
-							enableZoom && state.status === 'success' ? 'cursor-grab' : '',
-							zoomPan.isDragging ? 'cursor-grabbing' : ''
-						)}
-						style={{
-							minHeight: '50px',
-							display: 'block',
-							width: '100%',
-							position: 'relative',
-						}}
-						onMouseDown={handleMouseDown}
-					>
+				<Box
+					ref={containerRef}
+					className='mermaid'
+					style={{
+						width: '100%',
+						height: '100%',
+						overflow: 'auto',
+						cursor: enableZoom ? 'grab' : 'default',
+					}}
+					onMouseDown={enableZoom ? handleMouseDown : undefined}
+					onMouseMove={enableZoom ? handleMouseMove : undefined}
+					onMouseUp={enableZoom ? handleMouseUp : undefined}
+					onMouseLeave={enableZoom ? handleMouseLeave : undefined}
+				>
+					{state.status === 'success' && state.svg ? (
 						<div
-							ref={containerRef}
-							className='overflow-visible'
-							style={{
-								minHeight: '50px',
-								display: 'block',
-								width: '100%',
-							}}
-							aria-hidden={state.status !== 'success'}
-							data-testid='mermaid-container'
+							style={diagramStyle}
+							dangerouslySetInnerHTML={{ __html: state.svg }}
 						/>
-					</div>
-				</MermaidErrorBoundary>
-			</div>
+					) : (
+						getStatusComponent()
+					)}
+				</Box>
+				<CopyButton text={code} />
+			</Box>
 		)
 	}
 )
 
-// Set display name for better debugging
 Mermaid.displayName = 'Mermaid'
 
 export default Mermaid

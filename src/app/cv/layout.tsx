@@ -1,12 +1,40 @@
 import DownloadButton from '@/components/DownloadButton'
+import { Box } from '@mui/material'
 
 export default function MdxLayout({ children }: { children: React.ReactNode }) {
 	return (
-		<main className='relative mx-auto w-fit px-2 print:mx-0 print:px-0 print:bg-white print:text-black'>
-			<div className='prose dark:prose-invert prose-h1:my-0 prose-h2:my-2 prose-p:my-0 prose-hr:my-6 print:!m-0 print:!p-0'>
+		<Box
+			component='main'
+			sx={{
+				position: 'relative',
+				mx: 'auto',
+				width: 'fit-content',
+				px: 2,
+				'@media print': {
+					mx: 0,
+					px: 0,
+					bgcolor: 'white',
+					color: 'black',
+				},
+			}}
+		>
+			<Box
+				sx={{
+					'& .prose': {
+						'& h1': { my: 0 },
+						'& h2': { my: 2 },
+						'& p': { my: 0 },
+						'& hr': { my: 6 },
+					},
+					'@media print': {
+						m: '0 !important',
+						p: '0 !important',
+					},
+				}}
+			>
 				{children}
-			</div>
+			</Box>
 			<DownloadButton />
-		</main>
+		</Box>
 	)
 }

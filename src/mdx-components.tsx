@@ -31,6 +31,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
 				variant='h1'
 				id={generateId(String(children))}
 				gutterBottom
+				sx={{ fontSize: '2.5rem' }}
 				{...props}
 			>
 				{children}
@@ -40,7 +41,13 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
 			<Typography
 				variant='h2'
 				id={generateId(String(children))}
-				sx={{ mt: 8, mb: 4, borderBottom: 1, paddingBottom: 2 }}
+				sx={{
+					mt: 6,
+					mb: 3,
+					borderBottom: 1,
+					paddingBottom: 1.5,
+					fontSize: '2rem',
+				}}
 				{...props}
 			>
 				{children}
@@ -50,7 +57,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
 			<Typography
 				variant='h3'
 				id={generateId(String(children))}
-				sx={{ mt: 6, mb: 3 }}
+				sx={{ mt: 5, mb: 2.5, fontSize: '1.5rem' }}
 				{...props}
 			>
 				{children}
@@ -59,7 +66,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
 		p: ({ children, ...props }) => (
 			<Typography
 				variant='body1'
-				sx={{ '&:not(:first-of-type)': { mt: 2 } }}
+				sx={{ '&:not(:first-of-type)': { mt: 2 }, fontSize: '0.95rem' }}
 				{...props}
 			>
 				{children}
@@ -130,7 +137,6 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
 		},
 		pre: (props) => <Pre {...props} />,
 		code: ({ children, className, ...props }) => {
-		
 			return (
 				<Typography
 					component='code'

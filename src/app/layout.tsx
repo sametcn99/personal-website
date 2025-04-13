@@ -106,111 +106,6 @@ export default function Layout({ children }: { children: ReactNode }) {
 		setOpen(!open)
 	}
 
-	// Profile Section Component
-	const ProfileSection = () => (
-		<Box
-			sx={{
-				display: 'flex',
-				flexDirection: 'column',
-				alignItems: 'center',
-				p: 3,
-				pt: 4,
-			}}
-		>
-			<Avatar
-				sx={{
-					width: 90,
-					height: 90,
-					mb: 2,
-					border: `4px solid ${alpha(theme.palette.primary.main, 0.2)}`,
-					boxShadow: `0 0 20px ${alpha(theme.palette.primary.main, 0.4)}`,
-				}}
-				alt='Samet Can Cıncık'
-				src='/placeholder.svg?height=90&width=90'
-			>
-				SC
-			</Avatar>
-			<Typography
-				variant='h6'
-				sx={{
-					fontWeight: 'bold',
-					mb: 0.5,
-					background: `linear-gradient(45deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
-					backgroundClip: 'text',
-					textFillColor: 'transparent',
-					WebkitBackgroundClip: 'text',
-					WebkitTextFillColor: 'transparent',
-				}}
-			>
-				Samet Can Cıncık
-			</Typography>
-			<Chip
-				label='Web Developer'
-				size='small'
-				sx={{
-					bgcolor: alpha(theme.palette.primary.main, 0.1),
-					color: theme.palette.primary.main,
-					fontWeight: 500,
-					'& .MuiChip-label': { px: 1 },
-				}}
-			/>
-		</Box>
-	)
-
-	// Sidebar Footer Component
-	const SidebarFooter = () => (
-		<>
-			<Divider sx={{ opacity: 0.6 }} />
-			<Box sx={{ p: 2 }}>
-				<Stack
-					direction='row'
-					spacing={1}
-					justifyContent='center'
-					sx={{ mb: 1.5 }}
-				>
-					<IconButton
-						size='small'
-						sx={{
-							color: theme.palette.text.secondary,
-							'&:hover': { color: theme.palette.primary.main },
-						}}
-					>
-						<GitHub fontSize='small' />
-					</IconButton>
-					<IconButton
-						size='small'
-						sx={{
-							color: theme.palette.text.secondary,
-							'&:hover': { color: theme.palette.primary.main },
-						}}
-					>
-						<LinkedIn fontSize='small' />
-					</IconButton>
-					<IconButton
-						size='small'
-						sx={{
-							color: theme.palette.text.secondary,
-							'&:hover': { color: theme.palette.primary.main },
-						}}
-					>
-						<Twitter fontSize='small' />
-					</IconButton>
-				</Stack>
-				<Typography
-					variant='caption'
-					color='text.secondary'
-					align='center'
-					sx={{
-						display: 'block',
-						opacity: 0.8,
-					}}
-				>
-					© {new Date().getFullYear()} Samet Can Cıncık
-				</Typography>
-			</Box>
-		</>
-	)
-
 	// Mobile Menu Toggle Component
 	const MobileMenuToggle = () => {
 		if (!isMobile) return null
@@ -255,9 +150,6 @@ export default function Layout({ children }: { children: ReactNode }) {
 					borderRight: `1px solid ${alpha(theme.palette.divider, 0.1)}`,
 				}}
 			>
-				<ProfileSection />
-				<Divider sx={{ opacity: 0.6 }} />
-
 				<Box sx={{ flex: 1, overflowY: 'auto', px: 1 }}>
 					{Object.entries(sidebarLinks).map(([category, links]) => (
 						<React.Fragment key={category}>
@@ -317,8 +209,6 @@ export default function Layout({ children }: { children: ReactNode }) {
 						</React.Fragment>
 					))}
 				</Box>
-
-				<SidebarFooter />
 			</Paper>
 		)
 

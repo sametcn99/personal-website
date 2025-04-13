@@ -7,22 +7,15 @@ import {
 	ListItem,
 	ListItemButton,
 	ListItemText,
-	Divider,
 	IconButton,
 	Typography,
-	Avatar,
 	useTheme,
 	Paper,
 	alpha,
-	Chip,
-	Stack,
 } from '@mui/material'
 import {
 	Menu as MenuIcon,
 	ChevronLeft as ChevronLeftIcon,
-	GitHub,
-	LinkedIn,
-	Twitter,
 } from '@mui/icons-material'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 import sidebarLinks from '@/data/sidebar-links.json'

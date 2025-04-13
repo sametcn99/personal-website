@@ -1,10 +1,5 @@
 'use client'
-import {
-	Breadcrumbs,
-	Link,
-	Typography,
-	Box,
-} from '@mui/material'
+import { Breadcrumbs, Link, Typography, Box } from '@mui/material'
 import NextLink from 'next/link'
 
 export default function PageBreadcrumb({ path }: { path: string }) {

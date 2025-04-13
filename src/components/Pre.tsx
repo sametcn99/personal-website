@@ -1,13 +1,6 @@
 'use client'
 
-import {
-	Children,
-	ReactNode,
-	isValidElement,
-	cloneElement,
-	ReactElement,
-} from 'react'
-import CopyButton from './CopyButton'
+import { Children, ReactNode, isValidElement, ReactElement } from 'react'
 import { Box } from '@mui/material'
 
 interface PreProps {
@@ -29,12 +22,6 @@ interface ElementProps {
 export default function Pre({ children, ...props }: PreProps) {
 	// Extract the code content from the child element
 	let code = ''
-	let isMermaid = false
-
-	// Check if the pre element has mermaid language
-	if (props['data-language'] === 'mermaid') {
-		isMermaid = true
-	}
 
 	// Find the code element and extract its content
 	Children.forEach(children, (child) => {
@@ -84,7 +71,6 @@ export default function Pre({ children, ...props }: PreProps) {
 			>
 				{children}
 			</Box>
-			{!isMermaid && <CopyButton text={code} />}
 		</Box>
 	)
 }

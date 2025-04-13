@@ -1,11 +1,16 @@
-import { socialMediaLinks } from '@/lib/social'
-import { readdirSync, statSync } from 'fs'
-import { join } from 'path'
 import { List, ListItem, Typography, Link as MuiLink } from '@mui/material'
 import { OpenInNew as OpenInNewIcon } from '@mui/icons-material'
+import { socialMediaLinks } from '@/lib/social'
+import { readdirSync, statSync } from 'fs'
 import Link from 'next/link'
+import { join } from 'path'
 
-<Typography variant="h1" gutterBottom>Hello World!</Typography>
+<Typography
+	variant='h1'
+	gutterBottom
+>
+	Hello World!
+</Typography>
 
 {(() => {
 const grouped = socialMediaLinks
@@ -29,44 +34,54 @@ return acc;
 }, {});
 
 return Object.entries(grouped).map(([category, links]) => (
-  <div key={category}>
-    <Typography variant="h6" sx={{ mt: 2, mb: 1 }}>{category}</Typography>
-    <List>
-      {links.map((link) => (
-        <ListItem key={link.link.toString()}>
-          <MuiLink
-            component={Link}
-            href={link.link.toString()}
-            target="_blank"
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              color: 'primary.main',
-              '&:hover': {
-                '& .MuiSvgIcon-root': {
-                  opacity: 1
-                }
-              }
-            }}
-          >
-            {link.label}
-            <OpenInNewIcon 
-              sx={{ 
-                ml: 0.5, 
-                fontSize: '1rem',
-                opacity: 0,
-                transition: 'opacity 0.2s'
-              }} 
-            />
-          </MuiLink>
-        </ListItem>
-      ))}
-    </List>
-  </div>
-))
-})()}
 
-<Typography variant="h2" sx={{ mt: 4, mb: 2 }}>Recently Updated Gists</Typography>
+<div key={category}>
+	<Typography
+		variant='h6'
+		sx={{ mt: 2, mb: 1 }}
+	>
+		{category}
+	</Typography>
+	<List>
+		{links.map((link) => (
+			<ListItem key={link.link.toString()}>
+				<MuiLink
+					component={Link}
+					href={link.link.toString()}
+					target='_blank'
+					sx={{
+						display: 'flex',
+						alignItems: 'center',
+						color: 'primary.main',
+						'&:hover': {
+							'& .MuiSvgIcon-root': {
+								opacity: 1,
+							},
+						},
+					}}
+				>
+					{link.label}
+					<OpenInNewIcon
+						sx={{
+							ml: 0.5,
+							fontSize: '1rem',
+							opacity: 0,
+							transition: 'opacity 0.2s',
+						}}
+					/>
+				</MuiLink>
+			</ListItem>
+		))}
+	</List>
+</div>
+)) })()}
+
+<Typography
+	variant='h2'
+	sx={{ mt: 4, mb: 2 }}
+>
+	Recently Updated Gists
+</Typography>
 
 {(() => {
 const gistPath = join(process.cwd(), 'src', 'app', 'gist');
@@ -81,27 +96,30 @@ mtime: statSync(join(gistPath, dirent.name, 'page.mdx')).mtime
 .slice(0, 5);
 
 return (
-  <List>
-    {gistDirs.map((gist) => (
-      <ListItem key={gist.name}>
-        <MuiLink
-          component={Link}
-          href={`/gist/${gist.name}`}
-          sx={{ color: 'primary.main' }}
-        >
-          {gist.name
-            .split('-')
-            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-            .join(' ')}
-        </MuiLink>
-        <Typography component="span" sx={{ ml: 1 }}>
-          - {gist.mtime.toDateString()}
-        </Typography>
-      </ListItem>
-    ))}
-  </List>
-)
-})()}
+
+<List>
+	{gistDirs.map((gist) => (
+		<ListItem key={gist.name}>
+			<MuiLink
+				component={Link}
+				href={`/gist/${gist.name}`}
+				sx={{ color: 'primary.main' }}
+			>
+				{gist.name
+					.split('-')
+					.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+					.join(' ')}
+			</MuiLink>
+			<Typography
+				component='span'
+				sx={{ ml: 1 }}
+			>
+				- {gist.mtime.toDateString()}
+			</Typography>
+		</ListItem>
+	))}
+</List>
+) })()}
 
 ```mermaid
 mindmap

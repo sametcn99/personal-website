@@ -1,8 +1,8 @@
 'use client'
 
+import { Box, CircularProgress, Typography, Alert } from '@mui/material'
 import { useEffect, useState, useCallback } from 'react'
 import dynamic from 'next/dynamic'
-import { Box, CircularProgress, Typography, Alert } from '@mui/material'
 
 // Use dynamic import for client-side rendering of the Mermaid component
 const Mermaid = dynamic(() => import('./mermaid'), {
@@ -22,9 +22,19 @@ const Mermaid = dynamic(() => import('./mermaid'), {
 				boxShadow: 1,
 			}}
 		>
-			<Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
+			<Box
+				sx={{
+					display: 'flex',
+					flexDirection: 'column',
+					alignItems: 'center',
+					gap: 2,
+				}}
+			>
 				<CircularProgress size={24} />
-				<Typography variant="body2" color="text.secondary">
+				<Typography
+					variant='body2'
+					color='text.secondary'
+				>
 					Loading Mermaid diagram...
 				</Typography>
 			</Box>
@@ -186,9 +196,19 @@ const MermaidWrapper: React.FC<MermaidWrapperProps> = ({
 					boxShadow: 1,
 				}}
 			>
-				<Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
+				<Box
+					sx={{
+						display: 'flex',
+						flexDirection: 'column',
+						alignItems: 'center',
+						gap: 2,
+					}}
+				>
 					<CircularProgress size={24} />
-					<Typography variant="body2" color="text.secondary">
+					<Typography
+						variant='body2'
+						color='text.secondary'
+					>
 						{errorMessages.loading}
 					</Typography>
 				</Box>
@@ -199,7 +219,10 @@ const MermaidWrapper: React.FC<MermaidWrapperProps> = ({
 	// Show error state if no valid code was found
 	if (!processedCode) {
 		return (
-			<Alert severity="warning" sx={{ mt: 2 }}>
+			<Alert
+				severity='warning'
+				sx={{ mt: 2 }}
+			>
 				{processingError || errorMessages.noValidCode}
 			</Alert>
 		)

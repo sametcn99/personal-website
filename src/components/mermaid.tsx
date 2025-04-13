@@ -9,8 +9,6 @@ import React, {
 	memo,
 	ErrorInfo,
 } from 'react'
-import mermaid, { MermaidConfig } from 'mermaid'
-import { v4 as uuidv4 } from 'uuid'
 import {
 	CircularProgress,
 	Typography,
@@ -19,10 +17,12 @@ import {
 	IconButton,
 	Tooltip,
 } from '@mui/material'
-import ZoomInIcon from '@mui/icons-material/ZoomIn'
 import ZoomOutIcon from '@mui/icons-material/ZoomOut'
 import RefreshIcon from '@mui/icons-material/Refresh'
+import ZoomInIcon from '@mui/icons-material/ZoomIn'
+import mermaid, { MermaidConfig } from 'mermaid'
 import CopyButton from './CopyButton'
+import { v4 as uuidv4 } from 'uuid'
 
 // Define comprehensive types for better type safety
 interface MermaidRendererProps {
@@ -372,9 +372,20 @@ const LoadingState = memo(
 			role='status'
 			aria-live='polite'
 		>
-			<Box display='flex' flexDirection='column' alignItems='center' gap={3}>
-				<CircularProgress size={24} color='inherit' />
-				<Typography variant='subtitle1' color='grey.300'>
+			<Box
+				display='flex'
+				flexDirection='column'
+				alignItems='center'
+				gap={3}
+			>
+				<CircularProgress
+					size={24}
+					color='inherit'
+				/>
+				<Typography
+					variant='subtitle1'
+					color='grey.300'
+				>
 					{message}
 				</Typography>
 			</Box>
@@ -406,10 +417,17 @@ const ErrorState = memo(
 			role='alert'
 			aria-live='assertive'
 		>
-			<Typography variant='h6' fontWeight='bold' mb={2}>
+			<Typography
+				variant='h6'
+				fontWeight='bold'
+				mb={2}
+			>
 				Diagram rendering failed
 			</Typography>
-			<Typography variant='body2' mb={2}>
+			<Typography
+				variant='body2'
+				mb={2}
+			>
 				{error}
 			</Typography>
 			<pre
@@ -464,21 +482,48 @@ const ZoomControls = memo(
 			boxShadow={3}
 			zIndex={10}
 		>
-			<Tooltip title='Zoom out' placement='top' arrow>
-				<IconButton color='inherit' onClick={onZoomOut} aria-label='zoom out'>
+			<Tooltip
+				title='Zoom out'
+				placement='top'
+				arrow
+			>
+				<IconButton
+					color='inherit'
+					onClick={onZoomOut}
+					aria-label='zoom out'
+				>
 					<ZoomOutIcon />
 				</IconButton>
 			</Tooltip>
-			<Typography variant='caption' color='white'>
+			<Typography
+				variant='caption'
+				color='white'
+			>
 				{Math.round(scale * 100)}%
 			</Typography>
-			<Tooltip title='Zoom in' placement='top' arrow>
-				<IconButton color='inherit' onClick={onZoomIn} aria-label='zoom in'>
+			<Tooltip
+				title='Zoom in'
+				placement='top'
+				arrow
+			>
+				<IconButton
+					color='inherit'
+					onClick={onZoomIn}
+					aria-label='zoom in'
+				>
 					<ZoomInIcon />
 				</IconButton>
 			</Tooltip>
-			<Tooltip title='Reset view' placement='top' arrow>
-				<IconButton color='inherit' onClick={onReset} aria-label='reset view'>
+			<Tooltip
+				title='Reset view'
+				placement='top'
+				arrow
+			>
+				<IconButton
+					color='inherit'
+					onClick={onReset}
+					aria-label='reset view'
+				>
 					<RefreshIcon />
 				</IconButton>
 			</Tooltip>
@@ -566,14 +611,17 @@ const Mermaid = memo(
 			}))
 		}, [])
 
-		const handleMouseMove = useCallback((event: React.MouseEvent) => {
-			if (!zoomPanState.isDragging) return
-			setZoomPanState((prevState) => ({
-				...prevState,
-				translateX: event.clientX - prevState.startX,
-				translateY: event.clientY - prevState.startY,
-			}))
-		}, [zoomPanState.isDragging])
+		const handleMouseMove = useCallback(
+			(event: React.MouseEvent) => {
+				if (!zoomPanState.isDragging) return
+				setZoomPanState((prevState) => ({
+					...prevState,
+					translateX: event.clientX - prevState.startX,
+					translateY: event.clientY - prevState.startY,
+				}))
+			},
+			[zoomPanState.isDragging]
+		)
 
 		const handleMouseUp = useCallback(() => {
 			setZoomPanState((prevState) => ({
@@ -605,12 +653,16 @@ const Mermaid = memo(
 			switch (state.status) {
 				case 'loading':
 					return (
-						<LoadingState message={errorMessages?.loading || 'Loading diagram...'} />
+						<LoadingState
+							message={errorMessages?.loading || 'Loading diagram...'}
+						/>
 					)
 				case 'error':
 					return (
 						<ErrorState
-							error={state.error || errorMessages?.renderFailed || 'Render failed'}
+							error={
+								state.error || errorMessages?.renderFailed || 'Render failed'
+							}
 							code={code}
 							onRetry={renderDiagram}
 							retryButtonText={errorMessages?.retryButton || 'Retry'}

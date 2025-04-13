@@ -1,4 +1,3 @@
-import DownloadButton from '@/components/DownloadButton'
 import { Box } from '@mui/material'
 
 export default function MdxLayout({ children }: { children: React.ReactNode }) {
@@ -34,7 +33,6 @@ export default function MdxLayout({ children }: { children: React.ReactNode }) {
 			>
 				{children}
 			</Box>
-			<DownloadButton />
 		</Box>
 	)
 }

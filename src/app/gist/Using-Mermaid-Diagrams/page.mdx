@@ -59,10 +59,6 @@ Mermaid is a powerful diagramming and charting tool that lets you create diagram
 
 To use Mermaid in Markdown, you need to wrap your diagram code in a code block with the `mermaid` language specifier:
 
-\```mermaid graph TD A[Start] --> B{Is it working?} B -->|Yes| C[Great!] B -->|No| D[Check the documentation] \```
-
-This will render as:
-
 ```mermaid
 graph TD
     A[Start] --> B{Is it working?}
@@ -75,8 +71,6 @@ graph TD
 ### Flowcharts
 
 Flowcharts are one of the most commonly used diagram types. Here's a basic example:
-
-\```mermaid graph LR A[Start] --> B(Process) B --> C{Decision} C -->|Yes| D[Result 1] C -->|No| E[Result 2] \```
 
 ```mermaid
 graph LR
@@ -158,28 +152,20 @@ graph LR
 
 ### Sequence Diagrams
 
+### Sequence Diagrams
+
 Sequence diagrams show how processes operate with one another and in what order.
-
-\```mermaid sequenceDiagram participant Client participant Server participant Database
-
-    Client->>Server: Request Data
-    Server->>Database: Query
-    Database-->>Server: Return Results
-    Server-->>Client: Send Response
-
-\```
-
-```mermaid
 sequenceDiagram
-    participant Client
-    participant Server
-    participant Database
+participant Client
+participant Server
+participant Database
 
     Client->>Server: Request Data
     Server->>Database: Query
     Database-->>Server: Return Results
     Server-->>Client: Send Response
-```
+
+````
 
 ### Sequence Diagram Advanced Features
 
@@ -198,7 +184,7 @@ sequenceDiagram
     DB-->>S: Return Status
     S-->>A: Status Response
     A-->>U: Grant Access
-```
+````
 
 #### Alternative Paths and Loops
 
@@ -223,8 +209,6 @@ sequenceDiagram
 ### Class Diagrams
 
 Class diagrams are essential for object-oriented programming:
-
-\```mermaid classDiagram class Animal { +String name +int age +makeSound() } class Dog { +bark() } class Cat { +meow() } Animal <|-- Dog Animal <|-- Cat \```
 
 ```mermaid
 classDiagram
@@ -288,16 +272,14 @@ State diagrams show different states of a system:
 
 \```mermaid stateDiagram-v2 [*] --> Still Still --> [*] Still --> Moving Moving --> Still Moving --> Crash Crash --> [*] \```
 
-```mermaid
+````mermaid
 stateDiagram-v2
     [*] --> Still
     Still --> [*]
     Still --> Moving
-    Moving --> Still
-    Moving --> Crash
-    Crash --> [*]
-```
+### State Diagrams
 
+State diagrams show different states of a system:
 ### State Diagram Complex Patterns
 
 #### Composite States
@@ -314,13 +296,11 @@ stateDiagram-v2
     }
     Active --> Inactive: Shutdown
     Inactive --> [*]
-```
+````
 
 ### Entity Relationship Diagrams
 
 ERDs are useful for database design:
-
-\```mermaid erDiagram CUSTOMER ||--o{ ORDER : places ORDER ||--|{ LINE-ITEM : contains CUSTOMER }|..|{ DELIVERY-ADDRESS : uses \```
 
 ```mermaid
 erDiagram
@@ -329,29 +309,11 @@ erDiagram
     CUSTOMER }|..|{ DELIVERY-ADDRESS : uses
 ```
 
-### Advanced ERD Relationships
+### Entity Relationship Diagrams
 
-```mermaid
-erDiagram
-    CUSTOMER ||--o{ ORDER : places
-    CUSTOMER {
-        string id PK
-        string name
-        string email
-    }
-    ORDER ||--|{ LINE_ITEM : contains
-    ORDER {
-        int id PK
-        string status
-        date created_at
-    }
-    LINE_ITEM {
-        int id PK
-        int order_id FK
-        int product_id FK
-        int quantity
-    }
-```
+ERDs are useful for database design:
+
+````
 
 ### Gantt Charts
 
@@ -368,11 +330,9 @@ gantt
     Design phase          :a2, after a1, 10d
     section Development
     Implementation        :a3, after a2, 15d
-    Testing              :a4, after a3, 5d
-```
+### Gantt Charts
 
-## Advanced Topics
-
+Gantt charts are perfect for project planning:
 ### Styling and Themes
 
 You can customize the appearance of your diagrams using themes and inline styles:
@@ -390,13 +350,9 @@ graph TD
     C -->|One| D[Laptop]
     C -->|Two| E[iPhone]
     C -->|Three| F[Car]
-```
+### Styling and Themes
 
-### Advanced Styling Techniques
-
-#### Theme Customization
-
-```mermaid
+You can customize the appearance of your diagrams using themes and inline styles:
 %%{init: {
     'theme': 'base',
     'themeVariables': {
@@ -413,7 +369,7 @@ graph TD
     B --> C{Decision Node}
     C -->|Yes| D[Result 1]
     C -->|No| E[Result 2]
-```
+````
 
 #### Font and Text Styling
 
@@ -464,19 +420,6 @@ graph TD
 
 ### Business Process
 
-\```mermaid graph LR A[Customer Order] --> B{Stock Available?} B -->|Yes| C[Process Payment] B -->|No| D[Back Order] C --> E[Ship Order] D --> F[Notify Customer] F --> G[Wait for Stock] G --> C \```
-
-```mermaid
-graph LR
-    A[Customer Order] --> B{Stock Available?}
-    B -->|Yes| C[Process Payment]
-    B -->|No| D[Back Order]
-    C --> E[Ship Order]
-    D --> F[Notify Customer]
-    F --> G[Wait for Stock]
-    G --> C
-```
-
 ## Best Practices
 
 1. **Keep It Simple**
@@ -485,11 +428,10 @@ graph LR
    - Use clear and consistent naming
    - Add comments for clarity
 
-2. **Version Control**
+### Business Process
 
-   - Store diagrams with related documentation
-   - Use meaningful commit messages
-   - Review diagram changes during code review
+- Use meaningful commit messages
+- Review diagram changes during code review
 
 3. **Documentation**
    - Include diagram descriptions

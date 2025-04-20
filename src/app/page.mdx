@@ -5,6 +5,8 @@ import { readdirSync, statSync } from 'fs'
 import Link from 'next/link'
 import { join } from 'path'
 
+# Hello World!
+
 {(() => {
 const grouped = socialMediaLinks
 .filter(link => link.visible)
@@ -69,12 +71,7 @@ return Object.entries(grouped).map(([category, links]) => (
 </div>
 )) })()}
 
-<Typography
-	variant='h2'
-	sx={{ mt: 4, mb: 2 }}
->
-	Recently Updated Gists
-</Typography>
+## Recently Updated Gists
 
 {(() => {
 const gistPath = join(process.cwd(), 'src', 'app', 'gist');

@@ -253,7 +253,6 @@ export default function Layout({ children }: { children: ReactNode }) {
 				flexGrow: 1,
 				width: '100%',
 				p: { xs: 2, sm: 3 },
-				ml: open ? `${drawerWidth}px` : 0,
 				transition: theme.transitions.create('margin', {
 					easing: theme.transitions.easing.sharp,
 					duration: theme.transitions.duration.leavingScreen,

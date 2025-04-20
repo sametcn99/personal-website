@@ -51,18 +51,47 @@ code[data-line]::before {
 
 /* Print styles - Hide sidebar and menu when printing */
 @media print {
-  .MuiDrawer-root,
-  .sidebar-toggle {
-    display: none !important;
-  }
+	/* Hide navigation elements */
+	.MuiDrawer-root,
+	.sidebar-toggle,
+	.MuiAppBar-root {
+		display: none !important;
+	}
 
-  body {
-    background-color: white !important;
-    color: black !important;
-  }
-  
-  .MuiPaper-root {
-    box-shadow: none !important;
-    border: none !important;
-  }
+	/* Reset body styles for printing */
+	body {
+		background-color: white !important;
+		color: black !important;
+		margin: 0 !important;
+		padding: 0 !important;
+	}
+
+	/* Remove decorative elements from papers */
+	.MuiPaper-root {
+		box-shadow: none !important;
+		border: none !important;
+		padding: 0 !important;
+		margin: 0 !important;
+	}
+
+	/* Reset the layout container */
+	body > div {
+		display: block !important;
+		padding: 0 !important;
+		margin: 0 !important;
+	}
+
+	/* Make sure the content takes full width */
+	[class*='MainContent'] {
+		width: 100% !important;
+		padding: 0 !important;
+		margin: 0 !important;
+	}
+
+	/* Hide main content wrapper */
+	[class*='MainContentWrapper'] > .MuiPaper-root {
+		border: none !important;
+		box-shadow: none !important;
+		background-color: transparent !important;
+	}
 }

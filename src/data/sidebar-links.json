@@ -11,9 +11,17 @@
 		{
 			"title": "CV",
 			"href": "/cv"
+		},
+		{
+			"title": "Gists",
+			"href": "/gist"
 		}
 	],
 	"Gists": [
+		{
+			"title": "Additional Resources",
+			"href": "/gist/Additional-Resources"
+		},
 		{
 			"title": "Article Heading Styles",
 			"href": "/gist/article-heading-styles"
@@ -57,6 +65,10 @@
 		{
 			"title": "Dictionary Context Provider",
 			"href": "/gist/dictionary-context-provider"
+		},
+		{
+			"title": "Docker Command Documentation",
+			"href": "/gist/Docker-Command-Documentation"
 		},
 		{
 			"title": "Dotnet Api Setup",
@@ -111,12 +123,28 @@
 			"href": "/gist/hello-world-translations"
 		},
 		{
+			"title": "How To Install Bun",
+			"href": "/gist/How-to-Install-Bun"
+		},
+		{
+			"title": "How To Use Run And Debug Configurations In VS Code",
+			"href": "/gist/How-to-Use-Run-and-Debug-Configurations-in-VS-Code"
+		},
+		{
 			"title": "Markdown File Renamer",
 			"href": "/gist/markdown-file-renamer"
 		},
 		{
 			"title": "Nextjs Manifest Config",
 			"href": "/gist/nextjs-manifest-config"
+		},
+		{
+			"title": "Powershell Scripting",
+			"href": "/gist/Powershell-Scripting"
+		},
+		{
+			"title": "Product Requirements Document PRD Guide",
+			"href": "/gist/Product-Requirements-Document-PRD-Guide"
 		},
 		{
 			"title": "Profile Age Calculator",
@@ -127,12 +155,20 @@
 			"href": "/gist/random-color-generator"
 		},
 		{
+			"title": "React Component Lifecycle",
+			"href": "/gist/React-Component-Lifecycle"
+		},
+		{
 			"title": "Redux Root Reducer Setup",
 			"href": "/gist/redux-root-reducer-setup"
 		},
 		{
 			"title": "Regex Text Utility",
 			"href": "/gist/regex-text-utility"
+		},
+		{
+			"title": "Running Scripts In Linux",
+			"href": "/gist/Running-Scripts-in-Linux"
 		},
 		{
 			"title": "Scroll To Top Component",
@@ -165,6 +201,18 @@
 		{
 			"title": "Typescript Types",
 			"href": "/gist/typescript-types"
+		},
+		{
+			"title": "Using JSON Schema In VS Code",
+			"href": "/gist/Using-JSON-Schema-in-VS-Code"
+		},
+		{
+			"title": "Using Mermaid Diagrams",
+			"href": "/gist/Using-Mermaid-Diagrams"
+		},
+		{
+			"title": "Using Tasks In Visual Studio Code",
+			"href": "/gist/Using-Tasks-in-Visual-Studio-Code"
 		},
 		{
 			"title": "Website Configuration",

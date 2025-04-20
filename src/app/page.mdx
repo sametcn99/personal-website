@@ -5,13 +5,6 @@ import { readdirSync, statSync } from 'fs'
 import Link from 'next/link'
 import { join } from 'path'
 
-<Typography
-	variant='h1'
-	gutterBottom
->
-	Hello World!
-</Typography>
-
 {(() => {
 const grouped = socialMediaLinks
 .filter(link => link.visible)

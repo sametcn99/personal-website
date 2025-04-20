@@ -48,3 +48,21 @@ code[data-line]::before {
 	text-align: right;
 	color: #666;
 }
+
+/* Print styles - Hide sidebar and menu when printing */
+@media print {
+  .MuiDrawer-root,
+  .sidebar-toggle {
+    display: none !important;
+  }
+
+  body {
+    background-color: white !important;
+    color: black !important;
+  }
+  
+  .MuiPaper-root {
+    box-shadow: none !important;
+    border: none !important;
+  }
+}

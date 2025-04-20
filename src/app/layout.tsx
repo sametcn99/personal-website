@@ -104,6 +104,7 @@ export default function Layout({ children }: { children: ReactNode }) {
 		return (
 			<Paper
 				elevation={2}
+				className="sidebar-toggle"
 				sx={{
 					position: 'fixed',
 					top: 16,

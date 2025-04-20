@@ -93,16 +93,14 @@ export default function Layout({ children }: { children: ReactNode }) {
 	const pathname = usePathname()
 	const isMobile = useIsMobile()
 	const theme = useTheme()
-	const [open, setOpen] = useState(!isMobile)
+	const [open, setOpen] = useState(false) // Changed from !isMobile to always start closed
 
 	const handleDrawerToggle = () => {
 		setOpen(!open)
 	}
 
-	// Mobile Menu Toggle Component
+	// Menu Toggle Component (visible on all screen sizes)
 	const MobileMenuToggle = () => {
-		if (!isMobile) return null
-
 		return (
 			<Paper
 				elevation={2}
@@ -229,9 +227,9 @@ export default function Layout({ children }: { children: ReactNode }) {
 
 		return (
 			<Drawer
-				variant={isMobile ? 'temporary' : 'permanent'}
+				variant='temporary'
 				open={open}
-				onClose={isMobile ? handleDrawerToggle : undefined}
+				onClose={handleDrawerToggle}
 				sx={{
 					width: drawerWidth,
 					flexShrink: 0,
@@ -255,7 +253,7 @@ export default function Layout({ children }: { children: ReactNode }) {
 				flexGrow: 1,
 				width: '100%',
 				p: { xs: 2, sm: 3 },
-				ml: isMobile ? 0 : `${drawerWidth}px`,
+				ml: open ? `${drawerWidth}px` : 0,
 				transition: theme.transitions.create('margin', {
 					easing: theme.transitions.easing.sharp,
 					duration: theme.transitions.duration.leavingScreen,

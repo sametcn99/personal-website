@@ -1,9 +1,8 @@
 'use client'
 
-import { Breadcrumbs, Link, Typography } from '@mui/material'
+import { Breadcrumbs, Typography } from '@mui/material'
 import { useIsMobile } from '@/hooks/use-mobile'
 import { usePathname } from 'next/navigation'
-import NextLink from 'next/link'
 import React from 'react'
 
 export default function Breadcrumb() {

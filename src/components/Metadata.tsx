@@ -1,8 +1,9 @@
+import Head from 'next/head'
 import React from 'react'
 
 export default function Metadata() {
 	return (
-		<head>
+		<Head>
 			<title>Samet Can Cıncık | Web Developer</title>
 			<meta
 				name='description'
@@ -68,6 +69,6 @@ export default function Metadata() {
 				name='twitter:description'
 				content='Web Developer passionate about creating compelling and user-friendly web experiences.'
 			/>
-		</head>
+		</Head>
 	)
 }

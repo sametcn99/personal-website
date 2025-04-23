@@ -16,7 +16,7 @@
   "Gists": [
     {
       "title": "Additional Resources",
-      "href": "/gist/Additional-Resources",
+      "href": "/gist/additional-resources",
       "lastModified": "2025-04-20"
     },
     {
@@ -75,8 +75,8 @@
       "lastModified": "2025-04-06"
     },
     {
-      "title": "Docker Command Documentation",
-      "href": "/gist/Docker-Command-Documentation",
+      "title": "Docker Commands",
+      "href": "/gist/docker-commands",
       "lastModified": "2025-04-20"
     },
     {
@@ -150,11 +150,6 @@
       "lastModified": "2025-04-20"
     },
     {
-      "title": "How To Use Run And Debug Configurations In VS Code",
-      "href": "/gist/How-to-Use-Run-and-Debug-Configurations-in-VS-Code",
-      "lastModified": "2025-04-20"
-    },
-    {
       "title": "Markdown File Renamer",
       "href": "/gist/markdown-file-renamer",
       "lastModified": "2025-04-02"
@@ -166,12 +161,12 @@
     },
     {
       "title": "Powershell Scripting",
-      "href": "/gist/Powershell-Scripting",
+      "href": "/gist/powershell-scripting",
       "lastModified": "2025-04-20"
     },
     {
-      "title": "Product Requirements Document PRD Guide",
-      "href": "/gist/Product-Requirements-Document-PRD-Guide",
+      "title": "Product Requirement Doc Guide",
+      "href": "/gist/product-requirement-doc-guide",
       "lastModified": "2025-04-20"
     },
     {
@@ -186,7 +181,7 @@
     },
     {
       "title": "React Component Lifecycle",
-      "href": "/gist/React-Component-Lifecycle",
+      "href": "/gist/react-component-lifecycle",
       "lastModified": "2025-04-20"
     },
     {
@@ -201,12 +196,12 @@
     },
     {
       "title": "Running Scripts In Linux",
-      "href": "/gist/Running-Scripts-in-Linux",
+      "href": "/gist/running-scripts-in-linux",
       "lastModified": "2025-04-20"
     },
     {
-      "title": "Script Gists",
-      "href": "/gist/Script-Gists",
+      "title": "Scripts Gist",
+      "href": "/gist/scripts-gist",
       "lastModified": "2025-04-23"
     },
     {
@@ -250,18 +245,23 @@
       "lastModified": "2025-04-07"
     },
     {
-      "title": "Using JSON Schema In VS Code",
-      "href": "/gist/Using-JSON-Schema-in-VS-Code",
+      "title": "Using Json Schema In Vscode",
+      "href": "/gist/using-json-schema-in-vscode",
       "lastModified": "2025-04-20"
     },
     {
       "title": "Using Mermaid Diagrams",
-      "href": "/gist/Using-Mermaid-Diagrams",
+      "href": "/gist/using-mermaid-diagrams",
       "lastModified": "2025-04-20"
     },
     {
-      "title": "Using Tasks In Visual Studio Code",
-      "href": "/gist/Using-Tasks-in-Visual-Studio-Code",
+      "title": "Using Run And Debug In Vscode",
+      "href": "/gist/using-run-and-debug-in-vscode",
+      "lastModified": "2025-04-20"
+    },
+    {
+      "title": "Using Tasks In Vscode",
+      "href": "/gist/using-tasks-in-vscode",
       "lastModified": "2025-04-20"
     },
     {

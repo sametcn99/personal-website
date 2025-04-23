@@ -3,10 +3,7 @@
 	"singleAttributePerLine": true,
 	"semi": false,
 	"singleQuote": true,
-	"plugins": [
-		"prettier-plugin-tailwindcss",
-		"./node_modules/prettier-plugin-sort-imports/dist/index.js"
-	],
+	"plugins": ["./node_modules/prettier-plugin-sort-imports/dist/index.js"],
 	"jsxSingleQuote": true,
 	"useTabs": true,
 	"quoteProps": "as-needed"

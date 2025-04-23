@@ -1,6 +1,6 @@
 'use client'
 
-import { Box, Container } from '@mui/material'
+import { Box, Paper } from '@mui/material'
 import type React from 'react'
 
 interface MainContentProps {
@@ -16,22 +16,29 @@ const MainContent: React.FC<MainContentProps> = ({ children, pathname }) => {
 			sx={{
 				flexGrow: 1,
 				overflow: 'hidden',
-				px: { xs: 2, md: 4 },
-				py: 4,
 			}}
 		>
-			<Container maxWidth='lg'>
+			<Paper
+				elevation={3}
+				sx={{
+					maxWidth: 'lg',
+					marginX: 'auto',
+					padding: 2,
+					borderRadius: 2,
+					boxShadow: (theme) => theme.shadows[3],
+					border: (theme) => `1px solid ${theme.palette.divider}`,
+				}}
+			>
 				<Box
 					sx={{
 						display: { xs: 'flex', md: 'none' },
 						mb: 2,
-						alignItems: 'center',
 					}}
 				>
 					{/* Mobile sidebar trigger is now inside the MobileSidebar component */}
 				</Box>
 				<Box>{children}</Box>
-			</Container>
+			</Paper>
 		</Box>
 	)
 }

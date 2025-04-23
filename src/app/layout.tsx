@@ -1,27 +1,22 @@
 'use client'
 
 import {
-	Box,
-	useTheme,
-	Paper,
-	alpha,
-} from '@mui/material'
-import {
 	Menu as MenuIcon,
 	ChevronLeft as ChevronLeftIcon,
 } from '@mui/icons-material'
+import MainContentWrapper from '@/components/MainContentWrapper' // Import component
+import MobileMenuToggle from '@/components/MobileMenuToggle' // Import component
+import { Box, useTheme, Paper, alpha } from '@mui/material'
+import { customTheme, drawerWidth } from '@/theme/theme' // Import theme and drawerWidth
 import { ThemeProvider } from '@mui/material/styles' // Removed createTheme
 import { Analytics } from '@vercel/analytics/react'
 import MainContent from '@/components/MainContent'
 import { useIsMobile } from '@/hooks/use-mobile'
 import { usePathname } from 'next/navigation'
+import Sidebar from '@/components/Sidebar' // Import component
 import { Inter } from 'next/font/google'
 import React, { useState } from 'react'
 import type { ReactNode } from 'react'
-import { customTheme, drawerWidth } from '@/theme/theme' // Import theme and drawerWidth
-import MobileMenuToggle from '@/components/MobileMenuToggle' // Import component
-import Sidebar from '@/components/Sidebar' // Import component
-import MainContentWrapper from '@/components/MainContentWrapper' // Import component
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -121,13 +116,22 @@ export default function Layout({ children }: { children: ReactNode }) {
 						}}
 					>
 						{/* Mobile menu toggle */}
-						<MobileMenuToggle open={open} handleDrawerToggle={handleDrawerToggle} />
+						<MobileMenuToggle
+							open={open}
+							handleDrawerToggle={handleDrawerToggle}
+						/>
 
 						{/* Sidebar */}
-						<Sidebar open={open} handleDrawerToggle={handleDrawerToggle} />
+						<Sidebar
+							open={open}
+							handleDrawerToggle={handleDrawerToggle}
+						/>
 
 						{/* Main content */}
-						<MainContentWrapper isMobile={isMobile} pathname={pathname}>
+						<MainContentWrapper
+							isMobile={isMobile}
+							pathname={pathname}
+						>
 							{children}
 						</MainContentWrapper>
 					</Box>

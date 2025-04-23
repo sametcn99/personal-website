@@ -1,7 +1,7 @@
-import { createTheme } from '@mui/material/styles';
+import { createTheme } from '@mui/material/styles'
 
 // Sidebar width
-export const drawerWidth = 240;
+export const drawerWidth = 240
 
 export const customTheme = createTheme({
 	palette: {
@@ -57,4 +57,4 @@ export const customTheme = createTheme({
 			focus: 'rgba(255, 255, 255, 0.12)',
 		},
 	},
-});
+})

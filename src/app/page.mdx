@@ -1,8 +1,8 @@
 import { List, ListItem, Typography, Link as MuiLink } from '@mui/material'
 import { OpenInNew as OpenInNewIcon } from '@mui/icons-material'
+import sidebarLinksData from '@/data/sidebar-links.json' // Import the JSON data
 import { socialMediaLinks } from '@/lib/social'
 import Link from 'next/link'
-import sidebarLinksData from '@/data/sidebar-links.json'; // Import the JSON data
 
 # Hello World!
 
@@ -75,16 +75,16 @@ return Object.entries(grouped).map(([category, links]) => (
 {(() => {
 // Get Gists from the imported JSON data
 const gists = sidebarLinksData.Gists
-  // Ensure lastModified exists and parse dates for sorting
-  .map(gist => ({
-    ...gist,
-    // Use a far past date if lastModified is missing or invalid
-    mtime: new Date(gist.lastModified || '1970-01-01')
-  }))
-  // Sort by date descending
-  .sort((a, b) => b.mtime.getTime() - a.mtime.getTime())
-  // Take the top 5
-  .slice(0, 5);
+// Ensure lastModified exists and parse dates for sorting
+.map(gist => ({
+...gist,
+// Use a far past date if lastModified is missing or invalid
+mtime: new Date(gist.lastModified || '1970-01-01')
+}))
+// Sort by date descending
+.sort((a, b) => b.mtime.getTime() - a.mtime.getTime())
+// Take the top 5
+.slice(0, 5);
 
 return (
 
@@ -103,8 +103,7 @@ return (
 				component='span'
 				sx={{ ml: 1 }}
 			>
-				{/* Format the date from mtime */}
-				- {gist.mtime.toDateString()}
+				{/* Format the date from mtime */}- {gist.mtime.toDateString()}
 			</Typography>
 		</ListItem>
 	))}

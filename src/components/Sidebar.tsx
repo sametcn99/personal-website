@@ -1,4 +1,3 @@
-import React from 'react';
 import {
 	Box,
 	Drawer,
@@ -10,19 +9,20 @@ import {
 	useTheme,
 	Paper,
 	alpha,
-} from '@mui/material';
-import sidebarLinks from '@/data/sidebar-links.json';
-import { drawerWidth } from '@/theme/theme';
-import { usePathname } from 'next/navigation';
+} from '@mui/material'
+import sidebarLinks from '@/data/sidebar-links.json'
+import { usePathname } from 'next/navigation'
+import { drawerWidth } from '@/theme/theme'
+import React from 'react'
 
 interface SidebarProps {
-	open: boolean;
-	handleDrawerToggle: () => void;
+	open: boolean
+	handleDrawerToggle: () => void
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ open, handleDrawerToggle }) => {
-	const theme = useTheme();
-	const pathname = usePathname();
+	const theme = useTheme()
+	const pathname = usePathname()
 
 	const drawer = (
 		<Paper
@@ -84,20 +84,6 @@ const Sidebar: React.FC<SidebarProps> = ({ open, handleDrawerToggle }) => {
 								>
 									<ListItemButton
 										selected={pathname === item.href}
-										sx={{
-											borderRadius: '8px',
-											py: 1,
-											'&.Mui-selected': {
-												bgcolor: alpha(theme.palette.primary.main, 0.15),
-												color: theme.palette.primary.main,
-												'&:hover': {
-													bgcolor: alpha(theme.palette.primary.main, 0.25),
-												},
-											},
-											'&:hover': {
-												bgcolor: alpha(theme.palette.action.hover, 0.8),
-											},
-										}}
 										href={item.href}
 									>
 										<ListItemText
@@ -115,7 +101,7 @@ const Sidebar: React.FC<SidebarProps> = ({ open, handleDrawerToggle }) => {
 				))}
 			</Box>
 		</Paper>
-	);
+	)
 
 	return (
 		<Drawer
@@ -134,7 +120,7 @@ const Sidebar: React.FC<SidebarProps> = ({ open, handleDrawerToggle }) => {
 		>
 			{drawer}
 		</Drawer>
-	);
-};
+	)
+}
 
-export default Sidebar;
+export default Sidebar

@@ -1,22 +1,21 @@
-import React from 'react';
-import {
-	Paper,
-	IconButton,
-	useTheme,
-} from '@mui/material';
 import {
 	Menu as MenuIcon,
 	ChevronLeft as ChevronLeftIcon,
-} from '@mui/icons-material';
-import { drawerWidth } from '@/theme/theme';
+} from '@mui/icons-material'
+import { Paper, IconButton, useTheme } from '@mui/material'
+import { drawerWidth } from '@/theme/theme'
+import React from 'react'
 
 interface MobileMenuToggleProps {
-	open: boolean;
-	handleDrawerToggle: () => void;
+	open: boolean
+	handleDrawerToggle: () => void
 }
 
-const MobileMenuToggle: React.FC<MobileMenuToggleProps> = ({ open, handleDrawerToggle }) => {
-	const theme = useTheme();
+const MobileMenuToggle: React.FC<MobileMenuToggleProps> = ({
+	open,
+	handleDrawerToggle,
+}) => {
+	const theme = useTheme()
 
 	return (
 		<Paper
@@ -44,7 +43,7 @@ const MobileMenuToggle: React.FC<MobileMenuToggleProps> = ({ open, handleDrawerT
 				{open ? <ChevronLeftIcon /> : <MenuIcon />}
 			</IconButton>
 		</Paper>
-	);
-};
+	)
+}
 
-export default MobileMenuToggle;
+export default MobileMenuToggle

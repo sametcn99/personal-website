@@ -1,20 +1,19 @@
-import React, { ReactNode } from 'react';
-import {
-	Box,
-	Paper,
-	alpha,
-	useTheme,
-} from '@mui/material';
-import MainContent from '@/components/MainContent';
+import { Box, Paper, alpha, useTheme } from '@mui/material'
+import MainContent from '@/components/MainContent'
+import React, { ReactNode } from 'react'
 
 interface MainContentWrapperProps {
-	children: ReactNode;
-	isMobile: boolean;
-	pathname: string;
+	children: ReactNode
+	isMobile: boolean
+	pathname: string
 }
 
-const MainContentWrapper: React.FC<MainContentWrapperProps> = ({ children, isMobile, pathname }) => {
-	const theme = useTheme();
+const MainContentWrapper: React.FC<MainContentWrapperProps> = ({
+	children,
+	isMobile,
+	pathname,
+}) => {
+	const theme = useTheme()
 
 	return (
 		<Box
@@ -48,7 +47,7 @@ const MainContentWrapper: React.FC<MainContentWrapperProps> = ({ children, isMob
 				</MainContent>
 			</Paper>
 		</Box>
-	);
-};
+	)
+}
 
-export default MainContentWrapper;
+export default MainContentWrapper

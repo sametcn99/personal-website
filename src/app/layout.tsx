@@ -11,19 +11,19 @@ import { customTheme, drawerWidth } from '@/theme/theme' // Import theme and dra
 import { ThemeProvider } from '@mui/material/styles' // Removed createTheme
 import { Analytics } from '@vercel/analytics/react'
 import MainContent from '@/components/MainContent'
-import { useIsMobile } from '@/hooks/use-mobile'
+import Breadcrumb from '@/components/Breadcrumb' // Import Breadcrumb component
 import { usePathname } from 'next/navigation'
 import Sidebar from '@/components/Sidebar' // Import component
 import { Inter } from 'next/font/google'
 import React, { useState } from 'react'
 import type { ReactNode } from 'react'
+import NextLink from 'next/link' // Import NextLink for client-side navigation
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Layout({ children }: { children: ReactNode }) {
 	const pathname = usePathname()
-	const isMobile = useIsMobile()
 	const theme = useTheme() // Keep useTheme here as it might be needed by ThemeProvider context
 	const [open, setOpen] = useState(false) // Changed from !isMobile to always start closed
 
@@ -128,10 +128,9 @@ export default function Layout({ children }: { children: ReactNode }) {
 						/>
 
 						{/* Main content */}
-						<MainContentWrapper
-							isMobile={isMobile}
-							pathname={pathname}
-						>
+						<MainContentWrapper pathname={pathname}>
+							{/* Breadcrumbs */}
+							<Breadcrumb />
 							{children}
 						</MainContentWrapper>
 					</Box>

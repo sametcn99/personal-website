@@ -1,20 +1,20 @@
+'use client'
 import { Box, Paper, alpha, useTheme } from '@mui/material'
 import MainContent from '@/components/MainContent'
+import { useIsMobile } from '@/hooks/use-mobile'
 import React, { ReactNode } from 'react'
 
 interface MainContentWrapperProps {
 	children: ReactNode
-	isMobile: boolean
 	pathname: string
 }
 
 const MainContentWrapper: React.FC<MainContentWrapperProps> = ({
 	children,
-	isMobile,
 	pathname,
 }) => {
 	const theme = useTheme()
-
+	const isMobile = useIsMobile()
 	return (
 		<Box
 			component='main'

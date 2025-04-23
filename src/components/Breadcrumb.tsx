@@ -1,10 +1,10 @@
 'use client'
 
-import React from 'react'
-import { usePathname } from 'next/navigation'
-import NextLink from 'next/link'
 import { Breadcrumbs, Link, Typography } from '@mui/material'
 import { useIsMobile } from '@/hooks/use-mobile'
+import { usePathname } from 'next/navigation'
+import NextLink from 'next/link'
+import React from 'react'
 
 export default function Breadcrumb() {
 	const pathname = usePathname()

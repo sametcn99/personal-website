@@ -1,0 +1,9 @@
+# Script Gists
+
+```bash
+bun add --dev --exact prettier && \
+node -e 'require("fs").writeFileSync(".prettierrc","{}\n")' && \
+node -e 'require("fs").writeFileSync(".prettierignore","# Ignore artifacts:\nbuild\ncoverage\n")' && \
+npx exec prettier . --write
+
+```

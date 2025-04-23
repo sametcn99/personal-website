@@ -11,10 +11,6 @@
 		{
 			"title": "CV",
 			"href": "/cv"
-		},
-		{
-			"title": "Gists",
-			"href": "/gist"
 		}
 	],
 	"Gists": [
@@ -169,6 +165,10 @@
 		{
 			"title": "Running Scripts In Linux",
 			"href": "/gist/Running-Scripts-in-Linux"
+		},
+		{
+			"title": "Script Gists",
+			"href": "/gist/Script Gists"
 		},
 		{
 			"title": "Scroll To Top Component",

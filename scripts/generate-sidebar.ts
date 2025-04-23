@@ -36,7 +36,6 @@ function generateSidebarLinks(dir: string): void {
 			{ title: 'Home', href: '/' },
 			{ title: ' Blog', href: '/blog' },
 			{ title: 'CV', href: '/cv' },
-			{ title: 'Gists', href: '/gist' },
 		],
 		Gists: links,
 	}

@@ -1,9 +1,8 @@
 import { List, ListItem, Typography, Link as MuiLink } from '@mui/material'
 import { OpenInNew as OpenInNewIcon } from '@mui/icons-material'
 import { socialMediaLinks } from '@/lib/social'
-import { readdirSync, statSync } from 'fs'
 import Link from 'next/link'
-import { join } from 'path'
+import sidebarLinksData from '@/data/sidebar-links.json'; // Import the JSON data
 
 # Hello World!
 
@@ -74,36 +73,37 @@ return Object.entries(grouped).map(([category, links]) => (
 ## Recently Updated Gists
 
 {(() => {
-const gistPath = join(process.cwd(), 'src', 'app', 'gist');
-const gistDirs = readdirSync(gistPath, { withFileTypes: true })
-.filter(dirent => dirent.isDirectory())
-.map(dirent => ({
-name: dirent.name,
-path: join(gistPath, dirent.name),
-mtime: statSync(join(gistPath, dirent.name, 'page.mdx')).mtime
-}))
-.sort((a, b) => b.mtime.getTime() - a.mtime.getTime())
-.slice(0, 5);
+// Get Gists from the imported JSON data
+const gists = sidebarLinksData.Gists
+  // Ensure lastModified exists and parse dates for sorting
+  .map(gist => ({
+    ...gist,
+    // Use a far past date if lastModified is missing or invalid
+    mtime: new Date(gist.lastModified || '1970-01-01')
+  }))
+  // Sort by date descending
+  .sort((a, b) => b.mtime.getTime() - a.mtime.getTime())
+  // Take the top 5
+  .slice(0, 5);
 
 return (
 
 <List>
-	{gistDirs.map((gist) => (
-		<ListItem key={gist.name}>
+	{gists.map((gist) => (
+		<ListItem key={gist.href}>
 			<MuiLink
 				component={Link}
-				href={`/gist/${gist.name}`}
+				href={gist.href} // Use href from JSON
 				sx={{ color: 'primary.main' }}
 			>
-				{gist.name
-					.split('-')
-					.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-					.join(' ')}
+				{/* Use title directly from JSON */}
+				{gist.title}
 			</MuiLink>
 			<Typography
 				component='span'
 				sx={{ ml: 1 }}
 			>
+				{/* Format the date from mtime */}
 				- {gist.mtime.toDateString()}
 			</Typography>
 		</ListItem>

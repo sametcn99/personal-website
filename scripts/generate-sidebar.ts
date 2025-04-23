@@ -4,6 +4,7 @@ import * as fs from 'fs'
 interface SidebarLink {
 	title: string
 	href: string
+	lastModified?: string // Add last modified date property
 }
 
 interface SidebarData {
@@ -19,6 +20,10 @@ function generateSidebarLinks(dir: string): void {
 	const links: SidebarLink[] = items
 		.filter((item) => item.isDirectory())
 		.map((folder) => {
+			const folderPath = path.join(dir, folder.name) // Get full path for statSync
+			const stats = fs.statSync(folderPath) // Get file stats
+			const lastModified = stats.mtime.toISOString().split('T')[0] // Format date as YYYY-MM-DD
+
 			const title = folder.name
 				.split('-')
 				.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
@@ -27,9 +32,10 @@ function generateSidebarLinks(dir: string): void {
 			return {
 				title,
 				href: `/gist/${folder.name}`,
+				lastModified, // Include the last modified date
 			}
 		})
-		.sort((a, b) => a.title.localeCompare(b.title))
+		.sort((a, b) => a.title.localeCompare(b.title)) // Keep sorting by title
 
 	const sidebarData: SidebarData = {
 		Personal: [

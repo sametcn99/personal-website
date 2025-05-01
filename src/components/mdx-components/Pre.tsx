@@ -3,9 +3,23 @@
 import { Box, alpha } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import React from "react";
+import { MermaidComponent } from "./Mermaid";
+
+interface PreChildProps {
+    className?: string;
+    children?: string;
+}
 
 export function PreComponent({ children, ...props }: React.PropsWithChildren<React.HTMLAttributes<HTMLPreElement>>) {
-	const theme = useTheme();
+    const theme = useTheme();
+
+    // Check if this is a mermaid code block
+    if (
+        React.isValidElement(children) &&
+        (children.props as PreChildProps)?.className?.includes("language-mermaid")
+    ) {
+        return <MermaidComponent chart={(children.props as PreChildProps).children || ''} />;
+    }
 
 	return (
 		<Box

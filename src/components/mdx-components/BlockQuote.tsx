@@ -30,8 +30,8 @@ export function BlockQuote({ children, ...props }: React.PropsWithChildren<React
 				},
 			}}
 			{...props}
-		>
-			<Typography
+		>			<Typography
+				component="div"
 				variant="body1"
 				sx={{
 					fontStyle: "italic",

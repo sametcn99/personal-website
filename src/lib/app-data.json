@@ -1,269 +1,257 @@
-{
-  "Personal": [
-    {
-      "title": "Home",
-      "href": "/"
-    },
-    {
-      "title": "CV",
-      "href": "/cv"
-    }
-  ],
-  "Gists": [
-    {
-      "title": "Additional Resources",
-      "href": "/gist/additional-resources",
-      "lastModified": "2025-05-01T14:34:40.379Z"
-    },
-    {
-      "title": "Article Heading Styles",
-      "href": "/gist/article-heading-styles",
-      "lastModified": "2025-05-01T14:34:40.379Z"
-    },
-    {
-      "title": "Audio Lyrics Writer",
-      "href": "/gist/audio-lyrics-writer",
-      "lastModified": "2025-05-01T14:34:40.386Z"
-    },
-    {
-      "title": "Auth Verifier",
-      "href": "/gist/auth-verifier",
-      "lastModified": "2025-05-01T14:34:40.389Z"
-    },
-    {
-      "title": "Combine Locales",
-      "href": "/gist/combine-locales",
-      "lastModified": "2025-05-01T14:34:40.391Z"
-    },
-    {
-      "title": "Contact Form Handler",
-      "href": "/gist/contact-form-handler",
-      "lastModified": "2025-05-01T14:34:40.392Z"
-    },
-    {
-      "title": "Convert Time To Milliseconds",
-      "href": "/gist/convert-time-to-milliseconds",
-      "lastModified": "2025-05-01T14:34:40.395Z"
-    },
-    {
-      "title": "Copy Directory Utility",
-      "href": "/gist/copy-directory-utility",
-      "lastModified": "2025-05-01T14:34:40.395Z"
-    },
-    {
-      "title": "Date Range Slicer",
-      "href": "/gist/date-range-slicer",
-      "lastModified": "2025-05-01T14:34:40.398Z"
-    },
-    {
-      "title": "Date Utility",
-      "href": "/gist/date-utility",
-      "lastModified": "2025-05-01T14:34:40.400Z"
-    },
-    {
-      "title": "Delete Folder",
-      "href": "/gist/delete-folder",
-      "lastModified": "2025-05-01T14:34:40.400Z"
-    },
-    {
-      "title": "Dictionary Context Provider",
-      "href": "/gist/dictionary-context-provider",
-      "lastModified": "2025-05-01T14:34:40.407Z"
-    },
-    {
-      "title": "Docker Commands",
-      "href": "/gist/docker-commands",
-      "lastModified": "2025-05-01T14:34:40.407Z"
-    },
-    {
-      "title": "Dotnet Api Setup",
-      "href": "/gist/dotnet-api-setup",
-      "lastModified": "2025-05-01T14:34:40.414Z"
-    },
-    {
-      "title": "Electron Window Manager Utility",
-      "href": "/gist/electron-window-manager-utility",
-      "lastModified": "2025-05-01T14:34:40.414Z"
-    },
-    {
-      "title": "Fetch Hook",
-      "href": "/gist/fetch-hook",
-      "lastModified": "2025-05-01T14:34:40.420Z"
-    },
-    {
-      "title": "Format Date Utility",
-      "href": "/gist/format-date-utility",
-      "lastModified": "2025-05-01T14:34:40.422Z"
-    },
-    {
-      "title": "Git Tag Push Utility",
-      "href": "/gist/git-tag-push-utility",
-      "lastModified": "2025-05-01T14:34:40.422Z"
-    },
-    {
-      "title": "Github Api Route",
-      "href": "/gist/github-api-route",
-      "lastModified": "2025-05-01T14:34:40.428Z"
-    },
-    {
-      "title": "Github Data Store",
-      "href": "/gist/github-data-store",
-      "lastModified": "2025-05-01T14:34:40.428Z"
-    },
-    {
-      "title": "Github Profile Api",
-      "href": "/gist/github-profile-api",
-      "lastModified": "2025-05-01T14:34:40.428Z"
-    },
-    {
-      "title": "Github Repo Filter",
-      "href": "/gist/github-repo-filter",
-      "lastModified": "2025-05-01T14:34:40.439Z"
-    },
-    {
-      "title": "Github Repo Model",
-      "href": "/gist/github-repo-model",
-      "lastModified": "2025-05-01T14:34:40.446Z"
-    },
-    {
-      "title": "Github Repo Stats",
-      "href": "/gist/github-repo-stats",
-      "lastModified": "2025-05-01T14:34:40.451Z"
-    },
-    {
-      "title": "Github User Model",
-      "href": "/gist/github-user-model",
-      "lastModified": "2025-05-01T14:34:40.455Z"
-    },
-    {
-      "title": "Hello World Translations",
-      "href": "/gist/hello-world-translations",
-      "lastModified": "2025-05-01T14:34:40.460Z"
-    },
-    {
-      "title": "How To Install Bun",
-      "href": "/gist/How-to-Install-Bun",
-      "lastModified": "2025-05-01T14:34:40.465Z"
-    },
-    {
-      "title": "Markdown File Renamer",
-      "href": "/gist/markdown-file-renamer",
-      "lastModified": "2025-05-01T14:34:40.469Z"
-    },
-    {
-      "title": "Nextjs Manifest Config",
-      "href": "/gist/nextjs-manifest-config",
-      "lastModified": "2025-05-01T14:34:40.471Z"
-    },
-    {
-      "title": "Powershell Scripting",
-      "href": "/gist/powershell-scripting",
-      "lastModified": "2025-05-01T14:34:40.474Z"
-    },
-    {
-      "title": "Product Requirement Doc Guide",
-      "href": "/gist/product-requirement-doc-guide",
-      "lastModified": "2025-05-01T14:34:40.477Z"
-    },
-    {
-      "title": "Profile Age Calculator",
-      "href": "/gist/profile-age-calculator",
-      "lastModified": "2025-05-01T14:34:40.479Z"
-    },
-    {
-      "title": "Random Color Generator",
-      "href": "/gist/random-color-generator",
-      "lastModified": "2025-05-01T14:34:40.481Z"
-    },
-    {
-      "title": "React Component Lifecycle",
-      "href": "/gist/react-component-lifecycle",
-      "lastModified": "2025-05-01T14:34:40.483Z"
-    },
-    {
-      "title": "Redux Root Reducer Setup",
-      "href": "/gist/redux-root-reducer-setup",
-      "lastModified": "2025-05-01T14:34:40.485Z"
-    },
-    {
-      "title": "Regex Text Utility",
-      "href": "/gist/regex-text-utility",
-      "lastModified": "2025-05-01T14:34:40.486Z"
-    },
-    {
-      "title": "Running Scripts In Linux",
-      "href": "/gist/running-scripts-in-linux",
-      "lastModified": "2025-05-01T14:34:40.489Z"
-    },
-    {
-      "title": "Scripts Gist",
-      "href": "/gist/scripts-gist",
-      "lastModified": "2025-05-01T14:34:40.492Z"
-    },
-    {
-      "title": "Scroll To Top Component",
-      "href": "/gist/scroll-to-top-component",
-      "lastModified": "2025-05-01T14:34:40.493Z"
-    },
-    {
-      "title": "Service Configuration Guide",
-      "href": "/gist/service-configuration-guide",
-      "lastModified": "2025-05-01T14:34:40.496Z"
-    },
-    {
-      "title": "Site Url Utility",
-      "href": "/gist/site-url-utility",
-      "lastModified": "2025-05-01T14:34:40.498Z"
-    },
-    {
-      "title": "Tailwind Page Setup",
-      "href": "/gist/tailwind-page-setup",
-      "lastModified": "2025-05-01T14:34:40.500Z"
-    },
-    {
-      "title": "Text Cleaner",
-      "href": "/gist/text-cleaner",
-      "lastModified": "2025-05-01T14:34:40.501Z"
-    },
-    {
-      "title": "Theme Switcher Component",
-      "href": "/gist/theme-switcher-component",
-      "lastModified": "2025-05-01T14:34:40.504Z"
-    },
-    {
-      "title": "Typescript Glob Patterns",
-      "href": "/gist/typescript-glob-patterns",
-      "lastModified": "2025-05-01T14:34:40.506Z"
-    },
-    {
-      "title": "Typescript Types",
-      "href": "/gist/typescript-types",
-      "lastModified": "2025-05-01T14:34:40.509Z"
-    },
-    {
-      "title": "Using Json Schema In Vscode",
-      "href": "/gist/using-json-schema-in-vscode",
-      "lastModified": "2025-05-01T14:34:40.511Z"
-    },
-    {
-      "title": "Using Mermaid Diagrams",
-      "href": "/gist/using-mermaid-diagrams",
-      "lastModified": "2025-05-01T14:34:40.513Z"
-    },
-    {
-      "title": "Using Run And Debug In Vscode",
-      "href": "/gist/using-run-and-debug-in-vscode",
-      "lastModified": "2025-05-01T14:34:40.516Z"
-    },
-    {
-      "title": "Using Tasks In Vscode",
-      "href": "/gist/using-tasks-in-vscode",
-      "lastModified": "2025-05-01T14:34:40.517Z"
-    },
-    {
-      "title": "Website Configuration",
-      "href": "/gist/website-configuration",
-      "lastModified": "2025-05-01T14:34:40.519Z"
-    }
-  ]
-}
+[
+  {
+    "title": "Additional Resources",
+    "href": "/gist/additional-resources",
+    "lastModified": "2025-05-01T14:34:40.379Z"
+  },
+  {
+    "title": "Article Heading Styles",
+    "href": "/gist/article-heading-styles",
+    "lastModified": "2025-05-01T14:34:40.379Z"
+  },
+  {
+    "title": "Audio Lyrics Writer",
+    "href": "/gist/audio-lyrics-writer",
+    "lastModified": "2025-05-01T14:34:40.386Z"
+  },
+  {
+    "title": "Auth Verifier",
+    "href": "/gist/auth-verifier",
+    "lastModified": "2025-05-01T14:34:40.389Z"
+  },
+  {
+    "title": "Combine Locales",
+    "href": "/gist/combine-locales",
+    "lastModified": "2025-05-01T14:34:40.391Z"
+  },
+  {
+    "title": "Contact Form Handler",
+    "href": "/gist/contact-form-handler",
+    "lastModified": "2025-05-01T14:34:40.392Z"
+  },
+  {
+    "title": "Convert Time To Milliseconds",
+    "href": "/gist/convert-time-to-milliseconds",
+    "lastModified": "2025-05-01T14:34:40.395Z"
+  },
+  {
+    "title": "Copy Directory Utility",
+    "href": "/gist/copy-directory-utility",
+    "lastModified": "2025-05-01T14:34:40.395Z"
+  },
+  {
+    "title": "Date Range Slicer",
+    "href": "/gist/date-range-slicer",
+    "lastModified": "2025-05-01T14:34:40.398Z"
+  },
+  {
+    "title": "Date Utility",
+    "href": "/gist/date-utility",
+    "lastModified": "2025-05-01T14:34:40.400Z"
+  },
+  {
+    "title": "Delete Folder",
+    "href": "/gist/delete-folder",
+    "lastModified": "2025-05-01T14:34:40.400Z"
+  },
+  {
+    "title": "Dictionary Context Provider",
+    "href": "/gist/dictionary-context-provider",
+    "lastModified": "2025-05-01T14:34:40.407Z"
+  },
+  {
+    "title": "Docker Commands",
+    "href": "/gist/docker-commands",
+    "lastModified": "2025-05-01T14:34:40.407Z"
+  },
+  {
+    "title": "Dotnet Api Setup",
+    "href": "/gist/dotnet-api-setup",
+    "lastModified": "2025-05-01T14:34:40.414Z"
+  },
+  {
+    "title": "Electron Window Manager Utility",
+    "href": "/gist/electron-window-manager-utility",
+    "lastModified": "2025-05-01T14:34:40.414Z"
+  },
+  {
+    "title": "Fetch Hook",
+    "href": "/gist/fetch-hook",
+    "lastModified": "2025-05-01T14:34:40.420Z"
+  },
+  {
+    "title": "Format Date Utility",
+    "href": "/gist/format-date-utility",
+    "lastModified": "2025-05-01T14:34:40.422Z"
+  },
+  {
+    "title": "Git Tag Push Utility",
+    "href": "/gist/git-tag-push-utility",
+    "lastModified": "2025-05-01T14:34:40.422Z"
+  },
+  {
+    "title": "Github Api Route",
+    "href": "/gist/github-api-route",
+    "lastModified": "2025-05-01T14:34:40.428Z"
+  },
+  {
+    "title": "Github Data Store",
+    "href": "/gist/github-data-store",
+    "lastModified": "2025-05-01T14:34:40.428Z"
+  },
+  {
+    "title": "Github Profile Api",
+    "href": "/gist/github-profile-api",
+    "lastModified": "2025-05-01T14:34:40.428Z"
+  },
+  {
+    "title": "Github Repo Filter",
+    "href": "/gist/github-repo-filter",
+    "lastModified": "2025-05-01T14:34:40.439Z"
+  },
+  {
+    "title": "Github Repo Model",
+    "href": "/gist/github-repo-model",
+    "lastModified": "2025-05-01T14:34:40.446Z"
+  },
+  {
+    "title": "Github Repo Stats",
+    "href": "/gist/github-repo-stats",
+    "lastModified": "2025-05-01T14:34:40.451Z"
+  },
+  {
+    "title": "Github User Model",
+    "href": "/gist/github-user-model",
+    "lastModified": "2025-05-01T14:34:40.455Z"
+  },
+  {
+    "title": "Hello World Translations",
+    "href": "/gist/hello-world-translations",
+    "lastModified": "2025-05-01T14:34:40.460Z"
+  },
+  {
+    "title": "How To Install Bun",
+    "href": "/gist/How-to-Install-Bun",
+    "lastModified": "2025-05-01T14:34:40.465Z"
+  },
+  {
+    "title": "Markdown File Renamer",
+    "href": "/gist/markdown-file-renamer",
+    "lastModified": "2025-05-01T14:34:40.469Z"
+  },
+  {
+    "title": "Nextjs Manifest Config",
+    "href": "/gist/nextjs-manifest-config",
+    "lastModified": "2025-05-01T14:34:40.471Z"
+  },
+  {
+    "title": "Powershell Scripting",
+    "href": "/gist/powershell-scripting",
+    "lastModified": "2025-05-01T14:34:40.474Z"
+  },
+  {
+    "title": "Product Requirement Doc Guide",
+    "href": "/gist/product-requirement-doc-guide",
+    "lastModified": "2025-05-01T14:34:40.477Z"
+  },
+  {
+    "title": "Profile Age Calculator",
+    "href": "/gist/profile-age-calculator",
+    "lastModified": "2025-05-01T14:34:40.479Z"
+  },
+  {
+    "title": "Random Color Generator",
+    "href": "/gist/random-color-generator",
+    "lastModified": "2025-05-01T14:34:40.481Z"
+  },
+  {
+    "title": "React Component Lifecycle",
+    "href": "/gist/react-component-lifecycle",
+    "lastModified": "2025-05-01T14:34:40.483Z"
+  },
+  {
+    "title": "Redux Root Reducer Setup",
+    "href": "/gist/redux-root-reducer-setup",
+    "lastModified": "2025-05-01T14:34:40.485Z"
+  },
+  {
+    "title": "Regex Text Utility",
+    "href": "/gist/regex-text-utility",
+    "lastModified": "2025-05-01T14:34:40.486Z"
+  },
+  {
+    "title": "Running Scripts In Linux",
+    "href": "/gist/running-scripts-in-linux",
+    "lastModified": "2025-05-01T14:34:40.489Z"
+  },
+  {
+    "title": "Scripts Gist",
+    "href": "/gist/scripts-gist",
+    "lastModified": "2025-05-01T14:34:40.492Z"
+  },
+  {
+    "title": "Scroll To Top Component",
+    "href": "/gist/scroll-to-top-component",
+    "lastModified": "2025-05-01T14:34:40.493Z"
+  },
+  {
+    "title": "Service Configuration Guide",
+    "href": "/gist/service-configuration-guide",
+    "lastModified": "2025-05-01T14:34:40.496Z"
+  },
+  {
+    "title": "Site Url Utility",
+    "href": "/gist/site-url-utility",
+    "lastModified": "2025-05-01T14:34:40.498Z"
+  },
+  {
+    "title": "Tailwind Page Setup",
+    "href": "/gist/tailwind-page-setup",
+    "lastModified": "2025-05-01T14:34:40.500Z"
+  },
+  {
+    "title": "Text Cleaner",
+    "href": "/gist/text-cleaner",
+    "lastModified": "2025-05-01T14:34:40.501Z"
+  },
+  {
+    "title": "Theme Switcher Component",
+    "href": "/gist/theme-switcher-component",
+    "lastModified": "2025-05-01T14:34:40.504Z"
+  },
+  {
+    "title": "Typescript Glob Patterns",
+    "href": "/gist/typescript-glob-patterns",
+    "lastModified": "2025-05-01T14:34:40.506Z"
+  },
+  {
+    "title": "Typescript Types",
+    "href": "/gist/typescript-types",
+    "lastModified": "2025-05-01T14:34:40.509Z"
+  },
+  {
+    "title": "Using Json Schema In Vscode",
+    "href": "/gist/using-json-schema-in-vscode",
+    "lastModified": "2025-05-01T14:34:40.511Z"
+  },
+  {
+    "title": "Using Mermaid Diagrams",
+    "href": "/gist/using-mermaid-diagrams",
+    "lastModified": "2025-05-01T14:34:40.513Z"
+  },
+  {
+    "title": "Using Run And Debug In Vscode",
+    "href": "/gist/using-run-and-debug-in-vscode",
+    "lastModified": "2025-05-01T14:34:40.516Z"
+  },
+  {
+    "title": "Using Tasks In Vscode",
+    "href": "/gist/using-tasks-in-vscode",
+    "lastModified": "2025-05-01T14:34:40.517Z"
+  },
+  {
+    "title": "Website Configuration",
+    "href": "/gist/website-configuration",
+    "lastModified": "2025-05-01T14:34:40.519Z"
+  }
+]

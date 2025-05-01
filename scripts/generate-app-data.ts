@@ -7,10 +7,6 @@ interface SidebarLink {
 	lastModified?: string; // Add last modified date property
 }
 
-interface SidebarData {
-	Personal: SidebarLink[];
-	Gists: SidebarLink[];
-}
 
 const gistDir = path.join(__dirname, "../src/app/gist");
 
@@ -37,14 +33,8 @@ function generateAppData(dir: string): void {
 		})
 		.sort((a, b) => a.title.localeCompare(b.title)); // Keep sorting by title
 
-	const sidebarData: SidebarData = {
-		Personal: [
-			{ title: "Home", href: "/" },
-			{ title: "CV", href: "/cv" },
-		],
-		Gists: links,
-	};
-
+	const sidebarData = links; // Keep as array
+	
 	// Create data directory if it doesn't exist
 	const dataDir = path.join(__dirname, "../src/lib");
 	if (!fs.existsSync(dataDir)) {

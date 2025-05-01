@@ -26,6 +26,7 @@ export function Paragraph({ children, ...props }: React.PropsWithChildren<Typogr
         display: "block", // Ensure span still behaves like a block element
       }} 
       {...props}
+      aria-label="Paragraph"
     >
       {children}
     </Typography>

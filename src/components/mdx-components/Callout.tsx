@@ -35,6 +35,7 @@ export function CalloutComponent({ children, type = "info", title, ...props }: C
         boxShadow: `0 4px 20px ${alpha(theme.palette.common.black, 0.05)}`,
       }}
       {...props}
+	  aria-label={title ? `Callout: ${title}` : "Callout"}
     >
       {title && (
         <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
@@ -47,10 +48,11 @@ export function CalloutComponent({ children, type = "info", title, ...props }: C
               fontWeight: 500,
               mr: 1,
             }}
+			aria-label={title}
           />
         </Box>
       )}
-      <Typography variant="body1">{children}</Typography>
+      <Typography variant="body1" aria-label="Callout Content">{children}</Typography>
     </Paper>
   );
 }

@@ -40,6 +40,7 @@ export function LinkComponent({ children, href, ...props }: React.PropsWithChild
           },
         }}
         {...props}
+		aria-label={String(children)}
       >
         {children}
       </MuiLink>
@@ -74,6 +75,7 @@ export function LinkComponent({ children, href, ...props }: React.PropsWithChild
         },
       }}
       {...props}
+	  aria-label={String(children) + " (opens in a new tab)"}
     >
       {children}
       <Box 

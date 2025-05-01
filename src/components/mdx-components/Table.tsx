@@ -16,6 +16,7 @@ export function TableComponent({ children, ...props }: React.PropsWithChildren<R
         overflow: "hidden",
         boxShadow: `0 4px 20px ${alpha(theme.palette.common.black, 0.05)}`,
       }}
+      aria-label="Table Container"
     >
       <Table {...props}>{children}</Table>
     </TableContainer>
@@ -35,6 +36,7 @@ export function TableHeaderCell({ children, ...props }: React.PropsWithChildren<
         py: 1.5,
       }} 
       {...props}
+      aria-label="Table Header Cell"
     >
       {children}
     </TableCell>
@@ -51,6 +53,7 @@ export function TableDataCell({ children, ...props }: React.PropsWithChildren<Ta
         py: 1.5,
       }} 
       {...props}
+      aria-label="Table Data Cell"
     >
       {children}
     </TableCell>

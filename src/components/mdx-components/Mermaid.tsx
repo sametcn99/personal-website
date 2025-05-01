@@ -32,6 +32,7 @@ export function MermaidComponent({ chart }: MermaidProps) {
   return (
     <Box
       ref={containerRef}
+      aria-label="Mermaid chart"
       sx={{
         "& svg": {
           maxWidth: "100%",

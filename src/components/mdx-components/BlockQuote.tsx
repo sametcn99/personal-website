@@ -21,6 +21,7 @@ export function BlockQuote({ children, ...props }: React.PropsWithChildren<React
 				position: "relative",
 			}}
 			{...props}
+			aria-label="Block Quote"
 		>
 			<Typography
 				component="div"
@@ -29,6 +30,7 @@ export function BlockQuote({ children, ...props }: React.PropsWithChildren<React
 					fontStyle: "italic",
 					pl: 3,
 				}}
+				aria-label="Quote Text"
 			>
 				{children}
 			</Typography>

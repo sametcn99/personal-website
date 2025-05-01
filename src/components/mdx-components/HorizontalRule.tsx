@@ -17,6 +17,7 @@ export function HorizontalRule(props: DividerProps) {
 				width: "100%",
 			}}
 			{...props}
+			aria-label="Horizontal Rule"
 		/>
 	);
 }

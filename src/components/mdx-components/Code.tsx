@@ -25,6 +25,7 @@ export function CodeComponent({ children, className, ...props }: React.PropsWith
 					fontSize: "0.875em",
 				}}
 				{...props}
+				aria-label="Inline Code"
 			>
 				{children}
 			</Typography>
@@ -39,6 +40,7 @@ export function CodeComponent({ children, className, ...props }: React.PropsWith
 				fontSize: "0.875em",
 			}}
 			{...props}
+			aria-label="Code Block"
 		>
 			{children}
 		</Typography>

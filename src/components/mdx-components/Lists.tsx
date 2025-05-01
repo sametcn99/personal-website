@@ -17,6 +17,7 @@ export function UnorderedList({ children, ...props }: React.PropsWithChildren<Li
         }
       }} 
       {...props}
+      aria-label="Unordered List"
     >
       {children}
     </List>
@@ -37,6 +38,7 @@ export function OrderedList({ children, ...props }: React.PropsWithChildren<List
         }
       }} 
       {...props}
+      aria-label="Ordered List"
     >
       {children}
     </List>
@@ -51,6 +53,7 @@ export function ListItemComponent({ children, ...props }: React.PropsWithChildre
         py: 0.5,
       }} 
       {...props}
+      aria-label="List Item"
     >
       {children}
     </ListItem>

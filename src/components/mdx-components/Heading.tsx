@@ -23,6 +23,7 @@ export function H1({ children, ...props }: React.PropsWithChildren<React.HTMLAtt
         mb: 4
       }} 
       {...props}
+      aria-label={`Heading 1: ${String(children)}`}
     >
       {children}
     </Typography>
@@ -54,6 +55,7 @@ export function H2({ children, ...props }: React.PropsWithChildren<React.HTMLAtt
         }
       }}
       {...props}
+      aria-label={`Heading 2: ${String(children)}`}
     >
       {children}
     </Typography>
@@ -77,6 +79,7 @@ export function H3({ children, ...props }: React.PropsWithChildren<React.HTMLAtt
           : theme.palette.primary.dark
       }} 
       {...props}
+      aria-label={`Heading 3: ${String(children)}`}
     >
       {children}
     </Typography>

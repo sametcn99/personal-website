@@ -25,6 +25,7 @@ export function PreComponent({ children, ...props }: React.PropsWithChildren<Rea
 		<Box
 			component="pre"
 			{...props}
+			aria-label="code block"
 			sx={{
 				position: "relative",
 				overflow: "auto",

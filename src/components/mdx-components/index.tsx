@@ -1,11 +1,11 @@
-export { H1, H2, H3 } from "./Heading";
-export { Paragraph } from "./Paragraph";
-export { UnorderedList, OrderedList, ListItemComponent } from "./Lists";
 export { BlockQuote } from "./BlockQuote";
-export { LinkComponent } from "./Link";
-export { PreComponent } from "./Pre";
+export { CalloutComponent } from "./Callout";
 export { CodeComponent } from "./Code";
-export { TableComponent, TableHeaderCell, TableDataCell } from "./Table";
+export { H1, H2, H3 } from "./Heading";
 export { HorizontalRule } from "./HorizontalRule";
 export { ImageComponent } from "./Image";
-export { CalloutComponent } from "./Callout";
+export { LinkComponent } from "./Link";
+export { ListItemComponent, OrderedList, UnorderedList } from "./Lists";
+export { Paragraph } from "./Paragraph";
+export { PreComponent } from "./Pre";
+export { TableComponent, TableDataCell, TableHeaderCell } from "./Table";

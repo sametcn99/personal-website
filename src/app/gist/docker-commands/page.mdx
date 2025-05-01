@@ -437,13 +437,13 @@ docker run -d --name my-webapp --network my-app-network -p 8080:80 myapp:latest
 For applications that require multiple services (e.g., a web server, a database, a cache), Docker Compose is a powerful tool that allows you to define and run multi-container Docker applications. A typical `docker-compose.yml` file might look like this:
 
 ```yaml
-version: '3.8'
+version: "3.8"
 services:
   web:
     image: myapp:latest
     container_name: my-webapp
     ports:
-      - '8080:80'
+      - "8080:80"
     environment:
       - APP_ENV=production
     volumes:

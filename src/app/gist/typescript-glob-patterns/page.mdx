@@ -75,12 +75,12 @@ Now, armed with a detailed understanding of glob pattern characters, let's explo
 In this example, we use the `glob` package to synchronously select all TypeScript files within a specific directory:
 
 ```typescript
-import * as glob from 'glob'
+import * as glob from "glob";
 
-const tsFiles = glob.sync('src/**/*.ts')
-glob('src/**/*.ts', (err, tsFiles) => {
-	console.log('Selected TypeScript files synchronously:', tsFiles)
-})
+const tsFiles = glob.sync("src/**/*.ts");
+glob("src/**/*.ts", (err, tsFiles) => {
+  console.log("Selected TypeScript files synchronously:", tsFiles);
+});
 ```
 
 Here, the glob pattern `src/**/*.ts` matches all ".ts" files under the `src` directory. The `glob.sync` method performs the file matching synchronously, and the result is printed to the console.
@@ -90,15 +90,15 @@ Here, the glob pattern `src/**/*.ts` matches all ".ts" files under the `src` dir
 For scenarios where asynchronous file matching is preferred, the `glob` package provides an asynchronous method:
 
 ```typescript
-import * as glob from 'glob'
+import * as glob from "glob";
 
-glob('src/**/*.ts', (err, tsFiles) => {
-	if (err) {
-		console.error('Error during asynchronous file matching:', err)
-		return
-	}
-	console.log('Selected TypeScript files asynchronously:', tsFiles)
-})
+glob("src/**/*.ts", (err, tsFiles) => {
+  if (err) {
+    console.error("Error during asynchronous file matching:", err);
+    return;
+  }
+  console.log("Selected TypeScript files asynchronously:", tsFiles);
+});
 ```
 
 In this example, the asynchronous `glob` method accomplishes the same result as Example 1. Asynchronous methods are beneficial for non-blocking operations in TypeScript projects.
@@ -109,13 +109,13 @@ In TypeScript projects, you can incorporate glob patterns directly into the `tsc
 
 ```json
 {
-	"compilerOptions": {
-		"module": "commonjs",
-		"target": "es5",
-		"outDir": "./dist",
-		"rootDir": "./src",
-		"include": ["src/**/*.ts"]
-	}
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es5",
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "include": ["src/**/*.ts"]
+  }
 }
 ```
 
@@ -134,59 +134,59 @@ Incorporating glob patterns into TypeScript projects empowers developers to crea
 ## Glob Pattern Examples in TypeScript
 
 ```typescript
-import { promisify } from 'util'
-import glob from 'glob'
-const globPromise = promisify(glob)
+import { promisify } from "util";
+import glob from "glob";
+const globPromise = promisify(glob);
 
 // Examples of glob patterns and their usage
 async function globExamples() {
-	// Match all TypeScript files in src directory and subdirectories
-	const tsFiles = await globPromise('src/**/*.ts')
+  // Match all TypeScript files in src directory and subdirectories
+  const tsFiles = await globPromise("src/**/*.ts");
 
-	// Match all test files
-	const testFiles = await globPromise('**/*.test.{ts,tsx}')
+  // Match all test files
+  const testFiles = await globPromise("**/*.test.{ts,tsx}");
 
-	// Match files with specific extensions
-	const sourceFiles = await globPromise('src/**/*.{ts,tsx,js,jsx}')
+  // Match files with specific extensions
+  const sourceFiles = await globPromise("src/**/*.{ts,tsx,js,jsx}");
 
-	// Exclude node_modules and dist directories
-	const projectFiles = await globPromise('**/*.ts', {
-		ignore: ['**/node_modules/**', '**/dist/**'],
-	})
+  // Exclude node_modules and dist directories
+  const projectFiles = await globPromise("**/*.ts", {
+    ignore: ["**/node_modules/**", "**/dist/**"],
+  });
 
-	// Match files in specific directories
-	const componentFiles = await globPromise('src/components/**/*.tsx')
+  // Match files in specific directories
+  const componentFiles = await globPromise("src/components/**/*.tsx");
 
-	// Match files with specific naming pattern
-	const hookFiles = await globPromise('src/**/*.hook.{ts,tsx}')
+  // Match files with specific naming pattern
+  const hookFiles = await globPromise("src/**/*.hook.{ts,tsx}");
 
-	// Match configuration files
-	const configFiles = await globPromise('{tsconfig,package}.json')
+  // Match configuration files
+  const configFiles = await globPromise("{tsconfig,package}.json");
 
-	// Match markdown files excluding README
-	const docs = await globPromise('docs/**/*.md', {
-		ignore: ['**/README.md'],
-	})
+  // Match markdown files excluding README
+  const docs = await globPromise("docs/**/*.md", {
+    ignore: ["**/README.md"],
+  });
 
-	// Match specific file types in multiple directories
-	const utilityFiles = await globPromise('{src,lib}/utils/**/*.ts')
+  // Match specific file types in multiple directories
+  const utilityFiles = await globPromise("{src,lib}/utils/**/*.ts");
 
-	// Match files with numbers in name
-	const versionedFiles = await globPromise('src/**/v[0-9]*.ts')
+  // Match files with numbers in name
+  const versionedFiles = await globPromise("src/**/v[0-9]*.ts");
 
-	return {
-		tsFiles,
-		testFiles,
-		sourceFiles,
-		projectFiles,
-		componentFiles,
-		hookFiles,
-		configFiles,
-		docs,
-		utilityFiles,
-		versionedFiles,
-	}
+  return {
+    tsFiles,
+    testFiles,
+    sourceFiles,
+    projectFiles,
+    componentFiles,
+    hookFiles,
+    configFiles,
+    docs,
+    utilityFiles,
+    versionedFiles,
+  };
 }
 
-export default globExamples
+export default globExamples;
 ```

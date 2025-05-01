@@ -68,21 +68,21 @@ Here's a comprehensive example of a tasks.json file structure:
 
 ```json
 {
-	"version": "2.0.0",
-	"tasks": [
-		{
-			"label": "My Task",
-			"type": "shell",
-			"command": "echo",
-			"args": ["Hello World"],
-			"group": "build",
-			"presentation": {
-				"reveal": "always",
-				"panel": "shared"
-			},
-			"problemMatcher": ["$eslint-compact"]
-		}
-	]
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "My Task",
+      "type": "shell",
+      "command": "echo",
+      "args": ["Hello World"],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": ["$eslint-compact"]
+    }
+  ]
 }
 ```
 
@@ -111,9 +111,9 @@ Here's a comprehensive example of a tasks.json file structure:
 
 ```json
 {
-	"label": "Build TypeScript",
-	"type": "shell",
-	"command": "tsc"
+  "label": "Build TypeScript",
+  "type": "shell",
+  "command": "tsc"
 }
 ```
 
@@ -125,12 +125,12 @@ Supported types with examples:
 
 ```json
 {
-	"label": "List Files",
-	"type": "shell",
-	"command": "ls",
-	"windows": {
-		"command": "dir"
-	}
+  "label": "List Files",
+  "type": "shell",
+  "command": "ls",
+  "windows": {
+    "command": "dir"
+  }
 }
 ```
 
@@ -138,10 +138,10 @@ Supported types with examples:
 
 ```json
 {
-	"label": "Run Node Script",
-	"type": "process",
-	"command": "node",
-	"args": ["app.js"]
+  "label": "Run Node Script",
+  "type": "process",
+  "command": "node",
+  "args": ["app.js"]
 }
 ```
 
@@ -149,9 +149,9 @@ Supported types with examples:
 
 ```json
 {
-	"label": "Install Dependencies",
-	"type": "npm",
-	"script": "install"
+  "label": "Install Dependencies",
+  "type": "npm",
+  "script": "install"
 }
 ```
 
@@ -161,10 +161,10 @@ Supported types with examples:
 
 ```json
 {
-	"label": "Echo Text",
-	"type": "shell",
-	"command": "echo",
-	"args": ["Hello", "World"]
+  "label": "Echo Text",
+  "type": "shell",
+  "command": "echo",
+  "args": ["Hello", "World"]
 }
 ```
 
@@ -172,10 +172,10 @@ Supported types with examples:
 
 ```json
 {
-	"label": "Compile TypeScript",
-	"type": "shell",
-	"command": "tsc",
-	"args": ["--project", "tsconfig.json", "--watch", "--pretty"]
+  "label": "Compile TypeScript",
+  "type": "shell",
+  "command": "tsc",
+  "args": ["--project", "tsconfig.json", "--watch", "--pretty"]
 }
 ```
 
@@ -185,12 +185,12 @@ Supported types with examples:
 
 ```json
 {
-	"label": "Build Project",
-	"type": "shell",
-	"command": "make",
-	"options": {
-		"cwd": "${workspaceFolder}/build"
-	}
+  "label": "Build Project",
+  "type": "shell",
+  "command": "make",
+  "options": {
+    "cwd": "${workspaceFolder}/build"
+  }
 }
 ```
 
@@ -198,16 +198,16 @@ Supported types with examples:
 
 ```json
 {
-	"label": "Deploy to Staging",
-	"type": "shell",
-	"command": "deploy.sh",
-	"options": {
-		"env": {
-			"NODE_ENV": "staging",
-			"API_KEY": "secret-key",
-			"DEBUG": "true"
-		}
-	}
+  "label": "Deploy to Staging",
+  "type": "shell",
+  "command": "deploy.sh",
+  "options": {
+    "env": {
+      "NODE_ENV": "staging",
+      "API_KEY": "secret-key",
+      "DEBUG": "true"
+    }
+  }
 }
 ```
 
@@ -217,57 +217,57 @@ Supported types with examples:
 
 ```json
 {
-	"version": "2.0.0",
-	"tasks": [
-		{
-			"label": "Start Full Stack",
-			"dependsOn": ["Start Frontend", "Start Backend"],
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			}
-		},
-		{
-			"label": "Start Frontend",
-			"type": "npm",
-			"script": "start",
-			"path": "frontend/",
-			"isBackground": true,
-			"presentation": {
-				"panel": "dedicated",
-				"group": "dev-servers"
-			},
-			"problemMatcher": {
-				"owner": "custom",
-				"pattern": {
-					"regexp": "^\\[.*\\] (.*):(\\d+):(\\d+): (.*)$",
-					"file": 1,
-					"line": 2,
-					"column": 3,
-					"message": 4
-				},
-				"background": {
-					"activeOnStart": true,
-					"beginsPattern": "Starting development server",
-					"endsPattern": "Compiled successfully"
-				}
-			}
-		},
-		{
-			"label": "Start Backend",
-			"type": "shell",
-			"command": "python",
-			"args": ["manage.py", "runserver"],
-			"options": {
-				"cwd": "${workspaceFolder}/backend"
-			},
-			"isBackground": true,
-			"presentation": {
-				"panel": "dedicated",
-				"group": "dev-servers"
-			}
-		}
-	]
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Start Full Stack",
+      "dependsOn": ["Start Frontend", "Start Backend"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "Start Frontend",
+      "type": "npm",
+      "script": "start",
+      "path": "frontend/",
+      "isBackground": true,
+      "presentation": {
+        "panel": "dedicated",
+        "group": "dev-servers"
+      },
+      "problemMatcher": {
+        "owner": "custom",
+        "pattern": {
+          "regexp": "^\\[.*\\] (.*):(\\d+):(\\d+): (.*)$",
+          "file": 1,
+          "line": 2,
+          "column": 3,
+          "message": 4
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "Starting development server",
+          "endsPattern": "Compiled successfully"
+        }
+      }
+    },
+    {
+      "label": "Start Backend",
+      "type": "shell",
+      "command": "python",
+      "args": ["manage.py", "runserver"],
+      "options": {
+        "cwd": "${workspaceFolder}/backend"
+      },
+      "isBackground": true,
+      "presentation": {
+        "panel": "dedicated",
+        "group": "dev-servers"
+      }
+    }
+  ]
 }
 ```
 
@@ -275,35 +275,35 @@ Supported types with examples:
 
 ```json
 {
-	"version": "2.0.0",
-	"tasks": [
-		{
-			"label": "Docker: Build & Deploy",
-			"type": "shell",
-			"command": "docker-compose",
-			"args": [
-				"-f",
-				"docker-compose.${input:environment}.yml",
-				"up",
-				"-d",
-				"--build"
-			],
-			"presentation": {
-				"reveal": "always",
-				"panel": "new"
-			},
-			"problemMatcher": []
-		}
-	],
-	"inputs": [
-		{
-			"id": "environment",
-			"type": "pickString",
-			"description": "Select deployment environment",
-			"options": ["dev", "staging", "prod"],
-			"default": "dev"
-		}
-	]
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Docker: Build & Deploy",
+      "type": "shell",
+      "command": "docker-compose",
+      "args": [
+        "-f",
+        "docker-compose.${input:environment}.yml",
+        "up",
+        "-d",
+        "--build"
+      ],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    }
+  ],
+  "inputs": [
+    {
+      "id": "environment",
+      "type": "pickString",
+      "description": "Select deployment environment",
+      "options": ["dev", "staging", "prod"],
+      "default": "dev"
+    }
+  ]
 }
 ```
 
@@ -311,61 +311,61 @@ Supported types with examples:
 
 ```json
 {
-	"version": "2.0.0",
-	"tasks": [
-		{
-			"label": "Full Build Pipeline",
-			"dependsOn": ["Clean", "Lint", "Test", "Build", "Package"],
-			"dependsOrder": "sequence",
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			},
-			"presentation": {
-				"echo": true,
-				"reveal": "always",
-				"focus": false,
-				"panel": "shared",
-				"showReuseMessage": true,
-				"clear": false
-			}
-		},
-		{
-			"label": "Clean",
-			"type": "shell",
-			"command": "rm -rf dist/*",
-			"windows": {
-				"command": "if exist dist rd /s /q dist"
-			}
-		},
-		{
-			"label": "Lint",
-			"type": "npm",
-			"script": "lint",
-			"problemMatcher": "$eslint-stylish"
-		},
-		{
-			"label": "Test",
-			"type": "npm",
-			"script": "test",
-			"group": "test",
-			"problemMatcher": "$jest"
-		},
-		{
-			"label": "Build",
-			"type": "npm",
-			"script": "build",
-			"problemMatcher": "$tsc"
-		},
-		{
-			"label": "Package",
-			"type": "shell",
-			"command": "zip -r dist/app.zip dist/*",
-			"windows": {
-				"command": "powershell Compress-Archive -Path dist/* -DestinationPath dist/app.zip -Force"
-			}
-		}
-	]
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Full Build Pipeline",
+      "dependsOn": ["Clean", "Lint", "Test", "Build", "Package"],
+      "dependsOrder": "sequence",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      }
+    },
+    {
+      "label": "Clean",
+      "type": "shell",
+      "command": "rm -rf dist/*",
+      "windows": {
+        "command": "if exist dist rd /s /q dist"
+      }
+    },
+    {
+      "label": "Lint",
+      "type": "npm",
+      "script": "lint",
+      "problemMatcher": "$eslint-stylish"
+    },
+    {
+      "label": "Test",
+      "type": "npm",
+      "script": "test",
+      "group": "test",
+      "problemMatcher": "$jest"
+    },
+    {
+      "label": "Build",
+      "type": "npm",
+      "script": "build",
+      "problemMatcher": "$tsc"
+    },
+    {
+      "label": "Package",
+      "type": "shell",
+      "command": "zip -r dist/app.zip dist/*",
+      "windows": {
+        "command": "powershell Compress-Archive -Path dist/* -DestinationPath dist/app.zip -Force"
+      }
+    }
+  ]
 }
 ```
 
@@ -409,16 +409,16 @@ Creating custom problem matchers can be advanced and requires understanding regu
 
 ```json
 {
-	"problemMatcher": {
-		"owner": "python",
-		"fileLocation": ["relative", "${workspaceFolder}"],
-		"pattern": {
-			"regexp": "^\\s*File \"(.*?)\", line (\\d+).*$",
-			"file": 1,
-			"line": 2,
-			"message": 0
-		}
-	}
+  "problemMatcher": {
+    "owner": "python",
+    "fileLocation": ["relative", "${workspaceFolder}"],
+    "pattern": {
+      "regexp": "^\\s*File \"(.*?)\", line (\\d+).*$",
+      "file": 1,
+      "line": 2,
+      "message": 0
+    }
+  }
 }
 ```
 
@@ -426,20 +426,20 @@ Creating custom problem matchers can be advanced and requires understanding regu
 
 ```json
 {
-	"problemMatcher": {
-		"owner": "custom-compiler",
-		"pattern": [
-			{
-				"regexp": "^\\s*(?:ERROR|WARNING)\\s+in\\s+(.*?):(\\d+):\\s*$",
-				"file": 1,
-				"line": 2
-			},
-			{
-				"regexp": "^\\s*(.*)$",
-				"message": 1
-			}
-		]
-	}
+  "problemMatcher": {
+    "owner": "custom-compiler",
+    "pattern": [
+      {
+        "regexp": "^\\s*(?:ERROR|WARNING)\\s+in\\s+(.*?):(\\d+):\\s*$",
+        "file": 1,
+        "line": 2
+      },
+      {
+        "regexp": "^\\s*(.*)$",
+        "message": 1
+      }
+    ]
+  }
 }
 ```
 
@@ -447,24 +447,24 @@ Creating custom problem matchers can be advanced and requires understanding regu
 
 ```json
 {
-	"problemMatcher": {
-		"owner": "multiline-error",
-		"pattern": [
-			{
-				"regexp": "^Error in file: (.*)$",
-				"file": 1
-			},
-			{
-				"regexp": "^On line: (\\d+)$",
-				"line": 1
-			},
-			{
-				"regexp": "^Message: (.*)$",
-				"message": 1,
-				"loop": true
-			}
-		]
-	}
+  "problemMatcher": {
+    "owner": "multiline-error",
+    "pattern": [
+      {
+        "regexp": "^Error in file: (.*)$",
+        "file": 1
+      },
+      {
+        "regexp": "^On line: (\\d+)$",
+        "line": 1
+      },
+      {
+        "regexp": "^Message: (.*)$",
+        "message": 1,
+        "loop": true
+      }
+    ]
+  }
 }
 ```
 
@@ -495,30 +495,30 @@ You can see a full list of predefined variables in the VS Code documentation.
 
 ```json
 {
-	"version": "2.0.0",
-	"tasks": [
-		{
-			"label": "Build Current File",
-			"type": "shell",
-			"command": "gcc",
-			"args": ["-g", "${file}", "-o", "${fileBasenameNoExtension}"],
-			"options": {
-				"cwd": "${fileDirname}"
-			}
-		},
-		{
-			"label": "Process Workspace Files",
-			"type": "shell",
-			"command": "python",
-			"args": [
-				"${workspaceFolder}/scripts/process.py",
-				"--input",
-				"${workspaceFolder}/data",
-				"--output",
-				"${workspaceFolder}/output/${command:CurrentDateTime}"
-			]
-		}
-	]
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build Current File",
+      "type": "shell",
+      "command": "gcc",
+      "args": ["-g", "${file}", "-o", "${fileBasenameNoExtension}"],
+      "options": {
+        "cwd": "${fileDirname}"
+      }
+    },
+    {
+      "label": "Process Workspace Files",
+      "type": "shell",
+      "command": "python",
+      "args": [
+        "${workspaceFolder}/scripts/process.py",
+        "--input",
+        "${workspaceFolder}/data",
+        "--output",
+        "${workspaceFolder}/output/${command:CurrentDateTime}"
+      ]
+    }
+  ]
 }
 ```
 
@@ -528,43 +528,43 @@ You can see a full list of predefined variables in the VS Code documentation.
 
 ```json
 {
-	"version": "2.0.0",
-	"inputs": [
-		{
-			"id": "buildType",
-			"type": "pickString",
-			"description": "Select build configuration",
-			"options": ["debug", "release", "profile"],
-			"default": "debug"
-		},
-		{
-			"id": "serverPort",
-			"type": "promptString",
-			"description": "Enter server port",
-			"default": "3000"
-		},
-		{
-			"id": "deployTarget",
-			"type": "command",
-			"command": "extension.getDeploymentTargets",
-			"args": { "type": "production" }
-		}
-	],
-	"tasks": [
-		{
-			"label": "Deploy Application",
-			"type": "shell",
-			"command": "./deploy.sh",
-			"args": [
-				"--type",
-				"${input:buildType}",
-				"--port",
-				"${input:serverPort}",
-				"--target",
-				"${input:deployTarget}"
-			]
-		}
-	]
+  "version": "2.0.0",
+  "inputs": [
+    {
+      "id": "buildType",
+      "type": "pickString",
+      "description": "Select build configuration",
+      "options": ["debug", "release", "profile"],
+      "default": "debug"
+    },
+    {
+      "id": "serverPort",
+      "type": "promptString",
+      "description": "Enter server port",
+      "default": "3000"
+    },
+    {
+      "id": "deployTarget",
+      "type": "command",
+      "command": "extension.getDeploymentTargets",
+      "args": { "type": "production" }
+    }
+  ],
+  "tasks": [
+    {
+      "label": "Deploy Application",
+      "type": "shell",
+      "command": "./deploy.sh",
+      "args": [
+        "--type",
+        "${input:buildType}",
+        "--port",
+        "${input:serverPort}",
+        "--target",
+        "${input:deployTarget}"
+      ]
+    }
+  ]
 }
 ```
 
@@ -574,96 +574,96 @@ You can see a full list of predefined variables in the VS Code documentation.
 
 ```json
 {
-	"version": "2.0.0",
-	"tasks": [
-		{
-			"label": "Dev Environment",
-			"dependsOn": [
-				"Frontend Dev Server",
-				"Backend API",
-				"Database",
-				"Watch TypeScript",
-				"Watch Tests"
-			],
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			},
-			"presentation": {
-				"echo": true,
-				"reveal": "always",
-				"focus": false,
-				"panel": "dedicated",
-				"showReuseMessage": false
-			}
-		},
-		{
-			"label": "Frontend Dev Server",
-			"type": "npm",
-			"script": "start",
-			"path": "client/",
-			"isBackground": true,
-			"problemMatcher": {
-				"owner": "webpack",
-				"pattern": {
-					"regexp": "ERROR in (.*)",
-					"file": 1
-				},
-				"background": {
-					"activeOnStart": true,
-					"beginsPattern": "Starting development server",
-					"endsPattern": "Compiled successfully"
-				}
-			}
-		},
-		{
-			"label": "Backend API",
-			"type": "shell",
-			"command": "poetry",
-			"args": ["run", "uvicorn", "api.main:app", "--reload"],
-			"options": {
-				"cwd": "${workspaceFolder}/server",
-				"env": {
-					"DATABASE_URL": "postgresql://user:pass@localhost:5432/devdb",
-					"DEBUG": "1"
-				}
-			},
-			"isBackground": true,
-			"problemMatcher": {
-				"pattern": {
-					"regexp": "^.*Error in.*$",
-					"message": 0
-				},
-				"background": {
-					"activeOnStart": true,
-					"beginsPattern": "^INFO:.*Application startup complete.*$"
-				}
-			}
-		},
-		{
-			"label": "Database",
-			"type": "shell",
-			"command": "docker-compose",
-			"args": ["-f", "docker-compose.dev.yml", "up", "database"],
-			"isBackground": true
-		},
-		{
-			"label": "Watch TypeScript",
-			"type": "typescript",
-			"tsconfig": "client/tsconfig.json",
-			"option": "watch",
-			"problemMatcher": ["$tsc-watch"],
-			"isBackground": true
-		},
-		{
-			"label": "Watch Tests",
-			"type": "npm",
-			"script": "test:watch",
-			"path": "client/",
-			"isBackground": true,
-			"problemMatcher": "$jest-watch"
-		}
-	]
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Dev Environment",
+      "dependsOn": [
+        "Frontend Dev Server",
+        "Backend API",
+        "Database",
+        "Watch TypeScript",
+        "Watch Tests"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "dedicated",
+        "showReuseMessage": false
+      }
+    },
+    {
+      "label": "Frontend Dev Server",
+      "type": "npm",
+      "script": "start",
+      "path": "client/",
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "webpack",
+        "pattern": {
+          "regexp": "ERROR in (.*)",
+          "file": 1
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "Starting development server",
+          "endsPattern": "Compiled successfully"
+        }
+      }
+    },
+    {
+      "label": "Backend API",
+      "type": "shell",
+      "command": "poetry",
+      "args": ["run", "uvicorn", "api.main:app", "--reload"],
+      "options": {
+        "cwd": "${workspaceFolder}/server",
+        "env": {
+          "DATABASE_URL": "postgresql://user:pass@localhost:5432/devdb",
+          "DEBUG": "1"
+        }
+      },
+      "isBackground": true,
+      "problemMatcher": {
+        "pattern": {
+          "regexp": "^.*Error in.*$",
+          "message": 0
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "^INFO:.*Application startup complete.*$"
+        }
+      }
+    },
+    {
+      "label": "Database",
+      "type": "shell",
+      "command": "docker-compose",
+      "args": ["-f", "docker-compose.dev.yml", "up", "database"],
+      "isBackground": true
+    },
+    {
+      "label": "Watch TypeScript",
+      "type": "typescript",
+      "tsconfig": "client/tsconfig.json",
+      "option": "watch",
+      "problemMatcher": ["$tsc-watch"],
+      "isBackground": true
+    },
+    {
+      "label": "Watch Tests",
+      "type": "npm",
+      "script": "test:watch",
+      "path": "client/",
+      "isBackground": true,
+      "problemMatcher": "$jest-watch"
+    }
+  ]
 }
 ```
 
@@ -671,81 +671,81 @@ You can see a full list of predefined variables in the VS Code documentation.
 
 ```json
 {
-	"version": "2.0.0",
-	"tasks": [
-		{
-			"label": "CI Pipeline",
-			"dependsOn": [
-				"Install Dependencies",
-				"Type Check",
-				"Lint",
-				"Unit Tests",
-				"Integration Tests",
-				"Build",
-				"Docker Build"
-			],
-			"dependsOrder": "sequence",
-			"group": "test",
-			"presentation": {
-				"reveal": "always",
-				"panel": "new"
-			}
-		},
-		{
-			"label": "Install Dependencies",
-			"type": "shell",
-			"command": "npm ci && cd server && poetry install",
-			"problemMatcher": []
-		},
-		{
-			"label": "Type Check",
-			"type": "npm",
-			"script": "type-check",
-			"problemMatcher": "$tsc"
-		},
-		{
-			"label": "Lint",
-			"type": "shell",
-			"command": "npm run lint && cd server && poetry run flake8",
-			"problemMatcher": ["$eslint-stylish", "$flake8"]
-		},
-		{
-			"label": "Unit Tests",
-			"type": "shell",
-			"command": "npm test -- --coverage && cd server && poetry run pytest tests/unit",
-			"group": "test",
-			"presentation": {
-				"reveal": "always",
-				"panel": "dedicated"
-			},
-			"problemMatcher": ["$jest", "$pytest"]
-		},
-		{
-			"label": "Integration Tests",
-			"dependsOn": ["Start Test DB"],
-			"type": "shell",
-			"command": "cd server && poetry run pytest tests/integration",
-			"problemMatcher": ["$pytest"]
-		},
-		{
-			"label": "Start Test DB",
-			"type": "shell",
-			"command": "docker-compose -f docker-compose.test.yml up -d db",
-			"isBackground": true
-		},
-		{
-			"label": "Build",
-			"type": "shell",
-			"command": "npm run build && cd server && poetry run python setup.py bdist_wheel",
-			"problemMatcher": []
-		},
-		{
-			"label": "Docker Build",
-			"type": "shell",
-			"command": "docker-compose -f docker-compose.prod.yml build",
-			"problemMatcher": []
-		}
-	]
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "CI Pipeline",
+      "dependsOn": [
+        "Install Dependencies",
+        "Type Check",
+        "Lint",
+        "Unit Tests",
+        "Integration Tests",
+        "Build",
+        "Docker Build"
+      ],
+      "dependsOrder": "sequence",
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "Install Dependencies",
+      "type": "shell",
+      "command": "npm ci && cd server && poetry install",
+      "problemMatcher": []
+    },
+    {
+      "label": "Type Check",
+      "type": "npm",
+      "script": "type-check",
+      "problemMatcher": "$tsc"
+    },
+    {
+      "label": "Lint",
+      "type": "shell",
+      "command": "npm run lint && cd server && poetry run flake8",
+      "problemMatcher": ["$eslint-stylish", "$flake8"]
+    },
+    {
+      "label": "Unit Tests",
+      "type": "shell",
+      "command": "npm test -- --coverage && cd server && poetry run pytest tests/unit",
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      },
+      "problemMatcher": ["$jest", "$pytest"]
+    },
+    {
+      "label": "Integration Tests",
+      "dependsOn": ["Start Test DB"],
+      "type": "shell",
+      "command": "cd server && poetry run pytest tests/integration",
+      "problemMatcher": ["$pytest"]
+    },
+    {
+      "label": "Start Test DB",
+      "type": "shell",
+      "command": "docker-compose -f docker-compose.test.yml up -d db",
+      "isBackground": true
+    },
+    {
+      "label": "Build",
+      "type": "shell",
+      "command": "npm run build && cd server && poetry run python setup.py bdist_wheel",
+      "problemMatcher": []
+    },
+    {
+      "label": "Docker Build",
+      "type": "shell",
+      "command": "docker-compose -f docker-compose.prod.yml build",
+      "problemMatcher": []
+    }
+  ]
 }
 ```
 
@@ -755,25 +755,25 @@ You can see a full list of predefined variables in the VS Code documentation.
 
 ```json
 {
-	"version": "2.0.0",
-	"tasks": [
-		{
-			"label": "Debug Python Tests",
-			"type": "shell",
-			"command": "python",
-			"args": ["-m", "pytest", "--pdb", "tests/"],
-			"options": {
-				"env": {
-					"PYTHONBREAKPOINT": "0"
-				}
-			},
-			"presentation": {
-				"reveal": "always",
-				"panel": "dedicated",
-				"focus": true
-			}
-		}
-	]
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Debug Python Tests",
+      "type": "shell",
+      "command": "python",
+      "args": ["-m", "pytest", "--pdb", "tests/"],
+      "options": {
+        "env": {
+          "PYTHONBREAKPOINT": "0"
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      }
+    }
+  ]
 }
 ```
 
@@ -781,28 +781,28 @@ You can see a full list of predefined variables in the VS Code documentation.
 
 ```json
 {
-	"version": "2.0.0",
-	"tasks": [
-		{
-			"label": "Build Debug",
-			"type": "shell",
-			"command": "gcc",
-			"args": ["-g", "${file}", "-o", "${fileBasenameNoExtension}"],
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			}
-		}
-	],
-	"configurations": [
-		{
-			"name": "Debug C++ Program",
-			"type": "cppdbg",
-			"request": "launch",
-			"program": "${workspaceFolder}/${fileBasenameNoExtension}",
-			"preLaunchTask": "Build Debug"
-		}
-	]
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build Debug",
+      "type": "shell",
+      "command": "gcc",
+      "args": ["-g", "${file}", "-o", "${fileBasenameNoExtension}"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    }
+  ],
+  "configurations": [
+    {
+      "name": "Debug C++ Program",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/${fileBasenameNoExtension}",
+      "preLaunchTask": "Build Debug"
+    }
+  ]
 }
 ```
 

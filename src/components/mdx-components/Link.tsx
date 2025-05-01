@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { Link as MuiLink, Box } from "@mui/material";
+import { Box, Link as MuiLink } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import Link from "next/link";
 import React from "react";
@@ -9,14 +9,18 @@ interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   href?: string;
 }
 
-export function LinkComponent({ children, href, ...props }: React.PropsWithChildren<LinkProps>) {
+export function LinkComponent({
+  children,
+  href,
+  ...props
+}: React.PropsWithChildren<LinkProps>) {
   const theme = useTheme();
-  
+
   if (href && href.startsWith("/")) {
     return (
-      <MuiLink 
-        href={href} 
-        component={Link} 
+      <MuiLink
+        href={href}
+        component={Link}
         sx={{
           textDecoration: "none",
           color: theme.palette.primary.main,
@@ -40,18 +44,18 @@ export function LinkComponent({ children, href, ...props }: React.PropsWithChild
           },
         }}
         {...props}
-		aria-label={String(children)}
+        aria-label={String(children)}
       >
         {children}
       </MuiLink>
     );
   }
-  
+
   return (
-    <MuiLink 
-      href={href} 
-      target="_blank" 
-      rel="noopener noreferrer" 
+    <MuiLink
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
       sx={{
         textDecoration: "none",
         color: theme.palette.secondary.main,
@@ -75,15 +79,15 @@ export function LinkComponent({ children, href, ...props }: React.PropsWithChild
         },
       }}
       {...props}
-	  aria-label={String(children) + " (opens in a new tab)"}
+      aria-label={String(children) + " (opens in a new tab)"}
     >
       {children}
-      <Box 
-        component="span" 
-        sx={{ 
-          fontSize: "0.8rem", 
-          ml: 0.5, 
-          verticalAlign: "super" 
+      <Box
+        component="span"
+        sx={{
+          fontSize: "0.8rem",
+          ml: 0.5,
+          verticalAlign: "super",
         }}
       >
         ↗

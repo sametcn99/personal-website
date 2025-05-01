@@ -38,45 +38,45 @@ Recursively makes all properties in an object type optional, including nested ob
 // The '?' makes the property optional.
 // If T is not an object (e.g., primitive, array), it returns T as is.
 type DeepPartial<T> = T extends object
-	? {
-			[P in keyof T]?: DeepPartial<T[P]>
-		}
-	: T
+  ? {
+      [P in keyof T]?: DeepPartial<T[P]>;
+    }
+  : T;
 
 // Example usage:
 interface NestedUser {
-	id: number
-	name: string
-	address: {
-		street: string
-		city: string
-		zip: number
-	}
-	preferences: {
-		theme: {
-			dark: boolean
-			fontSize: number
-		}
-		notifications: string[]
-	}
+  id: number;
+  name: string;
+  address: {
+    street: string;
+    city: string;
+    zip: number;
+  };
+  preferences: {
+    theme: {
+      dark: boolean;
+      fontSize: number;
+    };
+    notifications: string[];
+  };
 }
 
 // With DeepPartial, even nested properties can be omitted or partially provided.
 const deepPartialUser: DeepPartial<NestedUser> = {
-	id: 1, // Provide id
-	address: {
-		// Partially provide address
-		city: 'New York',
-	},
-	preferences: {
-		// Partially provide preferences
-		theme: {
-			// Partially provide theme
-			fontSize: 14,
-		},
-		// notifications can be omitted entirely
-	},
-}
+  id: 1, // Provide id
+  address: {
+    // Partially provide address
+    city: "New York",
+  },
+  preferences: {
+    // Partially provide preferences
+    theme: {
+      // Partially provide theme
+      fontSize: 14,
+    },
+    // notifications can be omitted entirely
+  },
+};
 ```
 
 #### `DeepReadonly<T>`
@@ -89,39 +89,39 @@ Recursively makes all properties in an object type `readonly`, including nested 
 // Handles objects: If T is an object, map over keys [P in keyof T] and apply DeepReadonly recursively. Add 'readonly' modifier.
 // Handles primitives: If T is none of the above, return T.
 type DeepReadonly<T> = T extends (infer R)[]
-	? ReadonlyArray<DeepReadonly<R>>
-	: T extends Function
-		? T
-		: T extends object
-			? {
-					readonly [P in keyof T]: DeepReadonly<T[P]>
-				}
-			: T
+  ? ReadonlyArray<DeepReadonly<R>>
+  : T extends Function
+    ? T
+    : T extends object
+      ? {
+          readonly [P in keyof T]: DeepReadonly<T[P]>;
+        }
+      : T;
 
 // Example:
 interface Config {
-	apiKey: string
-	settings: {
-		timeout: number
-		retries: number
-		advanced: {
-			logging: boolean
-		}
-		features: string[]
-	}
+  apiKey: string;
+  settings: {
+    timeout: number;
+    retries: number;
+    advanced: {
+      logging: boolean;
+    };
+    features: string[];
+  };
 }
 
 const config: DeepReadonly<Config> = {
-	apiKey: 'abc123',
-	settings: {
-		timeout: 3000,
-		retries: 3,
-		advanced: {
-			logging: true,
-		},
-		features: ['featureA', 'featureB'],
-	},
-}
+  apiKey: "abc123",
+  settings: {
+    timeout: 3000,
+    retries: 3,
+    advanced: {
+      logging: true,
+    },
+    features: ["featureA", "featureB"],
+  },
+};
 
 // All attempts to modify will cause TypeScript errors:
 // config.apiKey = "xyz"; // Error
@@ -138,24 +138,24 @@ Removes the `readonly` modifier from all properties in a type `T`. This is the i
 // Uses a mapped type with '-readonly' modifier.
 // This special syntax removes the readonly flag from each property P in T.
 type Mutable<T> = {
-	-readonly [P in keyof T]: T[P]
-}
+  -readonly [P in keyof T]: T[P];
+};
 
 // Example:
 interface ReadonlyUser {
-	readonly id: number
-	readonly name: string
-	readonly roles: readonly string[]
+  readonly id: number;
+  readonly name: string;
+  readonly roles: readonly string[];
 }
 
-const readonlyUser: ReadonlyUser = { id: 1, name: 'John', roles: ['admin'] }
+const readonlyUser: ReadonlyUser = { id: 1, name: "John", roles: ["admin"] };
 
 // Create a mutable version
-const mutableUser: Mutable<ReadonlyUser> = { ...readonlyUser }
+const mutableUser: Mutable<ReadonlyUser> = { ...readonlyUser };
 
 // Now modifications are allowed:
-mutableUser.id = 2
-mutableUser.name = 'Jane'
+mutableUser.id = 2;
+mutableUser.name = "Jane";
 // Note: Deep immutability is not removed by Mutable<T> alone.
 // mutableUser.roles.push("editor"); // Error if roles was ReadonlyArray<string>
 // To make roles mutable too, you'd need a DeepMutable type.
@@ -167,37 +167,37 @@ Constructs a type that allows `T` or `null`. Useful for representing values that
 
 ```typescript
 // Simple union type definition.
-type Nullable<T> = T | null
+type Nullable<T> = T | null;
 
 // Example:
 interface User {
-	id: number
-	profileImageUrl: Nullable<string> // Profile image might not exist
+  id: number;
+  profileImageUrl: Nullable<string>; // Profile image might not exist
 }
 
 function getUserProfile(userId: number): Nullable<User> {
-	// Simulating data fetching
-	if (userId === 1) {
-		return { id: 1, profileImageUrl: 'http://example.com/img.jpg' }
-	} else if (userId === 2) {
-		return { id: 2, profileImageUrl: null } // User exists, but no image
-	}
-	return null // User not found
+  // Simulating data fetching
+  if (userId === 1) {
+    return { id: 1, profileImageUrl: "http://example.com/img.jpg" };
+  } else if (userId === 2) {
+    return { id: 2, profileImageUrl: null }; // User exists, but no image
+  }
+  return null; // User not found
 }
 
-const user1 = getUserProfile(1)
-const user2 = getUserProfile(2)
-const user3 = getUserProfile(3)
+const user1 = getUserProfile(1);
+const user2 = getUserProfile(2);
+const user3 = getUserProfile(3);
 
 // Need null checks
 if (user1) {
-	console.log(user1.profileImageUrl?.toUpperCase()) // Optional chaining needed for profileImageUrl
+  console.log(user1.profileImageUrl?.toUpperCase()); // Optional chaining needed for profileImageUrl
 }
 if (user2) {
-	console.log(user2.profileImageUrl) // null
+  console.log(user2.profileImageUrl); // null
 }
 if (user3 === null) {
-	console.log('User 3 not found')
+  console.log("User 3 not found");
 }
 ```
 
@@ -215,32 +215,32 @@ Extracts the keys of `T` whose properties are optional (can be `undefined`).
 // 3. `? K : never`: If the condition is true (K is optional), keep the key `K`. Otherwise, discard it (`never`).
 // 4. `[keyof T]`: Finally, look up the resulting type using `keyof T` to get a union of the keys that were kept (the optional ones).
 type OptionalKeys<T> = {
-	[K in keyof T]-?: {} extends Pick<T, K> ? K : never
-}[keyof T]
+  [K in keyof T]-?: {} extends Pick<T, K> ? K : never;
+}[keyof T];
 
 // Example:
 interface UserConfig {
-	id: number // Required
-	theme: string // Required
-	notifications?: boolean // Optional
-	language?: string // Optional
+  id: number; // Required
+  theme: string; // Required
+  notifications?: boolean; // Optional
+  language?: string; // Optional
 }
 
 // Results in: "notifications" | "language"
-type ConfigOptionalKeys = OptionalKeys<UserConfig>
+type ConfigOptionalKeys = OptionalKeys<UserConfig>;
 
 // Usage example: Setting default values for optional keys
 function applyDefaults(config: UserConfig): Required<UserConfig> {
-	const defaults: Pick<UserConfig, OptionalKeys<UserConfig>> = {
-		notifications: true,
-		language: 'en',
-	}
-	// Spread defaults first, then the provided config to override
-	return { ...defaults, ...config } as Required<UserConfig> // Asserting Required for simplicity here
+  const defaults: Pick<UserConfig, OptionalKeys<UserConfig>> = {
+    notifications: true,
+    language: "en",
+  };
+  // Spread defaults first, then the provided config to override
+  return { ...defaults, ...config } as Required<UserConfig>; // Asserting Required for simplicity here
 }
 
-const userConf: UserConfig = { id: 1, theme: 'dark' }
-const fullConfig = applyDefaults(userConf)
+const userConf: UserConfig = { id: 1, theme: "dark" };
+const fullConfig = applyDefaults(userConf);
 // fullConfig = { id: 1, theme: 'dark', notifications: true, language: 'en' }
 ```
 
@@ -255,32 +255,32 @@ Extracts the keys of `T` whose properties are required (must be present and cann
 // 3. `? never : K`: If the condition is true (K is optional), discard the key (`never`). Otherwise (K is required), keep the key `K`.
 // 4. `[keyof T]`: Look up the resulting type to get a union of the required keys.
 type RequiredKeys<T> = {
-	[K in keyof T]-?: {} extends Pick<T, K> ? never : K
-}[keyof T]
+  [K in keyof T]-?: {} extends Pick<T, K> ? never : K;
+}[keyof T];
 
 // Example:
 interface UserConfig {
-	id: number // Required
-	theme: string // Required
-	notifications?: boolean // Optional
-	language?: string // Optional
+  id: number; // Required
+  theme: string; // Required
+  notifications?: boolean; // Optional
+  language?: string; // Optional
 }
 
 // Results in: "id" | "theme"
-type ConfigRequiredKeys = RequiredKeys<UserConfig>
+type ConfigRequiredKeys = RequiredKeys<UserConfig>;
 
 // Usage example: Validating required fields
 function validateConfig(config: Partial<UserConfig>): boolean {
-	const requiredKeys: ConfigRequiredKeys[] = ['id', 'theme']
-	return requiredKeys.every(
-		(key) => config[key] !== undefined && config[key] !== null
-	)
+  const requiredKeys: ConfigRequiredKeys[] = ["id", "theme"];
+  return requiredKeys.every(
+    (key) => config[key] !== undefined && config[key] !== null,
+  );
 }
 
-console.log(validateConfig({ id: 1, theme: 'light' })) // true
-console.log(validateConfig({ id: 1 })) // false (missing theme)
-console.log(validateConfig({ theme: 'dark' })) // false (missing id)
-console.log(validateConfig({ id: 1, theme: 'dark', notifications: false })) // true
+console.log(validateConfig({ id: 1, theme: "light" })); // true
+console.log(validateConfig({ id: 1 })); // false (missing theme)
+console.log(validateConfig({ theme: "dark" })); // false (missing id)
+console.log(validateConfig({ id: 1, theme: "dark", notifications: false })); // true
 ```
 
 #### `UnionToIntersection<T>`
@@ -296,28 +296,28 @@ Converts a union type `U` into an intersection type. This is often used in advan
 //    Example: `((k: A) => void) | ((k: B) => void)` is assignable to `(k: I) => void` only if `I` is `A & B`.
 // 3. `? I : never`: If the inference succeeds, return the inferred intersection type `I`. Otherwise, return `never`.
 type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends (
-	k: infer I
+  k: infer I,
 ) => void
-	? I
-	: never
+  ? I
+  : never;
 
 // Example 1: Simple object union
-type UnionObjects = { a: string } | { b: number }
+type UnionObjects = { a: string } | { b: number };
 
 // Results in: { a: string } & { b: number }
-type IntersectionObjects = UnionToIntersection<UnionObjects>
-const obj: IntersectionObjects = { a: 'hello', b: 123 }
+type IntersectionObjects = UnionToIntersection<UnionObjects>;
+const obj: IntersectionObjects = { a: "hello", b: 123 };
 
 // Example 2: Function overload union
-type Overloads = ((a: string) => number) | ((a: number) => string)
+type Overloads = ((a: string) => number) | ((a: number) => string);
 
 // Results in an intersection of function signatures, representing an overloaded function
-type CombinedOverload = UnionToIntersection<Overloads>
+type CombinedOverload = UnionToIntersection<Overloads>;
 // const combinedFunc: CombinedOverload = ...; // Can be called with string or number
 
 // Example 3: Union of primitives (less common, results in 'never' as primitives can't intersect meaningfully)
-type Primitives = string | number
-type IntersectionPrimitives = UnionToIntersection<Primitives> // Type is 'never'
+type Primitives = string | number;
+type IntersectionPrimitives = UnionToIntersection<Primitives>; // Type is 'never'
 ```
 
 #### `DeepNonNullable<T>`
@@ -330,30 +330,30 @@ Recursively removes `null` and `undefined` from all properties in a type `T`, in
 // If true, maps over keys [P in keyof T] and applies DeepNonNullable recursively.
 // If false (primitive or array), applies the built-in NonNullable<T> to remove null/undefined from the value itself.
 type DeepNonNullable<T> = T extends object
-	? { [P in keyof T]: DeepNonNullable<T[P]> }
-	: NonNullable<T> // Use built-in NonNullable for non-object types
+  ? { [P in keyof T]: DeepNonNullable<T[P]> }
+  : NonNullable<T>; // Use built-in NonNullable for non-object types
 
 // Example:
 interface UserProfile {
-	id: number | null
-	name: string | undefined
-	contact: {
-		email: string | null
-		phone?: string | null // Optional and potentially null
-	} | null
+  id: number | null;
+  name: string | undefined;
+  contact: {
+    email: string | null;
+    phone?: string | null; // Optional and potentially null
+  } | null;
 }
 
 // All nullable/undefinable properties must be provided with non-nullish values.
 // Optional properties must also be provided if they exist in the original type.
 const profile: DeepNonNullable<UserProfile> = {
-	id: 1, // Must be number
-	name: 'John', // Must be string
-	contact: {
-		// contact object cannot be null
-		email: 'john@example.com', // Must be string
-		phone: '123-456-7890', // Must be string (since phone exists in the mapped type)
-	},
-}
+  id: 1, // Must be number
+  name: "John", // Must be string
+  contact: {
+    // contact object cannot be null
+    email: "john@example.com", // Must be string
+    phone: "123-456-7890", // Must be string (since phone exists in the mapped type)
+  },
+};
 
 // This would be invalid:
 // const invalidProfile: DeepNonNullable<UserProfile> = {

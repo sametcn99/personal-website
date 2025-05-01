@@ -27,16 +27,16 @@ The `launch.json` file is the cornerstone of VS Code's debugging configuration:
 
 ```json
 {
-	"version": "0.2.0",
-	"configurations": [
-		{
-			"type": "node",
-			"request": "launch",
-			"name": "Debug Node.js Program",
-			"program": "${workspaceFolder}/app.js",
-			"skipFiles": ["<node_internals>/**"]
-		}
-	]
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug Node.js Program",
+      "program": "${workspaceFolder}/app.js",
+      "skipFiles": ["<node_internals>/**"]
+    }
+  ]
 }
 ```
 
@@ -140,7 +140,7 @@ VS Code can automatically detect and configure debugging for:
 
    ```json
    {
-   	"args": ["--env", "development", "--port", "3000"]
+     "args": ["--env", "development", "--port", "3000"]
    }
    ```
 
@@ -148,11 +148,11 @@ VS Code can automatically detect and configure debugging for:
 
    ```json
    {
-   	"env": {
-   		"NODE_ENV": "development",
-   		"DEBUG": "app:*",
-   		"API_KEY": "secret-key"
-   	}
+     "env": {
+       "NODE_ENV": "development",
+       "DEBUG": "app:*",
+       "API_KEY": "secret-key"
+     }
    }
    ```
 
@@ -160,7 +160,7 @@ VS Code can automatically detect and configure debugging for:
 
    ```json
    {
-   	"envFile": "${workspaceFolder}/.env"
+     "envFile": "${workspaceFolder}/.env"
    }
    ```
 
@@ -168,7 +168,7 @@ VS Code can automatically detect and configure debugging for:
 
    ```json
    {
-   	"cwd": "${workspaceFolder}/src"
+     "cwd": "${workspaceFolder}/src"
    }
    ```
 
@@ -180,15 +180,15 @@ VS Code can automatically detect and configure debugging for:
 
 ```json
 {
-	"type": "node",
-	"request": "launch",
-	"name": "Debug Node.js",
-	"program": "${workspaceFolder}/index.js",
-	"skipFiles": ["<node_internals>/**"],
-	"outFiles": ["${workspaceFolder}/dist/**/*.js"],
-	"runtimeArgs": ["--inspect"],
-	"console": "integratedTerminal",
-	"internalConsoleOptions": "neverOpen"
+  "type": "node",
+  "request": "launch",
+  "name": "Debug Node.js",
+  "program": "${workspaceFolder}/index.js",
+  "skipFiles": ["<node_internals>/**"],
+  "outFiles": ["${workspaceFolder}/dist/**/*.js"],
+  "runtimeArgs": ["--inspect"],
+  "console": "integratedTerminal",
+  "internalConsoleOptions": "neverOpen"
 }
 ```
 
@@ -196,19 +196,19 @@ VS Code can automatically detect and configure debugging for:
 
 ```json
 {
-	"type": "node",
-	"request": "launch",
-	"name": "Debug Express",
-	"program": "${workspaceFolder}/bin/www",
-	"env": {
-		"PORT": "3000",
-		"NODE_ENV": "development"
-	},
-	"serverReadyAction": {
-		"pattern": "listening on port ([0-9]+)",
-		"uriFormat": "http://localhost:%s",
-		"action": "openExternally"
-	}
+  "type": "node",
+  "request": "launch",
+  "name": "Debug Express",
+  "program": "${workspaceFolder}/bin/www",
+  "env": {
+    "PORT": "3000",
+    "NODE_ENV": "development"
+  },
+  "serverReadyAction": {
+    "pattern": "listening on port ([0-9]+)",
+    "uriFormat": "http://localhost:%s",
+    "action": "openExternally"
+  }
 }
 ```
 
@@ -216,14 +216,14 @@ VS Code can automatically detect and configure debugging for:
 
 ```json
 {
-	"type": "node",
-	"request": "launch",
-	"name": "Debug TypeScript",
-	"program": "${workspaceFolder}/src/index.ts",
-	"preLaunchTask": "tsc: build - tsconfig.json",
-	"outFiles": ["${workspaceFolder}/dist/**/*.js"],
-	"sourceMaps": true,
-	"resolveSourceMapLocations": ["${workspaceFolder}/**", "!**/node_modules/**"]
+  "type": "node",
+  "request": "launch",
+  "name": "Debug TypeScript",
+  "program": "${workspaceFolder}/src/index.ts",
+  "preLaunchTask": "tsc: build - tsconfig.json",
+  "outFiles": ["${workspaceFolder}/dist/**/*.js"],
+  "sourceMaps": true,
+  "resolveSourceMapLocations": ["${workspaceFolder}/**", "!**/node_modules/**"]
 }
 ```
 
@@ -233,15 +233,15 @@ VS Code can automatically detect and configure debugging for:
 
 ```json
 {
-	"type": "python",
-	"request": "launch",
-	"name": "Python: Current File",
-	"program": "${file}",
-	"console": "integratedTerminal",
-	"justMyCode": true,
-	"env": {
-		"PYTHONPATH": "${workspaceFolder}"
-	}
+  "type": "python",
+  "request": "launch",
+  "name": "Python: Current File",
+  "program": "${file}",
+  "console": "integratedTerminal",
+  "justMyCode": true,
+  "env": {
+    "PYTHONPATH": "${workspaceFolder}"
+  }
 }
 ```
 
@@ -249,15 +249,15 @@ VS Code can automatically detect and configure debugging for:
 
 ```json
 {
-	"type": "python",
-	"request": "launch",
-	"name": "Django",
-	"program": "${workspaceFolder}/manage.py",
-	"args": ["runserver"],
-	"django": true,
-	"env": {
-		"DJANGO_SETTINGS_MODULE": "myproject.settings"
-	}
+  "type": "python",
+  "request": "launch",
+  "name": "Django",
+  "program": "${workspaceFolder}/manage.py",
+  "args": ["runserver"],
+  "django": true,
+  "env": {
+    "DJANGO_SETTINGS_MODULE": "myproject.settings"
+  }
 }
 ```
 
@@ -265,15 +265,15 @@ VS Code can automatically detect and configure debugging for:
 
 ```json
 {
-	"type": "python",
-	"request": "launch",
-	"name": "Flask",
-	"module": "flask",
-	"env": {
-		"FLASK_APP": "app.py",
-		"FLASK_ENV": "development"
-	},
-	"args": ["run", "--no-debugger"]
+  "type": "python",
+  "request": "launch",
+  "name": "Flask",
+  "module": "flask",
+  "env": {
+    "FLASK_APP": "app.py",
+    "FLASK_ENV": "development"
+  },
+  "args": ["run", "--no-debugger"]
 }
 ```
 
@@ -283,15 +283,15 @@ VS Code can automatically detect and configure debugging for:
 
 ```json
 {
-	"type": "java",
-	"request": "launch",
-	"name": "Spring Boot",
-	"mainClass": "com.example.Application",
-	"projectName": "my-spring-project",
-	"args": ["--spring.profiles.active=dev"],
-	"env": {
-		"SERVER_PORT": "8080"
-	}
+  "type": "java",
+  "request": "launch",
+  "name": "Spring Boot",
+  "mainClass": "com.example.Application",
+  "projectName": "my-spring-project",
+  "args": ["--spring.profiles.active=dev"],
+  "env": {
+    "SERVER_PORT": "8080"
+  }
 }
 ```
 
@@ -299,12 +299,12 @@ VS Code can automatically detect and configure debugging for:
 
 ```json
 {
-	"type": "java",
-	"request": "launch",
-	"name": "Maven Debug",
-	"mainClass": "${file}",
-	"projectName": "my-maven-project",
-	"preLaunchTask": "maven-compile"
+  "type": "java",
+  "request": "launch",
+  "name": "Maven Debug",
+  "mainClass": "${file}",
+  "projectName": "my-maven-project",
+  "preLaunchTask": "maven-compile"
 }
 ```
 
@@ -314,24 +314,24 @@ VS Code can automatically detect and configure debugging for:
 
 ```json
 {
-	"type": "cppdbg",
-	"request": "launch",
-	"name": "Debug C++",
-	"program": "${workspaceFolder}/bin/${fileBasenameNoExtension}",
-	"args": [],
-	"stopAtEntry": false,
-	"cwd": "${workspaceFolder}",
-	"environment": [],
-	"externalConsole": false,
-	"MIMode": "gdb",
-	"setupCommands": [
-		{
-			"description": "Enable pretty-printing",
-			"text": "-enable-pretty-printing",
-			"ignoreFailures": true
-		}
-	],
-	"preLaunchTask": "C/C++: g++ build active file"
+  "type": "cppdbg",
+  "request": "launch",
+  "name": "Debug C++",
+  "program": "${workspaceFolder}/bin/${fileBasenameNoExtension}",
+  "args": [],
+  "stopAtEntry": false,
+  "cwd": "${workspaceFolder}",
+  "environment": [],
+  "externalConsole": false,
+  "MIMode": "gdb",
+  "setupCommands": [
+    {
+      "description": "Enable pretty-printing",
+      "text": "-enable-pretty-printing",
+      "ignoreFailures": true
+    }
+  ],
+  "preLaunchTask": "C/C++: g++ build active file"
 }
 ```
 
@@ -349,9 +349,9 @@ VS Code can automatically detect and configure debugging for:
 
    ```json
    {
-   	"condition": "count > 42",
-   	"hitCount": 3,
-   	"logMessage": "count is ${count}"
+     "condition": "count > 42",
+     "hitCount": 3,
+     "logMessage": "count is ${count}"
    }
    ```
 
@@ -372,10 +372,10 @@ VS Code can automatically detect and configure debugging for:
 
    ```json
    {
-   	"hitCount": {
-   		"type": "equals",
-   		"value": 3
-   	}
+     "hitCount": {
+       "type": "equals",
+       "value": 3
+     }
    }
    ```
 
@@ -383,7 +383,7 @@ VS Code can automatically detect and configure debugging for:
 
    ```json
    {
-   	"condition": "typeof myVar === 'string' && myVar.length > 10"
+     "condition": "typeof myVar === 'string' && myVar.length > 10"
    }
    ```
 
@@ -391,8 +391,8 @@ VS Code can automatically detect and configure debugging for:
 
    ```json
    {
-   	"logMessage": "Variable x = {x}, y = {y}",
-   	"condition": "x > y"
+     "logMessage": "Variable x = {x}, y = {y}",
+     "condition": "x > y"
    }
    ```
 
@@ -402,13 +402,13 @@ VS Code can automatically detect and configure debugging for:
 
 ```json
 {
-	"type": "node",
-	"request": "attach",
-	"name": "Remote SSH Debug",
-	"address": "192.168.1.100",
-	"port": 9229,
-	"localRoot": "${workspaceFolder}",
-	"remoteRoot": "/home/user/app"
+  "type": "node",
+  "request": "attach",
+  "name": "Remote SSH Debug",
+  "address": "192.168.1.100",
+  "port": 9229,
+  "localRoot": "${workspaceFolder}",
+  "remoteRoot": "/home/user/app"
 }
 ```
 
@@ -416,11 +416,11 @@ VS Code can automatically detect and configure debugging for:
 
 ```json
 {
-	"type": "node",
-	"request": "launch",
-	"name": "Debug in WSL",
-	"useWSL": true,
-	"program": "${workspaceFolder}/index.js"
+  "type": "node",
+  "request": "launch",
+  "name": "Debug in WSL",
+  "useWSL": true,
+  "program": "${workspaceFolder}/index.js"
 }
 ```
 
@@ -430,13 +430,13 @@ VS Code can automatically detect and configure debugging for:
 
 ```json
 {
-	"type": "docker",
-	"request": "launch",
-	"name": "Docker Node.js",
-	"platform": "node",
-	"containerName": "my-node-app",
-	"dockerFile": "${workspaceFolder}/Dockerfile",
-	"remoteRoot": "/usr/src/app"
+  "type": "docker",
+  "request": "launch",
+  "name": "Docker Node.js",
+  "platform": "node",
+  "containerName": "my-node-app",
+  "dockerFile": "${workspaceFolder}/Dockerfile",
+  "remoteRoot": "/usr/src/app"
 }
 ```
 
@@ -444,13 +444,13 @@ VS Code can automatically detect and configure debugging for:
 
 ```json
 {
-	"type": "docker",
-	"request": "launch",
-	"name": "Docker Python",
-	"platform": "python",
-	"pythonPath": "/usr/local/bin/python",
-	"dockerFile": "${workspaceFolder}/Dockerfile",
-	"volumes": ["${workspaceFolder}:/app"]
+  "type": "docker",
+  "request": "launch",
+  "name": "Docker Python",
+  "platform": "python",
+  "pythonPath": "/usr/local/bin/python",
+  "dockerFile": "${workspaceFolder}/Dockerfile",
+  "volumes": ["${workspaceFolder}:/app"]
 }
 ```
 
@@ -460,14 +460,14 @@ VS Code can automatically detect and configure debugging for:
 
 ```json
 {
-	"type": "chrome",
-	"request": "launch",
-	"name": "Launch Chrome",
-	"url": "http://localhost:3000",
-	"webRoot": "${workspaceFolder}/src",
-	"sourceMapPathOverrides": {
-		"webpack:///src/*": "${webRoot}/*"
-	}
+  "type": "chrome",
+  "request": "launch",
+  "name": "Launch Chrome",
+  "url": "http://localhost:3000",
+  "webRoot": "${workspaceFolder}/src",
+  "sourceMapPathOverrides": {
+    "webpack:///src/*": "${webRoot}/*"
+  }
 }
 ```
 
@@ -475,17 +475,17 @@ VS Code can automatically detect and configure debugging for:
 
 ```json
 {
-	"type": "firefox",
-	"request": "launch",
-	"name": "Firefox Debug",
-	"url": "http://localhost:3000",
-	"webRoot": "${workspaceFolder}",
-	"pathMappings": [
-		{
-			"url": "webpack:///src",
-			"path": "${workspaceFolder}/src"
-		}
-	]
+  "type": "firefox",
+  "request": "launch",
+  "name": "Firefox Debug",
+  "url": "http://localhost:3000",
+  "webRoot": "${workspaceFolder}",
+  "pathMappings": [
+    {
+      "url": "webpack:///src",
+      "path": "${workspaceFolder}/src"
+    }
+  ]
 }
 ```
 
@@ -514,12 +514,12 @@ VS Code can automatically detect and configure debugging for:
 
 ```json
 {
-	"type": "node",
-	"request": "launch",
-	"name": "Profile Node.js",
-	"program": "${workspaceFolder}/index.js",
-	"runtimeArgs": ["--prof"],
-	"profileStartup": true
+  "type": "node",
+  "request": "launch",
+  "name": "Profile Node.js",
+  "program": "${workspaceFolder}/index.js",
+  "runtimeArgs": ["--prof"],
+  "profileStartup": true
 }
 ```
 
@@ -527,12 +527,12 @@ VS Code can automatically detect and configure debugging for:
 
 ```json
 {
-	"type": "node",
-	"request": "launch",
-	"name": "Memory Profile",
-	"program": "${workspaceFolder}/index.js",
-	"runtimeArgs": ["--inspect-brk"],
-	"console": "integratedTerminal"
+  "type": "node",
+  "request": "launch",
+  "name": "Memory Profile",
+  "program": "${workspaceFolder}/index.js",
+  "runtimeArgs": ["--inspect-brk"],
+  "console": "integratedTerminal"
 }
 ```
 
@@ -542,12 +542,12 @@ VS Code can automatically detect and configure debugging for:
 
 ```json
 {
-	"program": "${workspaceFolder}/src/main.js",
-	"outFiles": "${workspaceFolder}/dist/**/*.js",
-	"cwd": "${workspaceFolder}",
-	"env": {
-		"CONFIG_PATH": "${workspaceFolder}/config"
-	}
+  "program": "${workspaceFolder}/src/main.js",
+  "outFiles": "${workspaceFolder}/dist/**/*.js",
+  "cwd": "${workspaceFolder}",
+  "env": {
+    "CONFIG_PATH": "${workspaceFolder}/config"
+  }
 }
 ```
 
@@ -555,12 +555,12 @@ VS Code can automatically detect and configure debugging for:
 
 ```json
 {
-	"compounds": [
-		{
-			"name": "Full Stack",
-			"configurations": ["Backend (workspace1)", "Frontend (workspace2)"]
-		}
-	]
+  "compounds": [
+    {
+      "name": "Full Stack",
+      "configurations": ["Backend (workspace1)", "Frontend (workspace2)"]
+    }
+  ]
 }
 ```
 
@@ -568,13 +568,13 @@ VS Code can automatically detect and configure debugging for:
 
 ```json
 {
-	"preLaunchTask": "build",
-	"postDebugTask": "cleanup",
-	"serverReadyAction": {
-		"pattern": "Server started on port ([0-9]+)",
-		"uriFormat": "http://localhost:%s",
-		"action": "openExternally"
-	}
+  "preLaunchTask": "build",
+  "postDebugTask": "cleanup",
+  "serverReadyAction": {
+    "pattern": "Server started on port ([0-9]+)",
+    "uriFormat": "http://localhost:%s",
+    "action": "openExternally"
+  }
 }
 ```
 
@@ -586,12 +586,12 @@ VS Code can automatically detect and configure debugging for:
 
    ```json
    {
-   	"sourceMaps": true,
-   	"outFiles": ["${workspaceFolder}/dist/**/*.js"],
-   	"sourceMapPathOverrides": {
-   		"webpack:///./~/*": "${workspaceFolder}/node_modules/*",
-   		"webpack:///src/*": "${workspaceFolder}/src/*"
-   	}
+     "sourceMaps": true,
+     "outFiles": ["${workspaceFolder}/dist/**/*.js"],
+     "sourceMapPathOverrides": {
+       "webpack:///./~/*": "${workspaceFolder}/node_modules/*",
+       "webpack:///src/*": "${workspaceFolder}/src/*"
+     }
    }
    ```
 
@@ -599,11 +599,11 @@ VS Code can automatically detect and configure debugging for:
 
    ```json
    {
-   	"resolveSourceMapLocations": [
-   		"${workspaceFolder}/**",
-   		"!**/node_modules/**"
-   	],
-   	"skipFiles": ["<node_internals>/**", "${workspaceFolder}/node_modules/**"]
+     "resolveSourceMapLocations": [
+       "${workspaceFolder}/**",
+       "!**/node_modules/**"
+     ],
+     "skipFiles": ["<node_internals>/**", "${workspaceFolder}/node_modules/**"]
    }
    ```
 
@@ -611,10 +611,10 @@ VS Code can automatically detect and configure debugging for:
 
    ```json
    {
-   	"trace": true,
-   	"logLevel": "verbose",
-   	"timeout": 20000,
-   	"skipFiles": ["<node_internals>/**", "**/node_modules/**"]
+     "trace": true,
+     "logLevel": "verbose",
+     "timeout": 20000,
+     "skipFiles": ["<node_internals>/**", "**/node_modules/**"]
    }
    ```
 

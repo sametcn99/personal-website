@@ -1,21 +1,24 @@
-'use client';
+"use client";
 
-import { List, ListItem, ListProps, ListItemProps } from "@mui/material";
+import { List, ListItem, ListItemProps, ListProps } from "@mui/material";
 import React from "react";
 
-export function UnorderedList({ children, ...props }: React.PropsWithChildren<ListProps>) {
+export function UnorderedList({
+  children,
+  ...props
+}: React.PropsWithChildren<ListProps>) {
   return (
-    <List 
-      component="ul" 
-      sx={{ 
-        my: 3, 
-        ml: 3, 
+    <List
+      component="ul"
+      sx={{
+        my: 3,
+        ml: 3,
         listStyleType: "disc",
         "& li": {
           pl: 1,
           pb: 0.5,
-        }
-      }} 
+        },
+      }}
       {...props}
       aria-label="Unordered List"
     >
@@ -24,19 +27,22 @@ export function UnorderedList({ children, ...props }: React.PropsWithChildren<Li
   );
 }
 
-export function OrderedList({ children, ...props }: React.PropsWithChildren<ListProps>) {
+export function OrderedList({
+  children,
+  ...props
+}: React.PropsWithChildren<ListProps>) {
   return (
-    <List 
-      component="ol" 
-      sx={{ 
-        my: 3, 
-        ml: 3, 
+    <List
+      component="ol"
+      sx={{
+        my: 3,
+        ml: 3,
         listStyleType: "decimal",
         "& li": {
           pl: 1,
           pb: 0.5,
-        }
-      }} 
+        },
+      }}
       {...props}
       aria-label="Ordered List"
     >
@@ -45,13 +51,16 @@ export function OrderedList({ children, ...props }: React.PropsWithChildren<List
   );
 }
 
-export function ListItemComponent({ children, ...props }: React.PropsWithChildren<ListItemProps>) {
+export function ListItemComponent({
+  children,
+  ...props
+}: React.PropsWithChildren<ListItemProps>) {
   return (
-    <ListItem 
-      sx={{ 
+    <ListItem
+      sx={{
         display: "list-item",
         py: 0.5,
-      }} 
+      }}
       {...props}
       aria-label="List Item"
     >

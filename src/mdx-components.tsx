@@ -1,22 +1,22 @@
 import type { MDXComponents } from "mdx/types";
 import {
+  BlockQuote,
+  CalloutComponent,
+  CodeComponent,
   H1,
   H2,
   H3,
-  Paragraph,
-  UnorderedList,
-  OrderedList,
-  ListItemComponent,
-  BlockQuote,
-  LinkComponent,
-  PreComponent,
-  CodeComponent,
-  TableComponent,
-  TableHeaderCell,
-  TableDataCell,
   HorizontalRule,
   ImageComponent,
-  CalloutComponent
+  LinkComponent,
+  ListItemComponent,
+  OrderedList,
+  Paragraph,
+  PreComponent,
+  TableComponent,
+  TableDataCell,
+  TableHeaderCell,
+  UnorderedList,
 } from "./components/mdx-components";
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {

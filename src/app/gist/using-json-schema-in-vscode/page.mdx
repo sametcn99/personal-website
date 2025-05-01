@@ -12,46 +12,46 @@ This schema will validate order data.
 
 ```json
 {
-	"$schema": "https://json-schema.org/draft/2020-12/schema",
-	"title": "Order Schema",
-	"description": "A JSON schema for an order",
-	"type": "object",
-	"properties": {
-		"orderId": {
-			"type": "string",
-			"pattern": "^[A-Z0-9]{8}$",
-			"description": "Order ID (8 characters, uppercase letters and numbers)"
-		},
-		"customer": {
-			"type": "object",
-			"properties": {
-				"name": { "type": "string", "minLength": 3 },
-				"email": { "type": "string", "format": "email" },
-				"phone": { "type": "string", "pattern": "^\\+?[0-9]{10,15}$" }
-			},
-			"required": ["name", "email"]
-		},
-		"orderDate": { "type": "string", "format": "date-time" },
-		"items": {
-			"type": "array",
-			"minItems": 1,
-			"items": {
-				"type": "object",
-				"properties": {
-					"productId": { "type": "integer" },
-					"productName": { "type": "string", "minLength": 3 },
-					"price": { "type": "number", "minimum": 0 },
-					"quantity": { "type": "integer", "minimum": 1 }
-				},
-				"required": ["productId", "productName", "price", "quantity"]
-			}
-		},
-		"paymentMethod": {
-			"type": "string",
-			"enum": ["Credit Card", "PayPal", "Bank Transfer"]
-		}
-	},
-	"required": ["orderId", "customer", "orderDate", "items", "paymentMethod"]
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Order Schema",
+  "description": "A JSON schema for an order",
+  "type": "object",
+  "properties": {
+    "orderId": {
+      "type": "string",
+      "pattern": "^[A-Z0-9]{8}$",
+      "description": "Order ID (8 characters, uppercase letters and numbers)"
+    },
+    "customer": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "minLength": 3 },
+        "email": { "type": "string", "format": "email" },
+        "phone": { "type": "string", "pattern": "^\\+?[0-9]{10,15}$" }
+      },
+      "required": ["name", "email"]
+    },
+    "orderDate": { "type": "string", "format": "date-time" },
+    "items": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "properties": {
+          "productId": { "type": "integer" },
+          "productName": { "type": "string", "minLength": 3 },
+          "price": { "type": "number", "minimum": 0 },
+          "quantity": { "type": "integer", "minimum": 1 }
+        },
+        "required": ["productId", "productName", "price", "quantity"]
+      }
+    },
+    "paymentMethod": {
+      "type": "string",
+      "enum": ["Credit Card", "PayPal", "Bank Transfer"]
+    }
+  },
+  "required": ["orderId", "customer", "orderDate", "items", "paymentMethod"]
 }
 ```
 
@@ -64,23 +64,23 @@ By adding `$schema`, **VS Code will automatically validate the data against the 
 
 ```json
 {
-	"$schema": "./orderSchema.json",
-	"orderId": "A1B2C3D4",
-	"customer": {
-		"name": "Ahmet Yılmaz",
-		"email": "ahmet.yilmaz@example.com",
-		"phone": "+905551234567"
-	},
-	"orderDate": "2025-02-01T14:30:00Z",
-	"items": [
-		{
-			"productId": 101,
-			"productName": "Wireless Headphones",
-			"price": 499.99,
-			"quantity": 2
-		}
-	],
-	"paymentMethod": "Credit Card"
+  "$schema": "./orderSchema.json",
+  "orderId": "A1B2C3D4",
+  "customer": {
+    "name": "Ahmet Yılmaz",
+    "email": "ahmet.yilmaz@example.com",
+    "phone": "+905551234567"
+  },
+  "orderDate": "2025-02-01T14:30:00Z",
+  "items": [
+    {
+      "productId": 101,
+      "productName": "Wireless Headphones",
+      "price": 499.99,
+      "quantity": 2
+    }
+  ],
+  "paymentMethod": "Credit Card"
 }
 ```
 
@@ -105,12 +105,12 @@ If you don’t want to add `$schema` in your JSON files,
 
 ```json
 {
-	"json.schemas": [
-		{
-			"fileMatch": ["order.json"],
-			"url": "./orderSchema.json"
-		}
-	]
+  "json.schemas": [
+    {
+      "fileMatch": ["order.json"],
+      "url": "./orderSchema.json"
+    }
+  ]
 }
 ```
 
@@ -130,22 +130,22 @@ The following JSON **is invalid** because:
 
 ```json
 {
-	"$schema": "./orderSchema.json",
-	"orderId": "1234",
-	"customer": {
-		"name": "Ahmet Yılmaz",
-		"email": "ahmet.yilmaz@example.com"
-	},
-	"orderDate": "2025-02-01T14:30:00Z",
-	"items": [
-		{
-			"productId": 101,
-			"productName": "Headphones",
-			"price": 499.99,
-			"quantity": 2
-		}
-	],
-	"paymentMethod": "Bitcoin"
+  "$schema": "./orderSchema.json",
+  "orderId": "1234",
+  "customer": {
+    "name": "Ahmet Yılmaz",
+    "email": "ahmet.yilmaz@example.com"
+  },
+  "orderDate": "2025-02-01T14:30:00Z",
+  "items": [
+    {
+      "productId": 101,
+      "productName": "Headphones",
+      "price": 499.99,
+      "quantity": 2
+    }
+  ],
+  "paymentMethod": "Bitcoin"
 }
 ```
 

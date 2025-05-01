@@ -84,13 +84,13 @@ graph TD
 
 ```javascript
 class MyComponent extends React.Component {
-	constructor(props) {
-		super(props)
-		this.state = {
-			data: null,
-			loading: true,
-		}
-	}
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: null,
+      loading: true,
+    };
+  }
 }
 ```
 
@@ -161,25 +161,25 @@ useEffect(() => {
 
 ```javascript
 class ErrorBoundary extends React.Component {
-	constructor(props) {
-		super(props)
-		this.state = { hasError: false }
-	}
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
 
-	static getDerivedStateFromError(error) {
-		return { hasError: true }
-	}
+  static getDerivedStateFromError(error) {
+    return { hasError: true };
+  }
 
-	componentDidCatch(error, errorInfo) {
-		logErrorToService(error, errorInfo)
-	}
+  componentDidCatch(error, errorInfo) {
+    logErrorToService(error, errorInfo);
+  }
 
-	render() {
-		if (this.state.hasError) {
-			return <h1>Something went wrong.</h1>
-		}
-		return this.props.children
-	}
+  render() {
+    if (this.state.hasError) {
+      return <h1>Something went wrong.</h1>;
+    }
+    return this.props.children;
+  }
 }
 ```
 
@@ -239,23 +239,23 @@ graph TD
 
 ```javascript
 function Counter() {
-	// Initialize state - runs only once
-	const [count, setCount] = useState(0)
+  // Initialize state - runs only once
+  const [count, setCount] = useState(0);
 
-	// Batched updates
-	const incrementTwice = () => {
-		setCount((prev) => prev + 1) // Update function form
-		setCount((prev) => prev + 1) // Guaranteed to use latest state
-	}
+  // Batched updates
+  const incrementTwice = () => {
+    setCount((prev) => prev + 1); // Update function form
+    setCount((prev) => prev + 1); // Guaranteed to use latest state
+  };
 
-	// State updates with object merging
-	const [state, setState] = useState({ count: 0, name: 'John' })
-	const updatePartially = () => {
-		setState((prev) => ({
-			...prev, // Preserve other fields
-			count: prev.count + 1,
-		}))
-	}
+  // State updates with object merging
+  const [state, setState] = useState({ count: 0, name: "John" });
+  const updatePartially = () => {
+    setState((prev) => ({
+      ...prev, // Preserve other fields
+      count: prev.count + 1,
+    }));
+  };
 }
 ```
 
@@ -263,43 +263,43 @@ function Counter() {
 
 ```javascript
 function CompleteEffectGuide({ id }) {
-	// 1. Run on every render
-	useEffect(() => {
-		console.log('I run on every render')
-	})
+  // 1. Run on every render
+  useEffect(() => {
+    console.log("I run on every render");
+  });
 
-	// 2. Run only once (component mount)
-	useEffect(() => {
-		console.log('I run only once on mount')
+  // 2. Run only once (component mount)
+  useEffect(() => {
+    console.log("I run only once on mount");
 
-		// Cleanup on unmount
-		return () => {
-			console.log('I run only once on unmount')
-		}
-	}, [])
+    // Cleanup on unmount
+    return () => {
+      console.log("I run only once on unmount");
+    };
+  }, []);
 
-	// 3. Run on specific dependencies
-	useEffect(() => {
-		console.log('I run when id changes')
+  // 3. Run on specific dependencies
+  useEffect(() => {
+    console.log("I run when id changes");
 
-		// Cleanup before next effect run
-		return () => {
-			console.log('I clean up before next effect or unmount')
-		}
-	}, [id])
+    // Cleanup before next effect run
+    return () => {
+      console.log("I clean up before next effect or unmount");
+    };
+  }, [id]);
 
-	// 4. Multiple effects organization
-	useEffect(() => {
-		// Data fetching
-	}, [id])
+  // 4. Multiple effects organization
+  useEffect(() => {
+    // Data fetching
+  }, [id]);
 
-	useEffect(() => {
-		// Event listeners
-	}, [])
+  useEffect(() => {
+    // Event listeners
+  }, []);
 
-	useEffect(() => {
-		// WebSocket connection
-	}, [])
+  useEffect(() => {
+    // WebSocket connection
+  }, []);
 }
 ```
 
@@ -307,16 +307,16 @@ function CompleteEffectGuide({ id }) {
 
 ```javascript
 function LayoutEffectExample() {
-	const [width, setWidth] = useState(0)
+  const [width, setWidth] = useState(0);
 
-	// Runs synchronously after DOM mutations
-	useLayoutEffect(() => {
-		// DOM measurements
-		const measuredWidth = divRef.current.getBoundingClientRect().width
-		setWidth(measuredWidth)
-	}, [])
+  // Runs synchronously after DOM mutations
+  useLayoutEffect(() => {
+    // DOM measurements
+    const measuredWidth = divRef.current.getBoundingClientRect().width;
+    setWidth(measuredWidth);
+  }, []);
 
-	return <div ref={divRef}>Measured Width: {width}</div>
+  return <div ref={divRef}>Measured Width: {width}</div>;
 }
 ```
 
@@ -326,47 +326,47 @@ function LayoutEffectExample() {
 
 ```javascript
 function useDataFetching(url) {
-	const [state, setState] = useState({
-		data: null,
-		loading: true,
-		error: null,
-	})
+  const [state, setState] = useState({
+    data: null,
+    loading: true,
+    error: null,
+  });
 
-	useEffect(() => {
-		let mounted = true
+  useEffect(() => {
+    let mounted = true;
 
-		const fetchData = async () => {
-			try {
-				setState((prev) => ({ ...prev, loading: true }))
-				const response = await fetch(url)
-				const data = await response.json()
+    const fetchData = async () => {
+      try {
+        setState((prev) => ({ ...prev, loading: true }));
+        const response = await fetch(url);
+        const data = await response.json();
 
-				if (mounted) {
-					setState({
-						data,
-						loading: false,
-						error: null,
-					})
-				}
-			} catch (error) {
-				if (mounted) {
-					setState({
-						data: null,
-						loading: false,
-						error: error.message,
-					})
-				}
-			}
-		}
+        if (mounted) {
+          setState({
+            data,
+            loading: false,
+            error: null,
+          });
+        }
+      } catch (error) {
+        if (mounted) {
+          setState({
+            data: null,
+            loading: false,
+            error: error.message,
+          });
+        }
+      }
+    };
 
-		fetchData()
+    fetchData();
 
-		return () => {
-			mounted = false
-		}
-	}, [url])
+    return () => {
+      mounted = false;
+    };
+  }, [url]);
 
-	return state
+  return state;
 }
 ```
 
@@ -374,15 +374,15 @@ function useDataFetching(url) {
 
 ```javascript
 function ConditionalEffectExample({ isEnabled }) {
-	useEffect(() => {
-		if (!isEnabled) return
+  useEffect(() => {
+    if (!isEnabled) return;
 
-		const subscription = subscribe()
+    const subscription = subscribe();
 
-		return () => {
-			subscription.unsubscribe()
-		}
-	}, [isEnabled])
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, [isEnabled]);
 }
 ```
 
@@ -390,24 +390,24 @@ function ConditionalEffectExample({ isEnabled }) {
 
 ```javascript
 function DependenciesExample({ onDataChange, data }) {
-	// 1. Function dependencies
-	useEffect(() => {
-		onDataChange(data)
-	}, [onDataChange, data]) // Include both function and data
+  // 1. Function dependencies
+  useEffect(() => {
+    onDataChange(data);
+  }, [onDataChange, data]); // Include both function and data
 
-	// 2. Stable references with useCallback
-	const handleData = useCallback(() => {
-		processData(data)
-	}, [data])
+  // 2. Stable references with useCallback
+  const handleData = useCallback(() => {
+    processData(data);
+  }, [data]);
 
-	// 3. Object dependencies with useMemo
-	const config = useMemo(
-		() => ({
-			id: data.id,
-			type: data.type,
-		}),
-		[data.id, data.type]
-	)
+  // 3. Object dependencies with useMemo
+  const config = useMemo(
+    () => ({
+      id: data.id,
+      type: data.type,
+    }),
+    [data.id, data.type],
+  );
 }
 ```
 
@@ -417,16 +417,16 @@ function DependenciesExample({ onDataChange, data }) {
 
 ```javascript
 function SubscriptionComponent() {
-	useEffect(() => {
-		const subscription = source.subscribe({
-			next: (data) => console.log(data),
-			error: (error) => console.error(error),
-		})
+  useEffect(() => {
+    const subscription = source.subscribe({
+      next: (data) => console.log(data),
+      error: (error) => console.error(error),
+    });
 
-		return () => {
-			subscription.unsubscribe()
-		}
-	}, [])
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, []);
 }
 ```
 
@@ -434,18 +434,18 @@ function SubscriptionComponent() {
 
 ```javascript
 function EventListenerExample() {
-	useEffect(() => {
-		const handleResize = debounce(() => {
-			// Handle resize
-		}, 250)
+  useEffect(() => {
+    const handleResize = debounce(() => {
+      // Handle resize
+    }, 250);
 
-		window.addEventListener('resize', handleResize)
+    window.addEventListener("resize", handleResize);
 
-		return () => {
-			window.removeEventListener('resize', handleResize)
-			handleResize.cancel() // Clean up debounce
-		}
-	}, [])
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      handleResize.cancel(); // Clean up debounce
+    };
+  }, []);
 }
 ```
 
@@ -453,32 +453,32 @@ function EventListenerExample() {
 
 ```javascript
 function AsyncOperationsExample({ id }) {
-	const [data, setData] = useState(null)
+  const [data, setData] = useState(null);
 
-	useEffect(() => {
-		let isCancelled = false
+  useEffect(() => {
+    let isCancelled = false;
 
-		async function loadData() {
-			try {
-				const response = await fetch(`/api/data/${id}`)
-				const newData = await response.json()
+    async function loadData() {
+      try {
+        const response = await fetch(`/api/data/${id}`);
+        const newData = await response.json();
 
-				if (!isCancelled) {
-					setData(newData)
-				}
-			} catch (error) {
-				if (!isCancelled) {
-					console.error('Failed to load data:', error)
-				}
-			}
-		}
+        if (!isCancelled) {
+          setData(newData);
+        }
+      } catch (error) {
+        if (!isCancelled) {
+          console.error("Failed to load data:", error);
+        }
+      }
+    }
 
-		loadData()
+    loadData();
 
-		return () => {
-			isCancelled = true
-		}
-	}, [id])
+    return () => {
+      isCancelled = true;
+    };
+  }, [id]);
 }
 ```
 
@@ -488,10 +488,10 @@ function AsyncOperationsExample({ id }) {
 
 ```javascript
 function ExpensiveComponent({ data }) {
-	// Memoize expensive computation
-	const processedData = useMemo(() => {
-		return data.map((item) => expensiveOperation(item))
-	}, [data])
+  // Memoize expensive computation
+  const processedData = useMemo(() => {
+    return data.map((item) => expensiveOperation(item));
+  }, [data]);
 }
 ```
 
@@ -499,12 +499,12 @@ function ExpensiveComponent({ data }) {
 
 ```javascript
 function CallbackExample({ onItemClick }) {
-	const handleClick = useCallback(
-		(item) => {
-			onItemClick(item.id)
-		},
-		[onItemClick]
-	)
+  const handleClick = useCallback(
+    (item) => {
+      onItemClick(item.id);
+    },
+    [onItemClick],
+  );
 }
 ```
 
@@ -512,19 +512,19 @@ function CallbackExample({ onItemClick }) {
 
 ```javascript
 function useDebounce(value, delay) {
-	const [debouncedValue, setDebouncedValue] = useState(value)
+  const [debouncedValue, setDebouncedValue] = useState(value);
 
-	useEffect(() => {
-		const timer = setTimeout(() => {
-			setDebouncedValue(value)
-		}, delay)
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedValue(value);
+    }, delay);
 
-		return () => {
-			clearTimeout(timer)
-		}
-	}, [value, delay])
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [value, delay]);
 
-	return debouncedValue
+  return debouncedValue;
 }
 ```
 
@@ -532,32 +532,32 @@ function useDebounce(value, delay) {
 
 ```javascript
 // 1. Testing Hook Initialization
-test('initializes with correct state', () => {
-	const { result } = renderHook(() => useState(0))
-	expect(result.current[0]).toBe(0)
-})
+test("initializes with correct state", () => {
+  const { result } = renderHook(() => useState(0));
+  expect(result.current[0]).toBe(0);
+});
 
 // 2. Testing Effect Cleanup
-test('cleans up effect', () => {
-	const cleanup = jest.fn()
-	const { unmount } = renderHook(() => {
-		useEffect(() => cleanup, [])
-	})
+test("cleans up effect", () => {
+  const cleanup = jest.fn();
+  const { unmount } = renderHook(() => {
+    useEffect(() => cleanup, []);
+  });
 
-	unmount()
-	expect(cleanup).toHaveBeenCalled()
-})
+  unmount();
+  expect(cleanup).toHaveBeenCalled();
+});
 
 // 3. Testing Custom Hooks
-test('custom hook behavior', async () => {
-	const { result, waitForNextUpdate } = renderHook(() =>
-		useDataFetching('api/data')
-	)
+test("custom hook behavior", async () => {
+  const { result, waitForNextUpdate } = renderHook(() =>
+    useDataFetching("api/data"),
+  );
 
-	expect(result.current.loading).toBe(true)
-	await waitForNextUpdate()
-	expect(result.current.loading).toBe(false)
-})
+  expect(result.current.loading).toBe(true);
+  await waitForNextUpdate();
+  expect(result.current.loading).toBe(false);
+});
 ```
 
 ### Common Pitfalls and Solutions
@@ -567,24 +567,24 @@ test('custom hook behavior', async () => {
 ```javascript
 // Bad
 function InfiniteLoopComponent() {
-	const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
-	useEffect(() => {
-		setCount(count + 1) // Will cause infinite loop
-	})
+  useEffect(() => {
+    setCount(count + 1); // Will cause infinite loop
+  });
 }
 
 // Good
 function FixedComponent() {
-	const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
-	useEffect(() => {
-		const timer = setInterval(() => {
-			setCount((prev) => prev + 1) // Use functional update
-		}, 1000)
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCount((prev) => prev + 1); // Use functional update
+    }, 1000);
 
-		return () => clearInterval(timer)
-	}, []) // Empty dependency array
+    return () => clearInterval(timer);
+  }, []); // Empty dependency array
 }
 ```
 
@@ -593,24 +593,24 @@ function FixedComponent() {
 ```javascript
 // Bad
 function StaleClosureExample() {
-	const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
-	useEffect(() => {
-		const timer = setInterval(() => {
-			console.log(count) // Stale closure
-		}, 1000)
+  useEffect(() => {
+    const timer = setInterval(() => {
+      console.log(count); // Stale closure
+    }, 1000);
 
-		return () => clearInterval(timer)
-	}, []) // Missing dependency
+    return () => clearInterval(timer);
+  }, []); // Missing dependency
 
-	// Good
-	useEffect(() => {
-		const timer = setInterval(() => {
-			setCount((prev) => prev + 1) // Using functional update
-		}, 1000)
+  // Good
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCount((prev) => prev + 1); // Using functional update
+    }, 1000);
 
-		return () => clearInterval(timer)
-	}, []) // No need for dependencies
+    return () => clearInterval(timer);
+  }, []); // No need for dependencies
 }
 ```
 
@@ -618,26 +618,26 @@ function StaleClosureExample() {
 
 ```javascript
 function RaceConditionExample({ id }) {
-	const [data, setData] = useState(null)
+  const [data, setData] = useState(null);
 
-	useEffect(() => {
-		let isCurrent = true
+  useEffect(() => {
+    let isCurrent = true;
 
-		async function fetchData() {
-			const response = await fetch(`/api/data/${id}`)
-			const newData = await response.json()
+    async function fetchData() {
+      const response = await fetch(`/api/data/${id}`);
+      const newData = await response.json();
 
-			if (isCurrent) {
-				setData(newData) // Only update if still current
-			}
-		}
+      if (isCurrent) {
+        setData(newData); // Only update if still current
+      }
+    }
 
-		fetchData()
+    fetchData();
 
-		return () => {
-			isCurrent = false // Prevent updates if component unmounted
-		}
-	}, [id])
+    return () => {
+      isCurrent = false; // Prevent updates if component unmounted
+    };
+  }, [id]);
 }
 ```
 
@@ -650,24 +650,24 @@ function RaceConditionExample({ id }) {
 ```javascript
 // Good
 useEffect(() => {
-	fetchData(userId)
-}, [userId])
+  fetchData(userId);
+}, [userId]);
 
 // Bad
 useEffect(() => {
-	fetchData(userId)
-}, []) // Missing dependency
+  fetchData(userId);
+}, []); // Missing dependency
 ```
 
 2. **Cleanup Operations**
 
 ```javascript
 useEffect(() => {
-	const subscription = subscribe()
-	return () => {
-		subscription.unsubscribe()
-	}
-}, [])
+  const subscription = subscribe();
+  return () => {
+    subscription.unsubscribe();
+  };
+}, []);
 ```
 
 3. **Conditional Updates**
@@ -695,43 +695,43 @@ graph TD
 
 ```javascript
 function DataFetchingComponent({ id }) {
-	const [data, setData] = useState(null)
-	const [loading, setLoading] = useState(true)
-	const [error, setError] = useState(null)
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-	useEffect(() => {
-		let isMounted = true
+  useEffect(() => {
+    let isMounted = true;
 
-		async function fetchData() {
-			try {
-				setLoading(true)
-				const response = await api.getData(id)
-				if (isMounted) {
-					setData(response)
-					setError(null)
-				}
-			} catch (err) {
-				if (isMounted) {
-					setError(err)
-					setData(null)
-				}
-			} finally {
-				if (isMounted) {
-					setLoading(false)
-				}
-			}
-		}
+    async function fetchData() {
+      try {
+        setLoading(true);
+        const response = await api.getData(id);
+        if (isMounted) {
+          setData(response);
+          setError(null);
+        }
+      } catch (err) {
+        if (isMounted) {
+          setError(err);
+          setData(null);
+        }
+      } finally {
+        if (isMounted) {
+          setLoading(false);
+        }
+      }
+    }
 
-		fetchData()
+    fetchData();
 
-		return () => {
-			isMounted = false
-		}
-	}, [id])
+    return () => {
+      isMounted = false;
+    };
+  }, [id]);
 
-	if (loading) return <Loading />
-	if (error) return <Error error={error} />
-	return <DataDisplay data={data} />
+  if (loading) return <Loading />;
+  if (error) return <Error error={error} />;
+  return <DataDisplay data={data} />;
 }
 ```
 

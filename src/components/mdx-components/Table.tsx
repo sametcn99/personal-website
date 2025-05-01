@@ -1,16 +1,26 @@
-'use client';
+"use client";
 
-import { Table, TableCell, TableContainer, Paper, alpha, TableCellProps } from "@mui/material";
+import {
+  alpha,
+  Paper,
+  Table,
+  TableCell,
+  TableCellProps,
+  TableContainer,
+} from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import React from "react";
 
-export function TableComponent({ children, ...props }: React.PropsWithChildren<React.HTMLAttributes<HTMLTableElement>>) {
+export function TableComponent({
+  children,
+  ...props
+}: React.PropsWithChildren<React.HTMLAttributes<HTMLTableElement>>) {
   const theme = useTheme();
-  
+
   return (
-    <TableContainer 
-      component={Paper} 
-      sx={{ 
+    <TableContainer
+      component={Paper}
+      sx={{
         my: 3,
         borderRadius: 2,
         overflow: "hidden",
@@ -23,18 +33,21 @@ export function TableComponent({ children, ...props }: React.PropsWithChildren<R
   );
 }
 
-export function TableHeaderCell({ children, ...props }: React.PropsWithChildren<TableCellProps>) {
+export function TableHeaderCell({
+  children,
+  ...props
+}: React.PropsWithChildren<TableCellProps>) {
   const theme = useTheme();
-  
+
   return (
-    <TableCell 
-      sx={{ 
-        fontWeight: "bold", 
+    <TableCell
+      sx={{
+        fontWeight: "bold",
         bgcolor: alpha(theme.palette.primary.main, 0.08),
         color: theme.palette.text.primary,
         borderBottom: `2px solid ${theme.palette.divider}`,
         py: 1.5,
-      }} 
+      }}
       {...props}
       aria-label="Table Header Cell"
     >
@@ -43,15 +56,18 @@ export function TableHeaderCell({ children, ...props }: React.PropsWithChildren<
   );
 }
 
-export function TableDataCell({ children, ...props }: React.PropsWithChildren<TableCellProps>) {
+export function TableDataCell({
+  children,
+  ...props
+}: React.PropsWithChildren<TableCellProps>) {
   const theme = useTheme();
-  
+
   return (
-    <TableCell 
-      sx={{ 
+    <TableCell
+      sx={{
         borderBottom: `1px solid ${theme.palette.divider}`,
         py: 1.5,
-      }} 
+      }}
       {...props}
       aria-label="Table Data Cell"
     >

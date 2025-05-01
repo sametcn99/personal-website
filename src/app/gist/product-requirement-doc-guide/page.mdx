@@ -871,27 +871,27 @@ mindmap
 
 ```json
 {
-	"reportType": "executive",
-	"metrics": [
-		{
-			"name": "Monthly Active Users",
-			"type": "line_chart",
-			"timeFrame": "last_12_months",
-			"comparison": "previous_period"
-		},
-		{
-			"name": "Revenue Growth",
-			"type": "bar_chart",
-			"breakdown": ["region", "product"],
-			"timeFrame": "current_quarter"
-		},
-		{
-			"name": "User Satisfaction",
-			"type": "gauge",
-			"source": "nps_surveys",
-			"target": 85
-		}
-	]
+  "reportType": "executive",
+  "metrics": [
+    {
+      "name": "Monthly Active Users",
+      "type": "line_chart",
+      "timeFrame": "last_12_months",
+      "comparison": "previous_period"
+    },
+    {
+      "name": "Revenue Growth",
+      "type": "bar_chart",
+      "breakdown": ["region", "product"],
+      "timeFrame": "current_quarter"
+    },
+    {
+      "name": "User Satisfaction",
+      "type": "gauge",
+      "source": "nps_surveys",
+      "target": 85
+    }
+  ]
 }
 ```
 
@@ -899,22 +899,22 @@ mindmap
 
 ```json
 {
-	"reportType": "technical",
-	"sections": [
-		{
-			"name": "System Health",
-			"metrics": ["uptime", "error_rate", "response_time"],
-			"alerts": {
-				"critical": "threshold > 95%",
-				"warning": "threshold > 85%"
-			}
-		},
-		{
-			"name": "Resource Usage",
-			"metrics": ["cpu", "memory", "storage", "bandwidth"],
-			"visualization": "time_series"
-		}
-	]
+  "reportType": "technical",
+  "sections": [
+    {
+      "name": "System Health",
+      "metrics": ["uptime", "error_rate", "response_time"],
+      "alerts": {
+        "critical": "threshold > 95%",
+        "warning": "threshold > 85%"
+      }
+    },
+    {
+      "name": "Resource Usage",
+      "metrics": ["cpu", "memory", "storage", "bandwidth"],
+      "visualization": "time_series"
+    }
+  ]
 }
 ```
 

@@ -535,9 +535,9 @@ graph TD
 
 ```json
 {
-	"markdown.mermaid.enabled": true,
-	"markdown.mermaid.theme": "default",
-	"markdown.preview.breaks": true
+  "markdown.mermaid.enabled": true,
+  "markdown.mermaid.theme": "default",
+  "markdown.preview.breaks": true
 }
 ```
 
@@ -558,13 +558,13 @@ markdown_extensions:
 
 ```js
 module.exports = {
-	markdown: {
-		extendMarkdown: (md) => {
-			md.set({ breaks: true })
-			md.use(require('markdown-it-mermaid').default)
-		},
-	},
-}
+  markdown: {
+    extendMarkdown: (md) => {
+      md.set({ breaks: true });
+      md.use(require("markdown-it-mermaid").default);
+    },
+  },
+};
 ```
 
 ## Real-World Application Examples

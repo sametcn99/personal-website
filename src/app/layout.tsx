@@ -6,6 +6,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import InitColorSchemeScript from "@mui/material/InitColorSchemeScript";
 import theme from "@/theme";
+import 'katex/dist/katex.min.css'; // Import KaTeX CSS
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",

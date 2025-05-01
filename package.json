@@ -2,8 +2,9 @@
   "name": "personal-website",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -26,8 +27,11 @@
     "octokit": "^4.1.3",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "rehype-autolink-headings": "^7.1.0",
     "rehype-katex": "^7.0.1",
-    "remark-gfm": "^4.0.1"
+    "rehype-slug": "^6.0.0",
+    "remark-gfm": "^4.0.1",
+    "remark-math": "^6.0.0"
   },
   "devDependencies": {
     "typescript": "^5.8.3",

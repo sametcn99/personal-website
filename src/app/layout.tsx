@@ -4,7 +4,6 @@ import CssBaseline from "@mui/material/CssBaseline";
 import InitColorSchemeScript from "@mui/material/InitColorSchemeScript";
 import { ThemeProvider } from "@mui/material/styles";
 import "highlight.js/styles/github-dark.css"; // Import highlight.js CSS
-import "katex/dist/katex.min.css"; // Import KaTeX CSS
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import * as React from "react";

@@ -43,8 +43,8 @@ export function TableHeaderCell({
     <TableCell
       sx={{
         fontWeight: "bold",
-        bgcolor: alpha(theme.palette.primary.main, 0.08),
-        color: theme.palette.text.primary,
+        bgcolor: alpha(theme.palette.primary.main, 0.04),
+        color: theme.palette.text.secondary,
         borderBottom: `2px solid ${theme.palette.divider}`,
         py: 1.5,
       }}

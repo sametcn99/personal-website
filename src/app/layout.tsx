@@ -7,6 +7,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import InitColorSchemeScript from "@mui/material/InitColorSchemeScript";
 import theme from "@/theme";
 import 'katex/dist/katex.min.css'; // Import KaTeX CSS
+import 'highlight.js/styles/github-dark.css'; // Import highlight.js CSS
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",

@@ -17,7 +17,7 @@ export function CodeComponent({ children, className, ...props }: React.PropsWith
 			<Typography
 				component="code"
 				sx={{
-					backgroundColor: alpha(theme.palette.primary.light, 0.1),
+					backgroundColor: alpha(theme.palette.primary.dark, 0.5),
 					color: theme.palette.primary.main,
 					padding: "0.2em 0.4em",
 					borderRadius: 1,

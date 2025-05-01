@@ -33,16 +33,7 @@ export default function Layout({ children }: { children: ReactNode }) {
 			>
 				<Metadata />
 				<body className={inter.className}>
-					<Box
-						sx={{
-							display: 'flex',
-							minHeight: '100vh',
-							width: '100%',
-							bgcolor: 'background.default',
-							color: 'text.primary',
-							position: 'relative',
-						}}
-					>
+					<>
 						{/* Mobile menu toggle */}
 						<MobileMenuToggle
 							open={open}
@@ -61,7 +52,7 @@ export default function Layout({ children }: { children: ReactNode }) {
 							<Breadcrumb />
 							{children}
 						</MainContentWrapper>
-					</Box>
+					</>
 					<Analytics />
 				</body>
 			</html>

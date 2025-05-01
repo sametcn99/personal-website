@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "generate-sidebar": "bun run scripts/generate-sidebar.ts"
+    "generate-app-data": "bun run scripts/generate-app-data.ts"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",

@@ -1,5 +1,5 @@
 type SocialMediaLink = {
-	link: URL
+	link: URL | string;
 	label: string
 	type: string[]
 	visible: boolean
@@ -8,5 +8,6 @@ type SocialMediaLink = {
 		| 'Development Platforms'
 		| 'Social Media'
 		| 'Contact'
-		| 'Other'
+		| 'Other';
+	icon?: React.ReactNode; // Add optional icon property
 }

@@ -1,61 +1,89 @@
-'use client'
+import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
+import "./globals.css";
+import * as React from "react";
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
+import { ThemeProvider } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+import InitColorSchemeScript from "@mui/material/InitColorSchemeScript";
+import theme from "@/theme";
 
-import MainContentWrapper from '@/components/MainContentWrapper'
-import MobileMenuToggle from '@/components/MobileMenuToggle'
-import { ThemeProvider } from '@mui/material/styles'
-import { Analytics } from '@vercel/analytics/react'
-import Breadcrumb from '@/components/Breadcrumb'
-import { usePathname } from 'next/navigation'
-import { Box, useTheme } from '@mui/material'
-import Metadata from '@/components/Metadata'
-import { customTheme } from '@/theme/theme'
-import Sidebar from '@/components/Sidebar'
-import { Inter } from 'next/font/google'
-import React, { useState } from 'react'
-import type { ReactNode } from 'react'
-import './globals.css'
+const geistSans = Geist({
+	variable: "--font-geist-sans",
+	subsets: ["latin"],
+});
 
-const inter = Inter({ subsets: ['latin'] })
+const geistMono = Geist_Mono({
+	variable: "--font-geist-mono",
+	subsets: ["latin"],
+});
 
-export default function Layout({ children }: { children: ReactNode }) {
-	const pathname = usePathname()
-	const [open, setOpen] = useState(false)
+export const metadata: Metadata = {
+	metadataBase: new URL("https://sametcc.me"), // Replace with your actual domain
+	title: "Samet Can Cıncık | Web Developer",
+	description: "Web Developer passionate about creating compelling and user-friendly web experiences.",
+	keywords: ["web developer", "frontend developer", "react", "next.js", "typescript"],
+	authors: [{ name: "Samet Can Cıncık" }],
+	creator: "Samet Can Cıncık",
+	publisher: "Samet Can Cıncık",
+	formatDetection: {
+		email: false,
+		address: false,
+		telephone: false,
+	},
+	openGraph: {
+		title: "Samet Can Cıncık | Web Developer",
+		description: "Web Developer passionate about creating compelling and user-friendly web experiences.",
+		siteName: "Samet Can Cıncık",
+		locale: "en_US",
+		type: "website",
+		// Add og:image if you have one:
+		// images: [
+		//   {
+		//     url: '/og-image.png', // Must be an absolute URL or start with /
+		//     width: 1200,
+		//     height: 630,
+		//     alt: 'Samet Can Cıncık Website',
+		//   },
+		// ],
+	},
+	twitter: {
+		card: "summary_large_image",
+		title: "Samet Can Cıncık | Web Developer",
+		description: "Web Developer passionate about creating compelling and user-friendly web experiences.",
+		// Add twitter:image if you have one:
+		// images: ['/twitter-image.png'], // Must be an absolute URL or start with /
+		// Add twitter:creator if you have a Twitter handle:
+		// creator: '@yourTwitterHandle',
+	},
+	// Add other metadata fields as needed
+	// icons: {
+	//   icon: '/favicon.ico', // Example for favicon
+	//   apple: '/apple-touch-icon.png', // Example for Apple touch icon
+	// },
+	// verification: {
+	//   google: 'your-google-site-verification-code',
+	//   yandex: 'your-yandex-verification-code',
+	// },
+};
 
-	const handleDrawerToggle = () => {
-		setOpen(!open)
-	}
-
+export default function RootLayout({
+	children,
+}: Readonly<{
+	children: React.ReactNode;
+}>) {
 	return (
-		<ThemeProvider theme={customTheme}>
-			<html
-				lang='en'
-				data-theme='dark'
-			>
-				<Metadata />
-				<body className={inter.className}>
-					<>
-						{/* Mobile menu toggle */}
-						<MobileMenuToggle
-							open={open}
-							handleDrawerToggle={handleDrawerToggle}
-						/>
-
-						{/* Sidebar */}
-						<Sidebar
-							open={open}
-							handleDrawerToggle={handleDrawerToggle}
-						/>
-
-						{/* Main content */}
-						<MainContentWrapper pathname={pathname}>
-							{/* Breadcrumbs */}
-							<Breadcrumb />
-							{children}
-						</MainContentWrapper>
-					</>
-					<Analytics />
-				</body>
-			</html>
-		</ThemeProvider>
-	)
+		<html lang="en" suppressHydrationWarning>
+			<body className={`${geistSans.variable} ${geistMono.variable}`}>
+				<InitColorSchemeScript attribute="class" />
+				<AppRouterCacheProvider options={{ enableCssLayer: true }}>
+					<ThemeProvider theme={theme}>
+						{/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+						<CssBaseline />
+						{children}
+					</ThemeProvider>
+				</AppRouterCacheProvider>
+			</body>
+		</html>
+	);
 }

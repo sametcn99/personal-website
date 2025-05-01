@@ -40,20 +40,19 @@ function generateSidebarLinks(dir: string): void {
 	const sidebarData: SidebarData = {
 		Personal: [
 			{ title: 'Home', href: '/' },
-			{ title: ' Blog', href: '/blog' },
 			{ title: 'CV', href: '/cv' },
 		],
 		Gists: links,
 	}
 
 	// Create data directory if it doesn't exist
-	const dataDir = path.join(__dirname, '../src/data')
+	const dataDir = path.join(__dirname, '../src/lib')
 	if (!fs.existsSync(dataDir)) {
 		fs.mkdirSync(dataDir, { recursive: true })
 	}
 
 	fs.writeFileSync(
-		path.join(__dirname, '../src/data/sidebar-links.json'),
+		path.join(__dirname, '../src/lib/sidebar-links.json'),
 		JSON.stringify(sidebarData, null, 2)
 	)
 }

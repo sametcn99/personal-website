@@ -1,7 +1,7 @@
 import { notFound, permanentRedirect } from 'next/navigation'
 import { socialMediaLinks } from '@/lib/social'
-import { getRepo } from '@/utils/utils'
 import { Metadata } from 'next'
+import { getRepo } from '@/lib/utils'
 
 type Props = {
 	params: Promise<{ slug: string }>

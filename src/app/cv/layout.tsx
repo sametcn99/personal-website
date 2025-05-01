@@ -1,38 +1,19 @@
-import { Box } from '@mui/material'
+import Container from "@mui/material/Container"; // MUI Container'ı içe aktar
 
-export default function MdxLayout({ children }: { children: React.ReactNode }) {
+export default function Layout({ children }: { children: React.ReactNode }) {
 	return (
-		<Box
-			component='main'
+		<Container
+			maxWidth="lg"
 			sx={{
-				position: 'relative',
-				mx: 'auto',
-				width: 'fit-content',
-				px: 2,
-				'@media print': {
+				"@media print": {
 					mx: 0,
 					px: 0,
-					bgcolor: 'white',
-					color: 'black',
+					bgcolor: "white",
+					color: "black",
 				},
 			}}
 		>
-			<Box
-				sx={{
-					'& .prose': {
-						'& h1': { my: 0 },
-						'& h2': { my: 2 },
-						'& p': { my: 0 },
-						'& hr': { my: 6 },
-					},
-					'@media print': {
-						m: '0 !important',
-						p: '0 !important',
-					},
-				}}
-			>
-				{children}
-			</Box>
-		</Box>
-	)
+			{children}
+		</Container>
+	);
 }

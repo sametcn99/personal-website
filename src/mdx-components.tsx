@@ -1,52 +1,43 @@
 import {
 	Typography,
 	Table,
-	TableBody,
 	TableCell,
 	TableContainer,
-	TableHead,
-	TableRow,
 	Paper,
 	Link as MuiLink,
 	Divider,
 	List,
 	ListItem,
-} from '@mui/material'
-import type { MDXComponents } from 'mdx/types'
-import Pre from '@/components/Pre'
-import Link from 'next/link'
+	Box,
+} from "@mui/material";
+import type { MDXComponents } from "mdx/types";
+import Link from "next/link";
 
 function generateId(text: string): string {
 	return text
 		.toLowerCase()
-		.replace(/[^a-z0-9 ]/g, '')
-		.replace(/[ ]/g, '-')
+		.replace(/[^a-z0-9 ]/g, "")
+		.replace(/[ ]/g, "-");
 }
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
 	return {
 		...components,
 		h1: ({ children, ...props }) => (
-			<Typography
-				variant='h1'
-				id={generateId(String(children))}
-				gutterBottom
-				sx={{ fontSize: '2.5rem' }}
-				{...props}
-			>
+			<Typography variant="h1" id={generateId(String(children))} gutterBottom sx={{ fontSize: "2.5rem" }} {...props}>
 				{children}
 			</Typography>
 		),
 		h2: ({ children, ...props }) => (
 			<Typography
-				variant='h2'
+				variant="h2"
 				id={generateId(String(children))}
 				sx={{
 					mt: 6,
 					mb: 3,
 					borderBottom: 1,
 					paddingBottom: 1.5,
-					fontSize: '2rem',
+					fontSize: "2rem",
 				}}
 				{...props}
 			>
@@ -54,47 +45,27 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
 			</Typography>
 		),
 		h3: ({ children, ...props }) => (
-			<Typography
-				variant='h3'
-				id={generateId(String(children))}
-				sx={{ mt: 5, mb: 2.5, fontSize: '1.5rem' }}
-				{...props}
-			>
+			<Typography variant="h3" id={generateId(String(children))} sx={{ mt: 5, mb: 2.5, fontSize: "1.5rem" }} {...props}>
 				{children}
 			</Typography>
 		),
 		p: ({ children, ...props }) => (
-			<Typography
-				variant='body1'
-				sx={{ '&:not(:first-of-type)': { mt: 2 }, fontSize: '0.95rem' }}
-				{...props}
-			>
+			<Typography variant="body1" sx={{ "&:not(:first-of-type)": { mt: 2 }, fontSize: "0.95rem" }} {...props}>
 				{children}
 			</Typography>
 		),
 		ul: ({ children, ...props }) => (
-			<List
-				component='ul'
-				sx={{ my: 3, ml: 3, listStyleType: 'disc' }}
-				{...props}
-			>
+			<List component="ul" sx={{ my: 3, ml: 3, listStyleType: "disc" }} {...props}>
 				{children}
 			</List>
 		),
 		ol: ({ children, ...props }) => (
-			<List
-				component='ol'
-				sx={{ my: 3, ml: 3, listStyleType: 'decimal' }}
-				{...props}
-			>
+			<List component="ol" sx={{ my: 3, ml: 3, listStyleType: "decimal" }} {...props}>
 				{children}
 			</List>
 		),
 		li: ({ children, ...props }) => (
-			<ListItem
-				sx={{ display: 'list-item' }}
-				{...props}
-			>
+			<ListItem sx={{ display: "list-item" }} {...props}>
 				{children}
 			</ListItem>
 		),
@@ -104,77 +75,68 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
 				sx={{
 					borderLeft: 4,
 					pl: 4,
-					borderColor: 'grey.500',
-					fontStyle: 'italic',
+					borderColor: "grey.500",
+					fontStyle: "italic",
 				}}
 				{...props}
 			>
-				<Typography variant='body1'>{children}</Typography>
+				<Typography variant="body1">{children}</Typography>
 			</Paper>
 		),
 		a: ({ children, href, ...props }) => {
-			if (href && href.startsWith('/')) {
+			if (href && href.startsWith("/")) {
 				return (
-					<MuiLink
-						href={href}
-						component={Link}
-						{...props}
-					>
+					<MuiLink href={href} component={Link} {...props}>
 						{children}
 					</MuiLink>
-				)
+				);
 			}
 			return (
-				<MuiLink
-					href={href}
-					target='_blank'
-					rel='noopener noreferrer'
-					{...props}
-				>
+				<MuiLink href={href} target="_blank" rel="noopener noreferrer" {...props}>
 					{children}
 				</MuiLink>
-			)
+			);
 		},
-		pre: (props) => <Pre {...props} />,
-		code: ({ children, className, ...props }) => {
+		pre: ({ children, ...props }) => {
 			return (
-				<Typography
-					component='code'
+				<Box
+					component="pre"
 					{...props}
+					sx={{
+						position: "relative",
+						overflow: "auto",
+						borderRadius: 1,
+						bgcolor: "grey.900",
+						width: "100%",
+						marginX: "auto",
+					}}
 				>
 					{children}
+				</Box>
+			);
+		},
+		code: ({ children, ...props }) => {
+			return (
+				<Typography component="code" {...props}>
+					{children}
 				</Typography>
-			)
+			);
 		},
 		table: ({ children, ...props }) => (
-			<TableContainer
-				component={Paper}
-				sx={{ my: 3 }}
-			>
+			<TableContainer component={Paper} sx={{ my: 3 }}>
 				<Table {...props}>{children}</Table>
 			</TableContainer>
 		),
 		th: ({ children, ...props }) => (
-			<TableCell
-				sx={{ fontWeight: 'bold', border: 1, borderColor: 'grey.700' }}
-				{...props}
-			>
+			<TableCell sx={{ fontWeight: "bold", border: 1, borderColor: "grey.700" }} {...props}>
 				{children}
 			</TableCell>
 		),
 		td: ({ children, ...props }) => (
-			<TableCell
-				sx={{ border: 1, borderColor: 'grey.700' }}
-				{...props}
-			>
+			<TableCell sx={{ border: 1, borderColor: "grey.700" }} {...props}>
 				{children}
 			</TableCell>
 		),
-		hr: (props) => (
-			<Divider
-				sx={{ my: 3 }}
-				{...props}
-			/>
-		),
-	}
+		hr: (props) => <Divider sx={{ my: 3 }} {...props} />,
+	};
 }

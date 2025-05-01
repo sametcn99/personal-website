@@ -1,7 +1,7 @@
 "use client";
 
 import appData from "@/lib/app-data.json";
-import { socialMediaLinks } from "@/lib/social";
+import { categoryOrder, socialMediaLinks } from "@/lib/social";
 import Code from "@mui/icons-material/Code";
 import Description from "@mui/icons-material/Description";
 import HomeIcon from "@mui/icons-material/Home";
@@ -17,7 +17,20 @@ import ListItemText from "@mui/material/ListItemText";
 import Typography from "@mui/material/Typography";
 
 export default function Home() {
-  const visibleLinks = socialMediaLinks.filter((link) => link.visible);
+  const visibleLinks = socialMediaLinks
+    .filter((link) => link.visible)
+    .sort((a, b) => {
+      // First, sort by category order
+      const categoryOrderA = categoryOrder[a.category] || Number.MAX_VALUE;
+      const categoryOrderB = categoryOrder[b.category] || Number.MAX_VALUE;
+
+      if (categoryOrderA !== categoryOrderB) {
+        return categoryOrderA - categoryOrderB;
+      }
+
+      // If categories have the same order, sort by label
+      return a.label.localeCompare(b.label);
+    });
 
   // Function to render an icon based on the title
   const getIconForItem = (title: string) => {
@@ -36,7 +49,7 @@ export default function Home() {
       <Container maxWidth="sm">
         {/* Social Media Links */}
         <Typography variant="h6" gutterBottom>
-          Social Media
+          Links
         </Typography>
         <List>
           {visibleLinks.map((link, index) => (

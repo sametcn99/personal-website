@@ -1,3 +1,5 @@
+import BackToHome from "@/components/BackToHome";
+import SaveThisPage from "@/components/SaveThisPage";
 import Container from "@mui/material/Container"; // MUI Container'ı içe aktar
 
 export default function BlogLayout({
@@ -5,5 +7,11 @@ export default function BlogLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <Container maxWidth="lg">{children}</Container>;
+  return (
+    <Container maxWidth="lg">
+      <BackToHome />
+      {children}
+      <SaveThisPage />
+    </Container>
+  );
 }

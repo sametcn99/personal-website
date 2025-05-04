@@ -10,4 +10,5 @@ type SocialMediaLink = {
     | "Contact"
     | "Other";
   icon?: React.ReactNode; // Add optional icon property
+  external?: boolean; // Add optional external property
 };

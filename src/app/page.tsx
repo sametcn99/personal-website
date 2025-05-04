@@ -58,8 +58,8 @@ export default function Home() {
                 <ListItemButton
                   component="a"
                   href={link.link.toString()}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  target={link.external ? "_blank" : "_self"}
+                  rel={link.external ? "noopener noreferrer" : undefined}
                 >
                   <ListItemIcon>{link.icon}</ListItemIcon>
                   <ListItemText primary={link.label} />

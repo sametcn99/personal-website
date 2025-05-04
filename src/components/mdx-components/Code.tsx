@@ -22,8 +22,8 @@ export function CodeComponent({
         component="code"
         sx={{
           backgroundColor: alpha(theme.palette.primary.dark, 0.5),
-          color: theme.palette.primary.main,
-          padding: "0.2em 0.4em",
+          color: theme.palette.primary.contrastText,
+          padding: "0.2em 0.3em",
           borderRadius: 1,
           fontFamily: "monospace",
           fontSize: "0.875em",

@@ -184,12 +184,17 @@ export default function SaveThisPage() {
             {isPrinting ? "Preparing..." : "Save This Page"}
           </Typography>
         </Box>
-      </Box>{" "}
+      </Box>
       <Snackbar
         open={!!showMessage}
         autoHideDuration={6000}
         onClose={() => setShowMessage(null)}
         anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+        sx={{
+          "@media print": {
+            display: "none",
+          },
+        }}
       >
         <Alert
           onClose={() => setShowMessage(null)}

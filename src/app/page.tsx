@@ -5,6 +5,7 @@ import { categoryOrder, socialMediaLinks } from "@/lib/social";
 import Code from "@mui/icons-material/Code";
 import Description from "@mui/icons-material/Description";
 import HomeIcon from "@mui/icons-material/Home";
+import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Divider from "@mui/material/Divider";
@@ -63,6 +64,13 @@ export default function Home() {
                 >
                   <ListItemIcon>{link.icon}</ListItemIcon>
                   <ListItemText primary={link.label} />
+                  {link.external && (
+                    <OpenInNewIcon
+                      sx={{ ml: 1 }}
+                      fontSize="small"
+                      color="action"
+                    />
+                  )}
                 </ListItemButton>
               </ListItem>
             </Fade>

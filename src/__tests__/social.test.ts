@@ -1,7 +1,7 @@
-import { socialMediaLinks } from '../lib/social';
+import { socialMediaLinks } from "../lib/social";
 
-describe('Social Media Links', () => {
-  test('all types should be unique', () => {
+describe("Social Media Links", () => {
+  test("all types should be unique", () => {
     // Create a Set to store all types
     const allTypes = new Set<string>();
     // Create an array to store duplicate types if found
@@ -16,10 +16,10 @@ describe('Social Media Links', () => {
           const linksWithType = socialMediaLinks
             .filter((otherLink) => otherLink.type.includes(type))
             .map((link) => link.label);
-          
+
           duplicates.push({
             type,
-            labels: linksWithType
+            labels: linksWithType,
           });
         } else {
           // Add the type to our Set if it's not a duplicate
@@ -30,12 +30,13 @@ describe('Social Media Links', () => {
 
     // If we found any duplicates, fail the test with a detailed message
     if (duplicates.length > 0) {
-      const duplicateMessages = duplicates.map(({type, labels}) => 
-        `Type "${type}" is used in multiple links: ${labels.join(', ')}`
+      const duplicateMessages = duplicates.map(
+        ({ type, labels }) =>
+          `Type "${type}" is used in multiple links: ${labels.join(", ")}`,
       );
-      
+
       throw new Error(
-        'Found duplicate types:\n' + duplicateMessages.join('\n')
+        "Found duplicate types:\n" + duplicateMessages.join("\n"),
       );
     }
   });

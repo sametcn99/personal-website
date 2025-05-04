@@ -10,7 +10,7 @@
     "lint": "next lint",
     "generate-app-data": "bun run scripts/generate-app-data.ts",
     "format": "prettier --write .",
-    "test": "bun test"
+    "jest": "jest"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -52,6 +52,7 @@
     "prettier": "3.5.3",
     "prettier-plugin-organize-imports": "^4.1.0",
     "ts-jest": "^29.3.2",
+    "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
   }
 }

@@ -21,7 +21,7 @@ export function CodeComponent({
       <Typography
         component="code"
         sx={{
-          backgroundColor: alpha(theme.palette.primary.dark, 0.5),
+          backgroundColor: alpha(theme.palette.primary.contrastText, 0.5),
           color: theme.palette.primary.contrastText,
           padding: "0.2em 0.3em",
           borderRadius: 1,

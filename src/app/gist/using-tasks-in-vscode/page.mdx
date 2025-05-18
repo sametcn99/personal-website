@@ -1,3 +1,8 @@
+---
+title: VS Code Tasks Guide
+description: Learn how to automate development workflows with tasks in Visual Studio Code.
+---
+
 # A Comprehensive Guide to Creating and Using Tasks in Visual Studio Code
 
 ## Table of Contents
@@ -866,3 +871,77 @@ VS Code tasks are a remarkably versatile tool for automating development workflo
 VS Code's task system is a powerful tool that can significantly enhance your development workflow. By understanding and implementing these advanced concepts and examples, you can create sophisticated automation solutions that improve your productivity and code quality. Remember to start simple and gradually add complexity as needed, always keeping maintainability and team collaboration in mind.
 
 The examples provided in this guide serve as a foundation for building your own task configurations. Feel free to modify and combine them to match your specific development needs. As you become more comfortable with tasks, you'll discover new ways to automate and streamline your development process.
+
+## Azure Tasks
+
+### 1. Deploy to Azure App Service
+
+```json
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Deploy to Azure App Service",
+      "type": "shell",
+      "command": "az webapp deploy",
+      "args": [
+        "--resource-group",
+        "myResourceGroup",
+        "--name",
+        "myAppService",
+        "--src-path",
+        "${workspaceFolder}/dist"
+      ],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    }
+  ]
+}
+```
+
+### 2. Run Azure CLI Command
+
+```json
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Run Azure CLI Command",
+      "type": "shell",
+      "command": "az vm list",
+      "args": ["--resource-group", "myResourceGroup", "--output", "table"],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    }
+  ]
+}
+```
+
+### 3. Deploy Azure Functions
+
+```json
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Deploy Azure Functions",
+      "type": "shell",
+      "command": "func azure functionapp publish myfunctionapp",
+      "args": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    }
+  ]
+}
+```
+
+These examples provide a starting point for automating Azure-related tasks within VS Code, helping to streamline your development and deployment workflows.

@@ -18,3 +18,9 @@ type AppDataItem = {
   href: string;
   lastModified: string;
 };
+
+interface Frontmatter {
+  title?: string;
+  description?: string;
+  keywords?: string[];
+}

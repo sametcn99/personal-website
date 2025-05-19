@@ -4,7 +4,6 @@ import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { alpha, Box, IconButton, Tooltip } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import React, { useCallback, useState } from "react";
-import { MermaidComponent } from "./Mermaid";
 
 // Helper function to extract text content from React children
 const getTextFromChildren = (childrenNode: React.ReactNode): string => {
@@ -72,16 +71,6 @@ export function PreComponent({
 
   // Check if this is a mermaid code block
   // This check must come AFTER hooks, but can use `children` directly.
-  if (
-    React.isValidElement(children) &&
-    (children.props as CodeElementProps)?.className?.includes(
-      "language-mermaid",
-    )
-  ) {
-    const codeElement = children as React.ReactElement<CodeElementProps>;
-    const chartText = getTextFromChildren(codeElement.props.children || "");
-    return <MermaidComponent chart={chartText} />;
-  }
 
   return (
     <Box

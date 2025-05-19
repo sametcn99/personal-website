@@ -8,7 +8,13 @@ import remarkMdxFrontmatter from "remark-mdx-frontmatter";
 const nextConfig = {
   // Allow .mdx extensions for files
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
-  transpilePackages: ["estree-walker", "rehype-highlight"],
+  transpilePackages: [
+    "estree-walker",
+    "rehype-highlight",
+    "remark-frontmatter",
+    "remark-gfm",
+    "remark-mdx-frontmatter",
+  ],
   // Optionally, add any other Next.js config below
 };
 

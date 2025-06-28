@@ -185,6 +185,15 @@ export const socialMediaLinks: SocialMediaLink[] = [
     category: "Social Media",
     icon: <Theaters />,
   },
+  {
+    type: ["imdb"],
+    label: "IMDb",
+    visible: true,
+    external: true,
+    link: new URL("https://www.imdb.com/user/ur120575296"),
+    category: "Social Media",
+    icon: <Theaters />,
+  }
 ];
 
 export const categoryOrder: Record<SocialMediaLink["category"], number> = {

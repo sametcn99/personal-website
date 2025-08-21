@@ -245,6 +245,7 @@ export default function Home() {
                   <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
                     {socialMediaLinks
                       .filter((link) => !link.visible)
+                      .sort((a, b) => a.label.localeCompare(b.label))
                       .map((link) => (
                         <Typography
                           key={link.label}

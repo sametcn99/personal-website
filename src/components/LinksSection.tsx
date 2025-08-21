@@ -1,7 +1,10 @@
 import { useLinks } from "@/hooks/useLinks";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import Box from "@mui/material/Box";
 import Chip from "@mui/material/Chip";
+import Collapse from "@mui/material/Collapse";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -91,7 +94,7 @@ export default function LinksSection() {
         {/* See all links toggle */}
         <Box sx={{ mt: 2, textAlign: "left" }}>
           <Typography
-            variant="body2"
+            variant="caption"
             component="button"
             onClick={() => setShowAllLinks(!showAllLinks)}
             sx={{
@@ -100,23 +103,51 @@ export default function LinksSection() {
               border: "none",
               cursor: "pointer",
               fontSize: "0.8rem",
+              display: "flex",
+              alignItems: "center",
+              gap: 0.5,
+              transition: "all 0.3s ease-in-out",
+              transform: showAllLinks ? "rotate(0deg)" : "rotate(0deg)",
               "&:hover": {
                 color: "text.primary",
               },
             }}
           >
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                transition: "transform 0.2s ease-in-out",
+                transform: showAllLinks ? "rotate(180deg)" : "rotate(0deg)",
+              }}
+            >
+              {showAllLinks ? (
+                <ExpandLessIcon fontSize="small" />
+              ) : (
+                <ExpandMoreIcon fontSize="small" />
+              )}
+            </Box>
             {showAllLinks ? "hide" : "see all"}
           </Typography>
         </Box>
 
         {/* Hidden links when showing all */}
-        {showAllLinks && (
+        <Collapse
+          in={showAllLinks}
+          timeout={500}
+          easing={{
+            enter: "cubic-bezier(0.4, 0, 0.2, 1)",
+            exit: "cubic-bezier(0.4, 0, 0.6, 1)",
+          }}
+        >
           <Box
             sx={{
               mt: 2,
               pt: 2,
               borderTop: "1px solid",
               borderColor: "divider",
+              opacity: showAllLinks ? 1 : 0,
+              transition: "opacity 0.3s ease-in-out",
             }}
           >
             <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
@@ -133,7 +164,6 @@ export default function LinksSection() {
                     textDecoration: "none",
                     fontSize: "0.75rem",
                     "&:hover": {
-                      color: "primary.main",
                       textDecoration: "underline",
                     },
                   }}
@@ -143,7 +173,7 @@ export default function LinksSection() {
               ))}
             </Box>
           </Box>
-        )}
+        </Collapse>
       </Paper>
     </Box>
   );

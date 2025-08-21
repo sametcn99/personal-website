@@ -88,7 +88,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
     label: "Telegram",
     visible: true,
     external: true,
-    category: "Social Media",
+    category: "Contact",
     icon: <Telegram />,
   },
   {

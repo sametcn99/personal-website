@@ -99,8 +99,8 @@ export default function Home() {
   const filteredGists = useMemo(() => {
     const filtered = searchQuery.trim()
       ? appData.filter((item) =>
-          item.title.toLowerCase().includes(searchQuery.toLowerCase()),
-        )
+        item.title.toLowerCase().includes(searchQuery.toLowerCase()),
+      )
       : [...appData];
 
     // Sort the filtered results
@@ -193,8 +193,10 @@ export default function Home() {
                           </ListItemIcon>
                           <ListItemText
                             primary={link.label}
-                            primaryTypographyProps={{
-                              fontSize: "0.9rem",
+                            slotProps={{
+                              primary: {
+                                fontSize: "0.9rem",
+                              },
                             }}
                           />
                           {link.external && (
@@ -432,12 +434,14 @@ export default function Home() {
                             month: "short",
                             day: "numeric",
                           })}
-                          primaryTypographyProps={{
-                            fontSize: "0.9rem",
-                            fontWeight: "medium",
-                          }}
-                          secondaryTypographyProps={{
-                            fontSize: "0.75rem",
+                          slotProps={{
+                            primary: {
+                              fontSize: "0.9rem",
+                              fontWeight: "medium",
+                            },
+                            secondary: {
+                              fontSize: "0.75rem",
+                            },
                           }}
                         />
                       </ListItemButton>

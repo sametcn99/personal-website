@@ -36,6 +36,9 @@ export default function Home() {
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
   const [showAllLinks, setShowAllLinks] = useState(false);
 
+  // Clear search function
+  const clearSearch = () => setSearchQuery("");
+
   // Load sort preferences from localStorage on component mount
   useEffect(() => {
     const savedSortBy = localStorage.getItem("gist-sort-by") as
@@ -63,6 +66,20 @@ export default function Home() {
   useEffect(() => {
     localStorage.setItem("gist-sort-order", sortOrder);
   }, [sortOrder]);
+
+  // Handle ESC key press to clear search
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape" && searchQuery) {
+        clearSearch();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [searchQuery]);
 
   const visibleLinks = socialMediaLinks
     .filter((link) => link.visible)
@@ -99,8 +116,8 @@ export default function Home() {
   const filteredGists = useMemo(() => {
     const filtered = searchQuery.trim()
       ? appData.filter((item) =>
-        item.title.toLowerCase().includes(searchQuery.toLowerCase()),
-      )
+          item.title.toLowerCase().includes(searchQuery.toLowerCase()),
+        )
       : [...appData];
 
     // Sort the filtered results
@@ -123,9 +140,6 @@ export default function Home() {
     if (title === "CV") return <Description />;
     return <Code />; // Default icon for gists
   };
-
-  // Clear search function
-  const clearSearch = () => setSearchQuery("");
 
   return (
     <Box

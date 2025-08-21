@@ -9,7 +9,78 @@ const roboto = Roboto({
 });
 
 const theme = createTheme({
-  colorSchemes: { light: true, dark: true },
+  colorSchemes: {
+    light: {
+      palette: {
+        primary: {
+          main: "#3f51b5",
+          light: "#757de8",
+          dark: "#002984",
+        },
+        secondary: {
+          main: "#f50057",
+          light: "#ff4081",
+          dark: "#c51162",
+        },
+        text: {
+          primary: "#212121",
+          secondary: "#757575",
+        },
+        divider: "#e0e0e0",
+        background: {
+          paper: "#ffffff",
+          default: "#fafafa",
+        },
+        error: {
+          main: "#f44336",
+        },
+        warning: {
+          main: "#ff9800",
+        },
+        info: {
+          main: "#2196f3",
+        },
+        success: {
+          main: "#4caf50",
+        },
+      },
+    },
+    dark: {
+      palette: {
+        primary: {
+          main: "#90caf9",
+          light: "#e3f2fd",
+          dark: "#42a5f5",
+        },
+        secondary: {
+          main: "#f48fb1",
+          light: "#fce4ec",
+          dark: "#ad2d5f",
+        },
+        text: {
+          primary: "#ffffff",
+          secondary: "#b0b0b0",
+        },
+        divider: "#333333",
+        background: {
+          paper: "#000000",
+          default: "#000000",
+        },
+        error: {
+          main: "#f44336",
+        },
+        warning: {
+          main: "#ff9800",
+        },
+        info: {
+          main: "#2196f3",
+        },
+        success: {
+          main: "#4caf50",
+        },
+      },
+    },
+  },
   cssVariables: {
     colorSchemeSelector: "class",
   },
@@ -30,39 +101,6 @@ const theme = createTheme({
           ],
         },
       },
-    },
-  },
-  palette: {
-    primary: {
-      main: "#3f51b5",
-      light: "#757de8",
-      dark: "#002984",
-    },
-    secondary: {
-      main: "#f50057",
-      light: "#ff4081",
-      dark: "#c51162",
-    },
-    text: {
-      primary: "#212121",
-      secondary: "#757575",
-    },
-    divider: "#e0e0e0",
-    background: {
-      paper: "#ffffff",
-      default: "#fafafa",
-    },
-    error: {
-      main: "#f44336",
-    },
-    warning: {
-      main: "#ff9800",
-    },
-    info: {
-      main: "#2196f3",
-    },
-    success: {
-      main: "#4caf50",
     },
   },
 });

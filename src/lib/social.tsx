@@ -195,14 +195,14 @@ export const socialMediaLinks: SocialMediaLink[] = [
     icon: <Theaters />,
   },
   {
-    type: ['pinterest'],
+    type: ["pinterest"],
     label: "Pinterest",
     visible: false,
     external: true,
     link: new URL("https://pinterest.com/sametcn99"),
     category: "Social Media",
     icon: <Theaters />,
-  }
+  },
 ];
 
 export const categoryOrder: Record<SocialMediaLink["category"], number> = {

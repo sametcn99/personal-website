@@ -70,8 +70,8 @@ export default function Home() {
   const filteredGists = useMemo(() => {
     const filtered = searchQuery.trim()
       ? appData.filter((item) =>
-        item.title.toLowerCase().includes(searchQuery.toLowerCase()),
-      )
+          item.title.toLowerCase().includes(searchQuery.toLowerCase()),
+        )
       : [...appData];
 
     // Sort the filtered results
@@ -216,8 +216,19 @@ export default function Home() {
 
               {/* Hidden links when showing all */}
               {showAllLinks && (
-                <Box sx={{ mt: 2, pt: 2, borderTop: "1px solid", borderColor: "divider" }}>
-                  <Typography variant="body2" color="text.secondary" sx={{ mb: 1, fontSize: "0.75rem" }}>
+                <Box
+                  sx={{
+                    mt: 2,
+                    pt: 2,
+                    borderTop: "1px solid",
+                    borderColor: "divider",
+                  }}
+                >
+                  <Typography
+                    variant="body2"
+                    color="text.secondary"
+                    sx={{ mb: 1, fontSize: "0.75rem" }}
+                  >
                     Additional links:
                   </Typography>
                   <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
@@ -230,7 +241,9 @@ export default function Home() {
                           component="a"
                           href={link.link.toString()}
                           target={link.external ? "_blank" : "_self"}
-                          rel={link.external ? "noopener noreferrer" : undefined}
+                          rel={
+                            link.external ? "noopener noreferrer" : undefined
+                          }
                           sx={{
                             color: "text.secondary",
                             textDecoration: "none",
@@ -282,7 +295,7 @@ export default function Home() {
                 slotProps={{
                   htmlInput: {
                     spellCheck: false,
-                    'data-ms-editor': false,
+                    "data-ms-editor": false,
                   },
                   input: {
                     startAdornment: (
@@ -292,7 +305,11 @@ export default function Home() {
                     ),
                     endAdornment: searchQuery && (
                       <InputAdornment position="end">
-                        <IconButton size="small" onClick={clearSearch} edge="end">
+                        <IconButton
+                          size="small"
+                          onClick={clearSearch}
+                          edge="end"
+                        >
                           <Clear />
                         </IconButton>
                       </InputAdornment>

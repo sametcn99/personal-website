@@ -1,10 +1,4 @@
 import type { Config } from "jest";
-import nextJest from "next/jest";
-
-const createJestConfig = nextJest({
-  // Provide the path to your Next.js app to load next.config.js and .env files in your test environment
-  dir: "./",
-});
 
 const config: Config = {
   preset: "ts-jest",
@@ -17,10 +11,19 @@ const config: Config = {
     "^.+\\.(ts|tsx)$": [
       "ts-jest",
       {
-        tsconfig: "tsconfig.json",
+        tsconfig: {
+          jsx: "react-jsx",
+        },
       },
     ],
   },
+  testMatch: [
+    "<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}",
+    "<rootDir>/src/**/*.{test,spec}.{js,jsx,ts,tsx}",
+  ],
+  collectCoverageFrom: ["src/**/*.{js,jsx,ts,tsx}", "!src/**/*.d.ts"],
+  moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
+  transformIgnorePatterns: ["node_modules/(?!(@mui/.*)/)"],
 };
 
-export default createJestConfig(config);
+export default config;

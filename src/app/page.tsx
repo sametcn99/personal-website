@@ -1,10 +1,10 @@
 "use client";
 
+import Footer from "@/components/Footer";
 import LinksSection from "@/components/LinksSection";
 import ContentTabs from "@/components/tabs/ContentTabs";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
-import Typography from "@mui/material/Typography";
 
 export default function Home() {
   return (
@@ -25,11 +25,7 @@ export default function Home() {
         </Box>
 
         {/* Footer */}
-        <Box textAlign="center" mt={4}>
-          <Typography variant="body2" color="text.secondary">
-            Last updated: {new Date().toLocaleDateString("tr-TR")}
-          </Typography>
-        </Box>
+        <Footer />
       </Container>
     </Box>
   );

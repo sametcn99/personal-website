@@ -2,6 +2,12 @@ import fs from "fs";
 import path from "path";
 import appData from "../lib/app-data.json"; // Adjust the path as necessary
 
+interface AppDataItem {
+  title: string;
+  href: string;
+  lastModified: string;
+}
+
 describe("App Data Validation", () => {
   it("should ensure all gist directories exist in app-data.json", () => {
     const gistDirPath = path.resolve(__dirname, "../../src/app/gist"); // Go up two levels from __tests__ to the root, then down to src/app/gist

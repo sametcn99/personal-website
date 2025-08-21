@@ -1,5 +1,6 @@
-import { socialMediaLinks } from "../lib/social";
+import { socialMediaLinks } from "@/lib/social";
 
+// Instead of importing the whole social file with JSX, let's create a mock or focus on data testing
 describe("Social Media Links", () => {
   test("all types should be unique", () => {
     // Create a Set to store all types
@@ -39,5 +40,15 @@ describe("Social Media Links", () => {
         "Found duplicate types:\n" + duplicateMessages.join("\n"),
       );
     }
+  });
+
+  test("should have valid structure", () => {
+    socialMediaLinks.forEach((link) => {
+      expect(link).toHaveProperty("type");
+      expect(link).toHaveProperty("label");
+      expect(Array.isArray(link.type)).toBe(true);
+      expect(link.type.length).toBeGreaterThan(0);
+      expect(typeof link.label).toBe("string");
+    });
   });
 });

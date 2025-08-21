@@ -212,28 +212,25 @@ export default function Home() {
               ))}
 
               {/* See all links toggle */}
-              {!showAllLinks && (
-                <Box sx={{ mt: 2, textAlign: "center" }}>
-                  <Typography
-                    variant="body2"
-                    component="button"
-                    onClick={() => setShowAllLinks(true)}
-                    sx={{
-                      color: "text.secondary",
-                      textDecoration: "underline",
-                      background: "none",
-                      border: "none",
-                      cursor: "pointer",
-                      fontSize: "0.8rem",
-                      "&:hover": {
-                        color: "text.primary",
-                      },
-                    }}
-                  >
-                    see all links
-                  </Typography>
-                </Box>
-              )}
+              <Box sx={{ mt: 2, textAlign: "left" }}>
+                <Typography
+                  variant="body2"
+                  component="button"
+                  onClick={() => setShowAllLinks(!showAllLinks)}
+                  sx={{
+                    color: "text.secondary",
+                    background: "none",
+                    border: "none",
+                    cursor: "pointer",
+                    fontSize: "0.8rem",
+                    "&:hover": {
+                      color: "text.primary",
+                    },
+                  }}
+                >
+                  {showAllLinks ? "hide" : "see all"}
+                </Typography>
+              </Box>
 
               {/* Hidden links when showing all */}
               {showAllLinks && (
@@ -245,13 +242,6 @@ export default function Home() {
                     borderColor: "divider",
                   }}
                 >
-                  <Typography
-                    variant="body2"
-                    color="text.secondary"
-                    sx={{ mb: 1, fontSize: "0.75rem" }}
-                  >
-                    Additional links:
-                  </Typography>
                   <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
                     {socialMediaLinks
                       .filter((link) => !link.visible)

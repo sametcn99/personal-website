@@ -3,18 +3,18 @@
 import appData from "@/lib/app-data.json";
 import { categoryOrder, socialMediaLinks } from "@/lib/social";
 import AccessTime from "@mui/icons-material/AccessTime";
+import ArrowDownward from "@mui/icons-material/ArrowDownward";
+import ArrowUpward from "@mui/icons-material/ArrowUpward";
 import Clear from "@mui/icons-material/Clear";
 import Code from "@mui/icons-material/Code";
 import Description from "@mui/icons-material/Description";
 import HomeIcon from "@mui/icons-material/Home";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import Search from "@mui/icons-material/Search";
-import Sort from "@mui/icons-material/Sort";
 import SortByAlpha from "@mui/icons-material/SortByAlpha";
 import Box from "@mui/material/Box";
 import Chip from "@mui/material/Chip";
 import Container from "@mui/material/Container";
-import Fade from "@mui/material/Fade";
 import IconButton from "@mui/material/IconButton";
 import InputAdornment from "@mui/material/InputAdornment";
 import List from "@mui/material/List";
@@ -26,14 +26,43 @@ import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
   const [sortBy, setSortBy] = useState<"title" | "date">("date");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
   const [showAllLinks, setShowAllLinks] = useState(false);
+
+  // Load sort preferences from localStorage on component mount
+  useEffect(() => {
+    const savedSortBy = localStorage.getItem("gist-sort-by") as
+      | "title"
+      | "date"
+      | null;
+    const savedSortOrder = localStorage.getItem("gist-sort-order") as
+      | "asc"
+      | "desc"
+      | null;
+
+    if (savedSortBy) {
+      setSortBy(savedSortBy);
+    }
+    if (savedSortOrder) {
+      setSortOrder(savedSortOrder);
+    }
+  }, []);
+
+  // Save sort preferences to localStorage when they change
+  useEffect(() => {
+    localStorage.setItem("gist-sort-by", sortBy);
+  }, [sortBy]);
+
+  useEffect(() => {
+    localStorage.setItem("gist-sort-order", sortOrder);
+  }, [sortOrder]);
 
   const visibleLinks = socialMediaLinks
     .filter((link) => link.visible)
@@ -142,49 +171,41 @@ export default function Home() {
                     sx={{ mb: 1 }}
                   />
                   <List dense>
-                    {links.map((link, index) => (
-                      <Fade
-                        in={true}
-                        timeout={500 + index * 100}
-                        key={link.label}
-                      >
-                        <ListItem disablePadding>
-                          <ListItemButton
-                            component="a"
-                            href={link.link.toString()}
-                            target={link.external ? "_blank" : "_self"}
-                            rel={
-                              link.external ? "noopener noreferrer" : undefined
-                            }
-                            sx={{
-                              borderRadius: 1,
-                              mb: 0.5,
-                              "&:hover": {
-                                backgroundColor: "action.hover",
-                                transform: "translateX(4px)",
-                                transition: "all 0.2s ease-in-out",
-                              },
+                    {links.map((link) => (
+                      <ListItem disablePadding key={link.label}>
+                        <ListItemButton
+                          component="a"
+                          href={link.link.toString()}
+                          target={link.external ? "_blank" : "_self"}
+                          rel={
+                            link.external ? "noopener noreferrer" : undefined
+                          }
+                          sx={{
+                            borderRadius: 1,
+                            mb: 0.5,
+                            "&:hover": {
+                              backgroundColor: "action.hover",
+                            },
+                          }}
+                        >
+                          <ListItemIcon sx={{ minWidth: 40 }}>
+                            {link.icon}
+                          </ListItemIcon>
+                          <ListItemText
+                            primary={link.label}
+                            primaryTypographyProps={{
+                              fontSize: "0.9rem",
                             }}
-                          >
-                            <ListItemIcon sx={{ minWidth: 40 }}>
-                              {link.icon}
-                            </ListItemIcon>
-                            <ListItemText
-                              primary={link.label}
-                              primaryTypographyProps={{
-                                fontSize: "0.9rem",
-                              }}
+                          />
+                          {link.external && (
+                            <OpenInNewIcon
+                              sx={{ ml: 1 }}
+                              fontSize="small"
+                              color="action"
                             />
-                            {link.external && (
-                              <OpenInNewIcon
-                                sx={{ ml: 1 }}
-                                fontSize="small"
-                                color="action"
-                              />
-                            )}
-                          </ListItemButton>
-                        </ListItem>
-                      </Fade>
+                          )}
+                        </ListItemButton>
+                      </ListItem>
                     ))}
                   </List>
                 </Box>
@@ -342,22 +363,25 @@ export default function Home() {
                     Date
                   </ToggleButton>
                 </ToggleButtonGroup>
-                <IconButton
-                  size="small"
-                  onClick={() =>
-                    setSortOrder(sortOrder === "asc" ? "desc" : "asc")
-                  }
-                  title={`Sort ${sortOrder === "asc" ? "descending" : "ascending"}`}
-                >
-                  <Sort
-                    fontSize="small"
-                    sx={{
-                      transform:
-                        sortOrder === "desc" ? "rotate(180deg)" : "none",
-                      transition: "transform 0.2s ease",
-                    }}
-                  />
-                </IconButton>
+                <Box display="flex" alignItems="center" gap={0.5}>
+                  <Tooltip
+                    title={`Click to sort ${sortOrder === "asc" ? "descending" : "ascending"}`}
+                    arrow
+                  >
+                    <IconButton
+                      size="small"
+                      onClick={() =>
+                        setSortOrder(sortOrder === "asc" ? "desc" : "asc")
+                      }
+                    >
+                      {sortOrder === "asc" ? (
+                        <ArrowUpward fontSize="small" />
+                      ) : (
+                        <ArrowDownward fontSize="small" />
+                      )}
+                    </IconButton>
+                  </Tooltip>
+                </Box>
               </Box>
 
               {/* Results info */}
@@ -376,14 +400,6 @@ export default function Home() {
                     {filteredGists.length} gists
                   </Typography>
                 )}
-                <Typography
-                  variant="body2"
-                  color="text.secondary"
-                  sx={{ fontSize: "0.75rem" }}
-                >
-                  {sortBy === "title" ? "Title" : "Date"} •{" "}
-                  {sortOrder === "asc" ? "↑" : "↓"}
-                </Typography>
               </Box>
 
               {/* Gists List */}
@@ -400,49 +416,41 @@ export default function Home() {
                     </Typography>
                   </Box>
                 ) : (
-                  filteredGists.map((item, index) => (
-                    <Fade
-                      in={true}
-                      timeout={500 + index * 100}
-                      key={item.title}
-                    >
-                      <ListItem disablePadding>
-                        <ListItemButton
-                          component="a"
-                          href={item.href}
-                          sx={{
-                            borderRadius: 1,
-                            mb: 0.5,
-                            "&:hover": {
-                              backgroundColor: "action.hover",
-                              transform: "translateX(4px)",
-                              transition: "all 0.2s ease-in-out",
-                            },
+                  filteredGists.map((item) => (
+                    <ListItem disablePadding key={item.title}>
+                      <ListItemButton
+                        component="a"
+                        href={item.href}
+                        sx={{
+                          borderRadius: 1,
+                          mb: 0.5,
+                          "&:hover": {
+                            backgroundColor: "action.hover",
+                          },
+                        }}
+                      >
+                        <ListItemIcon sx={{ minWidth: 40 }}>
+                          {getIconForItem(item.title)}
+                        </ListItemIcon>
+                        <ListItemText
+                          primary={item.title}
+                          secondary={new Date(
+                            item.lastModified,
+                          ).toLocaleDateString("tr-TR", {
+                            year: "numeric",
+                            month: "short",
+                            day: "numeric",
+                          })}
+                          primaryTypographyProps={{
+                            fontSize: "0.9rem",
+                            fontWeight: "medium",
                           }}
-                        >
-                          <ListItemIcon sx={{ minWidth: 40 }}>
-                            {getIconForItem(item.title)}
-                          </ListItemIcon>
-                          <ListItemText
-                            primary={item.title}
-                            secondary={new Date(
-                              item.lastModified,
-                            ).toLocaleDateString("tr-TR", {
-                              year: "numeric",
-                              month: "short",
-                              day: "numeric",
-                            })}
-                            primaryTypographyProps={{
-                              fontSize: "0.9rem",
-                              fontWeight: "medium",
-                            }}
-                            secondaryTypographyProps={{
-                              fontSize: "0.75rem",
-                            }}
-                          />
-                        </ListItemButton>
-                      </ListItem>
-                    </Fade>
+                          secondaryTypographyProps={{
+                            fontSize: "0.75rem",
+                          }}
+                        />
+                      </ListItemButton>
+                    </ListItem>
                   ))
                 )}
               </List>

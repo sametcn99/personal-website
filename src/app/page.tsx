@@ -33,6 +33,7 @@ export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
   const [sortBy, setSortBy] = useState<"title" | "date">("date");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
+  const [showAllLinks, setShowAllLinks] = useState(false);
 
   const visibleLinks = socialMediaLinks
     .filter((link) => link.visible)
@@ -69,8 +70,8 @@ export default function Home() {
   const filteredGists = useMemo(() => {
     const filtered = searchQuery.trim()
       ? appData.filter((item) =>
-          item.title.toLowerCase().includes(searchQuery.toLowerCase()),
-        )
+        item.title.toLowerCase().includes(searchQuery.toLowerCase()),
+      )
       : [...appData];
 
     // Sort the filtered results
@@ -188,6 +189,64 @@ export default function Home() {
                   </List>
                 </Box>
               ))}
+
+              {/* See all links toggle */}
+              {!showAllLinks && (
+                <Box sx={{ mt: 2, textAlign: "center" }}>
+                  <Typography
+                    variant="body2"
+                    component="button"
+                    onClick={() => setShowAllLinks(true)}
+                    sx={{
+                      color: "text.secondary",
+                      textDecoration: "underline",
+                      background: "none",
+                      border: "none",
+                      cursor: "pointer",
+                      fontSize: "0.8rem",
+                      "&:hover": {
+                        color: "text.primary",
+                      },
+                    }}
+                  >
+                    see all links
+                  </Typography>
+                </Box>
+              )}
+
+              {/* Hidden links when showing all */}
+              {showAllLinks && (
+                <Box sx={{ mt: 2, pt: 2, borderTop: "1px solid", borderColor: "divider" }}>
+                  <Typography variant="body2" color="text.secondary" sx={{ mb: 1, fontSize: "0.75rem" }}>
+                    Additional links:
+                  </Typography>
+                  <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+                    {socialMediaLinks
+                      .filter((link) => !link.visible)
+                      .map((link) => (
+                        <Typography
+                          key={link.label}
+                          variant="body2"
+                          component="a"
+                          href={link.link.toString()}
+                          target={link.external ? "_blank" : "_self"}
+                          rel={link.external ? "noopener noreferrer" : undefined}
+                          sx={{
+                            color: "text.secondary",
+                            textDecoration: "none",
+                            fontSize: "0.75rem",
+                            "&:hover": {
+                              color: "primary.main",
+                              textDecoration: "underline",
+                            },
+                          }}
+                        >
+                          {link.label}
+                        </Typography>
+                      ))}
+                  </Box>
+                </Box>
+              )}
             </Paper>
           </Box>
 
@@ -219,19 +278,26 @@ export default function Home() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 sx={{ mb: 2 }}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <Search color="action" />
-                    </InputAdornment>
-                  ),
-                  endAdornment: searchQuery && (
-                    <InputAdornment position="end">
-                      <IconButton size="small" onClick={clearSearch} edge="end">
-                        <Clear />
-                      </IconButton>
-                    </InputAdornment>
-                  ),
+                suppressHydrationWarning
+                slotProps={{
+                  htmlInput: {
+                    spellCheck: false,
+                    'data-ms-editor': false,
+                  },
+                  input: {
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <Search color="action" />
+                      </InputAdornment>
+                    ),
+                    endAdornment: searchQuery && (
+                      <InputAdornment position="end">
+                        <IconButton size="small" onClick={clearSearch} edge="end">
+                          <Clear />
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  },
                 }}
               />
 

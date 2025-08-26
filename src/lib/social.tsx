@@ -63,17 +63,6 @@ export const socialMediaLinks: SocialMediaLink[] = [
     icon: <BarChart />,
   },
   {
-    type: ["codenest", "cn"],
-    link: new URL(
-      "https://codenest.app/user/92addc02-ac45-466b-baf9-6e71f85d88b7",
-    ),
-    label: "CodeNest",
-    visible: false,
-    external: true,
-    category: "Development Platforms",
-    icon: <Code />,
-  },
-  {
     type: ["leetcode", "lc"],
     link: new URL("https://leetcode.com/sametcn99"),
     label: "LeetCode",
@@ -166,15 +155,6 @@ export const socialMediaLinks: SocialMediaLink[] = [
     link: new URL("https://open.spotify.com/user/31qg3kutxxwdq5lzydjx6md534cq"),
     category: "Social Media",
     icon: <MusicNote />,
-  },
-  {
-    type: ["1000kitap", "1k"],
-    label: "1000Kitap",
-    visible: false,
-    external: true,
-    link: new URL("https://1000kitap.com/sametc001"),
-    category: "Social Media",
-    icon: <MenuBook />,
   },
   {
     type: ["letterboxd", "lbxd", "lb"],

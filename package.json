@@ -23,6 +23,7 @@
     "@next/mdx": "^15.5.0",
     "@types/lunr": "^2.3.7",
     "@types/mdx": "^2.0.13",
+    "@vercel/analytics": "^1.5.0",
     "gray-matter": "^4.0.3",
     "install": "^0.13.0",
     "lunr": "^2.3.9",

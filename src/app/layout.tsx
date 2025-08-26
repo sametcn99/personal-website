@@ -3,6 +3,7 @@ import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import CssBaseline from "@mui/material/CssBaseline";
 import InitColorSchemeScript from "@mui/material/InitColorSchemeScript";
 import { ThemeProvider } from "@mui/material/styles";
+import { Analytics } from "@vercel/analytics/next";
 import "highlight.js/styles/github-dark.css"; // Import highlight.js CSS
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
@@ -92,6 +93,7 @@ export default function RootLayout({
             {children}
           </ThemeProvider>
         </AppRouterCacheProvider>
+        <Analytics />
       </body>
     </html>
   );

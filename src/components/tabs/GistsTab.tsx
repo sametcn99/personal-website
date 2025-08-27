@@ -55,15 +55,15 @@ export default function GistsTab({
   // Filter and sort gists based on search query and sort options
   const filteredGists = useMemo(() => {
     // Filter out any items with missing required fields
-    const validGists = gistPosts.filter(item =>
-      item && item.title && item.href && item.lastModified
+    const validGists = gistPosts.filter(
+      (item) => item && item.title && item.href && item.lastModified,
     );
 
     const filtered = searchQuery.trim()
       ? validGists.filter((item) =>
-        item.title.toLowerCase().includes(searchQuery.toLowerCase()),
-      )
-      : [...validGists];    // Sort the filtered results
+          item.title.toLowerCase().includes(searchQuery.toLowerCase()),
+        )
+      : [...validGists]; // Sort the filtered results
     return filtered.sort((a, b) => {
       if (sortBy === "title") {
         const titleA = a.title || "";

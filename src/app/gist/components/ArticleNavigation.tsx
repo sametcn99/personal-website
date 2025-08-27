@@ -12,7 +12,10 @@ interface ArticleNavigationProps {
   nextGist?: GistData | null;
 }
 
-export default function ArticleNavigation({ prevGist, nextGist }: ArticleNavigationProps) {
+export default function ArticleNavigation({
+  prevGist,
+  nextGist,
+}: ArticleNavigationProps) {
   if (!prevGist && !nextGist) return null;
 
   return (

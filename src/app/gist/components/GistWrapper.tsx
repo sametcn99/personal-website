@@ -2,17 +2,11 @@
 
 import BackToHome from "@/components/BackToHome";
 import SaveThisPage from "@/components/SaveThisPage";
-import {
-  Box,
-  Container,
-  Paper,
-  Typography,
-  alpha,
-} from "@mui/material";
-import ScrollProgress from './ScrollProgress';
-import ReadingTime from './ReadingTime';
-import ShareButton from './ShareButton';
-import ArticleNavigation from './ArticleNavigation';
+import { Box, Container, Paper, Typography, alpha } from "@mui/material";
+import ArticleNavigation from "./ArticleNavigation";
+import ReadingTime from "./ReadingTime";
+import ScrollProgress from "./ScrollProgress";
+import ShareButton from "./ShareButton";
 
 interface GistData {
   href: string;
@@ -28,12 +22,12 @@ interface GistWrapperProps {
   postContent: string;
 }
 
-export default function GistWrapper({ 
-  children, 
-  currentGist, 
-  prevGist, 
-  nextGist, 
-  postContent 
+export default function GistWrapper({
+  children,
+  currentGist,
+  prevGist,
+  nextGist,
+  postContent,
 }: GistWrapperProps) {
   return (
     <Container maxWidth="lg">
@@ -50,7 +44,8 @@ export default function GistWrapper({
             sx={{
               p: 2,
               mb: 3,
-              backgroundColor: (theme) => alpha(theme.palette.primary.main, 0.02),
+              backgroundColor: (theme) =>
+                alpha(theme.palette.primary.main, 0.02),
             }}
           >
             <Box
@@ -70,9 +65,7 @@ export default function GistWrapper({
                   alignItems: "center",
                 }}
               >
-                <ReadingTime>
-                  {postContent}
-                </ReadingTime>
+                <ReadingTime>{postContent}</ReadingTime>
                 <Typography variant="body2" color="text.secondary">
                   Last updated:{" "}
                   {new Date(currentGist.lastModified).toLocaleDateString(

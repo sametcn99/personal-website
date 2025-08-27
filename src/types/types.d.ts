@@ -12,15 +12,3 @@ type SocialMediaLink = {
   icon?: React.ReactNode; // Add optional icon property
   external?: boolean; // Add optional external property
 };
-
-type AppDataItem = {
-  title: string;
-  href: string;
-  lastModified: string;
-};
-
-interface Frontmatter {
-  title?: string;
-  description?: string;
-  keywords?: string[];
-}

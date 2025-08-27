@@ -7,7 +7,6 @@ type Props = {
   params: Promise<{ slug: string }>;
 };
 
-
 // Generate static params for all possible slugs at build time
 export async function generateStaticParams() {
   // Get all social media slugs
@@ -48,7 +47,7 @@ export default async function Page({ params }: Props) {
   const { slug } = await params;
 
   // Gist route'ları için redirect yapma - bunlar statik route'lar olarak handle edilir
-  if (slug.startsWith('gist/')) {
+  if (slug.startsWith("gist/")) {
     notFound();
   }
 

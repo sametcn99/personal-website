@@ -1,117 +1,8 @@
 "use client";
 
-import { alpha, Box, IconButton, Typography } from "@mui/material";
+import { alpha, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import React from "react";
-import { generateId } from "./utils";
-
-interface HeadingWithHashProps {
-  children: React.ReactNode;
-  level: 1 | 2 | 3;
-  sx?: Record<string, unknown>;
-  variant: "h1" | "h2" | "h3";
-  [key: string]: unknown;
-}
-
-// Helper function to extract text content from React children
-function getTextContent(children: React.ReactNode): string {
-  if (typeof children === "string") {
-    return children;
-  }
-  if (typeof children === "number") {
-    return String(children);
-  }
-  if (Array.isArray(children)) {
-    return children.map(getTextContent).join("");
-  }
-  if (React.isValidElement(children)) {
-    const element = children as React.ReactElement<{
-      children?: React.ReactNode;
-    }>;
-    return getTextContent(element.props.children);
-  }
-  return "";
-}
-
-function HeadingWithHash({
-  children,
-  level,
-  sx,
-  variant,
-  ...props
-}: HeadingWithHashProps) {
-  const theme = useTheme();
-  const textContent = getTextContent(children);
-  const id = generateId(textContent);
-
-  const handleHashClick = () => {
-    // Ensure we're in the browser
-    if (typeof window === "undefined") return;
-
-    // Update the URL hash
-    window.location.hash = id;
-
-    // Copy the full URL to clipboard
-    const fullUrl = `${window.location.origin}${window.location.pathname}#${id}`;
-
-    if (navigator.clipboard && window.isSecureContext) {
-      navigator.clipboard.writeText(fullUrl).catch((err) => {
-        // Fallback if clipboard API fails
-        console.log("Could not copy to clipboard:", err);
-      });
-    }
-  };
-
-  return (
-    <Box
-      sx={{
-        position: "relative",
-        display: "flex",
-        alignItems: "center",
-        "&:hover .hash-link": {
-          opacity: 1,
-          visibility: "visible",
-        },
-      }}
-    >
-      <IconButton
-        className="hash-link"
-        onClick={handleHashClick}
-        sx={{
-          position: "absolute",
-          left: "-2rem",
-          opacity: 0,
-          visibility: "hidden",
-          transition: "all 0.2s ease",
-          color: theme.palette.text.secondary,
-          fontSize:
-            variant === "h1" ? "2.75rem" : variant === "h2" ? "2rem" : "1.5rem",
-          fontWeight: "normal",
-          padding: 0,
-          minWidth: "auto",
-          width: "1.5rem",
-          height: "auto",
-          "&:hover": {
-            color: theme.palette.primary.main,
-            backgroundColor: "transparent",
-          },
-        }}
-        aria-label={`Link to ${textContent} section`}
-      >
-        #
-      </IconButton>
-      <Typography
-        variant={variant}
-        id={id}
-        sx={sx}
-        {...props}
-        aria-label={`Heading ${level}: ${textContent}`}
-      >
-        {children}
-      </Typography>
-    </Box>
-  );
-}
 
 export function H1({
   children,
@@ -120,8 +11,7 @@ export function H1({
   const theme = useTheme();
 
   return (
-    <HeadingWithHash
-      level={1}
+    <Typography
       variant="h1"
       sx={{
         fontSize: "2.75rem",
@@ -131,12 +21,12 @@ export function H1({
         WebkitTextFillColor: "transparent",
         letterSpacing: "-0.02em",
         mb: 4,
-        gutterBottom: true,
       }}
+      gutterBottom
       {...props}
     >
       {children}
-    </HeadingWithHash>
+    </Typography>
   );
 }
 
@@ -147,8 +37,7 @@ export function H2({
   const theme = useTheme();
 
   return (
-    <HeadingWithHash
-      level={2}
+    <Typography
       variant="h2"
       sx={{
         mt: 6,
@@ -170,7 +59,7 @@ export function H2({
       {...props}
     >
       {children}
-    </HeadingWithHash>
+    </Typography>
   );
 }
 
@@ -181,8 +70,7 @@ export function H3({
   const theme = useTheme();
 
   return (
-    <HeadingWithHash
-      level={3}
+    <Typography
       variant="h3"
       sx={{
         mt: 5,
@@ -197,6 +85,6 @@ export function H3({
       {...props}
     >
       {children}
-    </HeadingWithHash>
+    </Typography>
   );
 }

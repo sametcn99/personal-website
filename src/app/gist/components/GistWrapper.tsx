@@ -1,7 +1,6 @@
 "use client";
 
 import BackToHome from "@/components/BackToHome";
-import SaveThisPage from "@/components/SaveThisPage";
 import { Box, Container, Paper, Typography, alpha } from "@mui/material";
 import ArticleNavigation from "./ArticleNavigation";
 import ReadingTime from "./ReadingTime";

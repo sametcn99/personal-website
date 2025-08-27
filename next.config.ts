@@ -6,6 +6,8 @@ import remarkGfm from "remark-gfm";
 const nextConfig = {
   // Allow .mdx extensions for files
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
+  // Set the correct workspace root to avoid lockfile detection issues
+  outputFileTracingRoot: __dirname,
   // Optionally, add any other Next.js config below
 };
 

@@ -10,6 +10,20 @@ type Props = {
 // Known static routes that should be excluded from this dynamic route
 const EXCLUDED_ROUTES = ["blog", "cv", "gist"];
 
+// Generate static params for all possible slugs at build time
+export async function generateStaticParams() {
+  // Get all social media slugs
+  const socialSlugs = socialMediaLinks.flatMap(link => link.type);
+  
+  // Filter out excluded routes and duplicates
+  const validSlugs = [...new Set(socialSlugs)]
+    .filter(slug => !EXCLUDED_ROUTES.includes(slug));
+
+  return validSlugs.map((slug) => ({
+    slug: slug,
+  }));
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   

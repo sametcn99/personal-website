@@ -1,3 +1,5 @@
+"use client";
+
 import { useSearch } from "@/hooks/useSearch";
 import { useSort } from "@/hooks/useSort";
 import { useTabs } from "@/hooks/useTabs";
@@ -10,7 +12,17 @@ import Tabs from "@mui/material/Tabs";
 import BlogTab from "./BlogTab";
 import GistsTab from "./GistsTab";
 
-export default function ContentTabs() {
+type GistPost = {
+  title: string;
+  href: string;
+  lastModified: string;
+};
+
+interface ContentTabsProps {
+  gistPosts: GistPost[];
+}
+
+export default function ContentTabs({ gistPosts }: ContentTabsProps) {
   // Separate hooks for each tab
   const gistsSearch = useSearch("gists");
   const gistsSort = useSort("gists");
@@ -46,6 +58,7 @@ export default function ContentTabs() {
         {/* Tab Panels */}
         {tabValue === 0 && (
           <GistsTab
+            gistPosts={gistPosts}
             searchQuery={gistsSearch.searchQuery}
             setSearchQuery={gistsSearch.setSearchQuery}
             clearSearch={gistsSearch.clearSearch}

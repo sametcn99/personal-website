@@ -8,11 +8,9 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "npm run generate-app-data && next build",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "generate-app-data": "tsx scripts/generate-app-data.ts",
-    "generate-app-data:bun": "bun run scripts/generate-app-data.ts",
     "format": "prettier --write .",
     "jest": "jest"
   },

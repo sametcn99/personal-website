@@ -1,5 +1,6 @@
+"use client";
+
 import { SortBy, SortOrder } from "@/hooks/useSort";
-import appData from "@/lib/app-data.json";
 import AccessTime from "@mui/icons-material/AccessTime";
 import ArrowDownward from "@mui/icons-material/ArrowDownward";
 import ArrowUpward from "@mui/icons-material/ArrowUpward";
@@ -24,7 +25,14 @@ import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import { useMemo } from "react";
 
+type GistPost = {
+  title: string;
+  href: string;
+  lastModified: string;
+};
+
 interface GistsTabProps {
+  gistPosts: GistPost[];
   searchQuery: string;
   setSearchQuery: (query: string) => void;
   clearSearch: () => void;
@@ -35,6 +43,7 @@ interface GistsTabProps {
 }
 
 export default function GistsTab({
+  gistPosts,
   searchQuery,
   setSearchQuery,
   clearSearch,
@@ -45,25 +54,30 @@ export default function GistsTab({
 }: GistsTabProps) {
   // Filter and sort gists based on search query and sort options
   const filteredGists = useMemo(() => {
-    const filtered = searchQuery.trim()
-      ? appData.filter((item) =>
-          item.title.toLowerCase().includes(searchQuery.toLowerCase()),
-        )
-      : [...appData];
+    // Filter out any items with missing required fields
+    const validGists = gistPosts.filter(item =>
+      item && item.title && item.href && item.lastModified
+    );
 
-    // Sort the filtered results
+    const filtered = searchQuery.trim()
+      ? validGists.filter((item) =>
+        item.title.toLowerCase().includes(searchQuery.toLowerCase()),
+      )
+      : [...validGists];    // Sort the filtered results
     return filtered.sort((a, b) => {
       if (sortBy === "title") {
-        const comparison = a.title.localeCompare(b.title);
+        const titleA = a.title || "";
+        const titleB = b.title || "";
+        const comparison = titleA.localeCompare(titleB);
         return sortOrder === "asc" ? comparison : -comparison;
       } else {
-        const dateA = new Date(a.lastModified).getTime();
-        const dateB = new Date(b.lastModified).getTime();
+        const dateA = new Date(a.lastModified || "").getTime();
+        const dateB = new Date(b.lastModified || "").getTime();
         const comparison = dateA - dateB;
         return sortOrder === "asc" ? comparison : -comparison;
       }
     });
-  }, [searchQuery, sortBy, sortOrder]);
+  }, [gistPosts, searchQuery, sortBy, sortOrder]);
 
   // Function to render an icon based on the title
   const getIconForItem = (title: string) => {
@@ -161,7 +175,7 @@ export default function GistsTab({
       >
         {searchQuery ? (
           <Typography variant="body2" color="text.secondary">
-            {filteredGists.length} of {appData.length} gists found
+            {filteredGists.length} of {gistPosts.length} gists found
           </Typography>
         ) : (
           <Typography variant="body2" color="text.secondary">
@@ -185,7 +199,7 @@ export default function GistsTab({
           </Box>
         ) : (
           filteredGists.map((item) => (
-            <ListItem disablePadding key={item.title}>
+            <ListItem disablePadding key={item.href}>
               <ListItemButton
                 component="a"
                 href={item.href}

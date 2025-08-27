@@ -4,9 +4,12 @@ import {
   alpha,
   Paper,
   Table,
+  TableBody,
   TableCell,
   TableCellProps,
   TableContainer,
+  TableHead,
+  TableRow,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import React from "react";
@@ -74,4 +77,25 @@ export function TableDataCell({
       {children}
     </TableCell>
   );
+}
+
+export function TableHeadComponent({
+  children,
+  ...props
+}: React.PropsWithChildren<React.HTMLAttributes<HTMLTableSectionElement>>) {
+  return <TableHead {...props}>{children}</TableHead>;
+}
+
+export function TableBodyComponent({
+  children,
+  ...props
+}: React.PropsWithChildren<React.HTMLAttributes<HTMLTableSectionElement>>) {
+  return <TableBody {...props}>{children}</TableBody>;
+}
+
+export function TableRowComponent({
+  children,
+  ...props
+}: React.PropsWithChildren<React.HTMLAttributes<HTMLTableRowElement>>) {
+  return <TableRow {...props}>{children}</TableRow>;
 }

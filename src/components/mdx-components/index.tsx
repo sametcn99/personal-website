@@ -8,4 +8,11 @@ export { LinkComponent } from "./Link";
 export { ListItemComponent, OrderedList, UnorderedList } from "./Lists";
 export { Paragraph } from "./Paragraph";
 export { PreComponent } from "./Pre";
-export { TableComponent, TableDataCell, TableHeaderCell } from "./Table";
+export {
+  TableBodyComponent,
+  TableComponent,
+  TableDataCell,
+  TableHeadComponent,
+  TableHeaderCell,
+  TableRowComponent,
+} from "./Table";

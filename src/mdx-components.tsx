@@ -13,9 +13,12 @@ import {
   OrderedList,
   Paragraph,
   PreComponent,
+  TableBodyComponent,
   TableComponent,
   TableDataCell,
+  TableHeadComponent,
   TableHeaderCell,
+  TableRowComponent,
   UnorderedList,
 } from "./components/mdx-components";
 
@@ -34,6 +37,9 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     pre: PreComponent,
     code: CodeComponent,
     table: TableComponent,
+    thead: TableHeadComponent,
+    tbody: TableBodyComponent,
+    tr: TableRowComponent,
     th: TableHeaderCell,
     td: TableDataCell,
     hr: HorizontalRule,

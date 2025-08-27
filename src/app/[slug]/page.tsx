@@ -47,6 +47,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function Page({ params }: Props) {
   const { slug } = await params;
 
+  // Don't handle gist routes, let them be handled by the gist folder
+  if (slug.startsWith('gist/')) {
+    notFound();
+  }
+
   const social = socialMediaLinks.find((link) => link.type.includes(slug));
   if (social) {
     permanentRedirect(social.link.toString());

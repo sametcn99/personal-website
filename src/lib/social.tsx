@@ -119,7 +119,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
     icon: <Description />,
   },
   {
-    type: ["WhatsApp", "whatsapp", "wp"],
+    type: ["whatsapp", "wp"],
     link: new URL("https://wa.me/+905303790565"),
     label: "WhatsApp",
     category: "Contact",

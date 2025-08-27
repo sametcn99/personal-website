@@ -2,6 +2,7 @@ import { socialMediaLinks } from "@/lib/social";
 import { getRepo } from "@/lib/utils";
 import { Metadata } from "next";
 import { notFound, permanentRedirect } from "next/navigation";
+import appData from "@/lib/app-data.json";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -10,10 +11,21 @@ type Props = {
 
 // Generate static params for all possible slugs at build time
 export async function generateStaticParams() {
-  // Get all social media slugs
-  const socialSlugs = socialMediaLinks.flatMap((link) => link.type);
+  // Get all social media slugs (normalize to lowercase)
+  const socialSlugs = socialMediaLinks.flatMap((link) => 
+    link.type.map(type => type.toLowerCase())
+  );
+  
+  // Get all gist slugs from app-data.json
+  const gistSlugs = appData.map(item => {
+    const slug = item.href.replace('/gist/', '');
+    return slug;
+  });
 
-  return socialSlugs.map((slug) => ({
+  // Combine all slugs
+  const allSlugs = [...socialSlugs, ...gistSlugs];
+
+  return allSlugs.map((slug) => ({
     slug: slug,
   }));
 }
@@ -21,7 +33,9 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
 
-  const social = socialMediaLinks.find((link) => link.type.includes(slug));
+  const social = socialMediaLinks.find((link) => 
+    link.type.some(type => type.toLowerCase() === slug.toLowerCase())
+  );
   if (social) {
     return {
       title: social.label,
@@ -47,12 +61,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function Page({ params }: Props) {
   const { slug } = await params;
 
-  // Don't handle gist routes, let them be handled by the gist folder
-  if (slug.startsWith('gist/')) {
-    notFound();
-  }
-
-  const social = socialMediaLinks.find((link) => link.type.includes(slug));
+  const social = socialMediaLinks.find((link) => 
+    link.type.some(type => type.toLowerCase() === slug.toLowerCase())
+  );
   if (social) {
     permanentRedirect(social.link.toString());
   }

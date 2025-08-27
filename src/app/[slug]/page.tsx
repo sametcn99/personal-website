@@ -7,8 +7,17 @@ type Props = {
   params: Promise<{ slug: string }>;
 };
 
+// Known static routes that should be excluded from this dynamic route
+const EXCLUDED_ROUTES = ["blog", "cv", "gist"];
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
+  
+  // Don't handle static routes in this dynamic route
+  if (EXCLUDED_ROUTES.includes(slug)) {
+    return {};
+  }
+  
   const social = socialMediaLinks.find((link) => link.type.includes(slug));
   if (social) {
     return {
@@ -34,6 +43,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function Page({ params }: Props) {
   const { slug } = await params;
+  
+  // Don't handle static routes in this dynamic route
+  if (EXCLUDED_ROUTES.includes(slug)) {
+    notFound();
+  }
+  
   const social = socialMediaLinks.find((link) => link.type.includes(slug));
   if (social) {
     permanentRedirect(social.link.toString());

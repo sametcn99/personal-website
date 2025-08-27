@@ -92,8 +92,6 @@ export default function GistWrapper({
 
         {/* Navigation between articles */}
         <ArticleNavigation prevGist={prevGist} nextGist={nextGist} />
-
-        <SaveThisPage />
       </Box>
     </Container>
   );

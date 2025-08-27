@@ -26,7 +26,7 @@ function generateAppData(dir: string): void {
 
       return {
         title,
-        href: `/gist/${folder.name}`,
+        href: `/gist/${folder.name}`, // Keep folder name as-is in lowercase with dashes
         lastModified, // Include the last modified date
       };
     })

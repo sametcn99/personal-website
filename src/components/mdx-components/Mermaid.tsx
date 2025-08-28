@@ -21,6 +21,7 @@ import {
   Typography,
 } from "@mui/material";
 import { alpha, useTheme } from "@mui/material/styles";
+import { useColorScheme } from "@mui/material/styles";
 import mermaid from "mermaid";
 import { useCallback, useEffect, useRef, useState } from "react";
 
@@ -31,6 +32,7 @@ interface MermaidProps {
 
 export function MermaidComponent({ children, id }: MermaidProps) {
   const theme = useTheme();
+  const { mode } = useColorScheme();
   const ref = useRef<HTMLDivElement>(null);
   const diagramRef = useRef<HTMLDivElement>(null);
   const [isClient, setIsClient] = useState(false);
@@ -58,25 +60,9 @@ export function MermaidComponent({ children, id }: MermaidProps) {
         mermaid.initialize({
           startOnLoad: false,
           securityLevel: "loose",
-          theme: theme.palette.mode === "dark" ? "dark" : "default",
+          theme: mode === "dark" ? "dark" : "default",
           fontFamily: theme.typography.fontFamily,
-          themeVariables: {
-            primaryColor: theme.palette.primary.main,
-            primaryTextColor: theme.palette.getContrastText(
-              theme.palette.primary.main,
-            ),
-            primaryBorderColor: theme.palette.primary.dark,
-            lineColor: theme.palette.divider,
-            textColor: theme.palette.text.primary,
-            secondaryColor: theme.palette.secondary.main,
-            tertiaryColor: theme.palette.background.paper,
-            background: theme.palette.background.paper,
-            nodeBorder: theme.palette.divider,
-            clusterBkg: theme.palette.background.default,
-            clusterBorder: theme.palette.divider,
-            titleColor: theme.palette.text.primary,
-            edgeLabelBackground: alpha(theme.palette.background.paper, 0.7),
-          },
+        
         });
 
         // Generate unique ID if not provided
@@ -91,7 +77,7 @@ export function MermaidComponent({ children, id }: MermaidProps) {
         setSvg(renderedSvg);
       } catch (error) {
         console.error("Mermaid rendering error:", error);
-        setSvg(`<div style="color:${theme.palette.error.contrastText};background:${alpha(theme.palette.error.main, 0.1)};padding:0.75rem;border:1px solid ${alpha(theme.palette.error.main, 0.4)};border-radius:${theme.shape.borderRadius}px;font-size:0.85rem;">
+        setSvg(`<div style="color:${theme.palette.error.main};background:${alpha(theme.palette.error.main, mode === 'dark' ? 0.15 : 0.1)};padding:0.75rem;border:1px solid ${alpha(theme.palette.error.main, mode === 'dark' ? 0.6 : 0.4)};border-radius:${theme.shape.borderRadius}px;font-size:0.85rem;">
                     <strong style='color:${theme.palette.error.main}'>Mermaid Error:</strong><br>
                     <pre style="white-space:pre-wrap;word-wrap:break-word;margin:0;font-family:${theme.typography.fontFamily};color:${theme.palette.text.primary};">${error}</pre>
                 </div>`);
@@ -99,7 +85,7 @@ export function MermaidComponent({ children, id }: MermaidProps) {
     };
 
     renderMermaid();
-  }, [children, id, isClient, theme]);
+  }, [children, id, isClient, theme, mode]);
 
   const handleCopy = useCallback(async () => {
     try {
@@ -240,9 +226,9 @@ export function MermaidComponent({ children, id }: MermaidProps) {
   }, [translate]);
 
   const toolbarButtonSx = {
-    bgcolor: alpha(theme.palette.background.paper, 0.9),
+    bgcolor: alpha(mode === 'dark' ? theme.palette.grey[800] : theme.palette.background.paper, 0.95),
     backdropFilter: "blur(8px)",
-    border: `1px solid ${alpha(theme.palette.divider, 0.5)}`,
+    border: `1px solid ${alpha(theme.palette.divider, mode === 'dark' ? 0.7 : 0.5)}`,
     borderRadius: theme.shape.borderRadius,
     width: 36,
     height: 36,
@@ -255,8 +241,8 @@ export function MermaidComponent({ children, id }: MermaidProps) {
       },
     ),
     "&:hover": {
-      bgcolor: alpha(theme.palette.primary.main, 0.08),
-      borderColor: alpha(theme.palette.primary.main, 0.3),
+      bgcolor: alpha(theme.palette.primary.main, mode === 'dark' ? 0.12 : 0.08),
+      borderColor: alpha(theme.palette.primary.main, mode === 'dark' ? 0.4 : 0.3),
       transform: "scale(1.05)",
     },
     "&:active": {
@@ -265,7 +251,7 @@ export function MermaidComponent({ children, id }: MermaidProps) {
     "&:focus-visible": {
       outline: `2px solid ${theme.palette.primary.main}`,
       outlineOffset: 2,
-      bgcolor: alpha(theme.palette.primary.main, 0.12),
+      bgcolor: alpha(theme.palette.primary.main, mode === 'dark' ? 0.16 : 0.12),
     },
   } as const;
 
@@ -313,8 +299,8 @@ export function MermaidComponent({ children, id }: MermaidProps) {
       <Box
         sx={{
           p: 2,
-          backgroundColor: theme.palette.background.default,
-          border: `1px dashed ${alpha(theme.palette.text.primary, 0.15)}`,
+          backgroundColor: mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[50],
+          border: `1px dashed ${alpha(theme.palette.text.primary, mode === 'dark' ? 0.25 : 0.15)}`,
           borderRadius: theme.shape.borderRadius,
           textAlign: "center",
           color: theme.palette.text.secondary,
@@ -339,7 +325,7 @@ export function MermaidComponent({ children, id }: MermaidProps) {
             return isNaN(r) ? 8 : r * 2;
           })(),
           overflow: "hidden",
-          background: theme.palette.background.paper,
+          background: mode === 'dark' ? theme.palette.grey[900] : theme.palette.background.paper,
           boxShadow: theme.shadows[1],
           "&:hover": { boxShadow: theme.shadows[3] },
           transition: theme.transitions.create(["box-shadow"], {
@@ -449,10 +435,10 @@ export function MermaidComponent({ children, id }: MermaidProps) {
               typeof theme.shape.borderRadius === "number"
                 ? theme.shape.borderRadius * 1.5
                 : 12,
-            background: alpha(theme.palette.background.paper, 0.95),
+            background: alpha(mode === 'dark' ? theme.palette.grey[800] : theme.palette.background.paper, 0.95),
             boxShadow: theme.shadows[3],
             backdropFilter: "blur(12px)",
-            border: `1px solid ${alpha(theme.palette.divider, 0.3)}`,
+            border: `1px solid ${alpha(theme.palette.divider, mode === 'dark' ? 0.4 : 0.3)}`,
           }}
         >
           <Tooltip title={showCode ? "Show diagram" : "Show code"} arrow>
@@ -511,7 +497,7 @@ export function MermaidComponent({ children, id }: MermaidProps) {
           <DialogContent
             sx={{
               p: 0,
-              background: theme.palette.background.default,
+              background: mode === 'dark' ? theme.palette.grey[900] : theme.palette.background.default,
               overflow: "hidden",
               cursor: isDragging ? "grabbing" : "grab",
               userSelect: "none",
@@ -603,12 +589,13 @@ export function MermaidComponent({ children, id }: MermaidProps) {
                   left: { xs: 8, sm: 12 },
                   bottom: { xs: 8, sm: 12 },
                   zIndex: 10,
-                  bgcolor: alpha(theme.palette.background.paper, 0.9),
+                  bgcolor: alpha(mode === 'dark' ? theme.palette.grey[800] : theme.palette.background.paper, 0.95),
                   backdropFilter: "blur(8px)",
                   fontSize: { xs: "0.65rem", sm: "0.7rem" },
                   height: { xs: 24, sm: 28 },
                   boxShadow: theme.shadows[2],
-                  border: `1px solid ${alpha(theme.palette.divider, 0.3)}`,
+                  border: `1px solid ${alpha(theme.palette.divider, mode === 'dark' ? 0.4 : 0.3)}`,
+                  color: theme.palette.text.primary,
                 }}
               />
             </Fade>

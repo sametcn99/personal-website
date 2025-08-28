@@ -1,7 +1,7 @@
+import ArticleWrapper from "@/components/ArticleWrapper";
+import { formatDate, getGistPosts } from "@/lib/content";
 import { notFound } from "next/navigation";
 import { CustomMDX } from "../../../components/mdx";
-import GistWrapper from "../components/GistWrapper";
-import { formatDate, getGistPosts } from "@/lib/content";
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://localhost:3000";
 
@@ -87,11 +87,15 @@ export default async function Gist({ params }: PageParams) {
   const nextGistData = nextGist ? transformToGistData(nextGist) : null;
 
   return (
-    <GistWrapper
-      currentGist={currentGist}
-      prevGist={prevGistData}
-      nextGist={nextGistData}
+    <ArticleWrapper
+      currentArticle={currentGist}
+      prevArticle={prevGistData}
+      nextArticle={nextGistData}
       postContent={post.content}
+      contentType="gist"
+      publishedLabel="Last updated"
+      prevLabel="Previous Gist"
+      nextLabel="Next Gist"
     >
       <script
         type="application/ld+json"
@@ -126,6 +130,6 @@ export default async function Gist({ params }: PageParams) {
       <article className="prose">
         <CustomMDX source={post.content} />
       </article>
-    </GistWrapper>
+    </ArticleWrapper>
   );
 }

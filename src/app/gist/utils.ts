@@ -1,9 +1,9 @@
 // Re-export functions from shared content library
 export {
-  getGistPosts,
   formatDate,
   getContentBySlug,
+  getGistPosts,
   getSortedContent,
-  type ContentMetadata as Metadata,
   type ContentItem,
+  type ContentMetadata as Metadata,
 } from "@/lib/content";

@@ -24,7 +24,7 @@ export interface ContentItem {
  */
 function parseFrontmatter(
   fileContent: string,
-  contentType: ContentType = "blog"
+  contentType: ContentType = "blog",
 ): { metadata: ContentMetadata; content: string } {
   const frontmatterRegex = /---\s*([\s\S]*?)\s*---/;
   const match = frontmatterRegex.exec(fileContent);
@@ -32,13 +32,14 @@ function parseFrontmatter(
   if (!match) {
     // If no frontmatter, extract title from first heading and generate metadata
     const titleMatch = fileContent.match(/^#\s+(.+)$/m);
-    const title = titleMatch 
-      ? titleMatch[1] 
-      : contentType === "gist" ? "Untitled Gist" : "Untitled Post";
+    const title = titleMatch
+      ? titleMatch[1]
+      : contentType === "gist"
+        ? "Untitled Gist"
+        : "Untitled Post";
     const currentDate = new Date().toISOString().split("T")[0];
-    const summaryText = contentType === "gist" 
-      ? "A helpful gist" 
-      : "A blog post";
+    const summaryText =
+      contentType === "gist" ? "A helpful gist" : "A blog post";
 
     return {
       metadata: {
@@ -59,9 +60,9 @@ function parseFrontmatter(
     const [key, ...valueArr] = line.split(": ");
     let value = valueArr.join(": ").trim();
     value = value.replace(/^['"](.*)['"]$/, "$1"); // Remove quotes
-    
+
     const trimmedKey = key.trim();
-    
+
     // Handle arrays (like tags)
     if (trimmedKey === "tags" && value.startsWith("[") && value.endsWith("]")) {
       const tagsString = value.slice(1, -1);
@@ -102,10 +103,16 @@ function readMDXFile(filePath: string, contentType: ContentType = "blog") {
 /**
  * Get all MDX data from a directory
  */
-function getMDXData(dir: string, contentType: ContentType = "blog"): ContentItem[] {
+function getMDXData(
+  dir: string,
+  contentType: ContentType = "blog",
+): ContentItem[] {
   const mdxFiles = getMDXFiles(dir);
   return mdxFiles.map((file) => {
-    const { metadata, content } = readMDXFile(path.join(dir, file), contentType);
+    const { metadata, content } = readMDXFile(
+      path.join(dir, file),
+      contentType,
+    );
     const slug = path.basename(file, path.extname(file));
 
     return {
@@ -122,7 +129,7 @@ function getMDXData(dir: string, contentType: ContentType = "blog"): ContentItem
 export function getBlogPosts(): ContentItem[] {
   return getMDXData(
     path.join(process.cwd(), "src", "content", "posts"),
-    "blog"
+    "blog",
   );
 }
 
@@ -132,7 +139,7 @@ export function getBlogPosts(): ContentItem[] {
 export function getGistPosts(): ContentItem[] {
   return getMDXData(
     path.join(process.cwd(), "src", "content", "gists"),
-    "gist"
+    "gist",
   );
 }
 
@@ -192,8 +199,8 @@ export function formatDate(date: string, includeRelative = false): string {
  * Get content item by slug
  */
 export function getContentBySlug(
-  slug: string, 
-  contentType: ContentType
+  slug: string,
+  contentType: ContentType,
 ): ContentItem | undefined {
   const content = getContentByType(contentType);
   return content.find((item) => item.slug === slug);

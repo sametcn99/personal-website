@@ -1,7 +1,7 @@
+import ArticleWrapper from "@/components/ArticleWrapper";
+import { formatDate, getBlogPosts } from "@/lib/content";
 import { notFound } from "next/navigation";
 import { CustomMDX } from "../../../components/mdx";
-import BlogWrapper from "../components/BlogWrapper";
-import { formatDate, getBlogPosts } from "@/lib/content";
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://localhost:3000";
 
@@ -87,11 +87,15 @@ export default async function BlogPost({ params }: PageParams) {
   const nextPostData = nextPost ? transformToBlogData(nextPost) : null;
 
   return (
-    <BlogWrapper
-      currentPost={currentPost}
-      prevPost={prevPostData}
-      nextPost={nextPostData}
+    <ArticleWrapper
+      currentArticle={currentPost}
+      prevArticle={prevPostData}
+      nextArticle={nextPostData}
       postContent={post.content}
+      contentType="post"
+      publishedLabel="Published"
+      prevLabel="Previous Post"
+      nextLabel="Next Post"
     >
       <script
         type="application/ld+json"
@@ -145,6 +149,6 @@ export default async function BlogPost({ params }: PageParams) {
       <article className="prose">
         <CustomMDX source={post.content} />
       </article>
-    </BlogWrapper>
+    </ArticleWrapper>
   );
 }

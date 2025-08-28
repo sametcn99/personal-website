@@ -9,9 +9,9 @@ interface ShareButtonProps {
   contentType?: "gist" | "post" | "article";
 }
 
-export default function ShareButton({ 
-  title, 
-  contentType = "article" 
+export default function ShareButton({
+  title,
+  contentType = "article",
 }: ShareButtonProps) {
   const theme = useTheme();
 

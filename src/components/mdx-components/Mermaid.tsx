@@ -411,7 +411,6 @@ export function MermaidComponent({ children, id }: MermaidProps) {
                   sx={{
                     fontFamily: "monospace",
                     fontSize: "0.875em",
-                    color: theme.palette.text.primary,
                   }}
                   aria-label="Code Block"
                 >

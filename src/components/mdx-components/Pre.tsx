@@ -102,7 +102,7 @@ export function PreComponent({
         marginY: 3,
         padding: 2,
         boxShadow: `0 4px 20px ${alpha(theme.palette.common.black, 0.1)}`,
-        border: `1px solid ${theme.palette.divider}`,
+        border: `1px solid ${alpha(theme.palette.divider, 0.3)}`,
         // Override for better code visibility
         backgroundColor:
           theme.vars?.palette?.background?.paper ||

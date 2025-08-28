@@ -1,6 +1,6 @@
 "use client";
 
-import { Divider, DividerProps, alpha } from "@mui/material";
+import { Divider, DividerProps } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
 export function HorizontalRule(props: DividerProps) {
@@ -10,9 +10,11 @@ export function HorizontalRule(props: DividerProps) {
     <Divider
       sx={{
         my: 4,
-        borderColor: alpha(theme.palette.divider, 0.6),
-        opacity: 0.6,
+        borderColor: theme.palette.divider,
+        opacity: 1,
         width: "100%",
+        borderWidth: 1,
+        borderStyle: "solid",
       }}
       {...props}
       aria-label="Horizontal Rule"

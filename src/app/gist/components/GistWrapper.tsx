@@ -1,11 +1,11 @@
 "use client";
 
 import BackToHome from "@/components/BackToHome";
+import ArticleNavigation from "@/components/ArticleNavigation";
+import ReadingTime from "@/components/ReadingTime";
+import ScrollProgress from "@/components/ScrollProgress";
+import ShareButton from "@/components/ShareButton";
 import { Box, Container, Paper, Typography, alpha } from "@mui/material";
-import ArticleNavigation from "./ArticleNavigation";
-import ReadingTime from "./ReadingTime";
-import ScrollProgress from "./ScrollProgress";
-import ShareButton from "./ShareButton";
 
 interface GistData {
   href: string;
@@ -79,7 +79,7 @@ export default function GistWrapper({
               </Box>
 
               {/* Share Button */}
-              <ShareButton title={currentGist.title} />
+              <ShareButton title={currentGist.title} contentType="gist" />
             </Box>
           </Paper>
         )}
@@ -90,7 +90,12 @@ export default function GistWrapper({
         </Box>
 
         {/* Navigation between articles */}
-        <ArticleNavigation prevGist={prevGist} nextGist={nextGist} />
+        <ArticleNavigation 
+          prevArticle={prevGist} 
+          nextArticle={nextGist}
+          prevLabel="Previous"
+          nextLabel="Next"
+        />
       </Box>
     </Container>
   );

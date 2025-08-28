@@ -1,4 +1,4 @@
-import { getGistPosts } from "@/app/gist/utils";
+import { getGistPosts } from "@/lib/content";
 import PageClient from "@/components/PageClient";
 
 export default function Home() {

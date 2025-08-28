@@ -6,15 +6,30 @@ import { useTheme } from "@mui/material/styles";
 
 interface ShareButtonProps {
   title?: string;
+  contentType?: "gist" | "post" | "article";
 }
 
-export default function ShareButton({ title }: ShareButtonProps) {
+export default function ShareButton({ 
+  title, 
+  contentType = "article" 
+}: ShareButtonProps) {
   const theme = useTheme();
+
+  const getDefaultTitle = () => {
+    switch (contentType) {
+      case "gist":
+        return "Technical Gist";
+      case "post":
+        return "Blog Post";
+      default:
+        return "Article";
+    }
+  };
 
   const handleShare = async () => {
     try {
       await navigator.share({
-        title: title || "Technical Gist",
+        title: title || getDefaultTitle(),
         url: window.location.href,
       });
     } catch {

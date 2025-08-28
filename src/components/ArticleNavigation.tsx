@@ -2,26 +2,30 @@ import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import { Box, Link, Paper, Typography } from "@mui/material";
 
-interface GistData {
+interface ArticleData {
   href: string;
   title: string;
 }
 
 interface ArticleNavigationProps {
-  prevGist?: GistData | null;
-  nextGist?: GistData | null;
+  prevArticle?: ArticleData | null;
+  nextArticle?: ArticleData | null;
+  prevLabel?: string;
+  nextLabel?: string;
 }
 
 export default function ArticleNavigation({
-  prevGist,
-  nextGist,
+  prevArticle,
+  nextArticle,
+  prevLabel = "Previous",
+  nextLabel = "Next",
 }: ArticleNavigationProps) {
-  if (!prevGist && !nextGist) return null;
+  if (!prevArticle && !nextArticle) return null;
 
   return (
     <Box sx={{ mt: 4, display: "flex", gap: 2, flexWrap: "wrap" }}>
-      {/* Previous Gist */}
-      {prevGist && (
+      {/* Previous Article */}
+      {prevArticle && (
         <Paper
           elevation={1}
           sx={{
@@ -32,17 +36,17 @@ export default function ArticleNavigation({
           }}
         >
           <Link
-            href={prevGist.href}
+            href={prevArticle.href}
             sx={{ textDecoration: "none", color: "inherit" }}
           >
             <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
               <NavigateBeforeIcon color="primary" />
               <Box>
                 <Typography variant="body2" color="text.secondary">
-                  Previous
+                  {prevLabel}
                 </Typography>
                 <Typography variant="body1" fontWeight="medium">
-                  {prevGist.title}
+                  {prevArticle.title}
                 </Typography>
               </Box>
             </Box>
@@ -50,8 +54,8 @@ export default function ArticleNavigation({
         </Paper>
       )}
 
-      {/* Next Gist */}
-      {nextGist && (
+      {/* Next Article */}
+      {nextArticle && (
         <Paper
           elevation={1}
           sx={{
@@ -62,7 +66,7 @@ export default function ArticleNavigation({
           }}
         >
           <Link
-            href={nextGist.href}
+            href={nextArticle.href}
             sx={{ textDecoration: "none", color: "inherit" }}
           >
             <Box
@@ -75,10 +79,10 @@ export default function ArticleNavigation({
             >
               <Box sx={{ textAlign: "right" }}>
                 <Typography variant="body2" color="text.secondary">
-                  Next
+                  {nextLabel}
                 </Typography>
                 <Typography variant="body1" fontWeight="medium">
-                  {nextGist.title}
+                  {nextArticle.title}
                 </Typography>
               </Box>
               <NavigateNextIcon color="primary" />

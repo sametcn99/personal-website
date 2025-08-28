@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { CustomMDX } from "../../../components/mdx";
-import GistWrapper from "../components/GistWrapper";
-import { formatDate, getGistPosts } from "@/lib/content";
+import BlogWrapper from "../components/BlogWrapper";
+import { formatDate, getBlogPosts } from "@/lib/content";
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://localhost:3000";
 
@@ -12,7 +12,7 @@ type PageParams = {
 };
 
 export function generateStaticParams() {
-  const posts = getGistPosts();
+  const posts = getBlogPosts();
 
   return posts.map((post) => ({
     slug: post.slug,
@@ -21,7 +21,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageParams) {
   const resolvedParams = await params;
-  const post = getGistPosts().find((post) => post.slug === resolvedParams.slug);
+  const post = getBlogPosts().find((post) => post.slug === resolvedParams.slug);
   if (!post) {
     return;
   }
@@ -44,7 +44,7 @@ export async function generateMetadata({ params }: PageParams) {
       description,
       type: "article",
       publishedTime,
-      url: `${baseUrl}/gist/${post.slug}`,
+      url: `${baseUrl}/blog/${post.slug}`,
       images: [
         {
           url: ogImage,
@@ -60,9 +60,9 @@ export async function generateMetadata({ params }: PageParams) {
   };
 }
 
-export default async function Gist({ params }: PageParams) {
+export default async function BlogPost({ params }: PageParams) {
   const resolvedParams = await params;
-  const posts = getGistPosts();
+  const posts = getBlogPosts();
   const post = posts.find((post) => post.slug === resolvedParams.slug);
 
   if (!post) {
@@ -71,26 +71,26 @@ export default async function Gist({ params }: PageParams) {
 
   // Find current post index to get previous and next posts
   const currentIndex = posts.findIndex((p) => p.slug === resolvedParams.slug);
-  const prevGist = currentIndex > 0 ? posts[currentIndex - 1] : null;
-  const nextGist =
+  const prevPost = currentIndex > 0 ? posts[currentIndex - 1] : null;
+  const nextPost =
     currentIndex < posts.length - 1 ? posts[currentIndex + 1] : null;
 
-  // Transform data to match GistData interface
-  const transformToGistData = (gist: typeof post) => ({
-    href: `/gist/${gist.slug}`,
-    title: gist.metadata.title,
-    lastModified: gist.metadata.publishedAt,
+  // Transform data to match BlogData interface
+  const transformToBlogData = (blogPost: typeof post) => ({
+    href: `/blog/${blogPost.slug}`,
+    title: blogPost.metadata.title,
+    lastModified: blogPost.metadata.publishedAt,
   });
 
-  const currentGist = transformToGistData(post);
-  const prevGistData = prevGist ? transformToGistData(prevGist) : null;
-  const nextGistData = nextGist ? transformToGistData(nextGist) : null;
+  const currentPost = transformToBlogData(post);
+  const prevPostData = prevPost ? transformToBlogData(prevPost) : null;
+  const nextPostData = nextPost ? transformToBlogData(nextPost) : null;
 
   return (
-    <GistWrapper
-      currentGist={currentGist}
-      prevGist={prevGistData}
-      nextGist={nextGistData}
+    <BlogWrapper
+      currentPost={currentPost}
+      prevPost={prevPostData}
+      nextPost={nextPostData}
       postContent={post.content}
     >
       <script
@@ -99,7 +99,7 @@ export default async function Gist({ params }: PageParams) {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "TechArticle",
+            "@type": "BlogPosting",
             headline: post.metadata.title,
             datePublished: post.metadata.publishedAt,
             dateModified: post.metadata.publishedAt,
@@ -107,10 +107,10 @@ export default async function Gist({ params }: PageParams) {
             image: post.metadata.image
               ? `${baseUrl}${post.metadata.image}`
               : `/og?title=${encodeURIComponent(post.metadata.title)}`,
-            url: `${baseUrl}/gist/${post.slug}`,
+            url: `${baseUrl}/blog/${post.slug}`,
             author: {
               "@type": "Person",
-              name: "My Portfolio",
+              name: post.metadata.author || "My Portfolio",
             },
           }),
         }}
@@ -119,13 +119,32 @@ export default async function Gist({ params }: PageParams) {
         {post.metadata.title}
       </h1>
       <div className="flex justify-between items-center mt-2 mb-8 text-sm">
-        <p className="text-sm text-neutral-600 dark:text-neutral-400">
-          {formatDate(post.metadata.publishedAt)}
-        </p>
+        <div className="flex items-center gap-4">
+          <p className="text-sm text-neutral-600 dark:text-neutral-400">
+            {formatDate(post.metadata.publishedAt)}
+          </p>
+          {post.metadata.author && (
+            <p className="text-sm text-neutral-600 dark:text-neutral-400">
+              by {post.metadata.author}
+            </p>
+          )}
+        </div>
+        {post.metadata.tags && post.metadata.tags.length > 0 && (
+          <div className="flex gap-2">
+            {post.metadata.tags.map((tag) => (
+              <span
+                key={tag}
+                className="px-2 py-1 text-xs bg-neutral-100 dark:bg-neutral-800 rounded-md"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
       </div>
       <article className="prose">
         <CustomMDX source={post.content} />
       </article>
-    </GistWrapper>
+    </BlogWrapper>
   );
 }

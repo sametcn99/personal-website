@@ -21,12 +21,17 @@ export function CodeComponent({
       <Typography
         component="code"
         sx={{
-          backgroundColor: alpha(theme.palette.primary.contrastText, 0.5),
-          color: theme.palette.primary.contrastText,
+          backgroundColor: theme.palette.mode === 'light'
+            ? alpha(theme.palette.text.primary, 0.1)
+            : alpha(theme.palette.text.primary, 0.2),
+          color: theme.palette.text.primary,
           padding: "0.2em 0.3em",
           borderRadius: 1,
           fontFamily: "monospace",
           fontSize: "0.875em",
+          border: theme.palette.mode === 'light'
+            ? `1px solid ${alpha(theme.palette.text.primary, 0.2)}`
+            : 'none',
         }}
         {...props}
         aria-label="Inline Code"

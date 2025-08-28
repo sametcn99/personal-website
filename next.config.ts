@@ -1,7 +1,11 @@
 import createMDX from "@next/mdx";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeHighlight from "rehype-highlight";
+import rehypeKatex from "rehype-katex";
 import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
+import remarkMath from "remark-math";
+import remarkMdxFrontmatter from "remark-mdx-frontmatter";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -17,8 +21,17 @@ const nextConfig = {
 const withMDX = createMDX({
   // Add markdown plugins here, as desired
   options: {
-    remarkPlugins: [remarkGfm],
-    rehypePlugins: [rehypeSlug, rehypeHighlight],
+    remarkPlugins: [
+      remarkGfm,
+      remarkMath,
+      remarkMdxFrontmatter,
+    ],
+    rehypePlugins: [
+      rehypeSlug,
+      rehypeAutolinkHeadings,
+      rehypeKatex,
+      rehypeHighlight,
+    ],
   },
 });
 

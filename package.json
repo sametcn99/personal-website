@@ -23,7 +23,6 @@
     "@types/lunr": "^2.3.7",
     "@types/mdx": "^2.0.13",
     "@vercel/analytics": "^1.5.0",
-    "gray-matter": "^4.0.3",
     "install": "^0.13.0",
     "lunr": "^2.3.9",
     "mermaid": "^11.10.1",
@@ -37,7 +36,6 @@
     "rehype-highlight": "^7.0.2",
     "rehype-katex": "^7.0.1",
     "rehype-slug": "^6.0.0",
-    "remark-frontmatter": "^5.0.0",
     "remark-gfm": "^4.0.1",
     "remark-math": "^6.0.0",
     "remark-mdx-frontmatter": "^5.2.0"

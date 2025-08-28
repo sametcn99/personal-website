@@ -6,6 +6,7 @@ export { HorizontalRule } from "./HorizontalRule";
 export { ImageComponent } from "./Image";
 export { LinkComponent } from "./Link";
 export { ListItemComponent, OrderedList, UnorderedList } from "./Lists";
+export { MermaidComponent } from "./Mermaid";
 export { Paragraph } from "./Paragraph";
 export { PreComponent } from "./Pre";
 export {
@@ -16,4 +17,3 @@ export {
   TableHeaderCell,
   TableRowComponent,
 } from "./Table";
-export { MermaidComponent } from "./Mermaid";

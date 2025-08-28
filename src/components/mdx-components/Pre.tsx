@@ -71,12 +71,13 @@ export function PreComponent({
   }, [children]); // Dependencies: `children` to re-evaluate if it changes.
 
   // Check if this is a mermaid code block
-  const isMermaidBlock = React.isValidElement(children) && 
-    typeof children.props === 'object' &&
+  const isMermaidBlock =
+    React.isValidElement(children) &&
+    typeof children.props === "object" &&
     children.props !== null &&
-    'className' in children.props &&
-    typeof children.props.className === 'string' &&
-    children.props.className.includes('language-mermaid');
+    "className" in children.props &&
+    typeof children.props.className === "string" &&
+    children.props.className.includes("language-mermaid");
 
   // If it's a mermaid block, extract the code and render with MermaidComponent
   if (isMermaidBlock && React.isValidElement(children)) {

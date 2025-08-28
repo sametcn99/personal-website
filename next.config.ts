@@ -21,11 +21,7 @@ const nextConfig = {
 const withMDX = createMDX({
   // Add markdown plugins here, as desired
   options: {
-    remarkPlugins: [
-      remarkGfm,
-      remarkMath,
-      remarkMdxFrontmatter,
-    ],
+    remarkPlugins: [remarkGfm, remarkMath, remarkMdxFrontmatter],
     rehypePlugins: [
       rehypeSlug,
       rehypeAutolinkHeadings,

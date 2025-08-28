@@ -16,3 +16,4 @@ export {
   TableHeaderCell,
   TableRowComponent,
 } from "./Table";
+export { MermaidComponent } from "./Mermaid";

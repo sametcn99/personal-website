@@ -10,6 +10,7 @@ import {
   ImageComponent,
   LinkComponent,
   ListItemComponent,
+  MermaidComponent,
   OrderedList,
   Paragraph,
   PreComponent,
@@ -45,5 +46,6 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     hr: HorizontalRule,
     img: ImageComponent,
     Callout: CalloutComponent,
+    Mermaid: MermaidComponent,
   };
 }

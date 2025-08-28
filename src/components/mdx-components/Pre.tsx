@@ -4,6 +4,7 @@ import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { alpha, Box, IconButton, Tooltip } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import React, { useCallback, useState } from "react";
+import { MermaidComponent } from "./Mermaid";
 
 // Helper function to extract text content from React children
 const getTextFromChildren = (childrenNode: React.ReactNode): string => {
@@ -68,6 +69,21 @@ export function PreComponent({
       console.warn("No text content found to copy for code block.");
     }
   }, [children]); // Dependencies: `children` to re-evaluate if it changes.
+
+  // Check if this is a mermaid code block
+  const isMermaidBlock = React.isValidElement(children) && 
+    typeof children.props === 'object' &&
+    children.props !== null &&
+    'className' in children.props &&
+    typeof children.props.className === 'string' &&
+    children.props.className.includes('language-mermaid');
+
+  // If it's a mermaid block, extract the code and render with MermaidComponent
+  if (isMermaidBlock && React.isValidElement(children)) {
+    const codeElement = children as React.ReactElement<CodeElementProps>;
+    const mermaidCode = getTextFromChildren(codeElement.props.children);
+    return <MermaidComponent>{mermaidCode}</MermaidComponent>;
+  }
 
   // Check if this is a mermaid code block
   // This check must come AFTER hooks, but can use `children` directly.

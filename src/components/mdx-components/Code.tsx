@@ -17,12 +17,15 @@ export function CodeComponent({
   ...props
 }: React.PropsWithChildren<CodeProps>) {
   const theme = useTheme();
-  const { mode, mounted } = useCustomTheme();
+  const { mode, systemMode, themeMode, mounted } = useCustomTheme();
   const [copied, setCopied] = useState(false);
   const isInlineCode = !className;
 
   // Use mounted state to prevent hydration mismatch
-  const safeMode = mounted ? mode : "light";
+  // For system theme, use systemMode; otherwise use the selected mode
+  const safeMode = mounted 
+    ? (themeMode === "system" ? systemMode : mode) 
+    : "light";
 
   const handleCopy = useCallback(async () => {
     try {

@@ -32,7 +32,7 @@ interface MermaidProps {
 
 export function MermaidComponent({ children, id }: MermaidProps) {
   const theme = useTheme();
-  const { mode, mounted } = useCustomTheme();
+  const { mode, systemMode, themeMode, mounted } = useCustomTheme();
   const ref = useRef<HTMLDivElement>(null);
   const diagramRef = useRef<HTMLDivElement>(null);
   const [isClient, setIsClient] = useState(false);
@@ -48,7 +48,10 @@ export function MermaidComponent({ children, id }: MermaidProps) {
   const [lastTranslate, setLastTranslate] = useState({ x: 0, y: 0 });
 
   // Use mounted state to prevent hydration mismatch
-  const safeMode = mounted ? mode : "light";
+  // For system theme, use systemMode; otherwise use the selected mode
+  const safeMode = mounted 
+    ? (themeMode === "system" ? systemMode : mode) 
+    : "light";
 
   useEffect(() => {
     setIsClient(true);

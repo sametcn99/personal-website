@@ -3,7 +3,8 @@
 import CheckIcon from "@mui/icons-material/Check";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { Box, IconButton, Stack, Tooltip, Typography } from "@mui/material";
-import { alpha, useColorScheme, useTheme } from "@mui/material/styles";
+import { alpha, useTheme } from "@mui/material/styles";
+import { useTheme as useCustomTheme } from "@/hooks/useTheme";
 import React, { useCallback, useState } from "react";
 
 interface CodeProps extends React.HTMLAttributes<HTMLElement> {
@@ -16,9 +17,12 @@ export function CodeComponent({
   ...props
 }: React.PropsWithChildren<CodeProps>) {
   const theme = useTheme();
-  const { mode } = useColorScheme();
+  const { mode, mounted } = useCustomTheme();
   const [copied, setCopied] = useState(false);
   const isInlineCode = !className;
+
+  // Use mounted state to prevent hydration mismatch
+  const safeMode = mounted ? mode : "light";
 
   const handleCopy = useCallback(async () => {
     try {
@@ -68,13 +72,13 @@ export function CodeComponent({
 
   const toolbarButtonSx = {
     bgcolor: alpha(
-      mode === "dark"
+      safeMode === "dark"
         ? theme.palette.grey[800]
         : theme.palette.background.paper,
       0.95,
     ),
     backdropFilter: "blur(8px)",
-    border: `1px solid ${alpha(theme.palette.divider, mode === "dark" ? 0.7 : 0.5)}`,
+    border: `1px solid ${alpha(theme.palette.divider, safeMode === "dark" ? 0.7 : 0.5)}`,
     borderRadius: theme.shape.borderRadius,
     width: 32,
     height: 32,
@@ -87,10 +91,10 @@ export function CodeComponent({
       },
     ),
     "&:hover": {
-      bgcolor: alpha(theme.palette.primary.main, mode === "dark" ? 0.12 : 0.08),
+      bgcolor: alpha(theme.palette.primary.main, safeMode === "dark" ? 0.12 : 0.08),
       borderColor: alpha(
         theme.palette.primary.main,
-        mode === "dark" ? 0.4 : 0.3,
+        safeMode === "dark" ? 0.4 : 0.3,
       ),
       transform: "scale(1.05)",
     },
@@ -100,7 +104,7 @@ export function CodeComponent({
     "&:focus-visible": {
       outline: `2px solid ${theme.palette.primary.main}`,
       outlineOffset: 2,
-      bgcolor: alpha(theme.palette.primary.main, mode === "dark" ? 0.16 : 0.12),
+      bgcolor: alpha(theme.palette.primary.main, safeMode === "dark" ? 0.16 : 0.12),
     },
   } as const;
 
@@ -113,7 +117,7 @@ export function CodeComponent({
         borderRadius: theme.shape.borderRadius,
         overflow: "hidden",
         background:
-          mode === "dark"
+          safeMode === "dark"
             ? theme.palette.grey[900]
             : theme.palette.background.paper,
         boxShadow: theme.shadows[1],
@@ -133,7 +137,7 @@ export function CodeComponent({
           py: 1,
           borderBottom: `1px solid ${theme.palette.divider}`,
           background: alpha(
-            mode === "dark" ? theme.palette.grey[800] : theme.palette.grey[50],
+            safeMode === "dark" ? theme.palette.grey[800] : theme.palette.grey[50],
             0.5,
           ),
         }}

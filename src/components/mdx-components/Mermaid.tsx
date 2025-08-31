@@ -20,8 +20,7 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
-import { alpha, useTheme } from "@mui/material/styles";
-import { useColorScheme } from "@mui/material/styles";
+import { alpha, useColorScheme, useTheme } from "@mui/material/styles";
 import mermaid from "mermaid";
 import { useCallback, useEffect, useRef, useState } from "react";
 
@@ -60,9 +59,6 @@ export function MermaidComponent({ children, id }: MermaidProps) {
         mermaid.initialize({
           startOnLoad: false,
           securityLevel: "loose",
-          theme: mode === "dark" ? "dark" : "default",
-          fontFamily: theme.typography.fontFamily,
-        
         });
 
         // Generate unique ID if not provided
@@ -77,7 +73,7 @@ export function MermaidComponent({ children, id }: MermaidProps) {
         setSvg(renderedSvg);
       } catch (error) {
         console.error("Mermaid rendering error:", error);
-        setSvg(`<div style="color:${theme.palette.error.main};background:${alpha(theme.palette.error.main, mode === 'dark' ? 0.15 : 0.1)};padding:0.75rem;border:1px solid ${alpha(theme.palette.error.main, mode === 'dark' ? 0.6 : 0.4)};border-radius:${theme.shape.borderRadius}px;font-size:0.85rem;">
+        setSvg(`<div style="color:${theme.palette.error.main};background:${alpha(theme.palette.error.main, mode === "dark" ? 0.15 : 0.08)};padding:0.75rem;border:1px solid ${alpha(theme.palette.error.main, mode === "dark" ? 0.4 : 0.3)};border-radius:${theme.shape.borderRadius}px;font-size:0.85rem;">
                     <strong style='color:${theme.palette.error.main}'>Mermaid Error:</strong><br>
                     <pre style="white-space:pre-wrap;word-wrap:break-word;margin:0;font-family:${theme.typography.fontFamily};color:${theme.palette.text.primary};">${error}</pre>
                 </div>`);
@@ -226,24 +222,33 @@ export function MermaidComponent({ children, id }: MermaidProps) {
   }, [translate]);
 
   const toolbarButtonSx = {
-    bgcolor: alpha(mode === 'dark' ? theme.palette.grey[800] : theme.palette.background.paper, 0.95),
+    bgcolor: alpha(
+      mode === "dark"
+        ? theme.palette.grey[800]
+        : theme.palette.background.paper,
+      0.95,
+    ),
     backdropFilter: "blur(8px)",
-    border: `1px solid ${alpha(theme.palette.divider, mode === 'dark' ? 0.7 : 0.5)}`,
+    border: `1px solid ${alpha(theme.palette.divider, mode === "dark" ? 0.5 : 0.3)}`,
     borderRadius: theme.shape.borderRadius,
-    width: 36,
-    height: 36,
-    minWidth: 36,
+    width: 32,
+    height: 32,
+    minWidth: 32,
     color: theme.palette.text.primary,
     transition: theme.transitions.create(
-      ["background-color", "border-color", "transform"],
+      ["background-color", "border-color", "transform", "box-shadow"],
       {
         duration: theme.transitions.duration.short,
       },
     ),
     "&:hover": {
-      bgcolor: alpha(theme.palette.primary.main, mode === 'dark' ? 0.12 : 0.08),
-      borderColor: alpha(theme.palette.primary.main, mode === 'dark' ? 0.4 : 0.3),
+      bgcolor: alpha(theme.palette.primary.main, mode === "dark" ? 0.15 : 0.08),
+      borderColor: alpha(
+        theme.palette.primary.main,
+        mode === "dark" ? 0.5 : 0.4,
+      ),
       transform: "scale(1.05)",
+      boxShadow: `0 2px 8px ${alpha(theme.palette.primary.main, mode === "dark" ? 0.3 : 0.2)}`,
     },
     "&:active": {
       transform: "scale(0.95)",
@@ -251,7 +256,7 @@ export function MermaidComponent({ children, id }: MermaidProps) {
     "&:focus-visible": {
       outline: `2px solid ${theme.palette.primary.main}`,
       outlineOffset: 2,
-      bgcolor: alpha(theme.palette.primary.main, mode === 'dark' ? 0.16 : 0.12),
+      bgcolor: alpha(theme.palette.primary.main, mode === "dark" ? 0.2 : 0.12),
     },
   } as const;
 
@@ -299,8 +304,11 @@ export function MermaidComponent({ children, id }: MermaidProps) {
       <Box
         sx={{
           p: 2,
-          backgroundColor: mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[50],
-          border: `1px dashed ${alpha(theme.palette.text.primary, mode === 'dark' ? 0.25 : 0.15)}`,
+          backgroundColor:
+            mode === "dark"
+              ? alpha(theme.palette.background.paper, 0.05)
+              : alpha(theme.palette.grey[100], 0.8),
+          border: `1px dashed ${alpha(theme.palette.text.primary, mode === "dark" ? 0.3 : 0.2)}`,
           borderRadius: theme.shape.borderRadius,
           textAlign: "center",
           color: theme.palette.text.secondary,
@@ -316,7 +324,6 @@ export function MermaidComponent({ children, id }: MermaidProps) {
     <>
       <Box
         sx={{
-          position: "relative",
           mt: 2,
           mb: 2,
           border: `1px solid ${theme.palette.divider}`,
@@ -325,157 +332,181 @@ export function MermaidComponent({ children, id }: MermaidProps) {
             return isNaN(r) ? 8 : r * 2;
           })(),
           overflow: "hidden",
-          background: mode === 'dark' ? theme.palette.grey[900] : theme.palette.background.paper,
+          background:
+            mode === "dark"
+              ? theme.palette.grey[900]
+              : theme.palette.background.paper,
           boxShadow: theme.shadows[1],
           "&:hover": { boxShadow: theme.shadows[3] },
           transition: theme.transitions.create(["box-shadow"], {
             duration: theme.transitions.duration.short,
           }),
-          perspective: "1000px", // 3D flip için perspective
           minHeight: "200px", // Minimum yükseklik
         }}
       >
-        {/* Flip Container */}
+        {/* Header with Toolbar */}
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            px: 2,
+            py: 1,
+            borderBottom: `1px solid ${theme.palette.divider}`,
+            background: alpha(
+              mode === "dark"
+                ? theme.palette.grey[800]
+                : theme.palette.grey[100],
+              mode === "dark" ? 0.6 : 0.4,
+            ),
+          }}
+        >
+          <Typography
+            variant="caption"
+            sx={{
+              color: theme.palette.text.secondary,
+              fontFamily: "monospace",
+              fontSize: "0.75rem",
+            }}
+          >
+            {showCode ? "Code" : "Mermaid Diagram"}
+          </Typography>
+
+          <Stack direction="row" spacing={0.5}>
+            <Tooltip title={showCode ? "Show diagram" : "Show code"} arrow>
+              <IconButton
+                size="small"
+                onClick={() => setShowCode((s) => !s)}
+                sx={toolbarButtonSx}
+                aria-label="toggle code view"
+              >
+                <CodeIcon fontSize="small" />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title={copied ? "Copied" : "Copy"} arrow>
+              <IconButton
+                size="small"
+                onClick={handleCopy}
+                sx={toolbarButtonSx}
+                aria-label="copy code"
+                color={copied ? "success" : "default"}
+              >
+                {copied ? (
+                  <CheckIcon fontSize="small" />
+                ) : (
+                  <ContentCopyIcon fontSize="small" />
+                )}
+              </IconButton>
+            </Tooltip>
+            <Tooltip title="Fullscreen" arrow>
+              <IconButton
+                size="small"
+                onClick={() => setFullscreen(true)}
+                sx={toolbarButtonSx}
+                aria-label="fullscreen"
+              >
+                <FullscreenIcon fontSize="small" />
+              </IconButton>
+            </Tooltip>
+          </Stack>
+        </Box>
+
+        {/* Content Container */}
         <Box
           sx={{
             position: "relative",
-            width: "100%",
-            height: "100%",
-            transition: theme.transitions.create(["transform"], {
-              duration: theme.transitions.duration.complex,
-              easing: theme.transitions.easing.easeInOut,
-            }),
-            transformStyle: "preserve-3d",
-            transform: showCode ? "rotateY(180deg)" : "rotateY(0deg)",
+            perspective: "1000px", // 3D flip için perspective
+            minHeight: "200px",
           }}
         >
-          {/* Diagram Side */}
-          <Box
-            ref={ref}
-            sx={{
-              position: showCode ? "absolute" : "relative",
-              top: 0,
-              left: 0,
-              width: "100%",
-              height: "100%",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              p: 2,
-              overflow: "auto",
-              backfaceVisibility: "hidden",
-              transform: "rotateY(0deg)",
-              "& svg": {
-                maxWidth: "100%",
-                height: "auto",
-              },
-            }}
-            dangerouslySetInnerHTML={{ __html: svg }}
-          />
-
-          {/* Code Side */}
+          {/* Flip Container */}
           <Box
             sx={{
-              position: showCode ? "relative" : "absolute",
-              top: 0,
-              left: 0,
+              position: "relative",
               width: "100%",
               height: "100%",
-              backfaceVisibility: "hidden",
-              transform: "rotateY(180deg)",
-              display: "flex",
-              flexDirection: "column",
+              transition: theme.transitions.create(["transform"], {
+                duration: theme.transitions.duration.complex,
+                easing: theme.transitions.easing.easeInOut,
+              }),
+              transformStyle: "preserve-3d",
+              transform: showCode ? "rotateY(180deg)" : "rotateY(0deg)",
             }}
           >
+            {/* Diagram Side */}
             <Box
+              ref={ref}
               sx={{
-                flex: 1,
+                position: showCode ? "absolute" : "relative",
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: "100%",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
                 p: 2,
                 overflow: "auto",
+                backfaceVisibility: "hidden",
+                transform: "rotateY(0deg)",
+                minHeight: "200px",
+                "& svg": {
+                  maxWidth: "100%",
+                  height: "auto",
+                },
+              }}
+              dangerouslySetInnerHTML={{ __html: svg }}
+            />
+
+            {/* Code Side */}
+            <Box
+              sx={{
+                position: showCode ? "relative" : "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: "100%",
+                backfaceVisibility: "hidden",
+                transform: "rotateY(180deg)",
+                display: "flex",
+                flexDirection: "column",
+                minHeight: "200px",
               }}
             >
               <Box
-                component="pre"
                 sx={{
-                  m: 0,
-                  fontSize: "0.85rem",
-                  lineHeight: 1.5,
-                  fontFamily:
-                    'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
-                  whiteSpace: "pre-wrap",
-                  wordBreak: "break-word",
+                  flex: 1,
+                  p: 2,
+                  overflow: "auto",
                 }}
               >
-                <Typography
-                  component="code"
+                <Box
+                  component="pre"
                   sx={{
-                    fontFamily: "monospace",
-                    fontSize: "0.875em",
+                    m: 0,
+                    fontSize: "0.85rem",
+                    lineHeight: 1.5,
+                    fontFamily:
+                      'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
+                    whiteSpace: "pre-wrap",
+                    wordBreak: "break-word",
                   }}
-                  aria-label="Code Block"
                 >
-                  {children}
-                </Typography>
+                  <Typography
+                    component="code"
+                    sx={{
+                      fontFamily: "monospace",
+                      fontSize: "0.875em",
+                    }}
+                    aria-label="Code Block"
+                  >
+                    {children}
+                  </Typography>
+                </Box>
               </Box>
             </Box>
           </Box>
         </Box>
-        {/* Toolbar */}
-        <Stack
-          direction="row"
-          spacing={0.5}
-          sx={{
-            position: "absolute",
-            top: theme.spacing(1),
-            right: theme.spacing(1),
-            zIndex: 2,
-            p: theme.spacing(0.5),
-            borderRadius:
-              typeof theme.shape.borderRadius === "number"
-                ? theme.shape.borderRadius * 1.5
-                : 12,
-            background: alpha(mode === 'dark' ? theme.palette.grey[800] : theme.palette.background.paper, 0.95),
-            boxShadow: theme.shadows[3],
-            backdropFilter: "blur(12px)",
-            border: `1px solid ${alpha(theme.palette.divider, mode === 'dark' ? 0.4 : 0.3)}`,
-          }}
-        >
-          <Tooltip title={showCode ? "Show diagram" : "Show code"} arrow>
-            <IconButton
-              size="small"
-              onClick={() => setShowCode((s) => !s)}
-              sx={toolbarButtonSx}
-              aria-label="toggle code view"
-            >
-              <CodeIcon fontSize="small" />
-            </IconButton>
-          </Tooltip>
-          <Tooltip title={copied ? "Copied" : "Copy"} arrow>
-            <IconButton
-              size="small"
-              onClick={handleCopy}
-              sx={toolbarButtonSx}
-              aria-label="copy code"
-              color={copied ? "success" : "default"}
-            >
-              {copied ? (
-                <CheckIcon fontSize="small" />
-              ) : (
-                <ContentCopyIcon fontSize="small" />
-              )}
-            </IconButton>
-          </Tooltip>
-          <Tooltip title="Fullscreen" arrow>
-            <IconButton
-              size="small"
-              onClick={() => setFullscreen(true)}
-              sx={toolbarButtonSx}
-              aria-label="fullscreen"
-            >
-              <FullscreenIcon fontSize="small" />
-            </IconButton>
-          </Tooltip>
-        </Stack>
       </Box>
       <Dialog
         open={fullscreen}
@@ -496,7 +527,10 @@ export function MermaidComponent({ children, id }: MermaidProps) {
           <DialogContent
             sx={{
               p: 0,
-              background: mode === 'dark' ? theme.palette.grey[900] : theme.palette.background.default,
+              background:
+                mode === "dark"
+                  ? theme.palette.grey[900]
+                  : theme.palette.background.default,
               overflow: "hidden",
               cursor: isDragging ? "grabbing" : "grab",
               userSelect: "none",
@@ -588,12 +622,17 @@ export function MermaidComponent({ children, id }: MermaidProps) {
                   left: { xs: 8, sm: 12 },
                   bottom: { xs: 8, sm: 12 },
                   zIndex: 10,
-                  bgcolor: alpha(mode === 'dark' ? theme.palette.grey[800] : theme.palette.background.paper, 0.95),
+                  bgcolor: alpha(
+                    mode === "dark"
+                      ? theme.palette.grey[800]
+                      : theme.palette.background.paper,
+                    0.95,
+                  ),
                   backdropFilter: "blur(8px)",
                   fontSize: { xs: "0.65rem", sm: "0.7rem" },
                   height: { xs: 24, sm: 28 },
                   boxShadow: theme.shadows[2],
-                  border: `1px solid ${alpha(theme.palette.divider, mode === 'dark' ? 0.4 : 0.3)}`,
+                  border: `1px solid ${alpha(theme.palette.divider, mode === "dark" ? 0.5 : 0.3)}`,
                   color: theme.palette.text.primary,
                 }}
               />

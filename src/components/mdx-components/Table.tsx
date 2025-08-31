@@ -26,7 +26,9 @@ export function TableComponent({
       sx={{
         my: 3,
         borderRadius: 2,
-        overflow: "hidden",
+        overflow: "auto",
+        overflowX: "auto",
+        maxWidth: "100%",
         boxShadow: `0 4px 20px ${alpha(theme.palette.common.black, 0.05)}`,
       }}
       aria-label="Table Container"

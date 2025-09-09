@@ -34,6 +34,15 @@ export const socialMediaLinks: SocialMediaLink[] = [
     icon: <GitHub />,
   },
   {
+    type: ["vscode-extensions", "vscodeextensions", "vsextensions", "vsext", "vscode", "vsce"],
+    link: new URL("https://marketplace.visualstudio.com/publishers/sametcn99"),
+    label: "VSCode Extensions",
+    visible: true,
+    external: true,
+    category: "Development Platforms",
+    icon: <DataObject />,
+  },
+  {
     type: ["instagram", "ig"],
     link: new URL("https://instagram.com/sametc.0"),
     label: "Instagram",

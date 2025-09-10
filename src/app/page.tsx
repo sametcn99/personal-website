@@ -1,5 +1,5 @@
 import PageClient from "@/components/PageClient";
-import { getGistPosts } from "@/lib/content";
+import { getBlogPosts, getGistPosts } from "@/lib/content";
 
 export default function Home() {
   // Get gist posts and transform them to match the expected format
@@ -9,5 +9,14 @@ export default function Home() {
     lastModified: post.metadata.publishedAt,
   }));
 
-  return <PageClient gistPosts={gistPosts} />;
+  // Get blog posts and transform them to match the expected format
+  const blogPosts = getBlogPosts().map((post) => ({
+    title: post.metadata.title,
+    href: `/blog/${post.slug}`,
+    lastModified: post.metadata.publishedAt,
+    tags: post.metadata.tags || [],
+    language: post.metadata.language || "en",
+  }));
+
+  return <PageClient gistPosts={gistPosts} blogPosts={blogPosts} />;
 }

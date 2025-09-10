@@ -1,5 +1,5 @@
 import ArticleWrapper from "@/components/ArticleWrapper";
-import { formatDate, getBlogPosts } from "@/lib/content";
+import { getBlogPosts } from "@/lib/content";
 import { notFound } from "next/navigation";
 import { CustomMDX } from "../../../components/mdx";
 
@@ -96,6 +96,8 @@ export default async function BlogPost({ params }: PageParams) {
       publishedLabel="Published"
       prevLabel="Previous Post"
       nextLabel="Next Post"
+      tags={post.metadata.tags}
+      language={post.metadata.language}
     >
       <script
         type="application/ld+json"
@@ -119,33 +121,6 @@ export default async function BlogPost({ params }: PageParams) {
           }),
         }}
       />
-      <h1 className="title font-semibold text-2xl tracking-tighter">
-        {post.metadata.title}
-      </h1>
-      <div className="flex justify-between items-center mt-2 mb-8 text-sm">
-        <div className="flex items-center gap-4">
-          <p className="text-sm text-neutral-600 dark:text-neutral-400">
-            {formatDate(post.metadata.publishedAt)}
-          </p>
-          {post.metadata.author && (
-            <p className="text-sm text-neutral-600 dark:text-neutral-400">
-              by {post.metadata.author}
-            </p>
-          )}
-        </div>
-        {post.metadata.tags && post.metadata.tags.length > 0 && (
-          <div className="flex gap-2">
-            {post.metadata.tags.map((tag) => (
-              <span
-                key={tag}
-                className="px-2 py-1 text-xs bg-neutral-100 dark:bg-neutral-800 rounded-md"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-        )}
-      </div>
       <article className="prose">
         <CustomMDX source={post.content} />
       </article>

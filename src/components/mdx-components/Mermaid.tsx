@@ -1,5 +1,6 @@
 "use client";
 
+import { useTheme as useCustomTheme } from "@/hooks/useTheme";
 import CenterFocusStrongIcon from "@mui/icons-material/CenterFocusStrong";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
@@ -21,7 +22,6 @@ import {
   Typography,
 } from "@mui/material";
 import { alpha, useTheme } from "@mui/material/styles";
-import { useTheme as useCustomTheme } from "@/hooks/useTheme";
 import mermaid from "mermaid";
 import { useCallback, useEffect, useRef, useState } from "react";
 
@@ -49,8 +49,10 @@ export function MermaidComponent({ children, id }: MermaidProps) {
 
   // Use mounted state to prevent hydration mismatch
   // For system theme, use systemMode; otherwise use the selected mode
-  const safeMode = mounted 
-    ? (themeMode === "system" ? systemMode : mode) 
+  const safeMode = mounted
+    ? themeMode === "system"
+      ? systemMode
+      : mode
     : "light";
 
   useEffect(() => {
@@ -249,7 +251,10 @@ export function MermaidComponent({ children, id }: MermaidProps) {
       },
     ),
     "&:hover": {
-      bgcolor: alpha(theme.palette.primary.main, safeMode === "dark" ? 0.15 : 0.08),
+      bgcolor: alpha(
+        theme.palette.primary.main,
+        safeMode === "dark" ? 0.15 : 0.08,
+      ),
       borderColor: alpha(
         theme.palette.primary.main,
         safeMode === "dark" ? 0.5 : 0.4,
@@ -263,7 +268,10 @@ export function MermaidComponent({ children, id }: MermaidProps) {
     "&:focus-visible": {
       outline: `2px solid ${theme.palette.primary.main}`,
       outlineOffset: 2,
-      bgcolor: alpha(theme.palette.primary.main, safeMode === "dark" ? 0.2 : 0.12),
+      bgcolor: alpha(
+        theme.palette.primary.main,
+        safeMode === "dark" ? 0.2 : 0.12,
+      ),
     },
   } as const;
 

@@ -18,11 +18,23 @@ type GistPost = {
   lastModified: string;
 };
 
+type BlogPost = {
+  title: string;
+  href: string;
+  lastModified: string;
+  tags: string[];
+  language: string;
+};
+
 interface ContentTabsProps {
   gistPosts: GistPost[];
+  blogPosts: BlogPost[];
 }
 
-export default function ContentTabs({ gistPosts }: ContentTabsProps) {
+export default function ContentTabs({
+  gistPosts,
+  blogPosts,
+}: ContentTabsProps) {
   // Separate hooks for each tab
   const gistsSearch = useSearch("gists");
   const gistsSort = useSort("gists");
@@ -71,6 +83,7 @@ export default function ContentTabs({ gistPosts }: ContentTabsProps) {
 
         {tabValue === 1 && (
           <BlogTab
+            blogPosts={blogPosts}
             searchQuery={blogSearch.searchQuery}
             setSearchQuery={blogSearch.setSearchQuery}
             clearSearch={blogSearch.clearSearch}

@@ -12,11 +12,20 @@ type GistPost = {
   lastModified: string;
 };
 
+type BlogPost = {
+  title: string;
+  href: string;
+  lastModified: string;
+  tags: string[];
+  language: string;
+};
+
 interface PageClientProps {
   gistPosts: GistPost[];
+  blogPosts: BlogPost[];
 }
 
-export default function PageClient({ gistPosts }: PageClientProps) {
+export default function PageClient({ gistPosts, blogPosts }: PageClientProps) {
   return (
     <Box
       display="flex"
@@ -31,7 +40,7 @@ export default function PageClient({ gistPosts }: PageClientProps) {
           <LinksSection />
 
           {/* Content Tabs Section */}
-          <ContentTabs gistPosts={gistPosts} />
+          <ContentTabs gistPosts={gistPosts} blogPosts={blogPosts} />
         </Box>
 
         {/* Footer */}

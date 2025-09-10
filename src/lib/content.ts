@@ -9,6 +9,8 @@ export type ContentMetadata = {
   image?: string;
   author?: string;
   tags?: string[];
+  // ISO language code (e.g., 'tr', 'en'). Optional for backwards compatibility.
+  language?: string;
 };
 
 export type ContentType = "blog" | "gist";
@@ -57,9 +59,10 @@ function parseFrontmatter(
   const metadata: Partial<ContentMetadata> = {};
 
   frontMatterLines.forEach((line) => {
+    if (!line.includes(":")) return; // skip malformed lines
     const [key, ...valueArr] = line.split(": ");
     let value = valueArr.join(": ").trim();
-    value = value.replace(/^['"](.*)['"]$/, "$1"); // Remove quotes
+    value = value.replace(/^['"](.*)['"]$/, "$1"); // Remove surrounding quotes
 
     const trimmedKey = key.trim();
 
@@ -68,15 +71,24 @@ function parseFrontmatter(
       const tagsString = value.slice(1, -1);
       (metadata as Record<string, string | string[]>)[trimmedKey] = tagsString
         .split(",")
-        .map((tag) => tag.trim().replace(/^['"](.*)['"]$/, "$1"));
-    } else {
-      (metadata as Record<string, string | string[]>)[trimmedKey] = value;
+        .map((tag) => tag.trim().replace(/^['"](.*)['"]$/, "$1"))
+        .filter(Boolean);
+      return;
     }
+
+    (metadata as Record<string, string | string[]>)[trimmedKey] = value;
   });
 
   // Ensure we always have a publishedAt date
   if (!metadata.publishedAt) {
     metadata.publishedAt = new Date().toISOString().split("T")[0];
+  }
+
+  // Attempt to infer language if not explicitly provided.
+  // Simple heuristic: if content contains common Turkish characters, set 'tr'; else default 'en'.
+  if (!metadata.language) {
+    const turkishChars = /[çğıöşüÇĞİÖŞÜ]/;
+    metadata.language = turkishChars.test(content) ? "tr" : "en";
   }
 
   return { metadata: metadata as ContentMetadata, content };

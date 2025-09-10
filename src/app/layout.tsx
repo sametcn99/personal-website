@@ -21,7 +21,10 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://sametcc.me"), // Replace with your actual domain
-  title: "Samet Can Cıncık | Web Developer",
+  title: {
+    template: "%s | Samet Can Cıncık",
+    default: "Samet Can Cıncık | Web Developer",
+  },
   description:
     "Web Developer passionate about creating compelling and user-friendly web experiences.",
   keywords: [
@@ -40,7 +43,10 @@ export const metadata: Metadata = {
     telephone: false,
   },
   openGraph: {
-    title: "Samet Can Cıncık | Web Developer",
+    title: {
+      template: "%s | Samet Can Cıncık",
+      default: "Samet Can Cıncık | Web Developer",
+    },
     description:
       "Web Developer passionate about creating compelling and user-friendly web experiences.",
     siteName: "Samet Can Cıncık",

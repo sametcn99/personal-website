@@ -4,9 +4,11 @@ import ArrowDownward from "@mui/icons-material/ArrowDownward";
 import ArrowUpward from "@mui/icons-material/ArrowUpward";
 import Article from "@mui/icons-material/Article";
 import Clear from "@mui/icons-material/Clear";
+import Language from "@mui/icons-material/Language";
 import Search from "@mui/icons-material/Search";
 import SortByAlpha from "@mui/icons-material/SortByAlpha";
 import Box from "@mui/material/Box";
+import Chip from "@mui/material/Chip";
 import IconButton from "@mui/material/IconButton";
 import InputAdornment from "@mui/material/InputAdornment";
 import List from "@mui/material/List";
@@ -22,6 +24,13 @@ import Typography from "@mui/material/Typography";
 import { useMemo } from "react";
 
 interface BlogTabProps {
+  blogPosts: Array<{
+    title: string;
+    href: string;
+    lastModified: string;
+    tags: string[];
+    language: string;
+  }>;
   searchQuery: string;
   setSearchQuery: (query: string) => void;
   clearSearch: () => void;
@@ -32,6 +41,7 @@ interface BlogTabProps {
 }
 
 export default function BlogTab({
+  blogPosts,
   searchQuery,
   setSearchQuery,
   clearSearch,
@@ -40,16 +50,8 @@ export default function BlogTab({
   sortOrder,
   setSortOrder,
 }: BlogTabProps) {
-  // Blog data (empty for now, will be populated when blog posts are added)
-  const blogData = useMemo(
-    () =>
-      [] as Array<{
-        title: string;
-        href: string;
-        lastModified: string;
-      }>,
-    [],
-  );
+  // Use blog posts from props
+  const blogData = useMemo(() => blogPosts, [blogPosts]);
 
   // Filter and sort blog posts based on search query and sort options
   const filteredBlogs = useMemo(() => {
@@ -187,51 +189,12 @@ export default function BlogTab({
         ) : filteredBlogs.length === 0 ? (
           <Box
             display="flex"
-            flexDirection="column"
             justifyContent="center"
             alignItems="center"
             py={4}
-            gap={2}
-            sx={{
-              position: "relative",
-              "&::before": {
-                content: '""',
-                position: "absolute",
-                left: "50%",
-                top: 0,
-                width: "2px",
-                height: "100%",
-                background:
-                  "linear-gradient(to bottom, transparent, #00ff00, transparent)",
-                transform: "translateX(-50%)",
-                opacity: 0.3,
-              },
-            }}
           >
-            <Typography
-              variant="h6"
-              sx={{
-                fontFamily: "'Courier New', monospace",
-                color: "#00ff00",
-                textShadow: "0 0 10px #00ff00",
-                fontWeight: "bold",
-                fontSize: "1.1rem",
-                textAlign: "center",
-                letterSpacing: "0.5px",
-              }}
-            >
-              &quot;There is no spoon...&quot;
-            </Typography>
-            <Typography
-              variant="body1"
-              color="text.secondary"
-              sx={{
-                fontStyle: "italic",
-                textAlign: "center",
-                opacity: 0.8,
-              }}
-            >
-              and apparently no blog posts either
+            <Typography variant="body2" color="text.secondary">
+              No blog posts found.
             </Typography>
           </Box>
         ) : (
@@ -253,21 +216,66 @@ export default function BlogTab({
                 </ListItemIcon>
                 <ListItemText
                   primary={item.title}
-                  secondary={new Date(item.lastModified).toLocaleDateString(
-                    "tr-TR",
-                    {
-                      year: "numeric",
-                      month: "short",
-                      day: "numeric",
-                    },
-                  )}
+                  secondary={
+                    <Box>
+                      <Typography variant="caption" display="block">
+                        {new Date(item.lastModified).toLocaleDateString(
+                          "tr-TR",
+                          {
+                            year: "numeric",
+                            month: "short",
+                            day: "numeric",
+                          },
+                        )}
+                      </Typography>
+                      <Box display="flex" alignItems="center" gap={1}>
+                        <Box display="flex" alignItems="center" gap={0.5}>
+                          <Language fontSize="small" />
+                          <Typography variant="caption">
+                            {item.language.toUpperCase()}
+                          </Typography>
+                        </Box>
+                        {item.tags.length > 0 && (
+                          <Box
+                            display="flex"
+                            alignItems="center"
+                            gap={0.5}
+                            flexWrap="wrap"
+                          >
+                            {item.tags.slice(0, 3).map((tag) => (
+                              <Chip
+                                key={tag}
+                                label={tag}
+                                size="small"
+                                variant="outlined"
+                                sx={{
+                                  height: 16,
+                                  fontSize: "0.6rem",
+                                  "& .MuiChip-label": { px: 0.5 },
+                                }}
+                              />
+                            ))}
+                            {item.tags.length > 2 && (
+                              <Typography
+                                variant="caption"
+                                color="text.secondary"
+                              >
+                                +{item.tags.length - 3}
+                              </Typography>
+                            )}
+                          </Box>
+                        )}
+                      </Box>
+                    </Box>
+                  }
                   slotProps={{
                     primary: {
                       fontSize: "0.9rem",
                       fontWeight: "medium",
                     },
+                    // Render secondary Typography wrapper as a div to avoid invalid <p><div/></p> nesting
                     secondary: {
-                      fontSize: "0.75rem",
+                      component: "div",
                     },
                   }}
                 />

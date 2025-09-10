@@ -1,10 +1,10 @@
 "use client";
 
+import { useTheme as useCustomTheme } from "@/hooks/useTheme";
 import CheckIcon from "@mui/icons-material/Check";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { Box, IconButton, Stack, Tooltip, Typography } from "@mui/material";
 import { alpha, useTheme } from "@mui/material/styles";
-import { useTheme as useCustomTheme } from "@/hooks/useTheme";
 import React, { useCallback, useState } from "react";
 
 interface CodeProps extends React.HTMLAttributes<HTMLElement> {
@@ -23,8 +23,10 @@ export function CodeComponent({
 
   // Use mounted state to prevent hydration mismatch
   // For system theme, use systemMode; otherwise use the selected mode
-  const safeMode = mounted 
-    ? (themeMode === "system" ? systemMode : mode) 
+  const safeMode = mounted
+    ? themeMode === "system"
+      ? systemMode
+      : mode
     : "light";
 
   const handleCopy = useCallback(async () => {
@@ -94,7 +96,10 @@ export function CodeComponent({
       },
     ),
     "&:hover": {
-      bgcolor: alpha(theme.palette.primary.main, safeMode === "dark" ? 0.12 : 0.08),
+      bgcolor: alpha(
+        theme.palette.primary.main,
+        safeMode === "dark" ? 0.12 : 0.08,
+      ),
       borderColor: alpha(
         theme.palette.primary.main,
         safeMode === "dark" ? 0.4 : 0.3,
@@ -107,7 +112,10 @@ export function CodeComponent({
     "&:focus-visible": {
       outline: `2px solid ${theme.palette.primary.main}`,
       outlineOffset: 2,
-      bgcolor: alpha(theme.palette.primary.main, safeMode === "dark" ? 0.16 : 0.12),
+      bgcolor: alpha(
+        theme.palette.primary.main,
+        safeMode === "dark" ? 0.16 : 0.12,
+      ),
     },
   } as const;
 
@@ -140,7 +148,9 @@ export function CodeComponent({
           py: 1,
           borderBottom: `1px solid ${theme.palette.divider}`,
           background: alpha(
-            safeMode === "dark" ? theme.palette.grey[800] : theme.palette.grey[50],
+            safeMode === "dark"
+              ? theme.palette.grey[800]
+              : theme.palette.grey[50],
             0.5,
           ),
         }}

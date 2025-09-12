@@ -1,4 +1,5 @@
 import ArticleWrapper from "@/components/ArticleWrapper";
+import { JsonLd } from "@/components/JsonLd";
 import { getBlogPosts } from "@/lib/content";
 import { notFound } from "next/navigation";
 import { CustomMDX } from "../../../components/mdx";
@@ -99,26 +100,22 @@ export default async function BlogPost({ params }: PageParams) {
       tags={post.metadata.tags}
       language={post.metadata.language}
     >
-      <script
-        type="application/ld+json"
-        suppressHydrationWarning
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "BlogPosting",
-            headline: post.metadata.title,
-            datePublished: post.metadata.publishedAt,
-            dateModified: post.metadata.publishedAt,
-            description: post.metadata.summary,
-            image: post.metadata.image
-              ? `${baseUrl}${post.metadata.image}`
-              : `/og?title=${encodeURIComponent(post.metadata.title)}`,
-            url: `${baseUrl}/blog/${post.slug}`,
-            author: {
-              "@type": "Person",
-              name: post.metadata.author || "My Portfolio",
-            },
-          }),
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          headline: post.metadata.title,
+          datePublished: post.metadata.publishedAt,
+          dateModified: post.metadata.publishedAt,
+          description: post.metadata.summary,
+          image: post.metadata.image
+            ? `${baseUrl}${post.metadata.image}`
+            : `/og?title=${encodeURIComponent(post.metadata.title)}`,
+          url: `${baseUrl}/blog/${post.slug}`,
+          author: {
+            "@type": "Person",
+            name: post.metadata.author || "My Portfolio",
+          },
         }}
       />
       <article className="prose">

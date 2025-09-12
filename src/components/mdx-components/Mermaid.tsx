@@ -6,6 +6,7 @@ import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
 import CodeIcon from "@mui/icons-material/Code";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
+import DownloadIcon from "@mui/icons-material/Download";
 import FullscreenIcon from "@mui/icons-material/Fullscreen";
 import FullscreenExitIcon from "@mui/icons-material/FullscreenExit";
 import ZoomInIcon from "@mui/icons-material/ZoomIn";
@@ -39,6 +40,7 @@ export function MermaidComponent({ children, id }: MermaidProps) {
   const [svg, setSvg] = useState<string>("");
   const [showCode, setShowCode] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [downloading, setDownloading] = useState(false);
   const [fullscreen, setFullscreen] = useState(false);
   const [scale, setScale] = useState(1);
   const [translate, setTranslate] = useState({ x: 0, y: 0 });
@@ -105,6 +107,75 @@ export function MermaidComponent({ children, id }: MermaidProps) {
       } catch {}
     }
   }, [children]);
+
+  const handleDownloadSvg = useCallback(async () => {
+    if (!svg) return;
+
+    try {
+      setDownloading(true);
+
+      // Parse the SVG string and extract the SVG element
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(svg, "image/svg+xml");
+      const svgElement = doc.querySelector("svg");
+
+      if (!svgElement) {
+        console.error("No SVG element found");
+        return;
+      }
+
+      // Clone and optimize the SVG
+      const clonedSvg = svgElement.cloneNode(true) as SVGSVGElement;
+
+      // Ensure SVG has proper attributes
+      if (!clonedSvg.getAttribute("xmlns")) {
+        clonedSvg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+      }
+      if (!clonedSvg.getAttribute("xmlns:xlink")) {
+        clonedSvg.setAttribute("xmlns:xlink", "http://www.w3.org/1999/xlink");
+      }
+
+      // Set a proper viewBox if it doesn't exist
+      if (!clonedSvg.getAttribute("viewBox")) {
+        const width = clonedSvg.getAttribute("width") || "800";
+        const height = clonedSvg.getAttribute("height") || "600";
+        clonedSvg.setAttribute("viewBox", `0 0 ${width} ${height}`);
+      }
+
+      // Convert to string
+      const svgString = new XMLSerializer().serializeToString(clonedSvg);
+
+      // Create blob and download
+      const blob = new Blob([svgString], {
+        type: "image/svg+xml;charset=utf-8",
+      });
+      const url = URL.createObjectURL(blob);
+
+      // Generate filename with timestamp
+      const timestamp = new Date()
+        .toISOString()
+        .slice(0, 19)
+        .replace(/[:.]/g, "-");
+      const filename = `mermaid-diagram-${timestamp}.svg`;
+
+      // Create and trigger download
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      // Cleanup
+      URL.revokeObjectURL(url);
+
+      // Show feedback
+      setTimeout(() => setDownloading(false), 800);
+    } catch (error) {
+      console.error("Error downloading SVG:", error);
+      setDownloading(false);
+    }
+  }, [svg]);
 
   // Custom zoom and pan handlers
   const handleZoomIn = useCallback(() => {
@@ -222,51 +293,6 @@ export function MermaidComponent({ children, id }: MermaidProps) {
     setLastTranslate(translate);
   }, [translate]);
 
-  const toolbarButtonSx = {
-    bgcolor: alpha(
-      actualTheme === "dark"
-        ? theme.palette.grey[800]
-        : theme.palette.background.paper,
-      0.95,
-    ),
-    backdropFilter: "blur(8px)",
-    border: `1px solid ${alpha(theme.palette.divider, actualTheme === "dark" ? 0.5 : 0.3)}`,
-    borderRadius: theme.shape.borderRadius,
-    width: 32,
-    height: 32,
-    minWidth: 32,
-    color: theme.palette.text.primary,
-    transition: theme.transitions.create(
-      ["background-color", "border-color", "transform", "box-shadow"],
-      {
-        duration: theme.transitions.duration.short,
-      },
-    ),
-    "&:hover": {
-      bgcolor: alpha(
-        theme.palette.primary.main,
-        actualTheme === "dark" ? 0.15 : 0.08,
-      ),
-      borderColor: alpha(
-        theme.palette.primary.main,
-        actualTheme === "dark" ? 0.5 : 0.4,
-      ),
-      transform: "scale(1.05)",
-      boxShadow: `0 2px 8px ${alpha(theme.palette.primary.main, actualTheme === "dark" ? 0.3 : 0.2)}`,
-    },
-    "&:active": {
-      transform: "scale(0.95)",
-    },
-    "&:focus-visible": {
-      outline: `2px solid ${theme.palette.primary.main}`,
-      outlineOffset: 2,
-      bgcolor: alpha(
-        theme.palette.primary.main,
-        actualTheme === "dark" ? 0.2 : 0.12,
-      ),
-    },
-  } as const;
-
   // Keyboard shortcuts when fullscreen
   useEffect(() => {
     if (!fullscreen) return;
@@ -333,16 +359,11 @@ export function MermaidComponent({ children, id }: MermaidProps) {
         sx={{
           mt: 2,
           mb: 2,
-          border: `1px solid ${theme.palette.divider}`,
           borderRadius: (() => {
             const r = parseFloat(String(theme.shape.borderRadius));
             return Number.isNaN(r) ? 8 : r * 2;
           })(),
           overflow: "hidden",
-          background:
-            actualTheme === "dark"
-              ? theme.palette.grey[900]
-              : theme.palette.background.paper,
           boxShadow: theme.shadows[1],
           "&:hover": { boxShadow: theme.shadows[3] },
           transition: theme.transitions.create(["box-shadow"], {
@@ -360,12 +381,6 @@ export function MermaidComponent({ children, id }: MermaidProps) {
             px: 2,
             py: 1,
             borderBottom: `1px solid ${theme.palette.divider}`,
-            background: alpha(
-              actualTheme === "dark"
-                ? theme.palette.grey[800]
-                : theme.palette.grey[100],
-              actualTheme === "dark" ? 0.6 : 0.4,
-            ),
           }}
         >
           <Typography
@@ -384,7 +399,6 @@ export function MermaidComponent({ children, id }: MermaidProps) {
               <IconButton
                 size="small"
                 onClick={() => setShowCode((s) => !s)}
-                sx={toolbarButtonSx}
                 aria-label="toggle code view"
               >
                 <CodeIcon fontSize="small" />
@@ -394,7 +408,6 @@ export function MermaidComponent({ children, id }: MermaidProps) {
               <IconButton
                 size="small"
                 onClick={handleCopy}
-                sx={toolbarButtonSx}
                 aria-label="copy code"
                 color={copied ? "success" : "default"}
               >
@@ -405,11 +418,24 @@ export function MermaidComponent({ children, id }: MermaidProps) {
                 )}
               </IconButton>
             </Tooltip>
+            <Tooltip
+              title={downloading ? "Downloading..." : "Download SVG"}
+              arrow
+            >
+              <IconButton
+                size="small"
+                onClick={handleDownloadSvg}
+                disabled={!svg || downloading}
+                aria-label="download svg"
+                color={downloading ? "success" : "default"}
+              >
+                <DownloadIcon fontSize="small" />
+              </IconButton>
+            </Tooltip>
             <Tooltip title="Fullscreen" arrow>
               <IconButton
                 size="small"
                 onClick={() => setFullscreen(true)}
-                sx={toolbarButtonSx}
                 aria-label="fullscreen"
               >
                 <FullscreenIcon fontSize="small" />
@@ -572,37 +598,37 @@ export function MermaidComponent({ children, id }: MermaidProps) {
                 sx={{ flexWrap: "wrap" }}
               >
                 <Tooltip title="Zoom in ( + / = )" arrow>
-                  <IconButton
-                    onClick={handleZoomIn}
-                    aria-label="zoom in"
-                    sx={toolbarButtonSx}
-                  >
+                  <IconButton onClick={handleZoomIn} aria-label="zoom in">
                     <ZoomInIcon fontSize="small" />
                   </IconButton>
                 </Tooltip>
                 <Tooltip title="Zoom out ( - )" arrow>
-                  <IconButton
-                    onClick={handleZoomOut}
-                    aria-label="zoom out"
-                    sx={toolbarButtonSx}
-                  >
+                  <IconButton onClick={handleZoomOut} aria-label="zoom out">
                     <ZoomOutIcon fontSize="small" />
                   </IconButton>
                 </Tooltip>
                 <Tooltip title="Reset ( 0 )" arrow>
-                  <IconButton
-                    onClick={handleResetView}
-                    aria-label="reset view"
-                    sx={toolbarButtonSx}
-                  >
+                  <IconButton onClick={handleResetView} aria-label="reset view">
                     <CenterFocusStrongIcon fontSize="small" />
+                  </IconButton>
+                </Tooltip>
+                <Tooltip
+                  title={downloading ? "Downloading..." : "Download SVG"}
+                  arrow
+                >
+                  <IconButton
+                    onClick={handleDownloadSvg}
+                    disabled={!svg || downloading}
+                    aria-label="download svg"
+                    color={downloading ? "success" : "default"}
+                  >
+                    <DownloadIcon fontSize="small" />
                   </IconButton>
                 </Tooltip>
                 <Tooltip title="Exit Fullscreen (Esc)" arrow>
                   <IconButton
                     onClick={() => setFullscreen(false)}
                     aria-label="close fullscreen"
-                    sx={toolbarButtonSx}
                   >
                     <FullscreenExitIcon fontSize="small" />
                   </IconButton>
@@ -611,7 +637,6 @@ export function MermaidComponent({ children, id }: MermaidProps) {
                   <IconButton
                     onClick={() => setFullscreen(false)}
                     aria-label="close"
-                    sx={toolbarButtonSx}
                   >
                     <CloseIcon fontSize="small" />
                   </IconButton>

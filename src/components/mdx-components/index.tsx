@@ -6,7 +6,7 @@ export { HorizontalRule } from "./HorizontalRule";
 export { ImageComponent } from "./Image";
 export { LinkComponent } from "./Link";
 export { ListItemComponent, OrderedList, UnorderedList } from "./Lists";
-export { MermaidComponent } from "./Mermaid";
+export { MermaidComponent } from "./Mermaid/Mermaid";
 export { Paragraph } from "./Paragraph";
 export { PreComponent } from "./Pre";
 export {

@@ -2,7 +2,7 @@
 
 import { Box, useTheme } from "@mui/material";
 import React, { useCallback, useState } from "react";
-import { MermaidComponent } from "./Mermaid";
+import { MermaidComponent } from "./Mermaid/Mermaid";
 
 // Helper function to extract text content from React children
 const getTextFromChildren = (childrenNode: React.ReactNode): string => {

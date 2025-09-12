@@ -32,7 +32,7 @@ interface MermaidProps {
 
 export function MermaidComponent({ children, id }: MermaidProps) {
   const theme = useTheme();
-  const { mode, systemMode, themeMode, mounted } = useCustomTheme();
+  const { actualTheme } = useCustomTheme();
   const ref = useRef<HTMLDivElement>(null);
   const diagramRef = useRef<HTMLDivElement>(null);
   const [isClient, setIsClient] = useState(false);
@@ -46,14 +46,6 @@ export function MermaidComponent({ children, id }: MermaidProps) {
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const [lastTranslate, setLastTranslate] = useState({ x: 0, y: 0 });
-
-  // Use mounted state to prevent hydration mismatch
-  // For system theme, use systemMode; otherwise use the selected mode
-  const safeMode = mounted
-    ? themeMode === "system"
-      ? systemMode
-      : mode
-    : "light";
 
   useEffect(() => {
     setIsClient(true);
@@ -82,7 +74,7 @@ export function MermaidComponent({ children, id }: MermaidProps) {
         setSvg(renderedSvg);
       } catch (error) {
         console.error("Mermaid rendering error:", error);
-        setSvg(`<div style="color:${theme.palette.error.main};background:${alpha(theme.palette.error.main, safeMode === "dark" ? 0.15 : 0.08)};padding:0.75rem;border:1px solid ${alpha(theme.palette.error.main, safeMode === "dark" ? 0.4 : 0.3)};border-radius:${theme.shape.borderRadius}px;font-size:0.85rem;">
+        setSvg(`<div style="color:${theme.palette.error.main};background:${alpha(theme.palette.error.main, actualTheme === "dark" ? 0.15 : 0.08)};padding:0.75rem;border:1px solid ${alpha(theme.palette.error.main, actualTheme === "dark" ? 0.4 : 0.3)};border-radius:${theme.shape.borderRadius}px;font-size:0.85rem;">
                     <strong style='color:${theme.palette.error.main}'>Mermaid Error:</strong><br>
                     <pre style="white-space:pre-wrap;word-wrap:break-word;margin:0;font-family:${theme.typography.fontFamily};color:${theme.palette.text.primary};">${error}</pre>
                 </div>`);
@@ -90,7 +82,7 @@ export function MermaidComponent({ children, id }: MermaidProps) {
     };
 
     renderMermaid();
-  }, [children, id, isClient, theme, safeMode]);
+  }, [children, id, isClient, theme, actualTheme]);
 
   const handleCopy = useCallback(async () => {
     try {
@@ -232,13 +224,13 @@ export function MermaidComponent({ children, id }: MermaidProps) {
 
   const toolbarButtonSx = {
     bgcolor: alpha(
-      safeMode === "dark"
+      actualTheme === "dark"
         ? theme.palette.grey[800]
         : theme.palette.background.paper,
       0.95,
     ),
     backdropFilter: "blur(8px)",
-    border: `1px solid ${alpha(theme.palette.divider, safeMode === "dark" ? 0.5 : 0.3)}`,
+    border: `1px solid ${alpha(theme.palette.divider, actualTheme === "dark" ? 0.5 : 0.3)}`,
     borderRadius: theme.shape.borderRadius,
     width: 32,
     height: 32,
@@ -253,14 +245,14 @@ export function MermaidComponent({ children, id }: MermaidProps) {
     "&:hover": {
       bgcolor: alpha(
         theme.palette.primary.main,
-        safeMode === "dark" ? 0.15 : 0.08,
+        actualTheme === "dark" ? 0.15 : 0.08,
       ),
       borderColor: alpha(
         theme.palette.primary.main,
-        safeMode === "dark" ? 0.5 : 0.4,
+        actualTheme === "dark" ? 0.5 : 0.4,
       ),
       transform: "scale(1.05)",
-      boxShadow: `0 2px 8px ${alpha(theme.palette.primary.main, safeMode === "dark" ? 0.3 : 0.2)}`,
+      boxShadow: `0 2px 8px ${alpha(theme.palette.primary.main, actualTheme === "dark" ? 0.3 : 0.2)}`,
     },
     "&:active": {
       transform: "scale(0.95)",
@@ -270,7 +262,7 @@ export function MermaidComponent({ children, id }: MermaidProps) {
       outlineOffset: 2,
       bgcolor: alpha(
         theme.palette.primary.main,
-        safeMode === "dark" ? 0.2 : 0.12,
+        actualTheme === "dark" ? 0.2 : 0.12,
       ),
     },
   } as const;
@@ -320,10 +312,10 @@ export function MermaidComponent({ children, id }: MermaidProps) {
         sx={{
           p: 2,
           backgroundColor:
-            safeMode === "dark"
+            actualTheme === "dark"
               ? alpha(theme.palette.background.paper, 0.05)
               : alpha(theme.palette.grey[100], 0.8),
-          border: `1px dashed ${alpha(theme.palette.text.primary, safeMode === "dark" ? 0.3 : 0.2)}`,
+          border: `1px dashed ${alpha(theme.palette.text.primary, actualTheme === "dark" ? 0.3 : 0.2)}`,
           borderRadius: theme.shape.borderRadius,
           textAlign: "center",
           color: theme.palette.text.secondary,
@@ -348,7 +340,7 @@ export function MermaidComponent({ children, id }: MermaidProps) {
           })(),
           overflow: "hidden",
           background:
-            safeMode === "dark"
+            actualTheme === "dark"
               ? theme.palette.grey[900]
               : theme.palette.background.paper,
           boxShadow: theme.shadows[1],
@@ -369,10 +361,10 @@ export function MermaidComponent({ children, id }: MermaidProps) {
             py: 1,
             borderBottom: `1px solid ${theme.palette.divider}`,
             background: alpha(
-              safeMode === "dark"
+              actualTheme === "dark"
                 ? theme.palette.grey[800]
                 : theme.palette.grey[100],
-              safeMode === "dark" ? 0.6 : 0.4,
+              actualTheme === "dark" ? 0.6 : 0.4,
             ),
           }}
         >
@@ -543,7 +535,7 @@ export function MermaidComponent({ children, id }: MermaidProps) {
             sx={{
               p: 0,
               background:
-                safeMode === "dark"
+                actualTheme === "dark"
                   ? theme.palette.grey[900]
                   : theme.palette.background.default,
               overflow: "hidden",
@@ -638,7 +630,7 @@ export function MermaidComponent({ children, id }: MermaidProps) {
                   bottom: { xs: 8, sm: 12 },
                   zIndex: 10,
                   bgcolor: alpha(
-                    safeMode === "dark"
+                    actualTheme === "dark"
                       ? theme.palette.grey[800]
                       : theme.palette.background.paper,
                     0.95,
@@ -647,7 +639,7 @@ export function MermaidComponent({ children, id }: MermaidProps) {
                   fontSize: { xs: "0.65rem", sm: "0.7rem" },
                   height: { xs: 24, sm: 28 },
                   boxShadow: theme.shadows[2],
-                  border: `1px solid ${alpha(theme.palette.divider, safeMode === "dark" ? 0.5 : 0.3)}`,
+                  border: `1px solid ${alpha(theme.palette.divider, actualTheme === "dark" ? 0.5 : 0.3)}`,
                   color: theme.palette.text.primary,
                 }}
               />

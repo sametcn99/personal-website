@@ -1,13 +1,19 @@
 "use client";
 
 import { useTheme as useCustomTheme } from "@/hooks/useTheme";
+import { getMinimalScrollbarStyles } from "@/styles/scrollbar";
 import CheckIcon from "@mui/icons-material/Check";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { Box, IconButton, Stack, Tooltip, Typography } from "@mui/material";
-import { alpha, useTheme } from "@mui/material/styles";
-import React, { useCallback, useState } from "react";
+import { useTheme } from "@mui/material/styles";
+import {
+  useCallback,
+  useState,
+  type HTMLAttributes,
+  type PropsWithChildren,
+} from "react";
 
-interface CodeProps extends React.HTMLAttributes<HTMLElement> {
+interface CodeProps extends HTMLAttributes<HTMLElement> {
   className?: string;
 }
 
@@ -15,19 +21,11 @@ export function CodeComponent({
   children,
   className,
   ...props
-}: React.PropsWithChildren<CodeProps>) {
+}: PropsWithChildren<CodeProps>) {
   const theme = useTheme();
-  const { mode, systemMode, themeMode, mounted } = useCustomTheme();
+  const { actualTheme } = useCustomTheme();
   const [copied, setCopied] = useState(false);
   const isInlineCode = !className;
-
-  // Use mounted state to prevent hydration mismatch
-  // For system theme, use systemMode; otherwise use the selected mode
-  const safeMode = mounted
-    ? themeMode === "system"
-      ? systemMode
-      : mode
-    : "light";
 
   const handleCopy = useCallback(async () => {
     try {
@@ -75,62 +73,13 @@ export function CodeComponent({
     );
   }
 
-  const toolbarButtonSx = {
-    bgcolor: alpha(
-      safeMode === "dark"
-        ? theme.palette.grey[800]
-        : theme.palette.background.paper,
-      0.95,
-    ),
-    backdropFilter: "blur(8px)",
-    border: `1px solid ${alpha(theme.palette.divider, safeMode === "dark" ? 0.7 : 0.5)}`,
-    borderRadius: theme.shape.borderRadius,
-    width: 32,
-    height: 32,
-    minWidth: 32,
-    color: theme.palette.text.primary,
-    transition: theme.transitions.create(
-      ["background-color", "border-color", "transform"],
-      {
-        duration: theme.transitions.duration.short,
-      },
-    ),
-    "&:hover": {
-      bgcolor: alpha(
-        theme.palette.primary.main,
-        safeMode === "dark" ? 0.12 : 0.08,
-      ),
-      borderColor: alpha(
-        theme.palette.primary.main,
-        safeMode === "dark" ? 0.4 : 0.3,
-      ),
-      transform: "scale(1.05)",
-    },
-    "&:active": {
-      transform: "scale(0.95)",
-    },
-    "&:focus-visible": {
-      outline: `2px solid ${theme.palette.primary.main}`,
-      outlineOffset: 2,
-      bgcolor: alpha(
-        theme.palette.primary.main,
-        safeMode === "dark" ? 0.16 : 0.12,
-      ),
-    },
-  } as const;
-
   return (
     <Box
       sx={{
         mt: 2,
         mb: 2,
-        border: `1px solid ${theme.palette.divider}`,
         borderRadius: theme.shape.borderRadius,
         overflow: "hidden",
-        background:
-          safeMode === "dark"
-            ? theme.palette.grey[900]
-            : theme.palette.background.paper,
         boxShadow: theme.shadows[1],
         "&:hover": { boxShadow: theme.shadows[3] },
         transition: theme.transitions.create(["box-shadow"], {
@@ -146,13 +95,7 @@ export function CodeComponent({
           alignItems: "center",
           px: 2,
           py: 1,
-          borderBottom: `1px solid ${theme.palette.divider}`,
-          background: alpha(
-            safeMode === "dark"
-              ? theme.palette.grey[800]
-              : theme.palette.grey[50],
-            0.5,
-          ),
+          borderBottom: `1px solid ${theme.palette.text.secondary}`,
         }}
       >
         <Typography
@@ -163,7 +106,12 @@ export function CodeComponent({
             fontSize: "0.75rem",
           }}
         >
-          {className ? className.replace("language-", "") : "code"}
+          {className
+            ? className
+                .replace("language-", "")
+                .replace("hljs", " ")
+                .trimStart()
+            : "code"}
         </Typography>
 
         <Stack direction="row" spacing={0.5}>
@@ -171,7 +119,6 @@ export function CodeComponent({
             <IconButton
               size="small"
               onClick={handleCopy}
-              sx={toolbarButtonSx}
               aria-label="copy code"
               color={copied ? "success" : "default"}
             >
@@ -191,6 +138,7 @@ export function CodeComponent({
           p: 2,
           overflow: "auto",
           maxHeight: "500px", // Optional: limit max height
+          ...getMinimalScrollbarStyles(actualTheme === "dark"),
         }}
       >
         <Typography

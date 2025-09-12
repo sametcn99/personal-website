@@ -46,10 +46,20 @@ export function useTheme() {
     changeThemeMode(newThemeMode);
   };
 
+  // Determine actual theme (only light or dark)
+  const actualTheme = mounted
+    ? themeMode === "system"
+      ? systemMode === "dark"
+        ? "dark"
+        : "light"
+      : themeMode
+    : "light";
+
   // Use mounted state to prevent hydration mismatch
   return {
     mode: mounted ? mode : "light",
     themeMode: mounted ? themeMode : "system",
+    actualTheme: actualTheme as "light" | "dark",
     systemMode: mounted ? systemMode : "light",
     setThemeMode: changeThemeMode,
     cycleTheme,

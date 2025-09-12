@@ -16,6 +16,8 @@ export const renderMermaidDiagram = async (
     mermaid.initialize({
       startOnLoad: false,
       securityLevel: "loose",
+      theme: actualTheme === "dark" ? "dark" : "neutral",
+      darkMode: actualTheme === "dark",
     });
 
     // Generate unique ID if not provided

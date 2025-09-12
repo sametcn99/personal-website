@@ -336,7 +336,7 @@ export function MermaidComponent({ children, id }: MermaidProps) {
           border: `1px solid ${theme.palette.divider}`,
           borderRadius: (() => {
             const r = parseFloat(String(theme.shape.borderRadius));
-            return isNaN(r) ? 8 : r * 2;
+            return Number.isNaN(r) ? 8 : r * 2;
           })(),
           overflow: "hidden",
           background:

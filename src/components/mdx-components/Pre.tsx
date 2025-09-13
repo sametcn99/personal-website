@@ -1,7 +1,7 @@
 "use client";
 
-import { Box, useTheme } from "@mui/material";
-import React, { useCallback, useState } from "react";
+import { Box } from "@mui/material";
+import React from "react";
 import { MermaidComponent } from "./Mermaid/Mermaid";
 
 // Helper function to extract text content from React children
@@ -38,37 +38,6 @@ export function PreComponent({
   children, // This `children` is typically the <code> element
   ...props
 }: React.PropsWithChildren<React.HTMLAttributes<HTMLPreElement>>) {
-  const theme = useTheme();
-  const [showCopied, setShowCopied] = useState(false);
-
-  const handleCopy = useCallback(async () => {
-    let textToCopy = "";
-    // `children` of PreComponent is the <code> element.
-    // The actual code string/nodes are children of this <code> element.
-    if (React.isValidElement(children)) {
-      const codeElement = children as React.ReactElement<CodeElementProps>;
-      if (codeElement.props && codeElement.props.children) {
-        textToCopy = getTextFromChildren(codeElement.props.children);
-      }
-    }
-
-    if (textToCopy) {
-      try {
-        await navigator.clipboard.writeText(textToCopy);
-        setShowCopied(true);
-        setTimeout(() => {
-          setShowCopied(false);
-        }, 2000);
-      } catch (err) {
-        console.error("Failed to copy code: ", err);
-        // Optionally, show an error message to the user
-      }
-    } else {
-      console.warn("No text content found to copy for code block.");
-    }
-  }, [children]); // Dependencies: `children` to re-evaluate if it changes.
-
-  // Check if this is a mermaid code block
   const isMermaidBlock =
     React.isValidElement(children) &&
     typeof children.props === "object" &&

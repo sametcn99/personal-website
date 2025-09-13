@@ -6,14 +6,18 @@ export default function Home() {
   const gistPosts = getGistPosts().map((post) => ({
     title: post.metadata.title,
     href: `/gist/${post.slug}`,
-    lastModified: post.metadata.publishedAt,
+    publishedAt: post.metadata.publishedAt,
+    summary: post.metadata.summary,
+    tags: post.metadata.tags || [],
+    language: post.metadata.language || "en",
   }));
 
   // Get blog posts and transform them to match the expected format
   const blogPosts = getBlogPosts().map((post) => ({
     title: post.metadata.title,
     href: `/blog/${post.slug}`,
-    lastModified: post.metadata.publishedAt,
+    publishedAt: post.metadata.publishedAt,
+    summary: post.metadata.summary,
     tags: post.metadata.tags || [],
     language: post.metadata.language || "en",
   }));

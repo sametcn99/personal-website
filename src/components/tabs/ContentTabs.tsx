@@ -12,23 +12,9 @@ import Tabs from "@mui/material/Tabs";
 import BlogTab from "./BlogTab";
 import GistsTab from "./GistsTab";
 
-type GistPost = {
-  title: string;
-  href: string;
-  lastModified: string;
-};
-
-type BlogPost = {
-  title: string;
-  href: string;
-  lastModified: string;
-  tags: string[];
-  language: string;
-};
-
 interface ContentTabsProps {
-  gistPosts: GistPost[];
-  blogPosts: BlogPost[];
+  gistPosts: ContentMetadata[];
+  blogPosts: ContentMetadata[];
 }
 
 export default function ContentTabs({

@@ -92,7 +92,6 @@ export default async function BlogPost({ params }: PageParams) {
       currentArticle={currentPost}
       prevArticle={prevPostData}
       nextArticle={nextPostData}
-      postContent={post.content}
       contentType="post"
       publishedLabel="Published"
       prevLabel="Previous Post"
@@ -114,7 +113,7 @@ export default async function BlogPost({ params }: PageParams) {
           url: `${baseUrl}/blog/${post.slug}`,
           author: {
             "@type": "Person",
-            name: post.metadata.author || "My Portfolio",
+            name: post.metadata.author || "sametcn99",
           },
         }}
       />

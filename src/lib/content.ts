@@ -1,26 +1,6 @@
 import fs from "fs";
 import path from "path";
 
-// Extended metadata type that supports both blog and gist content
-export type ContentMetadata = {
-  title: string;
-  publishedAt: string;
-  summary: string;
-  image?: string;
-  author?: string;
-  tags?: string[];
-  // ISO language code (e.g., 'tr', 'en'). Optional for backwards compatibility.
-  language?: string;
-};
-
-export type ContentType = "blog" | "gist";
-
-export interface ContentItem {
-  metadata: ContentMetadata;
-  slug: string;
-  content: string;
-}
-
 /**
  * Parse frontmatter from MDX content
  */

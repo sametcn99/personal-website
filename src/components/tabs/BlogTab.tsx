@@ -1,8 +1,7 @@
-import { SortBy, SortOrder } from "@/hooks/useSort";
+import type { SortBy, SortOrder } from "@/hooks/useSort";
 import AccessTime from "@mui/icons-material/AccessTime";
 import ArrowDownward from "@mui/icons-material/ArrowDownward";
 import ArrowUpward from "@mui/icons-material/ArrowUpward";
-import Article from "@mui/icons-material/Article";
 import Clear from "@mui/icons-material/Clear";
 import Language from "@mui/icons-material/Language";
 import Search from "@mui/icons-material/Search";
@@ -14,7 +13,6 @@ import InputAdornment from "@mui/material/InputAdornment";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import TextField from "@mui/material/TextField";
 import ToggleButton from "@mui/material/ToggleButton";
@@ -24,13 +22,7 @@ import Typography from "@mui/material/Typography";
 import { useMemo } from "react";
 
 interface BlogTabProps {
-  blogPosts: Array<{
-    title: string;
-    href: string;
-    lastModified: string;
-    tags: string[];
-    language: string;
-  }>;
+  blogPosts: ContentMetadata[];
   searchQuery: string;
   setSearchQuery: (query: string) => void;
   clearSearch: () => void;
@@ -56,8 +48,10 @@ export default function BlogTab({
   // Filter and sort blog posts based on search query and sort options
   const filteredBlogs = useMemo(() => {
     const filtered = searchQuery.trim()
-      ? blogData.filter((item) =>
-          item.title.toLowerCase().includes(searchQuery.toLowerCase()),
+      ? blogData.filter(
+          (item) =>
+            item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            item.summary.toLowerCase().includes(searchQuery.toLowerCase()),
         )
       : [...blogData];
 
@@ -67,8 +61,8 @@ export default function BlogTab({
         const comparison = a.title.localeCompare(b.title);
         return sortOrder === "asc" ? comparison : -comparison;
       } else {
-        const dateA = new Date(a.lastModified).getTime();
-        const dateB = new Date(b.lastModified).getTime();
+        const dateA = new Date(a.publishedAt).getTime();
+        const dateB = new Date(b.publishedAt).getTime();
         const comparison = dateA - dateB;
         return sortOrder === "asc" ? comparison : -comparison;
       }
@@ -211,15 +205,19 @@ export default function BlogTab({
                   },
                 }}
               >
-                <ListItemIcon sx={{ minWidth: 40 }}>
-                  <Article />
-                </ListItemIcon>
                 <ListItemText
                   primary={item.title}
                   secondary={
                     <Box>
+                      <Typography
+                        variant="body2"
+                        color="text.secondary"
+                        sx={{ mb: 1, fontSize: "0.85rem" }}
+                      >
+                        {item.summary}
+                      </Typography>
                       <Typography variant="caption" display="block">
-                        {new Date(item.lastModified).toLocaleDateString(
+                        {new Date(item.publishedAt).toLocaleDateString(
                           "tr-TR",
                           {
                             year: "numeric",
@@ -232,10 +230,10 @@ export default function BlogTab({
                         <Box display="flex" alignItems="center" gap={0.5}>
                           <Language fontSize="small" />
                           <Typography variant="caption">
-                            {item.language.toUpperCase()}
+                            {item.language?.toUpperCase()}
                           </Typography>
                         </Box>
-                        {item.tags.length > 0 && (
+                        {item.tags?.length && item.tags.length > 0 && (
                           <Box
                             display="flex"
                             alignItems="center"
@@ -255,7 +253,7 @@ export default function BlogTab({
                                 }}
                               />
                             ))}
-                            {item.tags.length > 2 && (
+                            {item.tags.length > 3 && (
                               <Typography
                                 variant="caption"
                                 color="text.secondary"

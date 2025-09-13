@@ -18,7 +18,6 @@ interface ArticleWrapperProps {
   currentArticle?: ArticleData | null;
   prevArticle?: ArticleData | null;
   nextArticle?: ArticleData | null;
-  postContent: string;
   contentType: "post" | "gist";
   publishedLabel?: string;
   prevLabel?: string;
@@ -32,7 +31,6 @@ export default function ArticleWrapper({
   currentArticle,
   prevArticle,
   nextArticle,
-  postContent,
   contentType,
   publishedLabel = "Published",
   prevLabel = "Previous",
@@ -84,7 +82,7 @@ export default function ArticleWrapper({
                     alignItems: "center",
                   }}
                 >
-                  <ReadingTime>{postContent}</ReadingTime>
+                  <ReadingTime />
                   <Typography variant="body2" color="text.secondary">
                     {publishedLabel}:{" "}
                     {new Date(currentArticle.lastModified).toLocaleDateString(

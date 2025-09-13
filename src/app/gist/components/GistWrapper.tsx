@@ -13,7 +13,6 @@ interface GistWrapperProps {
   currentGist?: GistData | null;
   prevGist?: GistData | null;
   nextGist?: GistData | null;
-  postContent: string;
 }
 
 export default function GistWrapper({
@@ -21,14 +20,12 @@ export default function GistWrapper({
   currentGist,
   prevGist,
   nextGist,
-  postContent,
 }: GistWrapperProps) {
   return (
     <ArticleWrapper
       currentArticle={currentGist}
       prevArticle={prevGist}
       nextArticle={nextGist}
-      postContent={postContent}
       contentType="gist"
       publishedLabel="Last updated"
       prevLabel="Previous"

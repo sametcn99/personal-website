@@ -25,14 +25,8 @@ import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import { useMemo } from "react";
 
-type GistPost = {
-  title: string;
-  href: string;
-  lastModified: string;
-};
-
 interface GistsTabProps {
-  gistPosts: GistPost[];
+  gistPosts: ContentMetadata[];
   searchQuery: string;
   setSearchQuery: (query: string) => void;
   clearSearch: () => void;
@@ -56,7 +50,7 @@ export default function GistsTab({
   const filteredGists = useMemo(() => {
     // Filter out any items with missing required fields
     const validGists = gistPosts.filter(
-      (item) => item && item.title && item.href && item.lastModified,
+      (item) => item && item.title && item.href && item.publishedAt,
     );
 
     const filtered = searchQuery.trim()
@@ -71,8 +65,8 @@ export default function GistsTab({
         const comparison = titleA.localeCompare(titleB);
         return sortOrder === "asc" ? comparison : -comparison;
       } else {
-        const dateA = new Date(a.lastModified || "").getTime();
-        const dateB = new Date(b.lastModified || "").getTime();
+        const dateA = new Date(a.publishedAt || "").getTime();
+        const dateB = new Date(b.publishedAt || "").getTime();
         const comparison = dateA - dateB;
         return sortOrder === "asc" ? comparison : -comparison;
       }
@@ -216,7 +210,7 @@ export default function GistsTab({
                 </ListItemIcon>
                 <ListItemText
                   primary={item.title}
-                  secondary={new Date(item.lastModified).toLocaleDateString(
+                  secondary={new Date(item.publishedAt).toLocaleDateString(
                     "tr-TR",
                     {
                       year: "numeric",

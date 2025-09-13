@@ -2,21 +2,19 @@
 
 import TimerIcon from "@mui/icons-material/Timer";
 import { Chip } from "@mui/material";
-import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
-interface ReadingTimeProps {
-  children: React.ReactNode;
-}
-
-export default function ReadingTime({ children }: ReadingTimeProps) {
-  const pathname = usePathname();
-  const [readingTime, setReadingTime] = useState(0);
+export default function ReadingTime() {
+  const [readingTime, setReadingTime] = useState<number>(0);
 
   useEffect(() => {
+    setReadingTime(0);
+
     const timer = setTimeout(() => {
       const mainContent = document.querySelector("main");
-      if (!mainContent) return;
+      if (!mainContent) {
+        return;
+      }
 
       const text = mainContent.textContent || "";
       const wordCount = text
@@ -27,7 +25,7 @@ export default function ReadingTime({ children }: ReadingTimeProps) {
     }, 500);
 
     return () => clearTimeout(timer);
-  }, [pathname, children]);
+  }, []);
 
   return (
     <Chip

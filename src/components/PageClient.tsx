@@ -6,23 +6,9 @@ import ContentTabs from "@/components/tabs/ContentTabs";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 
-type GistPost = {
-  title: string;
-  href: string;
-  lastModified: string;
-};
-
-type BlogPost = {
-  title: string;
-  href: string;
-  lastModified: string;
-  tags: string[];
-  language: string;
-};
-
 interface PageClientProps {
-  gistPosts: GistPost[];
-  blogPosts: BlogPost[];
+  gistPosts: ContentMetadata[];
+  blogPosts: ContentMetadata[];
 }
 
 export default function PageClient({ gistPosts, blogPosts }: PageClientProps) {

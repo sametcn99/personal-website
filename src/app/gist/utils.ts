@@ -4,6 +4,4 @@ export {
   getContentBySlug,
   getGistPosts,
   getSortedContent,
-  type ContentItem,
-  type ContentMetadata as Metadata,
 } from "@/lib/content";

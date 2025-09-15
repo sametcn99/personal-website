@@ -197,6 +197,24 @@ export const socialMediaLinks: SocialMediaLink[] = [
     category: "Social Media",
     icon: <Theaters />,
   },
+  {
+    type: ["mastodon"]
+    , label: "Mastodon",
+    visible: false,
+    external: true,
+    link: new URL("https://mastodon.social/@sametcn99"),
+    category: "Social Media",
+    icon: <QuestionMark />,
+  },
+  {
+    type: ["bluesky", "bluesky", "bsky"],
+    label: "Bluesky",
+    visible: false,
+    external: true,
+    link: new URL("https://bsky.app/profile/sametcn99.bsky.social"),
+    category: "Social Media",
+    icon: <QuestionMark />,
+  }
 ];
 
 export const categoryOrder: Record<SocialMediaLink["category"], number> = {

@@ -4,6 +4,7 @@ import { Box, Link as MuiLink } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import Link from "next/link";
 import type React from "react";
+import { useId } from "react";
 
 interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   href?: string;
@@ -15,9 +16,10 @@ export function LinkComponent({
   ...props
 }: React.PropsWithChildren<LinkProps>) {
   const theme = useTheme();
+  const uniqueId = useId();
 
   // Handle anchor links (same page scroll)
-  if (href && href.startsWith("#")) {
+  if (href?.startsWith("#")) {
     const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
       e.preventDefault();
       const targetId = href.slice(1);
@@ -34,13 +36,14 @@ export function LinkComponent({
       <MuiLink
         href={href}
         onClick={handleAnchorClick}
+        className={`link-${uniqueId}`}
         sx={{
           textDecoration: "none",
           color: theme.palette.primary.main,
           fontWeight: 500,
           position: "relative",
           cursor: "pointer",
-          "&::after": {
+          [`&.link-${uniqueId}::after`]: {
             content: '""',
             position: "absolute",
             width: "100%",
@@ -52,7 +55,7 @@ export function LinkComponent({
             transformOrigin: "bottom right",
             transition: "transform 0.3s ease-out",
           },
-          "&:hover::after": {
+          [`&.link-${uniqueId}:hover::after`]: {
             transform: "scaleX(1)",
             transformOrigin: "bottom left",
           },
@@ -65,17 +68,18 @@ export function LinkComponent({
     );
   }
 
-  if (href && href.startsWith("/")) {
+  if (href?.startsWith("/")) {
     return (
       <MuiLink
         href={href}
         component={Link}
+        className={`link-${uniqueId}`}
         sx={{
           textDecoration: "none",
           color: theme.palette.primary.main,
           fontWeight: 500,
           position: "relative",
-          "&::after": {
+          [`&.link-${uniqueId}::after`]: {
             content: '""',
             position: "absolute",
             width: "100%",
@@ -87,7 +91,7 @@ export function LinkComponent({
             transformOrigin: "bottom right",
             transition: "transform 0.3s ease-out",
           },
-          "&:hover::after": {
+          [`&.link-${uniqueId}:hover::after`]: {
             transform: "scaleX(1)",
             transformOrigin: "bottom left",
           },
@@ -105,12 +109,13 @@ export function LinkComponent({
       href={href}
       target="_blank"
       rel="noopener noreferrer"
+      className={`link-${uniqueId}`}
       sx={{
         textDecoration: "none",
         color: theme.palette.secondary.main,
         fontWeight: 500,
         position: "relative",
-        "&::after": {
+        [`&.link-${uniqueId}::after`]: {
           content: '""',
           position: "absolute",
           width: "100%",
@@ -122,7 +127,7 @@ export function LinkComponent({
           transformOrigin: "bottom right",
           transition: "transform 0.3s ease-out",
         },
-        "&:hover::after": {
+        [`&.link-${uniqueId}:hover::after`]: {
           transform: "scaleX(1)",
           transformOrigin: "bottom left",
         },

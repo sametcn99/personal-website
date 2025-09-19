@@ -26,6 +26,8 @@ export function WriterHeader({
 }: WriterHeaderProps) {
   return (
     <Box
+      component="header"
+      role="banner"
       sx={{
         display: "flex",
         justifyContent: "space-between",
@@ -34,7 +36,12 @@ export function WriterHeader({
       }}
     >
       <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-        <Typography variant="h4" component="h1" sx={{ fontWeight: 600 }}>
+        <Typography
+          variant="h4"
+          component="h1"
+          sx={{ fontWeight: 600 }}
+          aria-label="Writer - Markdown Editor"
+        >
           Writer
         </Typography>
         {currentEntryTitle && (
@@ -43,26 +50,44 @@ export function WriterHeader({
             variant="outlined"
             size="small"
             color="primary"
+            aria-label={`Current document: ${currentEntryTitle}`}
           />
         )}
         {hasUnsavedChanges && (
-          <Chip label="Unsaved" variant="filled" size="small" color="warning" />
+          <Chip
+            label="Unsaved"
+            variant="filled"
+            size="small"
+            color="warning"
+            aria-label="Unsaved changes"
+          />
         )}
       </Box>
 
-      <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+      <Box
+        sx={{ display: "flex", alignItems: "center", gap: 1 }}
+        role="toolbar"
+        aria-label="Editor tools"
+      >
         <Tooltip title="Focus Mode (F11)">
           <IconButton
             onClick={onToggleFullscreen}
             size="small"
             color={focusMode ? "primary" : "default"}
+            aria-label="Toggle focus mode"
+            aria-pressed={focusMode}
           >
             <FullscreenIcon />
           </IconButton>
         </Tooltip>
 
         <Tooltip title={isHeaderCollapsed ? "Show Controls" : "Hide Controls"}>
-          <IconButton onClick={onToggleCollapse} size="small">
+          <IconButton
+            onClick={onToggleCollapse}
+            size="small"
+            aria-label={isHeaderCollapsed ? "Show controls" : "Hide controls"}
+            aria-expanded={!isHeaderCollapsed}
+          >
             {isHeaderCollapsed ? <ExpandMoreIcon /> : <ExpandLessIcon />}
           </IconButton>
         </Tooltip>

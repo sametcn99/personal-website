@@ -84,6 +84,19 @@ export default function manifest(): MetadataRoute.Manifest {
         ],
       },
       {
+        name: "Writer",
+        short_name: "Writer",
+        description: "Open markdown editor",
+        url: "/writer",
+        icons: [
+          {
+            src: "/icon-192.png",
+            sizes: "192x192",
+            type: "image/png",
+          },
+        ],
+      },
+      {
         name: "CV",
         short_name: "CV",
         description: "View curriculum vitae",

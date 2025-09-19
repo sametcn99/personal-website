@@ -1,6 +1,6 @@
 import { getGistPosts } from "@/app/gist/utils";
 import { getBlogPosts } from "@/lib/content";
-import { MetadataRoute } from "next";
+import type { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://sametcc.me"; // Replace with your actual domain
@@ -24,6 +24,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: "monthly" as const,
       priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/writer`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
     },
   ];
 

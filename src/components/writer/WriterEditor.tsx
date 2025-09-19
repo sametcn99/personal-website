@@ -126,6 +126,9 @@ export function WriterEditor() {
 
   return (
     <Box
+      component="main"
+      role="application"
+      aria-label="Markdown Editor Application"
       sx={{
         height: "100vh",
         overflow: "hidden",

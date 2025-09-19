@@ -1,6 +1,5 @@
 "use client";
 
-import { useTheme as useCustomTheme } from "@/hooks/useTheme";
 import { getMinimalScrollbarStyles } from "@/styles/scrollbar";
 import CheckIcon from "@mui/icons-material/Check";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
@@ -23,7 +22,6 @@ export function CodeComponent({
   ...props
 }: PropsWithChildren<CodeProps>) {
   const theme = useTheme();
-  const { actualTheme } = useCustomTheme();
   const [copied, setCopied] = useState(false);
   const isInlineCode = !className;
 
@@ -138,7 +136,7 @@ export function CodeComponent({
           p: 2,
           overflow: "auto",
           maxHeight: "500px", // Optional: limit max height
-          ...getMinimalScrollbarStyles(actualTheme === "dark"),
+          ...getMinimalScrollbarStyles(),
         }}
       >
         <Typography

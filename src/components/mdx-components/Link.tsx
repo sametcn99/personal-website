@@ -3,7 +3,7 @@
 import { Box, Link as MuiLink } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import Link from "next/link";
-import React from "react";
+import type React from "react";
 
 interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   href?: string;

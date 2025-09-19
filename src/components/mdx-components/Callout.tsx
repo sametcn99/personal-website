@@ -2,7 +2,7 @@
 
 import { Box, Chip, Paper, Typography, alpha } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import React from "react";
+import type React from "react";
 
 interface CalloutProps {
   type?: "info" | "warning" | "error" | "success";

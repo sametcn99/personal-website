@@ -9,15 +9,14 @@ export const renderMermaidDiagram = async (
   children: string,
   id: string | undefined,
   theme: Theme,
-  actualTheme: string,
 ): Promise<string> => {
   try {
     // Initialize mermaid with configuration
     mermaid.initialize({
       startOnLoad: false,
       securityLevel: "loose",
-      theme: actualTheme === "dark" ? "dark" : "neutral",
-      darkMode: actualTheme === "dark",
+      theme: "dark",
+      darkMode: true,
     });
 
     // Generate unique ID if not provided
@@ -34,10 +33,10 @@ export const renderMermaidDiagram = async (
     console.error("Mermaid rendering error:", error);
     return `<div style="color:${theme.palette.error.main};background:${alpha(
       theme.palette.error.main,
-      actualTheme === "dark" ? 0.15 : 0.08,
+      0.15,
     )};padding:0.75rem;border:1px solid ${alpha(
       theme.palette.error.main,
-      actualTheme === "dark" ? 0.4 : 0.3,
+      0.4,
     )};border-radius:${theme.shape.borderRadius}px;font-size:0.85rem;">
       <strong style='color:${theme.palette.error.main}'>Mermaid Error:</strong><br>
       <pre style="white-space:pre-wrap;word-wrap:break-word;margin:0;font-family:${

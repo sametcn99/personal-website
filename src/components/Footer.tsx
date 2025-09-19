@@ -2,7 +2,6 @@
 
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import ThemeToggle from "./ThemeToggle";
 
 export default function Footer() {
   return (
@@ -18,7 +17,6 @@ export default function Footer() {
           Last updated: {new Date().toLocaleDateString("tr-TR")}
         </Typography>
       </Box>
-      <ThemeToggle />
     </Box>
   );
 }

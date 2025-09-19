@@ -1,7 +1,8 @@
 "use client";
 
-import { List, ListItem, ListItemProps, ListProps } from "@mui/material";
-import React from "react";
+import type { ListItemProps, ListProps } from "@mui/material";
+import { List, ListItem } from "@mui/material";
+import type React from "react";
 
 export function UnorderedList({
   children,

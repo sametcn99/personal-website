@@ -1,4 +1,3 @@
-import { useTheme as useCustomTheme } from "@/hooks/useTheme";
 import { useTheme } from "@mui/material/styles";
 import { useCallback, useEffect, useState } from "react";
 import { copyToClipboard, downloadSvg, renderMermaidDiagram } from "./utils";
@@ -8,7 +7,6 @@ import { copyToClipboard, downloadSvg, renderMermaidDiagram } from "./utils";
  */
 export const useMermaidRendering = (children: string, id?: string) => {
   const theme = useTheme();
-  const { actualTheme } = useCustomTheme();
   const [isClient, setIsClient] = useState(false);
   const [svg, setSvg] = useState<string>("");
 
@@ -20,17 +18,12 @@ export const useMermaidRendering = (children: string, id?: string) => {
     if (!isClient || !children) return;
 
     const renderDiagram = async () => {
-      const renderedSvg = await renderMermaidDiagram(
-        children,
-        id,
-        theme,
-        actualTheme,
-      );
+      const renderedSvg = await renderMermaidDiagram(children, id, theme);
       setSvg(renderedSvg);
     };
 
     renderDiagram();
-  }, [children, id, isClient, theme, actualTheme]);
+  }, [children, id, isClient, theme]);
 
   return { svg, isClient };
 };

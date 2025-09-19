@@ -1,6 +1,8 @@
 "use client";
 
-import { Divider, DividerProps } from "@mui/material";
+import type { DividerProps } from "@mui/material";
+import { Divider } from "@mui/material";
+
 import { useTheme } from "@mui/material/styles";
 
 export function HorizontalRule(props: DividerProps) {

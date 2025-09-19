@@ -1,18 +1,18 @@
 "use client";
 
+import type { TableCellProps } from "@mui/material";
 import {
   alpha,
   Paper,
   Table,
   TableBody,
   TableCell,
-  TableCellProps,
   TableContainer,
   TableHead,
   TableRow,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import React from "react";
+import type React from "react";
 
 export function TableComponent({
   children,

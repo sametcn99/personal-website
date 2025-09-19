@@ -1,4 +1,3 @@
-import { useTheme as useCustomTheme } from "@/hooks/useTheme";
 import CenterFocusStrongIcon from "@mui/icons-material/CenterFocusStrong";
 import CloseIcon from "@mui/icons-material/Close";
 import DownloadIcon from "@mui/icons-material/Download";
@@ -34,7 +33,6 @@ export function MermaidFullscreenDialog({
   onDownload,
 }: FullscreenDialogProps) {
   const theme = useTheme();
-  const { actualTheme } = useCustomTheme();
   const [dialogReady, setDialogReady] = useState(false);
 
   const {
@@ -117,10 +115,7 @@ export function MermaidFullscreenDialog({
         <DialogContent
           sx={{
             p: 0,
-            background:
-              actualTheme === "dark"
-                ? theme.palette.grey[900]
-                : theme.palette.background.default,
+            background: theme.palette.grey[900],
             overflow: "hidden",
             cursor: isDragging ? "grabbing" : "grab",
             userSelect: "none",
@@ -205,20 +200,12 @@ export function MermaidFullscreenDialog({
                 left: { xs: 8, sm: 12 },
                 bottom: { xs: 8, sm: 12 },
                 zIndex: 10,
-                bgcolor: alpha(
-                  actualTheme === "dark"
-                    ? theme.palette.grey[800]
-                    : theme.palette.background.paper,
-                  0.95,
-                ),
+                bgcolor: alpha(theme.palette.grey[800], 0.95),
                 backdropFilter: "blur(8px)",
                 fontSize: { xs: "0.65rem", sm: "0.7rem" },
                 height: { xs: 24, sm: 28 },
                 boxShadow: theme.shadows[2],
-                border: `1px solid ${alpha(
-                  theme.palette.divider,
-                  actualTheme === "dark" ? 0.5 : 0.3,
-                )}`,
+                border: `1px solid ${alpha(theme.palette.divider, 0.5)}`,
                 color: theme.palette.text.primary,
               }}
             />

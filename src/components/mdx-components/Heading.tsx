@@ -2,7 +2,7 @@
 
 import { alpha, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import React from "react";
+import type React from "react";
 
 export function H1({
   children,

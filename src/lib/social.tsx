@@ -198,8 +198,8 @@ export const socialMediaLinks: SocialMediaLink[] = [
     icon: <Theaters />,
   },
   {
-    type: ["mastodon"]
-    , label: "Mastodon",
+    type: ["mastodon"],
+    label: "Mastodon",
     visible: false,
     external: true,
     link: new URL("https://mastodon.social/@sametcn99"),
@@ -214,7 +214,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
     link: new URL("https://bsky.app/profile/sametcn99.bsky.social"),
     category: "Social Media",
     icon: <QuestionMark />,
-  }
+  },
 ];
 
 export const categoryOrder: Record<SocialMediaLink["category"], number> = {

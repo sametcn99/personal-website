@@ -86,11 +86,22 @@ export function useWriter() {
   }, []);
 
   const saveEntry = useCallback(
-    (title?: string) => {
-      if (!content.trim()) return;
+    (title?: string): { success: boolean; error?: string } => {
+      if (!content.trim()) return { success: false, error: "Content is empty" };
 
       const now = new Date();
       const entryTitle = title || `Entry ${new Date().toLocaleDateString()}`;
+
+      // Check for duplicate titles (excluding current entry)
+      const existingEntry = entries.find(
+        (entry) => entry.title === entryTitle && entry.id !== currentEntryId,
+      );
+      if (existingEntry) {
+        return {
+          success: false,
+          error: "An entry with this title already exists",
+        };
+      }
 
       if (currentEntryId) {
         // Update existing entry
@@ -117,8 +128,42 @@ export function useWriter() {
       }
 
       setHasUnsavedChanges(false);
+      return { success: true };
     },
     [content, currentEntryId, entries, saveToLocalStorage],
+  );
+
+  const saveAsEntry = useCallback(
+    (title: string): { success: boolean; error?: string } => {
+      if (!content.trim()) return { success: false, error: "Content is empty" };
+
+      // Check for duplicate titles
+      const existingEntry = entries.find((entry) => entry.title === title);
+      if (existingEntry) {
+        return {
+          success: false,
+          error: "An entry with this title already exists",
+        };
+      }
+
+      const now = new Date();
+      const newEntry: WriterEntry = {
+        id: Date.now().toString(),
+        title,
+        content,
+        createdAt: now,
+        updatedAt: now,
+      };
+
+      const updatedEntries = [...entries, newEntry];
+      setEntries(updatedEntries);
+      setCurrentEntryId(newEntry.id);
+      saveToLocalStorage(updatedEntries);
+      setHasUnsavedChanges(false);
+
+      return { success: true };
+    },
+    [content, entries, saveToLocalStorage],
   );
 
   const loadEntry = useCallback(
@@ -217,6 +262,7 @@ export function useWriter() {
 
     // Actions
     saveEntry,
+    saveAsEntry,
     loadEntry,
     deleteEntry,
     newEntry,

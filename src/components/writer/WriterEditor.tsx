@@ -21,6 +21,7 @@ export function WriterEditor() {
     canUndo,
     canRedo,
     saveEntry,
+    saveAsEntry,
     loadEntry,
     deleteEntry,
     newEntry,
@@ -31,6 +32,7 @@ export function WriterEditor() {
   } = useWriter();
 
   const [showSaveDialog, setShowSaveDialog] = useState(false);
+  const [showSaveAsDialog, setShowSaveAsDialog] = useState(false);
   const [showLoadDialog, setShowLoadDialog] = useState(false);
   const [isHeaderCollapsed, setIsHeaderCollapsed] = useState(false);
   const [focusMode, setFocusMode] = useState(false);
@@ -90,9 +92,14 @@ export function WriterEditor() {
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     // Ctrl+S for save
-    if (e.ctrlKey && e.key === "s") {
+    if (e.ctrlKey && e.key === "s" && !e.shiftKey) {
       e.preventDefault();
       handleQuickSave();
+    }
+    // Ctrl+Shift+S for save as
+    else if (e.ctrlKey && e.shiftKey && e.key === "S") {
+      e.preventDefault();
+      setShowSaveAsDialog(true);
     }
     // Ctrl+Z for undo
     else if (e.ctrlKey && !e.shiftKey && e.key === "z") {
@@ -144,6 +151,7 @@ export function WriterEditor() {
           textFieldRef={textFieldRef}
           onToggleFullWidth={() => setFullscreenFullWidth(!fullscreenFullWidth)}
           onSave={handleQuickSave}
+          onSaveAs={() => setShowSaveAsDialog(true)}
           onExitFocus={handleExitFocus}
           onContentChange={updateContent}
           onKeyDown={handleKeyDown}
@@ -204,6 +212,7 @@ export function WriterEditor() {
                       onNewEntry={newEntry}
                       onLoadDialog={() => setShowLoadDialog(true)}
                       onSave={handleQuickSave}
+                      onSaveAs={() => setShowSaveAsDialog(true)}
                       onUndo={undo}
                       onRedo={redo}
                       onTogglePreview={togglePreview}
@@ -232,6 +241,14 @@ export function WriterEditor() {
             onClose={() => setShowSaveDialog(false)}
             onSave={saveEntry}
             currentTitle={getCurrentEntryTitle()}
+          />
+
+          <SaveDialog
+            isOpen={showSaveAsDialog}
+            onClose={() => setShowSaveAsDialog(false)}
+            onSave={saveAsEntry}
+            currentTitle=""
+            isSaveAs={true}
           />
 
           <LoadDialog

@@ -8,6 +8,7 @@ import {
   Add as NewIcon,
   Preview as PreviewIcon,
   Redo as RedoIcon,
+  SaveAlt as SaveAsIcon,
   Save as SaveIcon,
   Undo as UndoIcon,
 } from "@mui/icons-material";
@@ -36,6 +37,7 @@ interface FocusModeProps {
   textFieldRef: RefObject<HTMLInputElement | null>;
   onToggleFullWidth: () => void;
   onSave: () => void;
+  onSaveAs: () => void;
   onExitFocus: () => void;
   onContentChange: (content: string) => void;
   onKeyDown: (e: React.KeyboardEvent) => void;
@@ -57,6 +59,7 @@ export function FocusMode({
   textFieldRef,
   onToggleFullWidth,
   onSave,
+  onSaveAs,
   onExitFocus,
   onContentChange,
   onKeyDown,
@@ -186,6 +189,15 @@ export function FocusMode({
                 size="small"
               >
                 <SaveIcon />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title="Save As (Ctrl+Shift+S)">
+              <IconButton
+                onClick={onSaveAs}
+                disabled={!content.trim()}
+                size="small"
+              >
+                <SaveAsIcon />
               </IconButton>
             </Tooltip>
             <Tooltip title="Exit Focus Mode (F11)">

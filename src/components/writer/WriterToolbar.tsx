@@ -6,6 +6,7 @@ import {
   Add as NewIcon,
   Preview as PreviewIcon,
   Redo as RedoIcon,
+  SaveAs as SaveAsIcon,
   Save as SaveIcon,
   Undo as UndoIcon,
 } from "@mui/icons-material";
@@ -20,6 +21,7 @@ interface WriterToolbarProps {
   onNewEntry: () => void;
   onLoadDialog: () => void;
   onSave: () => void;
+  onSaveAs: () => void;
   onUndo: () => void;
   onRedo: () => void;
   onTogglePreview: () => void;
@@ -34,6 +36,7 @@ export function WriterToolbar({
   onNewEntry,
   onLoadDialog,
   onSave,
+  onSaveAs,
   onUndo,
   onRedo,
   onTogglePreview,
@@ -72,6 +75,15 @@ export function WriterToolbar({
             variant={hasUnsavedChanges ? "contained" : "outlined"}
           >
             Save
+          </Button>
+        </Tooltip>
+        <Tooltip title="Save As (Ctrl+Shift+S)">
+          <Button
+            startIcon={<SaveAsIcon />}
+            onClick={onSaveAs}
+            disabled={!hasContent}
+          >
+            Save As
           </Button>
         </Tooltip>
       </ButtonGroup>

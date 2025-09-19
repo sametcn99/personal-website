@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  Alert,
   Box,
   Button,
   Dialog,
@@ -14,35 +15,50 @@ import { useState } from "react";
 interface SaveDialogProps {
   isOpen: boolean;
   onClose: () => void;
-  onSave: (title: string) => void;
+  onSave: (title: string) => { success: boolean; error?: string };
+  onSaveAs?: (title: string) => { success: boolean; error?: string };
   currentTitle?: string;
+  isSaveAs?: boolean;
 }
 
 export function SaveDialog({
   isOpen,
   onClose,
   onSave,
+  onSaveAs,
   currentTitle = "",
+  isSaveAs = false,
 }: SaveDialogProps) {
   const [title, setTitle] = useState(currentTitle);
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (title.trim()) {
-      onSave(title.trim());
-      onClose();
-      setTitle("");
+      setError(null);
+
+      const result =
+        isSaveAs && onSaveAs ? onSaveAs(title.trim()) : onSave(title.trim());
+
+      if (result.success) {
+        onClose();
+        setTitle("");
+        setError(null);
+      } else {
+        setError(result.error || "An error occurred while saving");
+      }
     }
   };
 
   const handleClose = () => {
     onClose();
     setTitle(currentTitle);
+    setError(null);
   };
 
   return (
     <Dialog open={isOpen} onClose={handleClose} maxWidth="sm" fullWidth>
-      <DialogTitle>Save Entry</DialogTitle>
+      <DialogTitle>{isSaveAs ? "Save As" : "Save Entry"}</DialogTitle>
       <DialogContent>
         <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
           <TextField
@@ -53,7 +69,14 @@ export function SaveDialog({
             placeholder="Enter title for your entry..."
             variant="outlined"
             margin="normal"
+            error={!!error}
+            helperText={error}
           />
+          {error && (
+            <Alert severity="error" sx={{ mt: 2 }}>
+              {error}
+            </Alert>
+          )}
         </Box>
       </DialogContent>
       <DialogActions>
@@ -67,7 +90,7 @@ export function SaveDialog({
           variant="contained"
           disabled={!title.trim()}
         >
-          Save
+          {isSaveAs ? "Save As" : "Save"}
         </Button>
       </DialogActions>
     </Dialog>

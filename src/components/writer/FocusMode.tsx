@@ -198,7 +198,7 @@ export function FocusMode({
       </Box>
 
       {/* Fullscreen Content Area */}
-      <Box sx={{ flex: 1, overflow: "hidden", p: 1 }}>
+      <Box sx={{ flex: 1, overflow: "hidden", py: 1 }}>
         <Container
           maxWidth={fullscreenFullWidth ? false : "md"}
           sx={{ height: "100%", px: fullscreenFullWidth ? 0 : undefined }}

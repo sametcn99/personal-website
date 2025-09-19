@@ -138,7 +138,6 @@ export function WriterEditor() {
           left: 0,
           right: 0,
           bottom: 0,
-          zIndex: 9999,
         }),
       }}
     >
@@ -165,20 +164,17 @@ export function WriterEditor() {
           onTogglePreview={togglePreview}
         />
       ) : (
-        <Container
-          maxWidth="md"
-          sx={{ py: 2, height: "100vh", overflow: "auto" }}
-        >
+        <Container maxWidth="md" sx={{ height: "100vh", overflow: "auto" }}>
           <Box
             sx={{
-              height: "calc(100vh - 32px)",
+              height: "calc(100vh - 10px)",
               display: "flex",
               flexDirection: "column",
             }}
           >
             <Box
               sx={{
-                p: 3,
+                p: 2,
                 flex: 1,
                 display: "flex",
                 flexDirection: "column",
@@ -238,31 +234,32 @@ export function WriterEditor() {
               </Box>
             </Box>
           </Box>
-
-          <SaveDialog
-            isOpen={showSaveDialog}
-            onClose={() => setShowSaveDialog(false)}
-            onSave={saveEntry}
-            currentTitle={getCurrentEntryTitle()}
-          />
-
-          <SaveDialog
-            isOpen={showSaveAsDialog}
-            onClose={() => setShowSaveAsDialog(false)}
-            onSave={saveAsEntry}
-            currentTitle=""
-            isSaveAs={true}
-          />
-
-          <LoadDialog
-            isOpen={showLoadDialog}
-            onClose={() => setShowLoadDialog(false)}
-            onLoad={loadEntry}
-            onDelete={deleteEntry}
-            entries={entries}
-          />
         </Container>
       )}
+
+      {/* Dialogs - Available in both normal and focus modes */}
+      <SaveDialog
+        isOpen={showSaveDialog}
+        onClose={() => setShowSaveDialog(false)}
+        onSave={saveEntry}
+        currentTitle={getCurrentEntryTitle()}
+      />
+
+      <SaveDialog
+        isOpen={showSaveAsDialog}
+        onClose={() => setShowSaveAsDialog(false)}
+        onSave={saveAsEntry}
+        currentTitle=""
+        isSaveAs={true}
+      />
+
+      <LoadDialog
+        isOpen={showLoadDialog}
+        onClose={() => setShowLoadDialog(false)}
+        onLoad={loadEntry}
+        onDelete={deleteEntry}
+        entries={entries}
+      />
     </Box>
   );
 }

@@ -8,7 +8,7 @@ import {
   Add as NewIcon,
   Preview as PreviewIcon,
   Redo as RedoIcon,
-  SaveAlt as SaveAsIcon,
+  SaveAs as SaveAsIcon,
   Save as SaveIcon,
   Undo as UndoIcon,
 } from "@mui/icons-material";

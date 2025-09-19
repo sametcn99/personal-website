@@ -1,39 +1,44 @@
-"use client"
+"use client";
 
-import { useState } from 'react'
 import {
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  TextField,
+  Box,
   Button,
-  Box
-} from '@mui/material'
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  TextField,
+} from "@mui/material";
+import { useState } from "react";
 
 interface SaveDialogProps {
-  isOpen: boolean
-  onClose: () => void
-  onSave: (title: string) => void
-  currentTitle?: string
+  isOpen: boolean;
+  onClose: () => void;
+  onSave: (title: string) => void;
+  currentTitle?: string;
 }
 
-export function SaveDialog({ isOpen, onClose, onSave, currentTitle = '' }: SaveDialogProps) {
-  const [title, setTitle] = useState(currentTitle)
+export function SaveDialog({
+  isOpen,
+  onClose,
+  onSave,
+  currentTitle = "",
+}: SaveDialogProps) {
+  const [title, setTitle] = useState(currentTitle);
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
     if (title.trim()) {
-      onSave(title.trim())
-      onClose()
-      setTitle('')
+      onSave(title.trim());
+      onClose();
+      setTitle("");
     }
-  }
+  };
 
   const handleClose = () => {
-    onClose()
-    setTitle(currentTitle)
-  }
+    onClose();
+    setTitle(currentTitle);
+  };
 
   return (
     <Dialog open={isOpen} onClose={handleClose} maxWidth="sm" fullWidth>
@@ -55,8 +60,10 @@ export function SaveDialog({ isOpen, onClose, onSave, currentTitle = '' }: SaveD
         <Button onClick={handleClose} color="inherit">
           Cancel
         </Button>
-        <Button 
-          onClick={() => handleSubmit({ preventDefault: () => {} } as React.FormEvent)}
+        <Button
+          onClick={() =>
+            handleSubmit({ preventDefault: () => {} } as React.FormEvent)
+          }
           variant="contained"
           disabled={!title.trim()}
         >
@@ -64,5 +71,5 @@ export function SaveDialog({ isOpen, onClose, onSave, currentTitle = '' }: SaveD
         </Button>
       </DialogActions>
     </Dialog>
-  )
+  );
 }

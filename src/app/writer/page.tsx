@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { WriterEditor } from '../../components/writer/WriterEditor'
+import { WriterEditor } from "../../components/writer/WriterEditor";
 
 export default function Page() {
-    return <WriterEditor />
+  return <WriterEditor />;
 }

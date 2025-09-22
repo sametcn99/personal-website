@@ -23,6 +23,16 @@ export function useWriter() {
   const [history, setHistory] = useState<string[]>([""]);
   const [historyIndex, setHistoryIndex] = useState(0);
 
+  // Dialog states
+  const [showSaveDialog, setShowSaveDialog] = useState(false);
+  const [showSaveAsDialog, setShowSaveAsDialog] = useState(false);
+  const [showLoadDialog, setShowLoadDialog] = useState(false);
+
+  // UI states
+  const [isHeaderCollapsed, setIsHeaderCollapsed] = useState(false);
+  const [focusMode, setFocusMode] = useState(false);
+  const [fullscreenFullWidth, setFullscreenFullWidth] = useState(false);
+
   // Load entries from localStorage on mount
   useEffect(() => {
     try {
@@ -76,6 +86,36 @@ export function useWriter() {
       window.removeEventListener("beforeunload", handleBeforeUnload);
     };
   }, [hasUnsavedChanges]);
+
+  // Fullscreen detection and F11 handling
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      const isFullscreen = document.fullscreenElement !== null;
+      setFocusMode(isFullscreen);
+      if (isFullscreen) {
+        setIsHeaderCollapsed(true);
+      }
+    };
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "F11") {
+        e.preventDefault();
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen();
+        } else {
+          document.exitFullscreen();
+        }
+      }
+    };
+
+    document.addEventListener("fullscreenchange", handleFullscreenChange);
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("fullscreenchange", handleFullscreenChange);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
 
   const saveToLocalStorage = useCallback((entriesToSave: WriterEntry[]) => {
     try {
@@ -250,6 +290,83 @@ export function useWriter() {
   const canUndo = historyIndex > 0;
   const canRedo = historyIndex < history.length - 1;
 
+  // Helper functions
+  const getCurrentEntryTitle = useCallback(() => {
+    if (currentEntryId) {
+      const entry = entries.find((e) => e.id === currentEntryId);
+      return entry?.title || "";
+    }
+    return "";
+  }, [currentEntryId, entries]);
+
+  const handleQuickSave = useCallback(() => {
+    if (currentEntryId) {
+      // Update existing entry with same title
+      const currentEntry = entries.find((e) => e.id === currentEntryId);
+      if (currentEntry) {
+        saveEntry(currentEntry.title);
+      }
+    } else {
+      // Show dialog for new entry
+      setShowSaveDialog(true);
+    }
+  }, [currentEntryId, entries, saveEntry]);
+
+  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
+    // Ctrl+S for save
+    if (e.ctrlKey && e.key === "s" && !e.shiftKey) {
+      e.preventDefault();
+      handleQuickSave();
+    }
+    // Ctrl+Shift+S for save as
+    else if (e.ctrlKey && e.shiftKey && e.key === "S") {
+      e.preventDefault();
+      setShowSaveAsDialog(true);
+    }
+    // Ctrl+Z for undo
+    else if (e.ctrlKey && !e.shiftKey && e.key === "z") {
+      e.preventDefault();
+      undo();
+    }
+    // Ctrl+Shift+Z or Ctrl+Y for redo
+    else if (
+      (e.ctrlKey && e.shiftKey && e.key === "Z") ||
+      (e.ctrlKey && e.key === "y")
+    ) {
+      e.preventDefault();
+      redo();
+    }
+  }, [handleQuickSave, undo, redo]);
+
+  const handleExitFocus = useCallback(() => {
+    if (document.fullscreenElement) {
+      document.exitFullscreen();
+    } else {
+      setFocusMode(false);
+    }
+  }, []);
+
+  // UI state handlers
+  const toggleHeaderCollapse = useCallback(() => {
+    setIsHeaderCollapsed(!isHeaderCollapsed);
+  }, [isHeaderCollapsed]);
+
+  const toggleFullscreenFullWidth = useCallback(() => {
+    setFullscreenFullWidth(!fullscreenFullWidth);
+  }, [fullscreenFullWidth]);
+
+  const requestFullscreen = useCallback(() => {
+    document.documentElement.requestFullscreen();
+  }, []);
+
+  // Dialog handlers
+  const openSaveDialog = useCallback(() => setShowSaveDialog(true), []);
+  const closeSaveDialog = useCallback(() => setShowSaveDialog(false), []);
+  const openSaveAsDialog = useCallback(() => setShowSaveAsDialog(true), []);
+  const closeSaveAsDialog = useCallback(() => setShowSaveAsDialog(false), []);
+  const openLoadDialog = useCallback(() => setShowLoadDialog(true), []);
+  const closeLoadDialog = useCallback(() => setShowLoadDialog(false), []);
+
   return {
     // State
     content,
@@ -259,6 +376,12 @@ export function useWriter() {
     entries,
     canUndo,
     canRedo,
+    showSaveDialog,
+    showSaveAsDialog,
+    showLoadDialog,
+    isHeaderCollapsed,
+    focusMode,
+    fullscreenFullWidth,
 
     // Actions
     saveEntry,
@@ -270,5 +393,24 @@ export function useWriter() {
     updateContent,
     undo,
     redo,
+
+    // Helper functions
+    getCurrentEntryTitle,
+    handleQuickSave,
+    handleKeyDown,
+    handleExitFocus,
+
+    // UI state handlers
+    toggleHeaderCollapse,
+    toggleFullscreenFullWidth,
+    requestFullscreen,
+
+    // Dialog handlers
+    openSaveDialog,
+    closeSaveDialog,
+    openSaveAsDialog,
+    closeSaveAsDialog,
+    openLoadDialog,
+    closeLoadDialog,
   };
 }

@@ -17,14 +17,12 @@ import {
   Button,
   ButtonGroup,
   Chip,
-  Container,
   IconButton,
-  TextField,
   Tooltip,
   Typography,
 } from "@mui/material";
 import type { RefObject } from "react";
-import { MarkdownPreview } from "./MarkdownPreview";
+import { WriterContent } from "./WriterContent";
 
 interface FocusModeProps {
   currentEntryTitle: string;
@@ -211,69 +209,15 @@ export function FocusMode({
 
       {/* Fullscreen Content Area */}
       <Box sx={{ flex: 1, overflow: "hidden", py: 1 }}>
-        <Container
-          maxWidth={fullscreenFullWidth ? false : "md"}
-          sx={{ height: "100%", px: fullscreenFullWidth ? 0 : undefined }}
-        >
-          {isPreview ? (
-            <Box
-              sx={{
-                height: "100%",
-                overflow: "auto",
-              }}
-            >
-              {content.trim() ? (
-                <MarkdownPreview content={content} />
-              ) : (
-                <Box
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    height: "50%",
-                    flexDirection: "column",
-                    gap: 2,
-                  }}
-                >
-                  <Typography variant="h6" color="text.secondary">
-                    Nothing to preview
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    Write some markdown content first.
-                  </Typography>
-                </Box>
-              )}
-            </Box>
-          ) : (
-            <TextField
-              ref={textFieldRef}
-              fullWidth
-              multiline
-              value={content}
-              onChange={(e) => onContentChange(e.target.value)}
-              onKeyDown={onKeyDown}
-              placeholder="Start writing your markdown content here... (Press F11 to toggle fullscreen)"
-              variant="outlined"
-              sx={{
-                height: "100%",
-                "& .MuiInputBase-root": {
-                  height: "100%",
-                },
-                "& .MuiInputBase-input": {
-                  fontFamily:
-                    'Monaco, "Cascadia Code", "Roboto Mono", monospace',
-                  fontSize: "16px",
-                  lineHeight: 1.6,
-                  height: "100% !important",
-                  overflow: "auto !important",
-                },
-                "& .MuiOutlinedInput-root": {
-                  borderRadius: 1,
-                },
-              }}
-            />
-          )}
-        </Container>
+        <WriterContent
+          isPreview={isPreview}
+          content={content}
+          textFieldRef={textFieldRef}
+          onContentChange={onContentChange}
+          onKeyDown={onKeyDown}
+          isFocusMode={true}
+          fullscreenFullWidth={fullscreenFullWidth}
+        />
       </Box>
     </Box>
   );

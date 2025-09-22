@@ -79,17 +79,28 @@ export function LoadDialog({
                 <ListItemText
                   primary={entry.title}
                   secondary={
-                    <Box>
-                      <Typography variant="body2" color="text.secondary">
+                    <Box component="span">
+                      <Typography
+                        component="span"
+                        variant="body2"
+                        color="text.secondary"
+                        sx={{ display: "block" }}
+                      >
                         Created: {entry.createdAt.toLocaleDateString()}
                       </Typography>
-                      <Typography variant="body2" color="text.secondary">
+                      <Typography
+                        component="span"
+                        variant="body2"
+                        color="text.secondary"
+                        sx={{ display: "block" }}
+                      >
                         Updated: {entry.updatedAt.toLocaleDateString()}
                       </Typography>
                       <Typography
+                        component="span"
                         variant="body2"
                         color="text.secondary"
-                        sx={{ mt: 0.5 }}
+                        sx={{ mt: 0.5, display: "block" }}
                       >
                         {entry.content.slice(0, 100)}
                         {entry.content.length > 100 ? "..." : ""}

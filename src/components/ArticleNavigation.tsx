@@ -27,11 +27,14 @@ export default function ArticleNavigation({
       {/* Previous Article */}
       {prevArticle && (
         <Paper
-          elevation={1}
+          elevation={0}
           sx={{
             flex: 1,
             minWidth: 200,
             p: 2,
+            backgroundColor: "transparent",
+            border: "1px solid",
+            borderColor: "divider",
             "&:hover": { backgroundColor: "action.hover" },
           }}
         >
@@ -57,11 +60,14 @@ export default function ArticleNavigation({
       {/* Next Article */}
       {nextArticle && (
         <Paper
-          elevation={1}
+          elevation={0}
           sx={{
             flex: 1,
             minWidth: 200,
             p: 2,
+            backgroundColor: "transparent",
+            border: "1px solid",
+            borderColor: "divider",
             "&:hover": { backgroundColor: "action.hover" },
           }}
         >

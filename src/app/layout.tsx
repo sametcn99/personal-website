@@ -1,6 +1,7 @@
 import theme from "@/theme";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import CssBaseline from "@mui/material/CssBaseline";
+import GlobalStyles from "@mui/material/GlobalStyles";
 import InitColorSchemeScript from "@mui/material/InitColorSchemeScript";
 import { ThemeProvider } from "@mui/material/styles";
 import { Analytics } from "@vercel/analytics/next";
@@ -96,6 +97,43 @@ export default function RootLayout({
           <ThemeProvider theme={theme}>
             {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
             <CssBaseline />
+            {/* Global scrollbar styles */}
+            <GlobalStyles
+              styles={{
+                html: {
+                  // Firefox scrollbar styles
+                  scrollbarWidth: "thin" as const,
+                  scrollbarColor: "rgba(255, 255, 255, 0.3) transparent",
+                },
+
+                // Webkit scrollbar styles
+                "*::-webkit-scrollbar": {
+                  width: "8px",
+                  height: "8px",
+                },
+                "*::-webkit-scrollbar-track": {
+                  background: "transparent",
+                  borderRadius: "4px",
+                },
+                "*::-webkit-scrollbar-thumb": {
+                  background: "rgba(255, 255, 255, 0.3)",
+                  borderRadius: "4px",
+                  border: "1px solid transparent",
+                  backgroundClip: "content-box",
+                  "&:hover": {
+                    background: "rgba(255, 255, 255, 0.5)",
+                    backgroundClip: "content-box",
+                  },
+                  "&:active": {
+                    background: "rgba(255, 255, 255, 0.7)",
+                    backgroundClip: "content-box",
+                  },
+                },
+                "*::-webkit-scrollbar-corner": {
+                  background: "transparent",
+                },
+              }}
+            />
             {children}
           </ThemeProvider>
         </AppRouterCacheProvider>

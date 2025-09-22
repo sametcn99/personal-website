@@ -1,6 +1,5 @@
 "use client";
 
-import { getMinimalScrollbarStyles } from "@/styles/scrollbar";
 import CheckIcon from "@mui/icons-material/Check";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { Box, IconButton, Stack, Tooltip, Typography } from "@mui/material";
@@ -136,7 +135,6 @@ export function CodeComponent({
           p: 2,
           overflow: "auto",
           maxHeight: "500px", // Optional: limit max height
-          ...getMinimalScrollbarStyles(),
         }}
       >
         <Typography

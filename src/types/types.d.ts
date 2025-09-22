@@ -8,7 +8,6 @@ type SocialMediaLink = {
   category:
     | "Professional Networks"
     | "Development Platforms"
-    | "Apps"
     | "Social Media"
     | "Contact"
     | "Other";

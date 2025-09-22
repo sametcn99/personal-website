@@ -1,18 +1,14 @@
-import AccountTree from "@mui/icons-material/AccountTree";
 import BarChart from "@mui/icons-material/BarChart";
 import DataObject from "@mui/icons-material/DataObject";
 import Description from "@mui/icons-material/Description";
-import Edit from "@mui/icons-material/Edit";
 import GitHub from "@mui/icons-material/GitHub";
 import Instagram from "@mui/icons-material/Instagram";
 import LinkedIn from "@mui/icons-material/LinkedIn";
 import MailOutline from "@mui/icons-material/MailOutline";
 import MusicNote from "@mui/icons-material/MusicNote";
 import QuestionMark from "@mui/icons-material/QuestionMark";
-import Security from "@mui/icons-material/Security";
 import Telegram from "@mui/icons-material/Telegram";
 import Theaters from "@mui/icons-material/Theaters";
-import Visibility from "@mui/icons-material/Visibility";
 import WhatsApp from "@mui/icons-material/WhatsApp";
 import X from "@mui/icons-material/X";
 import YouTube from "@mui/icons-material/YouTube";
@@ -51,33 +47,6 @@ export const socialMediaLinks: SocialMediaLink[] = [
     external: true,
     category: "Development Platforms",
     icon: <DataObject />,
-  },
-  {
-    type: ["writer", "write", "editor", "markdown"],
-    link: "/writer",
-    label: "Writer",
-    visible: true,
-    external: false,
-    category: "Apps",
-    icon: <Edit />,
-  },
-  {
-    type: ['MermaidViewer'],
-    link: new URL("https://mermaid-viewer-alpha.vercel.app"),
-    label: "Mermaid Viewer",
-    visible: true,
-    external: false,
-    category: "Apps",
-    icon: <AccountTree />,
-  },
-  {
-    type: ['EnvProtector'],
-    link: new URL("https://marketplace.visualstudio.com/items?itemName=sametcn99.env-protector"),
-    label: "Env Protector",
-    visible: true,
-    external: false,
-    category: "Apps",
-    icon: <Security />,
   },
   {
     type: ["instagram", "ig"],
@@ -141,17 +110,6 @@ export const socialMediaLinks: SocialMediaLink[] = [
     external: false,
     category: "Contact",
     icon: <MailOutline />,
-  },
-  {
-    type: ["gpv", "githubprofileviewer", "gitpv"],
-    link: new URL(
-      "https://github-profile-viewer.azurewebsites.net/p/sametcn99",
-    ),
-    label: "GPV",
-    visible: true,
-    external: true,
-    category: "Development Platforms",
-    icon: <Visibility />,
   },
   {
     type: ["cv", "ozgecmis", "letter", "resume"],
@@ -250,8 +208,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
 export const categoryOrder: Record<SocialMediaLink["category"], number> = {
   "Professional Networks": 1,
   "Development Platforms": 2,
-  Apps: 3,
-  Contact: 4,
-  "Social Media": 5,
-  Other: 6,
+  Contact: 3,
+  "Social Media": 4,
+  Other: 5,
 };

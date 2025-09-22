@@ -12,16 +12,24 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
+import { useTheme } from "@mui/material/styles";
 
 export default function LinksSection() {
   const { showAllLinks, setShowAllLinks, linksByCategory, hiddenLinks } =
     useLinks();
+  const theme = useTheme();
 
   return (
     <Box flex={{ xs: 1, md: "1 1 50%" }}>
       <Paper
-        elevation={2}
-        sx={{ p: 3, height: "fit-content" }}
+        elevation={0}
+        sx={{
+          p: 3,
+          height: "fit-content",
+          backgroundColor: "transparent",
+          border: "1px solid",
+          borderColor: "divider",
+        }}
         variant="outlined"
       >
         <Typography
@@ -31,14 +39,18 @@ export default function LinksSection() {
             display: "flex",
             alignItems: "center",
             gap: 1,
-            fontWeight: "medium",
+            fontWeight: 600,
+            background: `linear-gradient(45deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
+            backgroundClip: "text",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
           }}
         >
-          <OpenInNewIcon color="primary" />
-          Links
+          <OpenInNewIcon sx={{ color: theme.palette.primary.main }} />
+          Connect With Me
         </Typography>
-        <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-          Connect with me on various platforms
+        <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
+          Find me on various platforms and social networks
         </Typography>
 
         {Object.entries(linksByCategory).map(([category, links]) => (
@@ -46,9 +58,14 @@ export default function LinksSection() {
             <Chip
               label={category}
               size="small"
-              color="primary"
-              variant="outlined"
-              sx={{ mb: 1 }}
+              sx={{
+                mb: 2,
+                background: `linear-gradient(45deg, ${theme.palette.primary.main}20, ${theme.palette.secondary.main}20)`,
+                border: "1px solid",
+                borderColor: "primary.main",
+                color: "primary.main",
+                fontWeight: 600,
+              }}
             />
             <List dense>
               {links.map((link) => (
@@ -59,10 +76,15 @@ export default function LinksSection() {
                     target={link.external ? "_blank" : "_self"}
                     rel={link.external ? "noopener noreferrer" : undefined}
                     sx={{
-                      borderRadius: 1,
-                      mb: 0.5,
+                      borderRadius: 2,
+                      mb: 1,
+                      border: "1px solid transparent",
+                      transition: "all 0.3s ease",
                       "&:hover": {
-                        backgroundColor: "action.hover",
+                        backgroundColor: `${theme.palette.primary.main}10`,
+                        borderColor: "primary.main",
+                        transform: "translateX(8px)",
+                        boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
                       },
                     }}
                   >
@@ -74,6 +96,7 @@ export default function LinksSection() {
                       slotProps={{
                         primary: {
                           fontSize: "0.9rem",
+                          fontWeight: 500,
                         },
                       }}
                     />
@@ -107,7 +130,6 @@ export default function LinksSection() {
               alignItems: "center",
               gap: 0.5,
               transition: "all 0.3s ease-in-out",
-              transform: showAllLinks ? "rotate(0deg)" : "rotate(0deg)",
               "&:hover": {
                 color: "text.primary",
               },

@@ -5,7 +5,7 @@ import BackToHome from "@/components/BackToHome";
 import ReadingTime from "@/components/ReadingTime";
 import ScrollProgress from "@/components/ScrollProgress";
 import ShareButton from "@/components/ShareButton";
-import { alpha, Box, Chip, Container, Paper, Typography } from "@mui/material";
+import { Box, Chip, Container, Paper, Typography } from "@mui/material";
 
 interface ArticleData {
   href: string;
@@ -49,12 +49,13 @@ export default function ArticleWrapper({
         {/* Article Meta */}
         {currentArticle && (
           <Paper
-            elevation={1}
+            elevation={0}
             sx={{
               p: 2,
               mb: 3,
-              backgroundColor: (theme) =>
-                alpha(theme.palette.primary.main, 0.02),
+              backgroundColor: "transparent",
+              border: "1px solid",
+              borderColor: "divider",
             }}
           >
             <Box

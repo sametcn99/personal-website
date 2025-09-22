@@ -1,5 +1,6 @@
 "use client";
 
+import { Box } from "@mui/material";
 import type React from "react";
 import {
   BlockQuote,
@@ -197,5 +198,15 @@ export function MarkdownPreview({ content }: MarkdownPreviewProps) {
     return <div>No content to preview</div>;
   }
 
-  return <div>{parseMarkdown(content)}</div>;
+  return (
+    <Box 
+      sx={{
+        fontSize: 'inherit',
+        lineHeight: 'inherit',
+        fontFamily: 'inherit'
+      }}
+    >
+      {parseMarkdown(content)}
+    </Box>
+  );
 }

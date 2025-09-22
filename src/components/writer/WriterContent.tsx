@@ -43,8 +43,9 @@ export function WriterContent({
         height: "100%",
       },
       "& .MuiInputBase-input": {
-        fontSize: isFocusMode ? "16px" : "14px",
-        lineHeight: 1.6,
+        fontSize: "1rem", // 16px - standardize with preview mode
+        lineHeight: 1.7, // Match with Paragraph component
+        fontFamily: "inherit",
         height: "100% !important",
         overflow: "auto !important",
       },
@@ -72,8 +73,9 @@ export function WriterContent({
     borderColor: "divider",
     borderRadius: isFocusMode ? 1 : 2,
     padding: isFocusMode ? "16.5px 14px" : "16.5px 14px", // MUI TextField'ın default padding değerleri
-    fontSize: isFocusMode ? "16px" : "14px",
-    lineHeight: 1.6,
+    fontSize: "1rem", // 16px - match with edit mode
+    lineHeight: 1.7, // Match with edit mode and Paragraph component
+    fontFamily: "inherit",
     overflow: "auto",
     position: "relative",
     "&:hover": !isPreview
@@ -81,6 +83,15 @@ export function WriterContent({
           borderColor: "primary.main",
         }
       : {},
+    // Override MDX component styles to match edit mode
+    "& .MuiTypography-root": {
+      fontSize: "inherit !important",
+      lineHeight: "inherit !important",
+      fontFamily: "inherit !important",
+      "&:not(:first-of-type)": { 
+        mt: 1 // Reduce margin for better consistency
+      },
+    },
   });
 
   const placeholder = isFocusMode

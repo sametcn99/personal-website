@@ -1,6 +1,8 @@
 "use client";
 
 import type React from "react";
+import { Box } from "@mui/material";
+import type { SxProps, Theme } from "@mui/material/styles";
 import {
   BlockQuote,
   CodeComponent,
@@ -18,9 +20,82 @@ import {
 
 interface MarkdownPreviewProps {
   content: string;
+  isFocusMode?: boolean;
 }
 
-export function MarkdownPreview({ content }: MarkdownPreviewProps) {
+export function MarkdownPreview({ content, isFocusMode = false }: MarkdownPreviewProps) {
+  // Font stillerini TextField ile uyumlu hale getirmek için wrapper styles
+  const getPreviewStyles = (): SxProps<Theme> => ({
+    fontSize: isFocusMode ? "16px" : "14px",
+    lineHeight: 1.6,
+    fontFamily: "inherit", // MUI TextField'ın varsayılan font family'sini kullan
+    "& p": {
+      fontSize: "inherit",
+      lineHeight: "inherit",
+      margin: "0 0 16px 0", // Paragraflar arası mesafe
+      "&:last-child": {
+        marginBottom: 0,
+      },
+    },
+    "& h1, & h2, & h3": {
+      fontSize: "inherit",
+      lineHeight: "inherit",
+      fontWeight: 600,
+      margin: "0 0 16px 0",
+      "&:last-child": {
+        marginBottom: 0,
+      },
+    },
+    "& h1": {
+      fontSize: isFocusMode ? "20px" : "18px",
+    },
+    "& h2": {
+      fontSize: isFocusMode ? "18px" : "16px",
+    },
+    "& h3": {
+      fontSize: isFocusMode ? "16px" : "15px",
+    },
+    "& code": {
+      fontSize: "inherit",
+      fontFamily: "monospace",
+    },
+    "& pre": {
+      fontSize: "inherit",
+      lineHeight: "inherit",
+      margin: "0 0 16px 0",
+      "&:last-child": {
+        marginBottom: 0,
+      },
+    },
+    "& blockquote": {
+      fontSize: "inherit",
+      lineHeight: "inherit",
+      margin: "0 0 16px 0",
+      "&:last-child": {
+        marginBottom: 0,
+      },
+    },
+    "& ul, & ol": {
+      fontSize: "inherit",
+      lineHeight: "inherit",
+      margin: "0 0 16px 0",
+      paddingLeft: "20px",
+      "&:last-child": {
+        marginBottom: 0,
+      },
+    },
+    "& li": {
+      fontSize: "inherit",
+      lineHeight: "inherit",
+    },
+    "& hr": {
+      margin: "16px 0",
+      "&:last-child": {
+        marginBottom: 0,
+      },
+    },
+  });
+
   // Basit markdown parsing
   const parseMarkdown = (text: string) => {
     const lines = text.split("\n");
@@ -197,5 +272,9 @@ export function MarkdownPreview({ content }: MarkdownPreviewProps) {
     return <div>No content to preview</div>;
   }
 
-  return <div>{parseMarkdown(content)}</div>;
+  return (
+    <Box sx={getPreviewStyles()}>
+      {parseMarkdown(content)}
+    </Box>
+  );
 }

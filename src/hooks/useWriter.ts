@@ -312,31 +312,34 @@ export function useWriter() {
     }
   }, [currentEntryId, entries, saveEntry]);
 
-  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
-    // Ctrl+S for save
-    if (e.ctrlKey && e.key === "s" && !e.shiftKey) {
-      e.preventDefault();
-      handleQuickSave();
-    }
-    // Ctrl+Shift+S for save as
-    else if (e.ctrlKey && e.shiftKey && e.key === "S") {
-      e.preventDefault();
-      setShowSaveAsDialog(true);
-    }
-    // Ctrl+Z for undo
-    else if (e.ctrlKey && !e.shiftKey && e.key === "z") {
-      e.preventDefault();
-      undo();
-    }
-    // Ctrl+Shift+Z or Ctrl+Y for redo
-    else if (
-      (e.ctrlKey && e.shiftKey && e.key === "Z") ||
-      (e.ctrlKey && e.key === "y")
-    ) {
-      e.preventDefault();
-      redo();
-    }
-  }, [handleQuickSave, undo, redo]);
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      // Ctrl+S for save
+      if (e.ctrlKey && e.key === "s" && !e.shiftKey) {
+        e.preventDefault();
+        handleQuickSave();
+      }
+      // Ctrl+Shift+S for save as
+      else if (e.ctrlKey && e.shiftKey && e.key === "S") {
+        e.preventDefault();
+        setShowSaveAsDialog(true);
+      }
+      // Ctrl+Z for undo
+      else if (e.ctrlKey && !e.shiftKey && e.key === "z") {
+        e.preventDefault();
+        undo();
+      }
+      // Ctrl+Shift+Z or Ctrl+Y for redo
+      else if (
+        (e.ctrlKey && e.shiftKey && e.key === "Z") ||
+        (e.ctrlKey && e.key === "y")
+      ) {
+        e.preventDefault();
+        redo();
+      }
+    },
+    [handleQuickSave, undo, redo],
+  );
 
   const handleExitFocus = useCallback(() => {
     if (document.fullscreenElement) {

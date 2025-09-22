@@ -8,7 +8,6 @@ import { LoadDialog } from "./LoadDialog";
 import { SaveDialog } from "./SaveDialog";
 import { WriterContent } from "./WriterContent";
 import { WriterHeader } from "./WriterHeader";
-import { WriterStatusAlerts } from "./WriterStatusAlerts";
 import { WriterToolbar } from "./WriterToolbar";
 
 export function WriterEditor() {
@@ -122,8 +121,6 @@ export function WriterEditor() {
                   <Box
                     sx={{ display: "flex", flexDirection: "column", gap: 2 }}
                   >
-                    <WriterStatusAlerts hasUnsavedChanges={hasUnsavedChanges} />
-
                     <WriterToolbar
                       isPreview={isPreview}
                       hasContent={content.trim() !== ""}

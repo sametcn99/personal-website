@@ -1,6 +1,7 @@
 "use client";
 
 import { Box, Container, TextField, Typography } from "@mui/material";
+import type { SxProps, Theme } from "@mui/material/styles";
 import type { RefObject } from "react";
 import { MarkdownPreview } from "./MarkdownPreview";
 
@@ -23,95 +24,33 @@ export function WriterContent({
   isFocusMode = false,
   fullscreenFullWidth = false,
 }: WriterContentProps) {
-  if (isPreview) {
-    const previewContent = (
-      <Box
-        sx={{
-          height: "100%",
-          overflow: "auto",
-          ...(isFocusMode && { p: fullscreenFullWidth ? 2 : 0 }),
-        }}
-      >
-        {content.trim() ? (
-          <MarkdownPreview content={content} />
-        ) : (
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              height: isFocusMode ? "50%" : "200px",
-              flexDirection: "column",
-              gap: 2,
-            }}
-          >
-            <Typography variant="h6" color="text.secondary">
-              Nothing to preview
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              Write some markdown content first.
-            </Typography>
-          </Box>
-        )}
-      </Box>
-    );
-
+  // Ortak container sx styles
+  const getContainerSx = (): SxProps<Theme> => {
     if (isFocusMode) {
-      return (
-        <Container
-          maxWidth={fullscreenFullWidth ? false : "md"}
-          sx={{ height: "100%", px: fullscreenFullWidth ? 0 : undefined }}
-        >
-          {previewContent}
-        </Container>
-      );
+      return {
+        height: "100%",
+        px: fullscreenFullWidth ? 0 : undefined,
+      };
     }
+    return {};
+  };
 
-    return (
-      <Box
-        sx={{
-          height: "100%",
-          overflow: "auto",
-          p: 3,
-          borderRadius: 2,
-        }}
-      >
-        {previewContent}
-      </Box>
-    );
-  }
-
-  const textFieldSx = isFocusMode
-    ? {
+  // Ortak field sx styles - hem textarea hem preview için
+  const getFieldSx = (): SxProps<Theme> => {
+    const baseSx: SxProps<Theme> = {
+      height: "100%",
+      "& .MuiInputBase-root": {
         height: "100%",
-        "& .MuiInputBase-root": {
-          height: "100%",
-        },
-        "& .MuiInputBase-input": {
-          fontFamily: 'Monaco, "Cascadia Code", "Roboto Mono", monospace',
-          fontSize: "16px",
-          lineHeight: 1.6,
-          height: "100% !important",
-          overflow: "auto !important",
-        },
-        "& .MuiOutlinedInput-root": {
-          borderRadius: 1,
-        },
-      }
-    : {
-        height: "100%",
-        "& .MuiInputBase-root": {
-          height: "100%",
-        },
-        "& .MuiInputBase-input": {
-          fontFamily: 'Monaco, "Cascadia Code", "Roboto Mono", monospace',
-          fontSize: "14px",
-          lineHeight: 1.6,
-          height: "100% !important",
-          overflow: "auto !important",
-        },
-        "& .MuiOutlinedInput-root": {
-          borderRadius: 2,
+      },
+      "& .MuiInputBase-input": {
+        fontSize: isFocusMode ? "16px" : "14px",
+        lineHeight: 1.6,
+        height: "100% !important",
+        overflow: "auto !important",
+      },
+      "& .MuiOutlinedInput-root": {
+        borderRadius: isFocusMode ? 1 : 2,
+        ...(!isFocusMode && {
           "&:hover": {
             borderColor: "primary.main",
           },
@@ -119,8 +58,30 @@ export function WriterContent({
             borderColor: "primary.main",
             boxShadow: "0 0 0 2px rgba(25, 118, 210, 0.2)",
           },
-        },
-      };
+        }),
+      },
+    };
+
+    return baseSx;
+  };
+
+  // Preview için textarea'yı taklit eden box sx
+  const getPreviewBoxSx = (): SxProps<Theme> => ({
+    height: "100%",
+    border: "1px solid",
+    borderColor: "divider",
+    borderRadius: isFocusMode ? 1 : 2,
+    padding: isFocusMode ? "16.5px 14px" : "16.5px 14px", // MUI TextField'ın default padding değerleri
+    fontSize: isFocusMode ? "16px" : "14px",
+    lineHeight: 1.6,
+    overflow: "auto",
+    position: "relative",
+    "&:hover": !isPreview
+      ? {
+          borderColor: "primary.main",
+        }
+      : {},
+  });
 
   const placeholder = isFocusMode
     ? "Start writing your markdown content here... (Press F11 to toggle fullscreen)"
@@ -136,7 +97,38 @@ Try some examples:
 1. Numbered list
 > Blockquote`;
 
-  const textField = (
+  // Empty state preview content
+  const emptyStateContent = (
+    <Box
+      sx={
+        {
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          height: "100%",
+          flexDirection: "column",
+          gap: 2,
+          color: "text.secondary",
+        } satisfies SxProps<Theme>
+      }
+    >
+      <Typography variant="h6">Nothing to preview</Typography>
+      <Typography variant="body2">
+        Write some markdown content first.
+      </Typography>
+    </Box>
+  );
+
+  // Main content wrapper - preview için textarea benzeri görünüm
+  const contentWrapper = isPreview ? (
+    <Box sx={getPreviewBoxSx()}>
+      {content.trim() ? (
+        <MarkdownPreview content={content} />
+      ) : (
+        emptyStateContent
+      )}
+    </Box>
+  ) : (
     <TextField
       ref={textFieldRef}
       fullWidth
@@ -146,20 +138,22 @@ Try some examples:
       onKeyDown={onKeyDown}
       placeholder={placeholder}
       variant="outlined"
-      sx={textFieldSx}
+      sx={getFieldSx()}
     />
   );
 
+  // Focus mode için container
   if (isFocusMode) {
     return (
       <Container
         maxWidth={fullscreenFullWidth ? false : "md"}
-        sx={{ height: "100%", px: fullscreenFullWidth ? 0 : undefined }}
+        sx={getContainerSx()}
       >
-        {textField}
+        {contentWrapper}
       </Container>
     );
   }
 
-  return textField;
+  // Normal mode
+  return contentWrapper;
 }

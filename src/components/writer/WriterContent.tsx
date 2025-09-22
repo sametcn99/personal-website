@@ -78,8 +78,8 @@ export function WriterContent({
     position: "relative",
     "&:hover": !isPreview
       ? {
-        borderColor: "primary.main",
-      }
+          borderColor: "primary.main",
+        }
       : {},
   });
 

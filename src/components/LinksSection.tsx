@@ -116,8 +116,7 @@ export default function LinksSection() {
 
         {/* See all links toggle */}
         <Box sx={{ mt: 2, textAlign: "left" }}>
-          <Typography
-            variant="caption"
+          <Box
             component="button"
             onClick={() => setShowAllLinks(!showAllLinks)}
             sx={{
@@ -130,10 +129,26 @@ export default function LinksSection() {
               alignItems: "center",
               gap: 0.5,
               transition: "all 0.3s ease-in-out",
+              p: 1,
+              borderRadius: 1,
+              minHeight: 44, // Better touch target for mobile
+              minWidth: 44, // Better touch target for mobile
               "&:hover": {
                 color: "text.primary",
+                backgroundColor: "action.hover",
+              },
+              "&:active": {
+                backgroundColor: "action.selected",
+              },
+              "&:focus-visible": {
+                outline: "2px solid",
+                outlineColor: "primary.main",
+                outlineOffset: 2,
               },
             }}
+            aria-label={
+              showAllLinks ? "Hide additional links" : "Show all links"
+            }
           >
             <Box
               sx={{
@@ -149,8 +164,10 @@ export default function LinksSection() {
                 <ExpandMoreIcon fontSize="small" />
               )}
             </Box>
-            {showAllLinks ? "hide" : "see all"}
-          </Typography>
+            <Typography variant="caption" sx={{ fontSize: "0.8rem" }}>
+              {showAllLinks ? "hide" : "see all"}
+            </Typography>
+          </Box>
         </Box>
 
         {/* Hidden links when showing all */}

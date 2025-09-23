@@ -88,8 +88,8 @@ export function WriterContent({
       fontSize: "inherit !important",
       lineHeight: "inherit !important",
       fontFamily: "inherit !important",
-      "&:not(:first-of-type)": { 
-        mt: 1 // Reduce margin for better consistency
+      "&:not(:first-of-type)": {
+        mt: 1, // Reduce margin for better consistency
       },
     },
   });

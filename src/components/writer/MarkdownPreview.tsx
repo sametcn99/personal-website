@@ -199,11 +199,11 @@ export function MarkdownPreview({ content }: MarkdownPreviewProps) {
   }
 
   return (
-    <Box 
+    <Box
       sx={{
-        fontSize: 'inherit',
-        lineHeight: 'inherit',
-        fontFamily: 'inherit'
+        fontSize: "inherit",
+        lineHeight: "inherit",
+        fontFamily: "inherit",
       }}
     >
       {parseMarkdown(content)}

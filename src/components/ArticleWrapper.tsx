@@ -48,16 +48,7 @@ export default function ArticleWrapper({
 
         {/* Article Meta */}
         {currentArticle && (
-          <Paper
-            elevation={0}
-            sx={{
-              p: 2,
-              mb: 3,
-              backgroundColor: "transparent",
-              border: "1px solid",
-              borderColor: "divider",
-            }}
-          >
+          <Box>
             <Box
               sx={{
                 display: "flex",
@@ -141,7 +132,7 @@ export default function ArticleWrapper({
                 </Box>
               )}
             </Box>
-          </Paper>
+          </Box>
         )}
 
         {/* Main Content */}

@@ -34,11 +34,7 @@ export function MermaidComponent({ children, id }: MermaidProps) {
             return Number.isNaN(r) ? 8 : r * 2;
           })(),
           overflow: "hidden",
-          boxShadow: theme.shadows[1],
-          "&:hover": { boxShadow: theme.shadows[3] },
-          transition: theme.transitions.create(["box-shadow"], {
-            duration: theme.transitions.duration.short,
-          }),
+          border: `1px solid ${theme.palette.divider}`,
           minHeight: "200px",
         }}
       >

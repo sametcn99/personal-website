@@ -1,104 +1,58 @@
 "use client";
 import { createTheme } from "@mui/material/styles";
-import { Roboto } from "next/font/google";
-
-const roboto = Roboto({
-  weight: ["300", "400", "500", "700"],
-  subsets: ["latin"],
-  display: "swap",
-});
 
 const theme = createTheme({
-  colorSchemes: {
-    light: {
-      palette: {
-        primary: {
-          main: "#3f51b5",
-          light: "#757de8",
-          dark: "#002984",
-        },
-        secondary: {
-          main: "#f50057",
-          light: "#ff4081",
-          dark: "#c51162",
-        },
-        text: {
-          primary: "#212121",
-          secondary: "#757575",
-        },
-        divider: "#e0e0e0",
-        background: {
-          paper: "#ffffff",
-          default: "#fafafa",
-        },
-        error: {
-          main: "#f44336",
-        },
-        warning: {
-          main: "#ff9800",
-        },
-        info: {
-          main: "#2196f3",
-        },
-        success: {
-          main: "#4caf50",
-        },
-      },
+  palette: {
+    primary: {
+      main: "#90caf9",
     },
-    dark: {
-      palette: {
-        primary: {
-          main: "#90caf9",
-          light: "#e3f2fd",
-          dark: "#42a5f5",
-        },
-        secondary: {
-          main: "#f48fb1",
-          light: "#fce4ec",
-          dark: "#ad2d5f",
-        },
-        text: {
-          primary: "#ffffff",
-          secondary: "#b0b0b0",
-        },
-        divider: "#333333",
-        background: {
-          paper: "#000000",
-          default: "#0a0a0aff",
-        },
-        error: {
-          main: "#f44336",
-        },
-        warning: {
-          main: "#ff9800",
-        },
-        info: {
-          main: "#2196f3",
-        },
-        success: {
-          main: "#4caf50",
-        },
-      },
+    secondary: {
+      main: "#ad2d5f",
     },
-  },
-  cssVariables: {
-    colorSchemeSelector: "class",
-  },
-  typography: {
-    fontFamily: roboto.style.fontFamily,
+    text: {
+      primary: "#dbdbdbff",
+      secondary: "#b0b0b0",
+    },
+    divider: "#5f5f5fff",
+    background: {
+      paper: "#0c0c0cff",
+      default: "#0e0e0eff",
+    },
+    error: {
+      main: "#f44336",
+    },
+    warning: {
+      main: "#ff9800",
+    },
+    info: {
+      main: "#2196f3",
+    },
+    success: {
+      main: "#4caf50",
+    },
+    // Add action colors for better icon visibility
+    action: {
+      active: "#90caf9",
+      hover: "rgba(144, 202, 249, 0.04)",
+      selected: "rgba(144, 202, 249, 0.12)",
+      disabled: "rgba(144, 202, 249, 0.26)",
+      disabledBackground: "rgba(144, 202, 249, 0.12)",
+    },
   },
   components: {
-    MuiAlert: {
+    // Set default colors for MUI components
+    MuiSvgIcon: {
       styleOverrides: {
         root: {
-          variants: [
-            {
-              props: { severity: "info" },
-              style: {
-                backgroundColor: "#60a5fa",
-              },
-            },
-          ],
+          // Default icon color when no color prop is specified
+          color: "#90caf9", // Use primary color as default
+        },
+      },
+    },
+    MuiIconButton: {
+      styleOverrides: {
+        root: {
+          color: "#90caf9", // Default IconButton color
         },
       },
     },

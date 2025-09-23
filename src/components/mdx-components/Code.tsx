@@ -77,11 +77,7 @@ export function CodeComponent({
         mb: 2,
         borderRadius: theme.shape.borderRadius,
         overflow: "hidden",
-        boxShadow: theme.shadows[1],
-        "&:hover": { boxShadow: theme.shadows[3] },
-        transition: theme.transitions.create(["box-shadow"], {
-          duration: theme.transitions.duration.short,
-        }),
+        border: `1px solid ${theme.palette.divider}`,
       }}
     >
       {/* Header with buttons */}

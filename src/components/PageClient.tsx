@@ -18,42 +18,6 @@ interface PageClientProps {
   blogPosts: ContentMetadata[];
 }
 
-// About Me Section Component
-function AboutMeSection() {
-  return (
-    <Paper
-      elevation={0}
-      sx={{
-        p: 4,
-        mb: 4,
-        backgroundColor: "transparent",
-        border: "1px solid",
-        borderColor: "divider",
-      }}
-    >
-      <Typography
-        variant="h4"
-        component="h2"
-        gutterBottom
-        sx={{ fontWeight: 600 }}
-      >
-        About Me
-      </Typography>
-      <Typography
-        variant="body1"
-        color="text.secondary"
-        sx={{ mb: 3, lineHeight: 1.7 }}
-      >
-        I&apos;m a passionate software developer with expertise in modern web
-        technologies. I love creating user-centric applications that solve
-        real-world problems and deliver exceptional user experiences.
-      </Typography>
-
-      <InfoGrid />
-    </Paper>
-  );
-}
-
 // Info Grid Component for About Section
 function InfoGrid() {
   const infoItems = [
@@ -333,7 +297,6 @@ function MainContent({
 }) {
   return (
     <Box sx={{ flex: { xs: "1", md: "2" } }}>
-      <AboutMeSection />
       <TechnicalGistsSection gistPosts={gistPosts} />
       <BlogPostsSection blogPosts={blogPosts} />
     </Box>

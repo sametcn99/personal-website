@@ -5,7 +5,7 @@ import BackToHome from "@/components/BackToHome";
 import ReadingTime from "@/components/ReadingTime";
 import ScrollProgress from "@/components/ScrollProgress";
 import ShareButton from "@/components/ShareButton";
-import { Box, Chip, Container, Paper, Typography } from "@mui/material";
+import { Box, Chip, Container, Typography } from "@mui/material";
 
 interface ArticleData {
   href: string;

@@ -73,7 +73,7 @@ function BlogPostsSection({ blogPosts }: { blogPosts: ContentMetadata[] }) {
         Blog Posts
       </Typography>
       <Typography variant="body2" sx={{ mb: 3, color: "gray" }}>
-        Thoughts, experiences, and insights on technology and development
+        A collection of my thoughts on development and the passions that keep me inspired.
       </Typography>
       <PostsList posts={blogPosts.slice(0, 5)} />
     </Box>
@@ -97,7 +97,7 @@ function TechnicalGistsSection({
         Technical Gists
       </Typography>
       <Typography variant="body2" sx={{ mb: 3, color: "gray" }}>
-        Code snippets, tutorials, and technical documentation
+        Code snippets, tutorials, and technical documentation.
       </Typography>
       <PostsList posts={gistPosts.slice(0, 5)} />
     </Box>

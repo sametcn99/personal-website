@@ -33,7 +33,7 @@ function LinksSection() {
         I&apos;m too lazy to bookmark things properly, so here&apos;s literally
         every platform I&apos;ve ever signed up for.
       </Typography>
-      <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2 }}>
+      <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
         {allLinks.map((link) => (
           <Typography
             key={link.label}

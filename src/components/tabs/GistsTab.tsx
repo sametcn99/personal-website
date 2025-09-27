@@ -24,6 +24,7 @@ import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import { useMemo } from "react";
+import Link from "next/link";
 
 interface GistsTabProps {
   gistPosts: ContentMetadata[];
@@ -50,7 +51,7 @@ export default function GistsTab({
   const filteredGists = useMemo(() => {
     // Filter out any items with missing required fields
     const validGists = gistPosts.filter(
-      (item) => item && item.title && item.href && item.publishedAt,
+      (item) => item?.title && item?.href && item?.publishedAt,
     );
 
     const filtered = searchQuery.trim()
@@ -195,7 +196,7 @@ export default function GistsTab({
           filteredGists.map((item) => (
             <ListItem disablePadding key={item.href}>
               <ListItemButton
-                component="a"
+                component={Link}
                 href={item.href}
                 sx={{
                   borderRadius: 1,

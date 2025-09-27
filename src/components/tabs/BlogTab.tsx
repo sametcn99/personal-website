@@ -20,6 +20,7 @@ import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import { useMemo } from "react";
+import Link from "next/link";
 
 interface BlogTabProps {
   blogPosts: ContentMetadata[];
@@ -195,7 +196,7 @@ export default function BlogTab({
           filteredBlogs.map((item) => (
             <ListItem disablePadding key={item.title}>
               <ListItemButton
-                component="a"
+                component={Link}
                 href={item.href}
                 sx={{
                   borderRadius: 1,

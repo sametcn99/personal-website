@@ -1,6 +1,7 @@
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import { Box, Link, Paper, Typography } from "@mui/material";
+import NextLink from "next/link";
 
 interface ArticleData {
   href: string;
@@ -39,6 +40,7 @@ export default function ArticleNavigation({
           }}
         >
           <Link
+            component={NextLink}
             href={prevArticle.href}
             sx={{ textDecoration: "none", color: "inherit" }}
           >
@@ -72,6 +74,7 @@ export default function ArticleNavigation({
           }}
         >
           <Link
+            component={NextLink}
             href={nextArticle.href}
             sx={{ textDecoration: "none", color: "inherit" }}
           >

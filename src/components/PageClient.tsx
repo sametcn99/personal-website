@@ -5,6 +5,7 @@ import { useLinks } from "@/hooks/useLinks";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
+import Link from "next/link";
 
 interface PageClientProps {
   gistPosts: ContentMetadata[];
@@ -34,27 +35,46 @@ function LinksSection() {
         every platform I&apos;ve ever signed up for.
       </Typography>
       <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
-        {allLinks.map((link) => (
-          <Typography
-            key={link.label}
-            variant="body2"
-            component="a"
-            href={link.link.toString()}
-            target={link.external ? "_blank" : "_self"}
-            rel={link.external ? "noopener noreferrer" : undefined}
-            sx={{
-              color: "text.secondary",
-              textDecoration: "none",
-              transition: "color 0.2s ease",
-              "&:hover": {
-                color: "text.primary",
-                textDecoration: "underline",
-              },
-            }}
-          >
-            {link.label}
-          </Typography>
-        ))}
+        {allLinks.map((link) => {
+          const isExternal = link.external || /^https?:\/\//.test(link.link.toString());
+          const commonSx = {
+            color: "text.secondary",
+            textDecoration: "none",
+            transition: "color 0.2s ease",
+            "&:hover": {
+              color: "text.primary",
+              textDecoration: "underline",
+            },
+          } as const;
+
+          if (isExternal) {
+            return (
+              <Typography
+                key={link.label}
+                variant="body2"
+                component="a"
+                href={link.link.toString()}
+                target="_blank"
+                rel="noopener noreferrer"
+                sx={commonSx}
+              >
+                {link.label}
+              </Typography>
+            );
+          }
+
+          return (
+            <Typography
+              key={link.label}
+              variant="body2"
+              component={Link}
+              href={link.link.toString()}
+              sx={commonSx}
+            >
+              {link.label}
+            </Typography>
+          );
+        })}
       </Box>
     </Box>
   );
@@ -111,7 +131,7 @@ function PostsList({ posts }: { posts: ContentMetadata[] }) {
       {posts.map((post) => (
         <Box
           key={post.href}
-          component="a"
+          component={Link}
           href={post.href}
           sx={{
             display: "block",

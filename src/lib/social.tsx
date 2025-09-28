@@ -203,6 +203,15 @@ export const socialMediaLinks: SocialMediaLink[] = [
     category: "Social Media",
     icon: <QuestionMark />,
   },
+  {
+    type: ["goodreads", "gr"],
+    label: "Goodreads",
+    visible: false,
+    external: true,
+    link: new URL("https://www.goodreads.com/user/show/75848289-samet"),
+    category: "Social Media",
+    icon: <Theaters />,
+  }
 ];
 
 export const categoryOrder: Record<SocialMediaLink["category"], number> = {

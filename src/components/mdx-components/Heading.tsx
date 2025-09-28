@@ -14,7 +14,7 @@ export function H1({
         fontSize: "2.75rem",
         fontWeight: 700,
         letterSpacing: "-0.02em",
-        mb: 4,
+        mb: 2,
       }}
       gutterBottom
       {...props}
@@ -32,8 +32,8 @@ export function H2({
     <Typography
       variant="h2"
       sx={{
-        mt: 6,
-        mb: 3,
+        mt: 4,
+        mb: 2,
         fontSize: "2rem",
         fontWeight: 600,
         position: "relative",
@@ -62,8 +62,8 @@ export function H3({
     <Typography
       variant="h3"
       sx={{
-        mt: 5,
-        mb: 2.5,
+        mt: 4,
+        mb: 2,
         fontSize: "1.5rem",
         fontWeight: 500,
       }}

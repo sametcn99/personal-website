@@ -1,7 +1,6 @@
 "use client";
 
-import TimerIcon from "@mui/icons-material/Timer";
-import { Chip } from "@mui/material";
+import { Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 
 export default function ReadingTime() {
@@ -28,12 +27,8 @@ export default function ReadingTime() {
   }, []);
 
   return (
-    <Chip
-      icon={<TimerIcon />}
-      label={`${readingTime} min read`}
-      size="small"
-      variant="outlined"
-      color="primary"
-    />
+    <Typography component="span" variant="body2" color="text.secondary">
+      {readingTime} min read
+    </Typography>
   );
 }

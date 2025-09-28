@@ -5,7 +5,7 @@ import BackToHome from "@/components/BackToHome";
 import ReadingTime from "@/components/ReadingTime";
 import ScrollProgress from "@/components/ScrollProgress";
 import ShareButton from "@/components/ShareButton";
-import { Box, Chip, Container, Typography } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 
 interface ArticleData {
   href: string;
@@ -48,97 +48,90 @@ export default function ArticleWrapper({
 
         {/* Article Meta */}
         {currentArticle && (
-          <Box>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
+            {/* First row: Reading time, published date, and share button */}
             <Box
               sx={{
                 display: "flex",
-                flexDirection: "column",
-                gap: 2,
+                flexWrap: "wrap",
+                alignItems: "center",
+                justifyContent: "space-between",
               }}
             >
-              {/* First row: Reading time, published date, and share button */}
               <Box
                 sx={{
                   display: "flex",
                   flexWrap: "wrap",
-                  gap: 2,
+                  gap: 1,
                   alignItems: "center",
-                  justifyContent: "space-between",
                 }}
               >
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexWrap: "wrap",
-                    gap: 2,
-                    alignItems: "center",
-                  }}
-                >
+                <Typography variant="body2" color="text.secondary">
+                  {publishedLabel}:{" "}
+                  {new Date(currentArticle.lastModified).toLocaleDateString(
+                    "en-US",
+                    {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    },
+                  )}
                   <ReadingTime />
-                  <Typography variant="body2" color="text.secondary">
-                    {publishedLabel}:{" "}
-                    {new Date(currentArticle.lastModified).toLocaleDateString(
-                      "en-US",
-                      {
-                        year: "numeric",
-                        month: "long",
-                        day: "numeric",
-                      },
-                    )}
-                  </Typography>
-                </Box>
-
-                {/* Share Button */}
+                </Typography>
                 <ShareButton
                   title={currentArticle.title}
                   contentType={contentType}
                 />
               </Box>
-
-              {/* Second row: Language and Tags */}
-              {(language || tags.length > 0) && (
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexWrap: "wrap",
-                    gap: 1,
-                    alignItems: "center",
-                  }}
-                >
-                  {/* Language */}
-                  {language && (
-                    <Chip
-                      label={language.toUpperCase()}
-                      size="small"
-                      color="primary"
-                      variant="outlined"
-                    />
-                  )}
-
-                  {/* Tags */}
-                  {tags.length > 0 && (
-                    <>
-                      {tags.map((tag) => (
-                        <Chip
-                          key={tag}
-                          label={tag}
-                          size="small"
-                          variant="outlined"
-                          color="secondary"
-                        />
-                      ))}
-                    </>
-                  )}
-                </Box>
-              )}
             </Box>
+
+            {/* Second row: Language and Tags */}
+            {(language || tags.length > 0) && (
+              <Box
+                sx={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  gap: 1,
+                  alignItems: "center",
+                }}
+              >
+                {/* Language */}
+                {language && (
+                  <Typography
+                    component="span"
+                    variant="caption"
+                    color="text.secondary"
+                  >
+                    {language.toUpperCase()}
+                  </Typography>
+                )}
+
+                {/* Tags */}
+                {tags.length > 0 && (
+                  <>
+                    {tags.map((tag) => (
+                      <Typography
+                        key={tag}
+                        color="textSecondary"
+                        variant="caption"
+                      >
+                        #{tag}
+                      </Typography>
+                    ))}
+                  </>
+                )}
+              </Box>
+            )}
           </Box>
         )}
 
         {/* Main Content */}
-        <Box component="main" sx={{ mb: 4 }}>
-          {children}
-        </Box>
+        <Box component="article">{children}</Box>
 
         {/* Navigation between articles */}
         <ArticleNavigation

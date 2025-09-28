@@ -1,6 +1,6 @@
 import ArticleWrapper from "@/components/ArticleWrapper";
 import { JsonLd } from "@/components/JsonLd";
-import { formatDate, getGistPosts } from "@/lib/content";
+import { getGistPosts } from "@/lib/content";
 import { notFound } from "next/navigation";
 import { CustomMDX } from "../../../components/mdx";
 
@@ -115,17 +115,7 @@ export default async function Gist({ params }: PageParams) {
           },
         }}
       />
-      <h1 className="title font-semibold text-2xl tracking-tighter">
-        {post.metadata.title}
-      </h1>
-      <div className="flex justify-between items-center mt-2 mb-8 text-sm">
-        <p className="text-sm text-neutral-600 dark:text-neutral-400">
-          {formatDate(post.metadata.publishedAt)}
-        </p>
-      </div>
-      <article className="prose">
-        <CustomMDX source={post.content} />
-      </article>
+      <CustomMDX source={post.content} />
     </ArticleWrapper>
   );
 }

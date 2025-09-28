@@ -1,8 +1,6 @@
 "use client";
 
-import ShareIcon from "@mui/icons-material/Share";
-import { Chip, alpha } from "@mui/material";
-import { useTheme } from "@mui/material/styles";
+import { Typography } from "@mui/material";
 
 interface ShareButtonProps {
   title?: string;
@@ -13,8 +11,6 @@ export default function ShareButton({
   title,
   contentType = "article",
 }: ShareButtonProps) {
-  const theme = useTheme();
-
   const getDefaultTitle = () => {
     switch (contentType) {
       case "gist":
@@ -39,19 +35,18 @@ export default function ShareButton({
   };
 
   return (
-    <Chip
-      icon={<ShareIcon />}
-      label="Share"
+    <Typography
       onClick={handleShare}
-      clickable
-      color="secondary"
-      variant="outlined"
+      color="textSecondary"
+      variant="body2"
       sx={{
         cursor: "pointer",
         "&:hover": {
-          backgroundColor: alpha(theme.palette.secondary.main, 0.1),
+          textDecoration: "underline",
         },
       }}
-    />
+    >
+      Share this {contentType} &nbsp;
+    </Typography>
   );
 }

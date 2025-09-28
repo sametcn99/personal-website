@@ -19,8 +19,8 @@ import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
-import { useMemo } from "react";
 import Link from "next/link";
+import { useMemo } from "react";
 
 interface BlogTabProps {
   blogPosts: ContentMetadata[];

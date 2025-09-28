@@ -1,6 +1,6 @@
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-import { Box, Link, Paper, Typography } from "@mui/material";
+import { Box, Link, Typography } from "@mui/material";
 import NextLink from "next/link";
 
 interface ArticleData {
@@ -27,16 +27,13 @@ export default function ArticleNavigation({
     <Box sx={{ mt: 4, display: "flex", gap: 2, flexWrap: "wrap" }}>
       {/* Previous Article */}
       {prevArticle && (
-        <Paper
-          elevation={0}
+        <Box
           sx={{
             flex: 1,
             minWidth: 200,
             p: 2,
             backgroundColor: "transparent",
-            border: "1px solid",
-            borderColor: "divider",
-            "&:hover": { backgroundColor: "action.hover" },
+            "&:hover": { textDecoration: "underline" },
           }}
         >
           <Link
@@ -56,21 +53,18 @@ export default function ArticleNavigation({
               </Box>
             </Box>
           </Link>
-        </Paper>
+        </Box>
       )}
 
       {/* Next Article */}
       {nextArticle && (
-        <Paper
-          elevation={0}
+        <Box
           sx={{
             flex: 1,
             minWidth: 200,
             p: 2,
             backgroundColor: "transparent",
-            border: "1px solid",
-            borderColor: "divider",
-            "&:hover": { backgroundColor: "action.hover" },
+            "&:hover": { textDecoration: "underline" },
           }}
         >
           <Link
@@ -97,7 +91,7 @@ export default function ArticleNavigation({
               <NavigateNextIcon color="primary" />
             </Box>
           </Link>
-        </Paper>
+        </Box>
       )}
     </Box>
   );

@@ -36,7 +36,8 @@ function LinksSection() {
       </Typography>
       <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
         {allLinks.map((link) => {
-          const isExternal = link.external || /^https?:\/\//.test(link.link.toString());
+          const isExternal =
+            link.external || /^https?:\/\//.test(link.link.toString());
           const commonSx = {
             color: "text.secondary",
             textDecoration: "none",
@@ -93,7 +94,8 @@ function BlogPostsSection({ blogPosts }: { blogPosts: ContentMetadata[] }) {
         Blog Posts
       </Typography>
       <Typography variant="body2" sx={{ mb: 3, color: "gray" }}>
-        A collection of my thoughts on development and the passions that keep me inspired.
+        A collection of my thoughts on development and the passions that keep me
+        inspired.
       </Typography>
       <PostsList posts={blogPosts.slice(0, 5)} />
     </Box>

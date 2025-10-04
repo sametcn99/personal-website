@@ -211,6 +211,15 @@ export const socialMediaLinks: SocialMediaLink[] = [
     link: new URL("https://www.goodreads.com/user/show/75848289-samet"),
     category: "Social Media",
     icon: <Theaters />,
+  },
+  {
+    type: ["backloggd"],
+    label: "Backloggd",
+    visible: false,
+    external: true,
+    link: new URL("https://backloggd.com/u/sametc001"),
+    category: "Social Media",
+    icon: <Theaters />
   }
 ];
 

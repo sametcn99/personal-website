@@ -220,6 +220,15 @@ export const socialMediaLinks: SocialMediaLink[] = [
     link: new URL("https://backloggd.com/u/sametc001"),
     category: "Social Media",
     icon: <Theaters />
+  },
+  {
+    type: ["steam"],
+    label: "Steam",
+    visible: false,
+    external: true,
+    link: new URL("https://steamcommunity.com/id/sametc001"),
+    category: "Social Media",
+    icon: <Theaters />
   }
 ];
 

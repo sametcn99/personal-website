@@ -10,6 +10,7 @@ import Link from "next/link";
 interface PageClientProps {
   gistPosts: ContentMetadata[];
   blogPosts: ContentMetadata[];
+  projectPosts: ContentMetadata[];
 }
 
 function LinksSection() {
@@ -97,7 +98,32 @@ function BlogPostsSection({ blogPosts }: { blogPosts: ContentMetadata[] }) {
         A collection of my thoughts on development and the passions that keep me
         inspired.
       </Typography>
-      <PostsList posts={blogPosts.slice(0, 5)} />
+      <PostsList posts={blogPosts} />
+    </Box>
+  );
+}
+
+// Projects Section Component
+function ProjectsSection({
+  projectPosts,
+}: {
+  projectPosts: ContentMetadata[];
+}) {
+  return (
+    <Box sx={{ mb: 6 }}>
+      <Typography
+        variant="h4"
+        component="h2"
+        gutterBottom
+        sx={{ fontWeight: 600 }}
+      >
+        Projects
+      </Typography>
+      <Typography variant="body2" sx={{ mb: 3, color: "gray" }}>
+        A showcase of my personal projects and contributions to the developer
+        community.
+      </Typography>
+      <PostsList posts={projectPosts} />
     </Box>
   );
 }
@@ -121,7 +147,7 @@ function TechnicalGistsSection({
       <Typography variant="body2" sx={{ mb: 3, color: "gray" }}>
         Code snippets, tutorials, and technical documentation.
       </Typography>
-      <PostsList posts={gistPosts.slice(0, 5)} />
+      <PostsList posts={gistPosts} />
     </Box>
   );
 }
@@ -158,12 +184,17 @@ function PostsList({ posts }: { posts: ContentMetadata[] }) {
   );
 }
 
-export default function PageClient({ gistPosts, blogPosts }: PageClientProps) {
+export default function PageClient({
+  gistPosts,
+  blogPosts,
+  projectPosts,
+}: PageClientProps) {
   return (
     <Box sx={{ minHeight: "100vh" }}>
       <Container maxWidth="md" sx={{ py: 6 }}>
         <Box>
           <BlogPostsSection blogPosts={blogPosts} />
+          <ProjectsSection projectPosts={projectPosts} />
           <TechnicalGistsSection gistPosts={gistPosts} />
           <LinksSection />
         </Box>

@@ -219,7 +219,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
     external: true,
     link: new URL("https://backloggd.com/u/sametc001"),
     category: "Social Media",
-    icon: <Theaters />
+    icon: <Theaters />,
   },
   {
     type: ["steam"],
@@ -228,8 +228,8 @@ export const socialMediaLinks: SocialMediaLink[] = [
     external: true,
     link: new URL("https://steamcommunity.com/id/sametc001"),
     category: "Social Media",
-    icon: <Theaters />
-  }
+    icon: <Theaters />,
+  },
 ];
 
 export const categoryOrder: Record<SocialMediaLink["category"], number> = {

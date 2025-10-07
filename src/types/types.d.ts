@@ -25,9 +25,10 @@ type ContentMetadata = {
   author?: string;
   tags?: string[];
   language?: "tr" | "en" | string;
+  onProduction?: boolean;
 };
 
-type ContentType = "blog" | "gist";
+type ContentType = "blog" | "gist" | "project";
 
 interface ContentItem {
   metadata: ContentMetadata;

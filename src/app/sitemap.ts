@@ -1,5 +1,5 @@
 import { getGistPosts } from "@/app/gist/utils";
-import { getBlogPosts } from "@/lib/content";
+import { getBlogPosts, getProjectPosts } from "@/lib/content";
 import type { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -50,8 +50,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
+  const projectPosts = getProjectPosts();
+  const projectPages = projectPosts.map((post) => ({
+    url: `${baseUrl}/project/${post.slug}`,
+    lastModified: new Date(post.metadata.publishedAt),
+    changeFrequency: "monthly" as const,
+    priority: 0.6,
+  }));
   // Combine all pages
-  const allPages = [...staticPages, ...gistPages, ...blogPages];
+  const allPages = [
+    ...staticPages,
+    ...gistPages,
+    ...blogPages,
+    ...projectPages,
+  ];
 
   return allPages;
 }

@@ -1,0 +1,88 @@
+---
+title: node-genius-lyrics-gui
+publishedAt: 2024-05-24
+summary: An Electron application that provides a graphical user interface for interacting with the Genius Lyrics API to fetch and write song lyrics to audio file metadata tags.
+tags:
+  [Electron, Vue.js, Vite, Genius API, Desktop Application, Node.js, TypeScript]
+---
+
+# node-genius-lyrics-gui
+
+![Build](https://github.com/sametcn99/node-genius-lyrics-gui/actions/workflows/main.yml/badge.svg)
+
+[Github Repo](https://github.com/sametcn99/node-genius-lyrics-gui)
+
+I recommend to use cli tool [write-lyric-to-audio](https://sametcc.me/write-lyric-to-audio) for a more lightweight solution.
+
+## Overview
+
+This project is an Electron application designed to interact with the Genius Lyrics API, providing a graphical user interface for fetching and writing song lyrics to audio file metadata tags. It leverages modern web technologies including Vue.js for the frontend and Vite as the build tool for a fast development experience.
+
+### Key Features
+
+- 🎵 **Automatic Lyrics Fetching**: Automatically searches and fetches lyrics from Genius API
+- 📝 **Metadata Writing**: Writes lyrics directly to audio file metadata tags
+- 🎨 **User-Friendly Interface**: Clean and intuitive GUI built with Vue.js
+- 🔄 **Batch Processing**: Process multiple audio files simultaneously
+- 💾 **Local Storage**: Saves your recent searches and preferences
+- 🌐 **Cross-Platform**: Works on Windows, macOS, and Linux
+
+## Technical Stack
+
+- **Frontend**: Vue.js 3 with Composition API
+- **Backend**: Electron with Node.js
+- **Build Tool**: Vite for rapid development
+- **Language**: TypeScript for type safety
+- **API Integration**: Genius API for lyrics fetching
+- **File Processing**: node-id3 for metadata manipulation
+
+## Getting Started
+
+To get started with `node-genius-lyrics-gui`, follow these steps:
+
+1. **Clone the repository**:
+
+```bash
+git clone https://github.com/sametcn99/node-genius-lyrics-gui.git
+cd node-genius-lyrics-gui
+```
+
+2. **Install Dependencies**:
+
+```bash
+npm install
+```
+
+3. **Configure API Key**:
+
+- Sign up for a Genius API account
+- Create a `.env` file in the root directory
+- Add your API key: `GENIUS_API_KEY=your_api_key_here`
+
+4. **Start the Application**:
+
+```bash
+npm run start
+```
+
+## Development
+
+### Available Scripts
+
+- `npm run start`: Starts the application in development mode
+- `npm run build`: Builds the application for production
+- `npm run test`: Runs the test suite
+- `npm run lint`: Lints and fixes files
+
+### Project Structure
+
+```
+node-genius-lyrics-gui/
+├── src/
+│   ├── main/         # Electron main process
+│   ├── renderer/     # Vue.js frontend code
+│   └── shared/       # Shared types and utilities
+├── electron/         # Electron configuration
+├── tests/           # Test files
+└── vite.config.ts   # Vite configuration
+```

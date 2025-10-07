@@ -18,7 +18,7 @@ interface ArticleWrapperProps {
   currentArticle?: ArticleData | null;
   prevArticle?: ArticleData | null;
   nextArticle?: ArticleData | null;
-  contentType: "post" | "gist";
+  contentType: ContentType;
   publishedLabel?: string;
   prevLabel?: string;
   nextLabel?: string;

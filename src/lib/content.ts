@@ -18,10 +18,16 @@ function parseFrontmatter(
       ? titleMatch[1]
       : contentType === "gist"
         ? "Untitled Gist"
-        : "Untitled Post";
+        : contentType === "blog"
+          ? "Untitled Blog Post"
+          : "Untitled Project";
     const currentDate = new Date().toISOString().split("T")[0];
     const summaryText =
-      contentType === "gist" ? "A helpful gist" : "A blog post";
+      contentType === "gist"
+        ? "A short gist"
+        : contentType === "blog"
+          ? "A short blog post"
+          : "A short project description";
 
     return {
       metadata: {
@@ -132,6 +138,16 @@ export function getGistPosts(): ContentItem[] {
   return getMDXData(
     path.join(process.cwd(), "src", "content", "gists"),
     "gist",
+  );
+}
+
+/**
+ * Get all gist posts
+ */
+export function getProjectPosts(): ContentItem[] {
+  return getMDXData(
+    path.join(process.cwd(), "src", "content", "projects"),
+    "project",
   );
 }
 

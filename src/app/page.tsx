@@ -1,7 +1,17 @@
 import PageClient from "@/components/PageClient";
-import { getBlogPosts, getGistPosts } from "@/lib/content";
+import { getBlogPosts, getGistPosts, getProjectPosts } from "@/lib/content";
 
 export default function Home() {
+  // Get project posts and transform them to match the expected format
+  const projectPosts = getProjectPosts().map((post) => ({
+    title: post.metadata.title,
+    href: `/project/${post.slug}`,
+    publishedAt: post.metadata.publishedAt,
+    summary: post.metadata.summary,
+    tags: post.metadata.tags || [],
+    language: post.metadata.language || "en",
+  }));
+
   // Get gist posts and transform them to match the expected format
   const gistPosts = getGistPosts().map((post) => ({
     title: post.metadata.title,
@@ -22,5 +32,11 @@ export default function Home() {
     language: post.metadata.language || "en",
   }));
 
-  return <PageClient gistPosts={gistPosts} blogPosts={blogPosts} />;
+  return (
+    <PageClient
+      gistPosts={gistPosts}
+      blogPosts={blogPosts}
+      projectPosts={projectPosts}
+    />
+  );
 }

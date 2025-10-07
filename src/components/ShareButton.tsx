@@ -4,19 +4,21 @@ import { Typography } from "@mui/material";
 
 interface ShareButtonProps {
   title?: string;
-  contentType?: "gist" | "post" | "article";
+  contentType?: ContentType;
 }
 
 export default function ShareButton({
   title,
-  contentType = "article",
+  contentType = "blog",
 }: ShareButtonProps) {
   const getDefaultTitle = () => {
     switch (contentType) {
       case "gist":
         return "Technical Gist";
-      case "post":
+      case "blog":
         return "Blog Post";
+      case "project":
+        return "Project";
       default:
         return "Article";
     }

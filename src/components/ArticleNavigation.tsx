@@ -9,7 +9,7 @@ interface ArticleData {
 }
 
 interface ArticleNavigationProps {
-  contentType: ContentType
+  contentType: ContentType;
   prevArticle?: ArticleData | null;
   nextArticle?: ArticleData | null;
   prevLabel?: string;

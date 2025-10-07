@@ -135,6 +135,7 @@ export default function ArticleWrapper({
 
         {/* Navigation between articles */}
         <ArticleNavigation
+          contentType={contentType}
           prevArticle={prevArticle}
           nextArticle={nextArticle}
           prevLabel={prevLabel}

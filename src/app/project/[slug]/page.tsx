@@ -78,16 +78,16 @@ export default async function BlogPost({ params }: PageParams) {
   const nextPost =
     currentIndex < posts.length - 1 ? posts[currentIndex + 1] : null;
 
-  // Transform data to match BlogData interface
-  const transformToBlogData = (blogPost: typeof post) => ({
-    href: `/blog/${blogPost.slug}`,
+  // Transform data to match PostData interface
+  const transformToPostData = (blogPost: typeof post) => ({
+    href: `/project/${blogPost.slug}`,
     title: blogPost.metadata.title,
     lastModified: blogPost.metadata.publishedAt,
   });
 
-  const currentPost = transformToBlogData(post);
-  const prevPostData = prevPost ? transformToBlogData(prevPost) : null;
-  const nextPostData = nextPost ? transformToBlogData(nextPost) : null;
+  const currentPost = transformToPostData(post);
+  const prevPostData = prevPost ? transformToPostData(prevPost) : null;
+  const nextPostData = nextPost ? transformToPostData(nextPost) : null;
 
   return (
     <ArticleWrapper

@@ -9,6 +9,7 @@ interface ArticleData {
 }
 
 interface ArticleNavigationProps {
+  contentType: ContentType
   prevArticle?: ArticleData | null;
   nextArticle?: ArticleData | null;
   prevLabel?: string;
@@ -16,6 +17,7 @@ interface ArticleNavigationProps {
 }
 
 export default function ArticleNavigation({
+  contentType,
   prevArticle,
   nextArticle,
   prevLabel = "Previous",

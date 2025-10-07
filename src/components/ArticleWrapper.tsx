@@ -59,35 +59,25 @@ export default function ArticleWrapper({
               sx={{
                 display: "flex",
                 flexWrap: "wrap",
-                alignItems: "center",
-                justifyContent: "space-between",
+                gap: 1,
               }}
             >
-              <Box
-                sx={{
-                  display: "flex",
-                  flexWrap: "wrap",
-                  gap: 1,
-                  alignItems: "center",
-                }}
-              >
-                <Typography variant="body2" color="text.secondary">
-                  {publishedLabel}:{" "}
-                  {new Date(currentArticle.lastModified).toLocaleDateString(
-                    "en-US",
-                    {
-                      year: "numeric",
-                      month: "long",
-                      day: "numeric",
-                    },
-                  )}
-                  <ReadingTime />
-                </Typography>
-                <ShareButton
-                  title={currentArticle.title}
-                  contentType={contentType}
-                />
-              </Box>
+              <Typography variant="body2" color="text.secondary">
+                {publishedLabel}:{" "}
+                {new Date(currentArticle.lastModified).toLocaleDateString(
+                  "en-US",
+                  {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  },
+                )}
+              </Typography>
+              <ReadingTime />
+              <ShareButton
+                title={currentArticle.title}
+                contentType={contentType}
+              />
             </Box>
 
             {/* Second row: Language and Tags */}

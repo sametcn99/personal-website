@@ -117,7 +117,7 @@ export default async function BlogPost({ params }: PageParams) {
           },
         }}
       />
-      <article className="prose">
+      <article>
         <CustomMDX source={post.content} />
       </article>
     </ArticleWrapper>

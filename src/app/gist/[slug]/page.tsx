@@ -115,7 +115,9 @@ export default async function Gist({ params }: PageParams) {
           },
         }}
       />
-      <CustomMDX source={post.content} />
+      <article>
+        <CustomMDX source={post.content} />
+      </article>
     </ArticleWrapper>
   );
 }

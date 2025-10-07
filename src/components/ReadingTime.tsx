@@ -10,7 +10,7 @@ export default function ReadingTime() {
     setReadingTime(0);
 
     const timer = setTimeout(() => {
-      const mainContent = document.querySelector("main");
+      const mainContent = document.querySelector("article");
       if (!mainContent) {
         return;
       }

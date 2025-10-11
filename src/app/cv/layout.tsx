@@ -8,7 +8,7 @@ export default function BlogLayout({
   children: React.ReactNode;
 }) {
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="md">
       <BackToHome />
       {children}
       <SaveThisPage />

@@ -95,7 +95,7 @@ export default function RootLayout({
         <script
           async
           defer
-          src="https://umami.sametcc.me//umami.js"
+          src="https://umami.sametcc.me/umami.js"
           data-website-id="be8d6d00-6517-4fe6-8a97-e5d0f8434685"
         ></script>
       </head>

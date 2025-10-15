@@ -59,7 +59,11 @@ function parseFrontmatter(
       const trimmedKey = key.trim();
 
       // Handle arrays (like tags)
-      if (trimmedKey === "tags" && value.startsWith("[") && value.endsWith("]")) {
+      if (
+        trimmedKey === "tags" &&
+        value.startsWith("[") &&
+        value.endsWith("]")
+      ) {
         const tagsString = value.slice(1, -1);
         (metadata as Record<string, string | string[]>)[trimmedKey] = tagsString
           .split(",")
@@ -92,7 +96,11 @@ function parseFrontmatter(
       const joinedValue = valueLines.join(" ").replace(/^['"](.*)['"]$/, "$1");
 
       // Handle arrays (like tags) if someone used multiline array (rare)
-      if (trimmedKey === "tags" && joinedValue.startsWith("[") && joinedValue.endsWith("]")) {
+      if (
+        trimmedKey === "tags" &&
+        joinedValue.startsWith("[") &&
+        joinedValue.endsWith("]")
+      ) {
         const tagsString = joinedValue.slice(1, -1);
         (metadata as Record<string, string | string[]>)[trimmedKey] = tagsString
           .split(",")

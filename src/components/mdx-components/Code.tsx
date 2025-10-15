@@ -4,7 +4,7 @@ import CheckIcon from "@mui/icons-material/Check";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { Box, IconButton, Stack, Tooltip, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import {
+import React, {
   useCallback,
   useState,
   type HTMLAttributes,
@@ -26,16 +26,56 @@ export function CodeComponent({
 
   const handleCopy = useCallback(async () => {
     try {
-      const codeText =
-        typeof children === "string" ? children : children?.toString() || "";
+      // Extract text from possible React nodes to avoid '[object Object]'
+      const getTextFromChildren = (childrenNode: React.ReactNode): string => {
+        let text = "";
+        React.Children.forEach(childrenNode, (child) => {
+          if (typeof child === "string" || typeof child === "number") {
+            text += child.toString();
+          } else if (React.isValidElement(child)) {
+            if (
+              child.props &&
+              typeof child.props === "object" &&
+              "children" in child.props
+            ) {
+              text += getTextFromChildren(
+                child.props.children as React.ReactNode,
+              );
+            }
+          }
+        });
+        return text;
+      };
+
+      const raw = getTextFromChildren(children);
+      const codeText = raw ?? "";
       await navigator.clipboard.writeText(codeText.trim());
       setCopied(true);
       setTimeout(() => setCopied(false), 1800);
     } catch {
       // Fallback
       try {
-        const codeText =
-          typeof children === "string" ? children : children?.toString() || "";
+        const getTextFromChildren = (childrenNode: React.ReactNode): string => {
+          let text = "";
+          React.Children.forEach(childrenNode, (child) => {
+            if (typeof child === "string" || typeof child === "number") {
+              text += child.toString();
+            } else if (React.isValidElement(child)) {
+              if (
+                child.props &&
+                typeof child.props === "object" &&
+                "children" in child.props
+              ) {
+                text += getTextFromChildren(
+                  child.props.children as React.ReactNode,
+                );
+              }
+            }
+          });
+          return text;
+        };
+
+        const codeText = getTextFromChildren(children) || "";
         const textarea = document.createElement("textarea");
         textarea.value = codeText.trim();
         textarea.style.position = "fixed";

@@ -91,6 +91,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          async
+          defer
+          src="https://umami.sametcc.me//umami.js"
+          data-website-id="be8d6d00-6517-4fe6-8a97-e5d0f8434685"
+        ></script>
+      </head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <InitColorSchemeScript attribute="class" />
         <AppRouterCacheProvider options={{ enableCssLayer: true }}>

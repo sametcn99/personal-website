@@ -17,7 +17,6 @@ interface ArticleNavigationProps {
 }
 
 export default function ArticleNavigation({
-  contentType,
   prevArticle,
   nextArticle,
   prevLabel = "Previous",

@@ -41,29 +41,72 @@ function parseFrontmatter(
 
   const frontMatterBlock = match[1];
   const content = fileContent.replace(frontmatterRegex, "").trim();
-  const frontMatterLines = frontMatterBlock.trim().split("\n");
+  const frontMatterLines = frontMatterBlock.split(/\r?\n/);
   const metadata: Partial<ContentMetadata> = {};
 
-  frontMatterLines.forEach((line) => {
-    if (!line.includes(":")) return; // skip malformed lines
-    const [key, ...valueArr] = line.split(": ");
-    let value = valueArr.join(": ").trim();
-    value = value.replace(/^['"](.*)['"]$/, "$1"); // Remove surrounding quotes
+  // Iterate with index so we can consume indented continuation lines for multiline values
+  for (let i = 0; i < frontMatterLines.length; i++) {
+    const rawLine = frontMatterLines[i];
+    const line = rawLine.replace(/\r?\n$/, "");
+    if (!line.trim()) continue;
 
-    const trimmedKey = key.trim();
+    // If line contains key: value on same line
+    if (line.includes(": ")) {
+      const [key, ...valueArr] = line.split(": ");
+      let value = valueArr.join(": ").trim();
+      value = value.replace(/^['"](.*)['"]$/, "$1"); // Remove surrounding quotes
 
-    // Handle arrays (like tags)
-    if (trimmedKey === "tags" && value.startsWith("[") && value.endsWith("]")) {
-      const tagsString = value.slice(1, -1);
-      (metadata as Record<string, string | string[]>)[trimmedKey] = tagsString
-        .split(",")
-        .map((tag) => tag.trim().replace(/^['"](.*)['"]$/, "$1"))
-        .filter(Boolean);
-      return;
+      const trimmedKey = key.trim();
+
+      // Handle arrays (like tags)
+      if (trimmedKey === "tags" && value.startsWith("[") && value.endsWith("]")) {
+        const tagsString = value.slice(1, -1);
+        (metadata as Record<string, string | string[]>)[trimmedKey] = tagsString
+          .split(",")
+          .map((tag) => tag.trim().replace(/^['"](.*)['"]$/, "$1"))
+          .filter(Boolean);
+        continue;
+      }
+
+      (metadata as Record<string, string | string[]>)[trimmedKey] = value;
+      continue;
     }
 
-    (metadata as Record<string, string | string[]>)[trimmedKey] = value;
-  });
+    // If line ends with ':' it may have multiline indented value lines following (YAML style)
+    if (line.trim().endsWith(":")) {
+      const trimmedKey = line.trim().slice(0, -1).trim();
+      const valueLines: string[] = [];
+
+      // Collect subsequent indented lines as the value
+      let j = i + 1;
+      while (j < frontMatterLines.length) {
+        const nextLine = frontMatterLines[j];
+        // stop if next line is not indented
+        if (!/^\s+/.test(nextLine)) break;
+        valueLines.push(nextLine.trim());
+        j++;
+      }
+
+      i = j - 1; // advance outer loop
+
+      const joinedValue = valueLines.join(" ").replace(/^['"](.*)['"]$/, "$1");
+
+      // Handle arrays (like tags) if someone used multiline array (rare)
+      if (trimmedKey === "tags" && joinedValue.startsWith("[") && joinedValue.endsWith("]")) {
+        const tagsString = joinedValue.slice(1, -1);
+        (metadata as Record<string, string | string[]>)[trimmedKey] = tagsString
+          .split(",")
+          .map((tag) => tag.trim().replace(/^['"](.*)['"]$/, "$1"))
+          .filter(Boolean);
+        continue;
+      }
+
+      (metadata as Record<string, string | string[]>)[trimmedKey] = joinedValue;
+      continue;
+    }
+
+    // Otherwise skip malformed line
+  }
 
   // Ensure we always have a publishedAt date
   if (!metadata.publishedAt) {

@@ -38,7 +38,10 @@ ENV NODE_ENV=production \
     HOSTNAME="0.0.0.0"
 
 RUN addgroup --system --gid 1001 nodejs && \
-    adduser --system --uid 1001 nextjs
+    adduser --system --uid 1001 nextjs && \
+    apt-get update && \
+    apt-get install -y curl && \
+    rm -rf /var/lib/apt/lists/*
 
 COPY --from=builder /app/public ./public
 

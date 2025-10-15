@@ -15,7 +15,8 @@ const nextConfig = {
   outputFileTracingRoot: __dirname,
   // Force consistent route generation
   trailingSlash: false,
-  // Optionally, add any other Next.js config below
+  // Enable standalone output for Docker builds
+  output: 'standalone' as const,
 };
 
 const withMDX = createMDX({
@@ -31,5 +32,10 @@ const withMDX = createMDX({
   },
 });
 
-// Combine MDX and Next.js config
-export default withMDX(nextConfig);
+// Combine MDX and Next.js config, ensuring 'output' is present
+const mdxConfig = withMDX(nextConfig);
+const finalConfig = {
+  ...mdxConfig,
+  output: 'standalone' as const,
+};
+export default finalConfig;

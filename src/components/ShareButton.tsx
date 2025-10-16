@@ -2,7 +2,6 @@
 
 import { useUmami } from "@/hooks/useUmami";
 import { Typography } from "@mui/material";
-import React from 'react';
 
 type ContentType = "gist" | "blog" | "project" | "article";
 
@@ -15,16 +14,16 @@ const copyToClipboard = (text: string): Promise<void> => {
   if (navigator.clipboard && window.isSecureContext) {
     return navigator.clipboard.writeText(text);
   }
-  const textarea = document.createElement('textarea');
+  const textarea = document.createElement("textarea");
   textarea.value = text;
-  textarea.style.position = 'fixed';
+  textarea.style.position = "fixed";
   document.body.appendChild(textarea);
   textarea.focus();
   textarea.select();
 
   return new Promise((resolve, reject) => {
     try {
-      document.execCommand('copy');
+      document.execCommand("copy");
       resolve();
     } catch (err) {
       reject(err);
@@ -57,37 +56,29 @@ export default function ShareButton({
     const shareTitle = title || getDefaultTitle();
     const shareUrl = window.location.href;
 
-    const isShareSupported = typeof navigator.share !== 'undefined';
+    const isShareSupported = typeof navigator.share !== "undefined";
 
     if (isShareSupported) {
-      try {
-        await navigator.share({
-          title: shareTitle,
-          url: shareUrl,
-        });
+      await navigator.share({
+        title: shareTitle,
+        url: shareUrl,
+      });
 
-        trackEvent("share_api_success", {
-          contentType,
-          title: shareTitle
-        });
-        return;
-
-      } catch {
-        trackEvent("share_api_failed_or_cancelled", { contentType });
-      }
+      trackEvent("share_api_success", {
+        contentType,
+      });
+      return;
     }
 
     try {
       await copyToClipboard(shareUrl);
       alert(`${shareTitle} URL copied!`);
-
       trackEvent("share_fallback_copied", {
         contentType,
-        title: shareTitle
+        title: shareTitle,
       });
     } catch {
       alert("Failed to copy URL. Please copy it manually.");
-      trackEvent("share_fallback_failed", { contentType });
     }
   };
 

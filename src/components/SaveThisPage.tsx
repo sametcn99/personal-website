@@ -1,4 +1,5 @@
 "use client";
+import { useUmami } from "@/hooks/useUmami";
 import SaveIcon from "@mui/icons-material/Save";
 import {
   Alert,
@@ -12,6 +13,7 @@ import { useTheme } from "@mui/material/styles";
 import { useCallback, useEffect, useState } from "react";
 
 export default function SaveThisPage() {
+  const { trackEvent } = useUmami();
   const theme = useTheme();
   const [isPrinting, setIsPrinting] = useState(false);
   const [showMessage, setShowMessage] = useState<{
@@ -85,6 +87,7 @@ export default function SaveThisPage() {
 
     try {
       setIsPrinting(true);
+      trackEvent("print_initiated");
 
       // Check browser compatibility
       if (typeof window === "undefined") {

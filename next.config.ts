@@ -16,7 +16,7 @@ const nextConfig = {
   // Force consistent route generation
   trailingSlash: false,
   // Enable standalone output for Docker builds
-  output: 'standalone' as const,
+  output: "standalone" as const,
 };
 
 const withMDX = createMDX({
@@ -36,6 +36,6 @@ const withMDX = createMDX({
 const mdxConfig = withMDX(nextConfig);
 const finalConfig = {
   ...mdxConfig,
-  output: 'standalone' as const,
+  output: "standalone" as const,
 };
 export default finalConfig;

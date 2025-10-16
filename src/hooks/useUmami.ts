@@ -1,49 +1,65 @@
-// src/hooks/useUmami.ts
+import { useCallback } from "react";
 
-import { useCallback } from 'react';
-
-// Etkinlik verilerinin (Custom Data) yapısını tanımlayan bir arayüz (interface).
-// Bu, eventData'nın her zaman bir nesne (key-value çifti) olmasını sağlar.
+// Defines the structure for custom event data (key-value pairs).
 interface UmamiEventData {
   [key: string]: string | number | boolean | null | undefined;
 }
 
-// Umami global nesnesinin tipini, güvenli bir şekilde tanımlıyoruz.
-// Next.js (browser) ortamında umami nesnesi window üzerinde bulunur.
+// Global type definition for the Umami object on the window.
 declare global {
   interface Window {
     umami?: {
       track: (eventName: string, eventData?: UmamiEventData) => void;
-      // İsteğe bağlı olarak, Umami'nin diğer fonksiyonlarını da buraya ekleyebilirsiniz.
     };
   }
 }
 
 /**
- * Umami'nin özel etkinlik takibi için tip güvenli bir React Hook'u.
+ * Collects dynamic, anonymous data about the user's browser environment and context.
+ * This function should only be executed in a browser environment.
+ * @returns {UmamiEventData} Dynamic data to be sent with every event.
+ */
+const getDynamicContextData = (): UmamiEventData => {
+  if (typeof window === "undefined") {
+    return {}; // Return empty object if not running in the browser (e.g., during SSR)
+  }
+
+  // --- ANONYMIZED USER/DEVICE DATA ---
+  const screenWidth = window.screen.width;
+  const isMobile = screenWidth < 768; // Simple heuristic to classify device type
+
+  // --- PAGE CONTEXT DATA ---
+  const currentPath = window.location.pathname;
+  const pageTitle = document.title;
+
+  return {
+    isMobile,
+    currentPath,
+    pageTitle,
+  };
+};
+
+/**
+ * A type-safe React Hook for reliably tracking custom Umami events in a Next.js environment.
+ * It automatically merges static app data, dynamic user context data, and custom event data.
  *
- * @returns {object} trackEvent: Özel bir Umami etkinliğini tetiklemek için fonksiyon.
+ * @returns {object} trackEvent: A function to trigger a custom Umami event.
  */
 export const useUmami = () => {
-  const trackEvent = useCallback((eventName: string, eventData: UmamiEventData = {}) => {
-    // 1. Tip Güvenli ve Çevre Kontrolü: 
-    // TypeScript ile window.umami'yi kontrol ederken global tip tanımı kullanılır.
-    if (typeof window !== 'undefined' && window.umami) {
-      try {
-        window.umami.track(eventName, eventData);
-        
-        // Opsiyonel: Geliştirme ortamında konsola log atma
-        if (process.env.NODE_ENV === 'development') {
-          console.log(`[Umami Tracker] Etkinlik Gönderildi: ${eventName}`, eventData);
-        }
-      } catch (error) {
-        // İzleme fonksiyonu çağrılırken oluşabilecek potansiyel hataları yakalama
-        console.error(`Umami etkinlik takibi başarısız oldu: ${eventName}`, error);
+  const trackEvent = useCallback(
+    (eventName: string, eventData: UmamiEventData = {}) => {
+      // 1. Merge Data: Custom event data overrides dynamic and base data if keys overlap.
+      const dynamicData = getDynamicContextData();
+      const mergedData = {
+        ...dynamicData,
+        ...eventData,
+      };
+      if (typeof window !== "undefined" && window.umami) {
+        window.umami.track(eventName, mergedData);
       }
-    } else if (process.env.NODE_ENV === 'development') {
-      console.warn(`[Umami Tracker] UYARI: Umami nesnesi tanımlı değil. Etkinlik gönderilemedi: ${eventName}`);
-    }
-  }, []);
+    },
+    [],
+  );
 
   return { trackEvent };
 };

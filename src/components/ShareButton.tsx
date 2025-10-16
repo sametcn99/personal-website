@@ -1,17 +1,46 @@
 "use client";
 
+import { useUmami } from "@/hooks/useUmami";
 import { Typography } from "@mui/material";
+import React from 'react';
+
+type ContentType = "gist" | "blog" | "project" | "article";
 
 interface ShareButtonProps {
   title?: string;
   contentType?: ContentType;
 }
 
+const copyToClipboard = (text: string): Promise<void> => {
+  if (navigator.clipboard && window.isSecureContext) {
+    return navigator.clipboard.writeText(text);
+  }
+  const textarea = document.createElement('textarea');
+  textarea.value = text;
+  textarea.style.position = 'fixed';
+  document.body.appendChild(textarea);
+  textarea.focus();
+  textarea.select();
+
+  return new Promise((resolve, reject) => {
+    try {
+      document.execCommand('copy');
+      resolve();
+    } catch (err) {
+      reject(err);
+    } finally {
+      document.body.removeChild(textarea);
+    }
+  });
+};
+
 export default function ShareButton({
   title,
   contentType = "blog",
 }: ShareButtonProps) {
-  const getDefaultTitle = () => {
+  const { trackEvent } = useUmami();
+
+  const getDefaultTitle = (): string => {
     switch (contentType) {
       case "gist":
         return "Technical Gist";
@@ -25,14 +54,40 @@ export default function ShareButton({
   };
 
   const handleShare = async () => {
+    const shareTitle = title || getDefaultTitle();
+    const shareUrl = window.location.href;
+
+    const isShareSupported = typeof navigator.share !== 'undefined';
+
+    if (isShareSupported) {
+      try {
+        await navigator.share({
+          title: shareTitle,
+          url: shareUrl,
+        });
+
+        trackEvent("share_api_success", {
+          contentType,
+          title: shareTitle
+        });
+        return;
+
+      } catch {
+        trackEvent("share_api_failed_or_cancelled", { contentType });
+      }
+    }
+
     try {
-      await navigator.share({
-        title: title || getDefaultTitle(),
-        url: window.location.href,
+      await copyToClipboard(shareUrl);
+      alert(`${shareTitle} URL copied!`);
+
+      trackEvent("share_fallback_copied", {
+        contentType,
+        title: shareTitle
       });
     } catch {
-      // Fallback to clipboard
-      navigator.clipboard.writeText(window.location.href);
+      alert("Failed to copy URL. Please copy it manually.");
+      trackEvent("share_fallback_failed", { contentType });
     }
   };
 
@@ -41,6 +96,7 @@ export default function ShareButton({
       onClick={handleShare}
       color="textSecondary"
       variant="body2"
+      title={`Share this ${contentType} or copy link`}
       sx={{
         cursor: "pointer",
         "&:hover": {

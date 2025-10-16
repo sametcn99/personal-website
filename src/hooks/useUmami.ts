@@ -1,8 +1,26 @@
 import { useCallback } from "react";
 
-// Defines the structure for custom event data (key-value pairs).
+// --- 1. Type Definitions ---
+
+/**
+ * Defines the structure for custom Umami event data (key-value pairs).
+ */
 interface UmamiEventData {
   [key: string]: string | number | boolean | null | undefined;
+}
+
+/**
+ * Defines the structure for dynamic context data collected and appended to every event.
+ */
+interface ContextData extends UmamiEventData {
+  userAgent: string;
+  language: string;
+
+  // Session and Page
+  currentPath: string;
+  pageTitle: string;
+  referrer: string;
+  timestamp: string; // The time the event was triggered (ISO 8601)
 }
 
 // Global type definition for the Umami object on the window.
@@ -15,47 +33,78 @@ declare global {
 }
 
 /**
- * Collects dynamic, anonymous data about the user's browser environment and context.
- * This function should only be executed in a browser environment.
- * @returns {UmamiEventData} Dynamic data to be sent with every event.
+ * Collects comprehensive, anonymous data about the user's browser environment and context.
+ * Safely returns null when executed outside of a browser environment (e.g., during SSR).
+ * @returns {ContextData | null} Dynamically collected context data, or null if running in SSR.
  */
-const getDynamicContextData = (): UmamiEventData => {
-  if (typeof window === "undefined") {
-    return {}; // Return empty object if not running in the browser (e.g., during SSR)
+const getDynamicContextData = (): ContextData | null => {
+  // Strict check for SSR and Browser environment
+  if (typeof window === "undefined" || !window.navigator || !document) {
+    return null;
   }
 
-  // --- ANONYMIZED USER/DEVICE DATA ---
-  const screenWidth = window.screen.width;
-  const isMobile = screenWidth < 768; // Simple heuristic to classify device type
+  // Browser/Device Data
+  const { userAgent, language } = window.navigator;
 
-  // --- PAGE CONTEXT DATA ---
+  // Page/Session Context Data
   const currentPath = window.location.pathname;
   const pageTitle = document.title;
+  const referrer = document.referrer;
+  const timestamp = new Date().toISOString(); // When the event occurred (ISO 8601)
 
+  // Explicitly return as ContextData for type safety
   return {
-    isMobile,
+    userAgent,
+    language,
     currentPath,
     pageTitle,
-  };
+    referrer,
+    timestamp,
+  } as ContextData;
 };
 
+// --- 3. The Main Hook ---
+
 /**
- * A type-safe React Hook for reliably tracking custom Umami events in a Next.js environment.
- * It automatically merges static app data, dynamic user context data, and custom event data.
+ * A type-safe and comprehensive React Hook for reliably tracking custom Umami events.
+ * It automatically merges dynamic user context data with custom event-specific data.
  *
- * @returns {object} trackEvent: A function to trigger a custom Umami event.
+ * @returns {{ trackEvent: (eventName: string, eventData?: UmamiEventData) => void }} A function to trigger a custom Umami event.
  */
 export const useUmami = () => {
+  /**
+   * Triggers a custom Umami event with merged data.
+   * @param {string} eventName - The name of the event to track.
+   * @param {UmamiEventData} [eventData={}] - Additional event-specific data.
+   */
   const trackEvent = useCallback(
     (eventName: string, eventData: UmamiEventData = {}) => {
-      // 1. Merge Data: Custom event data overrides dynamic and base data if keys overlap.
+      // 1. Collect Dynamic Context Data
       const dynamicData = getDynamicContextData();
-      const mergedData = {
+
+      // Stop tracking if in SSR or data cannot be collected
+      if (dynamicData === null) {
+        return;
+      }
+
+      // 2. Merge Data (Custom event data overrides dynamic data if keys overlap)
+      const mergedData: UmamiEventData = {
         ...dynamicData,
         ...eventData,
       };
-      if (typeof window !== "undefined" && window.umami) {
+
+      // 3. Perform Tracking
+      if (
+        typeof window !== "undefined" &&
+        window.umami &&
+        typeof window.umami.track === "function"
+      ) {
         window.umami.track(eventName, mergedData);
+      } else {
+        // Console output for Development/Debugging purposes (Check data schema and content)
+        console.groupCollapsed(`[Umami TRACKED] ${eventName} (Mock/Dev)`);
+        console.log("Payload:", mergedData);
+        console.groupEnd();
       }
     },
     [],

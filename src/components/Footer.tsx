@@ -18,8 +18,20 @@ export default function Footer() {
         <Typography variant="caption" color="text.secondary">
           Last updated: {new Date().toLocaleDateString("tr-TR")}
         </Typography>
-        <Link href="/privacy-policy" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
-          <Typography variant="caption" color="text.secondary" sx={{ textDecoration: 'none', '&:hover': { textDecoration: 'underline' } }}>
+        <Link
+          href="/privacy-policy"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ textDecoration: "none" }}
+        >
+          <Typography
+            variant="caption"
+            color="text.secondary"
+            sx={{
+              textDecoration: "none",
+              "&:hover": { textDecoration: "underline" },
+            }}
+          >
             Privacy Policy
           </Typography>
         </Link>

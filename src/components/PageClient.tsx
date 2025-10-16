@@ -61,7 +61,7 @@ function LinksSection() {
                 target="_blank"
                 rel="noopener noreferrer"
                 sx={commonSx}
-                onClick={() => trackEvent('link_click', { label: link.label })}
+                onClick={() => trackEvent("link_click", { label: link.label })}
               >
                 {link.label}
               </Typography>
@@ -75,7 +75,7 @@ function LinksSection() {
               component={Link}
               href={link.link.toString()}
               sx={commonSx}
-              onClick={() => trackEvent('link_click', { label: link.label })}
+              onClick={() => trackEvent("link_click", { label: link.label })}
             >
               {link.label}
             </Typography>

@@ -2,6 +2,7 @@
 
 import Footer from "@/components/Footer";
 import { useLinks } from "@/hooks/useLinks";
+import { useUmami } from "@/hooks/useUmami";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
@@ -14,6 +15,7 @@ interface PageClientProps {
 }
 
 function LinksSection() {
+  const { trackEvent } = useUmami();
   const { visibleLinks, hiddenLinks } = useLinks();
   const allLinks = [...visibleLinks, ...hiddenLinks];
 
@@ -59,6 +61,7 @@ function LinksSection() {
                 target="_blank"
                 rel="noopener noreferrer"
                 sx={commonSx}
+                onClick={() => trackEvent('link_click', { label: link.label })}
               >
                 {link.label}
               </Typography>
@@ -72,6 +75,7 @@ function LinksSection() {
               component={Link}
               href={link.link.toString()}
               sx={commonSx}
+              onClick={() => trackEvent('link_click', { label: link.label })}
             >
               {link.label}
             </Typography>

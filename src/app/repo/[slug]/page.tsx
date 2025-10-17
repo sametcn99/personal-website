@@ -1,6 +1,7 @@
+import RedirectClient from "@/components/RedirectClient";
 import { getRepo } from "@/lib/utils";
 import type { Metadata } from "next";
-import { notFound, permanentRedirect } from "next/navigation";
+import { notFound } from "next/navigation";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -28,7 +29,7 @@ export default async function Page({ params }: Props) {
 
   const repo = await getRepo(slug);
   if (repo) {
-    permanentRedirect(repo.data.html_url);
+    return <RedirectClient targetUrl={repo.data.html_url} />;
   }
   notFound();
 }

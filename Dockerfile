@@ -57,16 +57,13 @@ COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
 
-# Add bun executable from the builder stage
-COPY --from=builder /usr/local/bin/bun /usr/local/bin/
-
 # Create a non-root user
 USER 1001
 
 EXPOSE 3000
 
 # Add healthcheck with optimized interval settings
-HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 CMD ["/usr/local/bin/bun", "--eval", "try{fetch('http://localhost:3000/').then(r=>process.exit(r.ok?0:1))}catch(e){process.exit(1)}"]
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 CMD ["node", "-e", "require('http').get('http://localhost:3000/api/health'||'http://localhost:3000/', (res) => process.exit(res.statusCode === 200 ? 0 : 1)).on('error', () => process.exit(1))"]
 
-# Use direct executable path for faster startup
-CMD ["/usr/local/bin/bun", "./server.js"]
+# Use Node.js to run the Next.js standalone server
+CMD ["bun", "server.js"]

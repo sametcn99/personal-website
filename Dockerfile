@@ -6,7 +6,7 @@ WORKDIR /app
 # Dependencies
 FROM base AS deps
 COPY package.json bun.lock* ./
-RUN --mount=type=cache,target=/tmp/.bun-cache bun install --frozen-lockfile --production=false
+RUN --mount=type=cache,target=/tmp/.bun-cache bun install --frozen-lockfile
 
 # Build
 FROM base AS build

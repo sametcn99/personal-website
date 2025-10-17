@@ -1,60 +1,72 @@
 # -----------------------------------------------------------------------------
-# This Dockerfile.bun is specifically configured for projects using Bun
-# For npm/pnpm or yarn, refer to the Dockerfile instead
+# Optimized Dockerfile for Next.js + Bun project
 # -----------------------------------------------------------------------------
 
-# Use Bun's official image
-FROM oven/bun:alpine AS base
+# 1. Base image with common settings
+FROM oven/bun:1 AS base
+
+# Enable Bun's built-in optimizations
+ENV BUN_RUNTIME=1 \
+    BUN_INSTALL_CACHE=/tmp/.bun-install-cache \
+    NODE_ENV=production
 
 WORKDIR /app
 
-# Install dependencies with bun
+# 2. Dependencies installation stage with caching
 FROM base AS deps
+# Copy only the files needed for installation
 COPY package.json bun.lock* ./
-RUN bun install --no-save --frozen-lockfile
 
-# Rebuild the source code only when needed
+# Use cache mounting to speed up installation
+RUN --mount=type=cache,target=/tmp/.bun-install-cache \
+    bun install --frozen-lockfile --no-save
+
+# 3. Builder stage with optimized build settings
 FROM base AS builder
-WORKDIR /app
+
+# Disable telemetry during build
+ENV NEXT_TELEMETRY_DISABLED=1
+
+# Copy node_modules with cache awareness
 COPY --from=deps /app/node_modules ./node_modules
+
+# Copy only the necessary source files first
+COPY tsconfig.json next.config.ts ./
+COPY src ./src
+COPY public ./public
+
+# Copy remaining config files
 COPY . .
 
-# Next.js collects completely anonymous telemetry data about general usage.
-# Learn more here: https://nextjs.org/telemetry
-# Uncomment the following line in case you want to disable telemetry during the build.
-# ENV NEXT_TELEMETRY_DISABLED=1
+# Build with production optimizations
+RUN BUN_SCOPE="true" bun run build
 
-RUN bun run build
+# 4. Runner stage with minimal footprint
+FROM gcr.io/distroless/nodejs20-debian11 AS runner
 
-# Production image, copy all the files and run next
-FROM base AS runner
 WORKDIR /app
 
-# Uncomment the following line in case you want to disable telemetry during runtime.
-# ENV NEXT_TELEMETRY_DISABLED=1
-
+# Set production environment variables
 ENV NODE_ENV=production \
     PORT=3000 \
-    HOSTNAME="0.0.0.0"
+    HOSTNAME="0.0.0.0" \
+    NEXT_TELEMETRY_DISABLED=1
 
-RUN addgroup --system --gid 1001 nodejs && \
-    adduser --system --uid 1001 nextjs && \
-    apt-get update && \
-    apt-get install -y curl && \
-    rm -rf /var/lib/apt/lists/*
-
+# Copy only the necessary build outputs for running the application
 COPY --from=builder /app/public ./public
+COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/.next/static ./.next/static
 
-# Automatically leverage output traces to reduce image size
-# https://nextjs.org/docs/advanced-features/output-file-tracing
-COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+# Add bun executable from the builder stage
+COPY --from=builder /usr/local/bin/bun /usr/local/bin/
 
-USER nextjs
+# Create a non-root user
+USER 1001
 
 EXPOSE 3000
 
-# Add healthcheck to ensure container reports healthy status
-HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 CMD curl -f http://localhost:3000/ || exit 1
+# Add healthcheck with optimized interval settings
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 CMD ["/usr/local/bin/bun", "--eval", "try{fetch('http://localhost:3000/').then(r=>process.exit(r.ok?0:1))}catch(e){process.exit(1)}"]
 
-CMD ["bun", "./server.js"]
+# Use direct executable path for faster startup
+CMD ["/usr/local/bin/bun", "./server.js"]

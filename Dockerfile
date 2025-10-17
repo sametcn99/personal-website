@@ -20,12 +20,15 @@ COPY --from=build /app/public ./public
 COPY --from=build /app/.next/standalone ./
 COPY --from=build /app/.next/static ./.next/static
 
+# Install curl for health check
+RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
+
 RUN adduser --system --uid 1001 nextjs
 USER nextjs
 EXPOSE 3000
 
-# Add health check using a simple HTTP request
+# Add health check using curl
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-  CMD bun -e "fetch('http://localhost:3000').then(() => process.exit(0)).catch(() => process.exit(1))"
+  CMD curl -f http://localhost:3000 || exit 1
 
 CMD ["bun", "server.js"]

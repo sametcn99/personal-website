@@ -24,4 +24,8 @@ RUN adduser --system --uid 1001 nextjs
 USER nextjs
 EXPOSE 3000
 
+# Add health check using a simple HTTP request
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+  CMD bun -e "fetch('http://localhost:3000').then(() => process.exit(0)).catch(() => process.exit(1))"
+
 CMD ["bun", "server.js"]

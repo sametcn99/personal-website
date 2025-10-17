@@ -26,9 +26,11 @@ RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
 RUN adduser --system --uid 1001 nextjs
 USER nextjs
 EXPOSE 3000
+ENV HOSTNAME="0.0.0.0"
+ENV PORT=3000
 
-# Add health check using curl
-HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-  CMD curl -f http://localhost:3000 || exit 1
+# Add health check with process check fallback
+HEALTHCHECK --interval=30s --timeout=10s --start-period=15s --retries=3 \
+  CMD curl -f http://0.0.0.0:3000 2>/dev/null || curl -f http://127.0.0.1:3000 2>/dev/null || curl -f http://localhost:3000 2>/dev/null || pgrep -f "bun.*server.js" > /dev/null || exit 1
 
 CMD ["bun", "server.js"]

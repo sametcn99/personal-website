@@ -53,6 +53,7 @@ ENV NODE_ENV=production \
     NEXT_TELEMETRY_DISABLED=1
 
 # Copy only the necessary build outputs for running the application
+# Copy only the necessary build outputs for running the application
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
@@ -63,7 +64,7 @@ USER 1001
 EXPOSE 3000
 
 # Add healthcheck with optimized interval settings
-HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 CMD ["node", "-e", "require('http').get('http://localhost:3000/api/health'||'http://localhost:3000/', (res) => process.exit(res.statusCode === 200 ? 0 : 1)).on('error', () => process.exit(1))"]
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 CMD ["node", "-e", "require('http').get('http://localhost:3000/', (res) => process.exit(res.statusCode === 200 ? 0 : 1)).on('error', () => process.exit(1))"]
 
 # Use Node.js to run the Next.js standalone server
-CMD ["bun", "server.js"]
+CMD ["node", "server.js"]

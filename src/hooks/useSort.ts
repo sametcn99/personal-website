@@ -21,9 +21,16 @@ export const useSort = (tabKey?: string) => {
 
     if (savedSortBy) {
       setSortBy(savedSortBy);
+    } else {
+      // Set default to date if nothing saved
+      setSortBy("date");
     }
+
     if (savedSortOrder) {
       setSortOrder(savedSortOrder);
+    } else {
+      // Set default to desc (newest first) if nothing saved
+      setSortOrder("desc");
     }
   }, [sortByKey, sortOrderKey]);
 

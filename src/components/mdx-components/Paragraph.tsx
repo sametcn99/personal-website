@@ -1,9 +1,8 @@
 "use client";
 
+import type { TypographyProps } from "@mui/material";
 import { Typography } from "@mui/material";
 import type React from "react";
-
-import type { TypographyProps } from "@mui/material";
 
 function isInsideParagraph() {
   try {

@@ -1,8 +1,8 @@
+import { notFound } from "next/navigation";
 import ArticleWrapper from "@/components/ArticleWrapper";
 import { JsonLd } from "@/components/JsonLd";
 import { CustomMDX } from "@/components/mdx";
 import { getProjectPosts } from "@/lib/content";
-import { notFound } from "next/navigation";
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://localhost:3000";
 

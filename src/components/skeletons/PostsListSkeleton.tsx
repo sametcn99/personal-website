@@ -12,7 +12,10 @@ export default function PostsListSkeleton({
     <Box>
       {Array.from({ length: count }).map((_, index) => (
         <Box
-          key={index}
+          key={`post-skeleton-${
+            // biome-ignore lint/suspicious/noArrayIndexKey: .
+            index
+          }`}
           sx={{
             mb: 3,
             opacity: 0,

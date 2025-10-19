@@ -8,7 +8,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import Link from "next/link";
-import { ReactNode, useMemo } from "react";
+import { type ReactNode, useMemo } from "react";
 
 interface SearchSectionProps {
   searchQuery: string;

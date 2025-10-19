@@ -1,7 +1,7 @@
 "use client";
 
-import { useUmami } from "@/hooks/useUmami";
 import { Typography } from "@mui/material";
+import { useUmami } from "@/hooks/useUmami";
 
 type ContentType = "gist" | "blog" | "project" | "article";
 

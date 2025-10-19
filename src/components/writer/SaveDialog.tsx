@@ -85,7 +85,11 @@ export function SaveDialog({
         </Button>
         <Button
           onClick={() =>
-            handleSubmit({ preventDefault: () => {} } as React.FormEvent)
+            handleSubmit({
+              preventDefault: () => {
+                // No-op function for form submit handler
+              },
+            } as React.FormEvent)
           }
           variant="contained"
           disabled={!title.trim()}

@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/suspicious/noArrayIndexKey: . */
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Skeleton from "@mui/material/Skeleton";
@@ -64,7 +65,7 @@ export default function HomePageSkeleton() {
             <Box sx={{ display: "flex", gap: 2, flexWrap: "wrap" }}>
               {Array.from({ length: 6 }).map((_, index) => (
                 <Skeleton
-                  key={index}
+                  key={`link-skeleton-${index}`}
                   variant="rounded"
                   width={48}
                   height={48}

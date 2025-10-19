@@ -133,7 +133,7 @@ export function LinkComponent({
         },
       }}
       {...props}
-      aria-label={String(children) + " (opens in a new tab)"}
+      aria-label={`${String(children)} (opens in a new tab)`}
     >
       {children}
       <Box

@@ -41,6 +41,7 @@ export function MermaidDiagram({ svg, isLoading }: DiagramProps) {
           height: "auto",
         },
       }}
+      // biome-ignore lint/security/noDangerouslySetInnerHtml: .
       dangerouslySetInnerHTML={{ __html: svg }}
     />
   );

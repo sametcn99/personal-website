@@ -1,6 +1,6 @@
+import type { Metadata } from "next";
 import ContentListPage from "@/components/ContentListPage";
 import { getGistPosts } from "@/lib/content";
-import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Technical Gists",

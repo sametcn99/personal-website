@@ -1,6 +1,6 @@
+import type { MetadataRoute } from "next";
 import { getGistPosts } from "@/app/gist/utils";
 import { getBlogPosts, getProjectPosts } from "@/lib/content";
-import type { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://sametcc.me"; // Replace with your actual domain

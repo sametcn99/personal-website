@@ -1,11 +1,5 @@
 "use client";
 
-import BackToHome from "@/components/BackToHome";
-import Footer from "@/components/Footer";
-import PostsList from "@/components/home/PostsList";
-import SearchSection from "@/components/home/SearchSection";
-import { useSearch } from "@/hooks/useSearch";
-import { useSort, type SortBy, type SortOrder } from "@/hooks/useSort";
 import SortIcon from "@mui/icons-material/Sort";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
@@ -15,6 +9,12 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import Typography from "@mui/material/Typography";
 import { useMemo } from "react";
+import BackToHome from "@/components/BackToHome";
+import Footer from "@/components/Footer";
+import PostsList from "@/components/home/PostsList";
+import SearchSection from "@/components/home/SearchSection";
+import { useSearch } from "@/hooks/useSearch";
+import { type SortBy, type SortOrder, useSort } from "@/hooks/useSort";
 
 interface ContentListPageProps {
   title: string;

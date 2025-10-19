@@ -1,13 +1,13 @@
 "use client";
 
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
+import { useMemo } from "react";
 import Footer from "@/components/Footer";
 import ContentSection from "@/components/home/ContentSection";
 import LinksSection from "@/components/home/LinksSection";
 import SearchSection from "@/components/home/SearchSection";
 import { useSearch } from "@/hooks/useSearch";
-import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
-import { useMemo } from "react";
 
 interface HomePageProps {
   blogPosts: ContentMetadata[];

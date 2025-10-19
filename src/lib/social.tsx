@@ -195,7 +195,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
     icon: <QuestionMark />,
   },
   {
-    type: ["bluesky", "bluesky", "bsky"],
+    type: ["bluesky", "bsky"],
     label: "Bluesky",
     visible: false,
     external: true,

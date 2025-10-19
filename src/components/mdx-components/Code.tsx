@@ -5,10 +5,10 @@ import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { Box, IconButton, Stack, Tooltip, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import React, {
-  useCallback,
-  useState,
   type HTMLAttributes,
   type PropsWithChildren,
+  useCallback,
+  useState,
 } from "react";
 
 interface CodeProps extends HTMLAttributes<HTMLElement> {
@@ -86,7 +86,9 @@ export function CodeComponent({
         document.body.removeChild(textarea);
         setCopied(true);
         setTimeout(() => setCopied(false), 1800);
-      } catch {}
+      } catch {
+        // Ignore clipboard errors
+      }
     }
   }, [children]);
 

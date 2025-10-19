@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Chip, Paper, Typography, alpha } from "@mui/material";
+import { alpha, Box, Chip, Paper, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import type React from "react";
 

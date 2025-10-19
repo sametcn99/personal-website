@@ -189,7 +189,6 @@ export function MermaidFullscreenDialog({
               </Tooltip>
             </Stack>
           </Box>
-
           {/* Scale Indicator */}
           <Fade in timeout={300}>
             <Chip
@@ -210,7 +209,6 @@ export function MermaidFullscreenDialog({
               }}
             />
           </Fade>
-
           {/* Diagram */}
           <Box
             sx={{
@@ -236,9 +234,9 @@ export function MermaidFullscreenDialog({
                 color: theme.palette.text.primary,
               },
             }}
+            // biome-ignore lint/security/noDangerouslySetInnerHtml: .
             dangerouslySetInnerHTML={{ __html: svg }}
-          />
-
+          />{" "}
           {!svg && (
             <Box sx={{ p: 4 }}>
               <Typography variant="body2" color="text.secondary">

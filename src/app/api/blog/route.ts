@@ -1,15 +1,13 @@
-import { getBlogPosts } from "@/lib/content";
 import { NextResponse } from "next/server";
+import { getBlogPosts } from "@/lib/content";
 
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
-    const limit = searchParams.get("limit")
-      ? parseInt(searchParams.get("limit")!)
-      : undefined;
-    const offset = searchParams.get("offset")
-      ? parseInt(searchParams.get("offset")!)
-      : 0;
+    const limitParam = searchParams.get("limit");
+    const limit = limitParam ? parseInt(limitParam, 10) : undefined;
+    const offsetParam = searchParams.get("offset");
+    const offset = offsetParam ? parseInt(offsetParam, 10) : 0;
     const search = searchParams.get("search");
     const tag = searchParams.get("tag");
 

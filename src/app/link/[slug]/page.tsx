@@ -1,7 +1,7 @@
-import RedirectClient from "@/components/RedirectClient";
-import { socialMediaLinks } from "@/lib/social";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import RedirectClient from "@/components/RedirectClient";
+import { socialMediaLinks } from "@/lib/social";
 
 type Props = {
   params: Promise<{ slug: string }>;

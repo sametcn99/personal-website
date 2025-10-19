@@ -1,5 +1,5 @@
-import { categoryOrder, socialMediaLinks } from "@/lib/social";
 import { useMemo, useState } from "react";
+import { categoryOrder, socialMediaLinks } from "@/lib/social";
 
 export const useLinks = () => {
   const [showAllLinks, setShowAllLinks] = useState(false);

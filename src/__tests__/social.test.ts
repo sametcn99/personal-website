@@ -37,7 +37,7 @@ describe("Social Media Links", () => {
       );
 
       throw new Error(
-        "Found duplicate types:\n" + duplicateMessages.join("\n"),
+        `Found duplicate types:\n${duplicateMessages.join("\n")}`,
       );
     }
   });

@@ -1,5 +1,5 @@
-import fs from "fs";
-import path from "path";
+import fs from "node:fs";
+import path from "node:path";
 
 /**
  * Parse frontmatter from MDX content
@@ -110,7 +110,6 @@ function parseFrontmatter(
       }
 
       (metadata as Record<string, string | string[]>)[trimmedKey] = joinedValue;
-      continue;
     }
 
     // Otherwise skip malformed line

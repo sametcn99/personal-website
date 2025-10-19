@@ -1,11 +1,11 @@
 "use client";
 
+import { Box, Container, Typography } from "@mui/material";
 import ArticleNavigation from "@/components/ArticleNavigation";
 import BackToHome from "@/components/BackToHome";
 import ReadingTime from "@/components/ReadingTime";
 import ScrollProgress from "@/components/ScrollProgress";
 import ShareButton from "@/components/ShareButton";
-import { Box, Container, Typography } from "@mui/material";
 
 interface ArticleData {
   href: string;
@@ -102,19 +102,16 @@ export default function ArticleWrapper({
                 )}
 
                 {/* Tags */}
-                {tags.length > 0 && (
-                  <>
-                    {tags.map((tag) => (
-                      <Typography
-                        key={tag}
-                        color="textSecondary"
-                        variant="caption"
-                      >
-                        #{tag}
-                      </Typography>
-                    ))}
-                  </>
-                )}
+                {tags.length > 0 &&
+                  tags.map((tag) => (
+                    <Typography
+                      key={tag}
+                      color="textSecondary"
+                      variant="caption"
+                    >
+                      #{tag}
+                    </Typography>
+                  ))}
               </Box>
             )}
           </Box>

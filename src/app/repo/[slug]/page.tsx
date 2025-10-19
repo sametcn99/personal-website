@@ -1,7 +1,7 @@
-import RedirectClient from "@/components/RedirectClient";
-import { getRepo } from "@/lib/utils";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import RedirectClient from "@/components/RedirectClient";
+import { getRepo } from "@/lib/utils";
 
 type Props = {
   params: Promise<{ slug: string }>;

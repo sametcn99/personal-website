@@ -1,10 +1,10 @@
 "use client";
 
-import { useLinks } from "@/hooks/useLinks";
-import { useUmami } from "@/hooks/useUmami";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Link from "next/link";
+import { useLinks } from "@/hooks/useLinks";
+import { useUmami } from "@/hooks/useUmami";
 
 export default function LinksSection() {
   const { trackEvent } = useUmami();

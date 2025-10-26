@@ -70,6 +70,18 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title="RSS Feed"
+          href="/rss.xml"
+        />
+        <link
+          rel="alternate"
+          type="application/feed+json"
+          title="JSON Feed"
+          href="/feed.json"
+        />
         <script
           defer
           src="https://umami.sametcc.me/script.js"

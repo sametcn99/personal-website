@@ -11,16 +11,13 @@ tags: [Next.js, React, TypeScript, Mermaid, Monaco Editor, MUI, Diagram Editor, 
 
 **🚀 Create, edit, and share beautiful Mermaid diagrams in real-time!**
 
-*A powerful, modern web application that transforms your ideas into stunning diagrams with live preview and instant sharing capabilities.*
+_A powerful, modern web application that transforms your ideas into stunning diagrams with live preview and instant sharing capabilities._
 
 [✨ **Live Demo**](https://mermaid.sametcc.me) • [🐛 **Report Bug**](https://github.com/sametcn99/mermaid-viewer/issues) • [💡 **Request Feature**](https://github.com/sametcn99/mermaid-viewer/issues) • [🏠 **GitHub Repository**](https://sametcc.me/repo/mermaid-viewer)
 
 ## 📈 Stats
 
-![GitHub stars](https://img.shields.io/github/stars/sametcn99/mermaid-viewer?style=social)
-![GitHub forks](https://img.shields.io/github/forks/sametcn99/mermaid-viewer?style=social)
-![GitHub issues](https://img.shields.io/github/issues/sametcn99/mermaid-viewer)
-![GitHub pull requests](https://img.shields.io/github/issues-pr/sametcn99/mermaid-viewer)
+![GitHub stars](https://img.shields.io/github/stars/sametcn99/mermaid-viewer?style=social) ![GitHub forks](https://img.shields.io/github/forks/sametcn99/mermaid-viewer?style=social) ![GitHub issues](https://img.shields.io/github/issues/sametcn99/mermaid-viewer) ![GitHub pull requests](https://img.shields.io/github/issues-pr/sametcn99/mermaid-viewer)
 
 </div>
 
@@ -37,6 +34,8 @@ tags: [Next.js, React, TypeScript, Mermaid, Monaco Editor, MUI, Diagram Editor, 
 - **🎨 Syntax Highlighting:** Monaco Editor with intelligent code completion
 - **🚀 Fast Rendering:** Debounced updates for smooth performance
 - **📤 Quick Sharing:** Generate shareable links with URL encoding
+- **📥 Import Diagrams:** Import single `.mmd` files or a `.zip` archive exported from the app (the zip can include an optional `data.json` with metadata and compressed diagram content). Use the Upload button in the Saved Diagrams dialog to add diagrams to your local collection.
+- **⬇️ Download Diagrams:** Download the current diagram as a `.mmd` file, or export all saved diagrams as a `.zip` (the zip export includes an optional `data.json` with metadata and compressed diagram content). Use the Saved Diagrams dialog for bulk export.
 - **🌐 Iframe Embedding:** Easily embed your diagrams into any website or blog using the iframe sharing feature. Just click the share button, select 'Embed as iframe', and copy the HTML code to use anywhere.
 - **🖥️ Presentation Mode:** Distraction-free, full-viewport viewer at `/presentation` that preserves your encoded diagram in the URL, hides the toolbar, and lets you exit with Esc or the floating back button
 
@@ -51,7 +50,7 @@ tags: [Next.js, React, TypeScript, Mermaid, Monaco Editor, MUI, Diagram Editor, 
   - **📱 Momentum panning:** Smooth scrolling with velocity-based movement
 - **🔍 Smart Template Search:** Filter and search through templates by category, name, or tags
 - **💾 Auto-Save:** Your work is automatically saved in browser storage
-- **🎨 Persistent Settings:** Diagram configuration (theme, colors, fonts) saved to localStorage
+- **🎨 Persistent Settings:** Diagram configuration (theme, colors, fonts) saved to indexed-db
 - **📋 One-Click Copy:** Copy diagrams as SVG or share links instantly
 - **🔄 Real-time Validation:** Immediate feedback on syntax errors
 - **📁 Personal Collections:** Organize favorite templates and store custom snippets by saving the current diagram directly into reusable, local-only collections
@@ -160,7 +159,7 @@ We welcome contributions from the community! Here's how you can help:
 ### 🎯 **Contribution Areas**
 
 - 🐛 **Bug Fixes:** Help us squash bugs
-- ✨ **New Features:** Add exciting new functionality  
+- ✨ **New Features:** Add exciting new functionality
 - 📖 **Documentation:** Improve our docs
 - 🎨 **UI/UX:** Enhance user experience
 - ⚡ **Performance:** Optimize for speed

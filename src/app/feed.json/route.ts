@@ -2,13 +2,13 @@
  * JSON Feed route
  *
  * Serves a combined JSON Feed of blog posts, gists and projects at /feed.json
- * - Set SITE_URL environment variable to the production site URL (e.g. https://example.com)
- * - Feed URL will be available at `${SITE_URL}/feed.json`
+ * - Set NEXT_PUBLIC_SITE_URL environment variable to the production site URL (e.g. https://example.com)
+ * - Feed URL will be available at `${NEXT_PUBLIC_SITE_URL}/feed.json`
  * - Spec: https://jsonfeed.org/version/1.1
  */
 import { getBlogPosts, getGistPosts, getProjectPosts } from "../../lib/content";
 
-const SITE_URL = process.env.SITE_URL ?? "http://localhost:3000";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
 function ensureAbsoluteUrl(path: string) {
   if (!path.startsWith("/")) path = `/${path}`;

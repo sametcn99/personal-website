@@ -25,10 +25,6 @@ export default function LinksSection() {
       >
         Connect With Me
       </Typography>
-      <Typography variant="body2" sx={{ mb: 3, color: "gray" }}>
-        I&apos;m too lazy to bookmark things properly, so here&apos;s literally
-        every platform I&apos;ve ever signed up for.
-      </Typography>
       <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
         {visibleLinks.map((link) => {
           const isExternal =

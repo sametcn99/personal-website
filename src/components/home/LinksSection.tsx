@@ -30,7 +30,7 @@ export default function LinksSection() {
         every platform I&apos;ve ever signed up for.
       </Typography>
       <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
-        {allLinks.map((link) => {
+        {visibleLinks.map((link) => {
           const isExternal =
             link.external || /^https?:\/\//.test(link.link.toString());
           const commonSx = {

@@ -49,6 +49,15 @@ export const socialMediaLinks: SocialMediaLink[] = [
     icon: <DataObject />,
   },
   {
+    type:["npm","npmjs"],
+    link: new URL("https://www.npmjs.com/~sametc0"),
+    label: "NPMJS",
+    visible: false,
+    external: true,
+    category: "Development Platforms",
+    icon: <DataObject />,
+  },
+  {
     type: ["instagram", "ig"],
     link: new URL("https://instagram.com/sametc.0"),
     label: "Instagram",

@@ -27,7 +27,7 @@
     "install": "^0.13.0",
     "lunr": "^2.3.9",
     "mermaid": "^11.12.0",
-    "next": "15.5.6",
+    "next": "15.5.7",
     "next-mdx-remote": "^5.0.0",
     "octokit": "^5.0.4",
     "playwright": "^1.56.1",

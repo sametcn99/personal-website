@@ -16,7 +16,8 @@ export default function Footer() {
         mb={1}
       >
         <Typography variant="caption" color="text.secondary">
-          Last updated: {new Date().toLocaleDateString("tr-TR")}
+          Last updated:{" "}
+          {new Date(process.env.NEXT_PUBLIC_BUILD_DATE!).toLocaleDateString()}
         </Typography>
         <Link
           href="/privacy-policy"

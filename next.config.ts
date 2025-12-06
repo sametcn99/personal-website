@@ -9,6 +9,9 @@ import remarkMdxFrontmatter from "remark-mdx-frontmatter";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  env: {
+    NEXT_PUBLIC_BUILD_DATE: new Date().toISOString(),
+  },
   // Allow .mdx extensions for files
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
   // Set the correct workspace root to avoid lockfile detection issues

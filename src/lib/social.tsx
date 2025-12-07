@@ -49,7 +49,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
     icon: <DataObject />,
   },
   {
-    type:["npm","npmjs"],
+    type: ["npm", "npmjs"],
     link: new URL("https://www.npmjs.com/~sametc0"),
     label: "NPMJS",
     visible: false,
@@ -76,7 +76,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
     icon: <X />,
   },
   {
-    type: ["statsfm", "sfm", "sf"],
+    type: ["statsfm", "sfm"],
     link: new URL("https://stats.fm/sametc001"),
     label: "Stats.fm",
     visible: false,
@@ -139,7 +139,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
     icon: <WhatsApp />,
   },
   {
-    type: ["youtube", "yt", "ytb", "ytube", "ytbchannel", "ytchannel"],
+    type: ["youtube", "yt"],
     link: new URL("https://youtube.com/@sametc001"),
     label: "YouTube",
     visible: false,
@@ -148,7 +148,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
     icon: <YouTube />,
   },
   {
-    type: ["youtubemusic", "ytmusic", "ymusic", "ytm"],
+    type: ["youtubemusic", "ytmusic", "ytm"],
     link: new URL(
       "https://music.youtube.com/channel/UCgXu7EZ76uMqPW8i4ZCL72Q?si=1aNE6Zya_1t9ACFl",
     ),

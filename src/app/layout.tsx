@@ -87,7 +87,10 @@ export default function RootLayout({
           src="https://umami.sametcc.me/script.js"
           data-website-id="be8d6d00-6517-4fe6-8a97-e5d0f8434685"
         ></script>
-        <meta name="google-site-verification" content="YSbWeWN_f4RYnaxt__FUvujMbabAMnjmSzaJldja4Nk" />
+        <meta
+          name="google-site-verification"
+          content="YSbWeWN_f4RYnaxt__FUvujMbabAMnjmSzaJldja4Nk"
+        />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <InitColorSchemeScript attribute="class" />

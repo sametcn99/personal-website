@@ -1,3 +1,5 @@
+"use client";
+
 import ReportProblemOutlinedIcon from "@mui/icons-material/ReportProblemOutlined";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";

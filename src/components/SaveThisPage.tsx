@@ -134,59 +134,49 @@ export default function SaveThisPage() {
   return (
     <>
       <Box
+        onClick={handlePrint}
         sx={{
-          "@media print": {
-            display: "none",
+          display: "inline-flex",
+          alignItems: "center",
+          borderRadius: 2,
+          cursor: isPrinting ? "not-allowed" : "pointer",
+          opacity: isPrinting ? 0.7 : 1,
+          transition: theme.transitions.create(
+            ["background-color", "transform", "opacity"],
+            {
+              duration: theme.transitions.duration.shorter,
+            },
+          ),
+          "&:hover": {
+            backgroundColor: isPrinting
+              ? "transparent"
+              : alpha(theme.palette.primary.main, 0.08),
           },
-          display: "flex",
-          justifyContent: "flex-end",
         }}
       >
-        <Box
-          onClick={handlePrint}
+        <IconButton
+          size="small"
+          aria-label="Save this page"
+          disabled={isPrinting}
           sx={{
-            display: "inline-flex",
-            alignItems: "center",
-            borderRadius: 2,
-            cursor: isPrinting ? "not-allowed" : "pointer",
-            opacity: isPrinting ? 0.7 : 1,
-            transition: theme.transitions.create(
-              ["background-color", "transform", "opacity"],
-              {
-                duration: theme.transitions.duration.shorter,
-              },
-            ),
+            color: theme.palette.text.secondary,
             "&:hover": {
-              backgroundColor: isPrinting
-                ? "transparent"
-                : alpha(theme.palette.primary.main, 0.08),
+              backgroundColor: "transparent",
             },
           }}
         >
-          <IconButton
-            size="small"
-            aria-label="Save this page"
-            disabled={isPrinting}
-            sx={{
-              color: theme.palette.text.secondary,
-              "&:hover": {
-                backgroundColor: "transparent",
-              },
-            }}
-          >
-            <SaveIcon fontSize="small" />
-          </IconButton>
-          <Typography
-            variant="subtitle2"
-            color="text.secondary"
-            sx={{
-              fontWeight: 500,
-              letterSpacing: "0.02em",
-            }}
-          >
-            {isPrinting ? "Preparing..." : "Save This Page"}
-          </Typography>
-        </Box>
+          <SaveIcon fontSize="small" />
+        </IconButton>
+        <Typography
+          variant="subtitle2"
+          color="text.secondary"
+          sx={{
+            fontWeight: 500,
+            letterSpacing: "0.02em",
+          }}
+        >
+          {isPrinting ? "Preparing..." : "Save This Page"}
+        </Typography>
       </Box>
       <Snackbar
         open={!!showMessage}

@@ -23,6 +23,9 @@ export async function GET() {
     feed_url: ensureAbsoluteUrl("/rss.xml"),
     site_url: SITE_URL,
     language: "en",
+    custom_namespaces: {
+      media: "http://search.yahoo.com/mrss/",
+    },
   });
 
   // Gather items from all content sources
@@ -62,18 +65,30 @@ export async function GET() {
         ? [String(item.metadata.tags)]
         : [];
 
+    // biome-ignore lint/suspicious/noExplicitAny: rss library types require any[]
+    const custom_elements: any[] = [];
+
+    if (item.metadata.image) {
+      custom_elements.push({
+        "media:content": {
+          _attr: {
+            url: ensureAbsoluteUrl(item.metadata.image),
+            medium: "image",
+          },
+        },
+      });
+    }
+
     // Add item
     feed.item({
       title: item.metadata.title || item.slug,
       description,
       url,
       guid: url,
-      date: item.metadata.publishedAt,
+      date: new Date(item.metadata.publishedAt),
       author: item.metadata.author ?? "Samet Can Cıncık",
       categories,
-      enclosure: item.metadata.image
-        ? { url: ensureAbsoluteUrl(item.metadata.image) }
-        : undefined,
+      custom_elements,
     });
   }
 

@@ -1,8 +1,8 @@
-import Container from "@mui/material/Container"; // MUI Container'ı içe aktar
 import Box from "@mui/material/Box";
+import Container from "@mui/material/Container"; // MUI Container'ı içe aktar
 import BackToHome from "@/components/BackToHome";
-import SaveThisPage from "@/components/SaveThisPage";
 import DownloadCv from "@/components/DownloadCv";
+import SaveThisPage from "@/components/SaveThisPage";
 
 export default function BlogLayout({
   children,

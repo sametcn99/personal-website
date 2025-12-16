@@ -15,6 +15,60 @@ function ensureAbsoluteUrl(path: string) {
   return `${SITE_URL}${path}`;
 }
 
+// Types for JSON Feed 1.1: https://jsonfeed.org/version/1.1
+interface JSONFeed {
+  version: string;
+  title: string;
+  home_page_url?: string;
+  feed_url?: string;
+  description?: string;
+  user_comment?: string;
+  next_url?: string;
+  icon?: string;
+  favicon?: string;
+  authors?: JSONFeedAuthor[];
+  language?: string;
+  expired?: boolean;
+  hubs?: JSONFeedHub[];
+  items: JSONFeedItem[];
+}
+
+interface JSONFeedAuthor {
+  name?: string;
+  url?: string;
+  avatar?: string;
+}
+
+interface JSONFeedHub {
+  type: string;
+  url: string;
+}
+
+interface JSONFeedItem {
+  id: string;
+  url?: string;
+  external_url?: string;
+  title?: string;
+  content_html?: string;
+  content_text?: string;
+  summary?: string;
+  image?: string;
+  banner_image?: string;
+  date_published?: string;
+  date_modified?: string;
+  authors?: JSONFeedAuthor[];
+  tags?: string[];
+  attachments?: JSONFeedAttachment[];
+}
+
+interface JSONFeedAttachment {
+  url: string;
+  mime_type: string;
+  title?: string;
+  size_in_bytes?: number;
+  duration_in_seconds?: number;
+}
+
 export async function GET() {
   // Gather items from all content sources
   const blog = getBlogPosts();
@@ -35,12 +89,13 @@ export async function GET() {
   });
 
   // Build JSON Feed
-  const feed = {
+  const feed: JSONFeed = {
     version: "https://jsonfeed.org/version/1.1",
     title: "Samet Can Cıncık — All content",
     description: "Combined feed for blog posts, gists and projects",
     home_page_url: SITE_URL,
     feed_url: ensureAbsoluteUrl("/feed.json"),
+    favicon: ensureAbsoluteUrl("/favicon.ico"),
     language: "en",
     authors: [
       {

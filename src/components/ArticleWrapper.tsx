@@ -1,11 +1,12 @@
 "use client";
 
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Container, Divider, Typography } from "@mui/material";
 import ArticleNavigation from "@/components/ArticleNavigation";
 import BackToHome from "@/components/BackToHome";
 import ReadingTime from "@/components/ReadingTime";
 import ScrollProgress from "@/components/ScrollProgress";
 import ShareButton from "@/components/ShareButton";
+import { HorizontalRule } from "./mdx-components";
 
 interface ArticleData {
   href: string;
@@ -40,9 +41,6 @@ export default function ArticleWrapper({
 }: ArticleWrapperProps) {
   return (
     <Container maxWidth="md">
-      {/* Progress Bar */}
-      <ScrollProgress />
-
       <Box sx={{ py: 2 }}>
         <BackToHome />
 
@@ -64,14 +62,7 @@ export default function ArticleWrapper({
             >
               <Typography variant="body2" color="text.secondary">
                 {publishedLabel}:{" "}
-                {new Date(currentArticle.lastModified).toLocaleDateString(
-                  "en-US",
-                  {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  },
-                )}
+                {new Date(currentArticle.lastModified).toDateString()}
               </Typography>
               <ReadingTime />
               <ShareButton
@@ -108,6 +99,12 @@ export default function ArticleWrapper({
                       key={tag}
                       color="textSecondary"
                       variant="caption"
+                      sx={{
+                        cursor: "pointer",
+                        "&:hover": {
+                          textDecoration: "underline",
+                        },
+                      }}
                     >
                       #{tag}
                     </Typography>
@@ -116,6 +113,8 @@ export default function ArticleWrapper({
             )}
           </Box>
         )}
+
+        <HorizontalRule />
 
         {/* Main Content */}
         <Box component="article">{children}</Box>

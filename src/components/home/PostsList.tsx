@@ -29,7 +29,7 @@ export default function PostsList({ posts }: PostsListProps) {
             {post.summary}
           </Typography>
           <Typography variant="caption" sx={{ color: "gray" }}>
-            {new Date(post.publishedAt).toLocaleDateString()}
+            {new Date(post.publishedAt).toDateString()}
           </Typography>
         </Box>
       ))}

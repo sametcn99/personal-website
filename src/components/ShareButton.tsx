@@ -95,7 +95,7 @@ export default function ShareButton({
         },
       }}
     >
-      Share this {contentType} &nbsp;
+      Share this {contentType}
     </Typography>
   );
 }

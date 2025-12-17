@@ -1,7 +1,8 @@
 "use client";
 
-import { alpha, Box } from "@mui/material";
+import { alpha } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
+import Image from "next/image";
 import type React from "react";
 
 interface ImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
@@ -10,20 +11,31 @@ interface ImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
 
 export function ImageComponent({ alt, ...props }: ImageProps) {
   const theme = useTheme();
+  const { width, height, src, ...rest } = props;
+
+  // The src prop is required by Next.js Image, but optional in standard HTML attributes.
+  // We strictly require it for execution but provide a fallback for TS safety if needed.
+  if (!src) return null;
 
   return (
-    <Box
-      component="img"
-      alt={alt}
-      sx={{
-        maxWidth: "100%",
+    <Image
+      alt={alt || "Image"}
+      src={src as string}
+      width={0}
+      height={0}
+      sizes="100vw"
+      style={{
+        width: "100%",
         height: "auto",
-        borderRadius: 2,
-        my: 3,
+        borderRadius:
+          typeof theme.shape.borderRadius === "number"
+            ? theme.shape.borderRadius * 2
+            : 8,
+        marginTop: theme.spacing(3),
+        marginBottom: theme.spacing(3),
         boxShadow: `0 4px 20px ${alpha(theme.palette.common.black, 0.1)}`,
       }}
-      {...props}
-      aria-label={alt || "Image"}
+      {...rest}
     />
   );
 }

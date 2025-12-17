@@ -107,10 +107,15 @@ export function ImageComponent({ alt, ...props }: ImageProps) {
                   justifyContent: "center",
                 }}
               >
-                <img
+                <Image
                   src={src as string}
                   alt={alt || "Full screen image"}
+                  width={0}
+                  height={0}
+                  sizes="100vw"
                   style={{
+                    width: "auto",
+                    height: "auto",
                     maxWidth: "90vw",
                     maxHeight: "90vh",
                     objectFit: "contain",

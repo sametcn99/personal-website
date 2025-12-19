@@ -15,33 +15,42 @@ tags:
   ]
 ---
 
-# VitePress Mermaid Renderer 🎨
+<div align="center">
 
-[Live Demo](https://vitepress-mermaid-renderer.vercel.app/)
-[Github Repo](https://github.com/sametcn99/vitepress-mermaid-renderer)
-[npm Package](https://www.npmjs.com/package/vitepress-mermaid-renderer)
+# VitePress Mermaid Renderer
 
-Transform your static Mermaid diagrams into interactive, dynamic visualizations in VitePress! This powerful plugin brings life to your documentation by enabling interactive features like zooming, panning, and fullscreen viewing.
+[![Live Demo](https://img.shields.io/badge/demo-live-brightgreen)](https://vitepress-mermaid-renderer.sametcc.me) [![NPM Downloads](https://img.shields.io/npm/dw/vitepress-mermaid-renderer)](https://www.npmjs.com/package/vitepress-mermaid-renderer) [![Version](https://img.shields.io/npm/v/vitepress-mermaid-renderer)](https://www.npmjs.com/package/vitepress-mermaid-renderer)
 
-## ✨ Key Features
+Transform your static Mermaid diagrams into interactive, dynamic visualizations in VitePress. This powerful plugin brings life to your documentation by enabling interactive features like zooming, panning, and fullscreen viewing.
 
-- 🔍 Smooth Zoom In/Out capabilities
-- 🔄 Intuitive Diagram Navigation with panning
-- 📋 One-Click Diagram Code Copy
-- 📏 Quick View Reset
-- 🖥️ Immersive Fullscreen Mode
-- 🎨 Seamless VitePress Theme Integration
-- ⚡ Lightning-fast Performance
-- 🛠️ Easy Configuration
-- 🌐 Client-Side Only Rendering (SSR safe)
+<i>Stay up to date with new releases in the [CHANGELOG](https://github.com/sametcn99/vitepress-mermaid-renderer/blob/main/CHANGELOG.md).</i>
 
-## 🚀 Quick Start
+</div>
+
+## Key Features
+
+- **Smooth Zooming**: Capable of zooming in and out for better readability.
+- **Intuitive Navigation**: Easy panning allows for exploring complex diagrams.
+- **Code Copy**: Extract the Mermaid source code with a single click.
+- **View Reset**: Instantly restore the diagram to its default view.
+- **Fullscreen Mode**: View diagrams in a distraction-free fullscreen mode.
+- **Theme Integration**: Automatically adapts to Light and Dark modes.
+- **Download Options**: Export diagrams as SVG, PNG, or JPG.
+
+## How It Works
+
+Your Mermaid diagrams spring to life automatically. The plugin detects Mermaid code blocks (marked with `mermaid` language) and transforms them into interactive diagrams equipped with a powerful toolbar.
+
+## Quick Start
 
 ### Installation
 
-Choose your preferred package manager:
+Install the package using your preferred package manager:
 
 ```bash
+# Using bun
+bun add vitepress-mermaid-renderer
+
 # Using npm
 npm install vitepress-mermaid-renderer
 
@@ -50,56 +59,53 @@ yarn add vitepress-mermaid-renderer
 
 # Using pnpm
 pnpm add vitepress-mermaid-renderer
-
-# Using bun
-bun add vitepress-mermaid-renderer
 ```
 
 ### VitePress Configuration
 
-Your `.vitepress/theme/index.ts` file should look like this:
+Update your `.vitepress/theme/index.ts` file to initialize the renderer:
 
 ```typescript
-// https://vitepress.dev/guide/custom-theme
-import { h, nextTick } from "vue";
+import { h, nextTick, watch } from "vue";
 import type { Theme } from "vitepress";
 import DefaultTheme from "vitepress/theme";
-import "./style.css";
+import { useData } from "vitepress";
 import { createMermaidRenderer } from "vitepress-mermaid-renderer";
-import "vitepress-mermaid-renderer/dist/style.css";
 
 export default {
   extends: DefaultTheme,
   Layout: () => {
-    return h(DefaultTheme.Layout, null, {});
-  },
-  enhanceApp({ app, router, siteData }) {
-    // Use the client-safe wrapper for SSR compatibility
-    // Optional: Pass custom Mermaid configuration
-    const mermaidRenderer = createMermaidRenderer({
-      // Example configuration options
-      // theme: 'dark',
-      // startOnLoad: false,
-      // flowchart: { useMaxWidth: true }
-    });
-    mermaidRenderer.initialize();
+    const { isDark } = useData();
 
-    if (router) {
-      router.onAfterRouteChange = () => {
-        nextTick(() => mermaidRenderer.renderMermaidDiagrams());
-      };
-    }
+    const initMermaid = () => {
+      const mermaidRenderer = createMermaidRenderer({
+        theme: isDark.value ? "dark" : "forest",
+      });
+    };
+
+    // initial mermaid setup
+    nextTick(() => initMermaid());
+
+    // on theme change, re-render mermaid charts
+    watch(
+      () => isDark.value,
+      () => {
+        initMermaid();
+      },
+    );
+
+    return h(DefaultTheme.Layout);
   },
 } satisfies Theme;
 ```
 
-## ⚙️ Configuration
+## Configuration
 
-You can customize the Mermaid renderer by passing configuration options to `createMermaidRenderer()`:
+Customize the Mermaid renderer by passing configuration options to `createMermaidRenderer()`.
 
 ```typescript
 const mermaidRenderer = createMermaidRenderer({
-  theme: "dark", // 'default', 'dark', 'forest', 'neutral'
+  theme: "dark",
   startOnLoad: false,
   flowchart: {
     useMaxWidth: true,
@@ -109,43 +115,89 @@ const mermaidRenderer = createMermaidRenderer({
     diagramMarginX: 50,
     diagramMarginY: 10,
   },
-  // Any other Mermaid configuration options
 });
 ```
 
 For a complete list of available configuration options, refer to the [Mermaid Configuration Documentation](https://mermaid.js.org/config/schema-docs/config.html).
 
-## 🔧 How It Works
+### Toolbar Configuration
 
-Your Mermaid diagrams spring to life automatically! The plugin detects Mermaid code blocks (marked with `mermaid` language) and transforms them into interactive diagrams with a powerful toolset:
+You can fully customize the toolbar for desktop, mobile, and fullscreen modes using `setToolbar()`.
 
-- 🔍 Dynamic zoom controls
-- 🖱️ Smooth pan navigation
-- 🎯 One-click view reset
-- 📺 Immersive fullscreen experience
-- 📝 Easy code copying
+```typescript
+mermaidRenderer.setToolbar({
+  showLanguageLabel: true,
+  desktop: {
+    zoomIn: "disabled",
+    zoomLevel: "enabled",
+    positions: { vertical: "top", horizontal: "left" },
+  },
+  mobile: {
+    zoomLevel: "disabled",
+    positions: { vertical: "bottom", horizontal: "left" },
+  },
+  fullscreen: {
+    zoomLevel: "enabled",
+    positions: { vertical: "top", horizontal: "right" },
+  },
+});
+```
 
-## 📝 Client-Side Only Rendering
+#### Top-Level Configuration
 
-This plugin is designed to work only on the client side, making it fully compatible with server-side rendering (SSR). All rendering operations are protected by environment checks to ensure they only execute in the browser.
+| Option              | Type                      | Default | Description                                     |
+| :------------------ | :------------------------ | :------ | :---------------------------------------------- |
+| `showLanguageLabel` | `boolean`                 | `true`  | Toggles the original VitePress `mermaid` badge. |
+| `downloadFormat`    | `'svg' \| 'png' \| 'jpg'` | `'svg'` | Specifies the download format.                  |
+| `desktop`           | `object`                  | `{}`    | Configuration for desktop view.                 |
+| `mobile`            | `object`                  | `{}`    | Configuration for mobile view.                  |
+| `fullscreen`        | `object`                  | `{}`    | Configuration for fullscreen view.              |
 
-To ensure SSR compatibility:
+#### Toolbar Mode Options
 
-- Use `createMermaidRenderer(config?)` rather than `MermaidRenderer.getInstance()`
-- Import styles from the distributed CSS file
-- Make sure browser environment checks are in place
+Inside `desktop`, `mobile`, or `fullscreen`, use these keys:
 
-The `createMermaidRenderer` function accepts an optional configuration object that will be passed to Mermaid.js for customizing diagram appearance and behavior.
+| Key            | Type                      | Description                                     |
+| :------------- | :------------------------ | :---------------------------------------------- |
+| `[buttonName]` | `'enabled' \| 'disabled'` | Enable or disable specific buttons.             |
+| `zoomLevel`    | `'enabled' \| 'disabled'` | Controls the visibility of the zoom percentage. |
+| `positions`    | `object`                  | Defines where the toolbar is anchored.          |
 
-## 🤝 Contributing
+#### Default Button States
+
+| Button             | Desktop    | Mobile     | Fullscreen | Description              |
+| :----------------- | :--------- | :--------- | :--------- | :----------------------- |
+| `zoomIn`           | `enabled`  | `disabled` | `disabled` | Zoom in button.          |
+| `zoomOut`          | `enabled`  | `disabled` | `disabled` | Zoom out button.         |
+| `resetView`        | `enabled`  | `enabled`  | `disabled` | Resets zoom and pan.     |
+| `copyCode`         | `enabled`  | `enabled`  | `disabled` | Copies Mermaid source.   |
+| `download`         | `disabled` | `disabled` | `disabled` | Downloads the diagram.   |
+| `toggleFullscreen` | `enabled`  | `enabled`  | `enabled`  | Toggles fullscreen mode. |
+
+#### Position Configuration
+
+| Key          | Values              | Default  | Description                 |
+| :----------- | :------------------ | :------- | :-------------------------- |
+| `vertical`   | `'top' \| 'bottom'` | `bottom` | Vertical anchor position.   |
+| `horizontal` | `'left' \| 'right'` | `right`  | Horizontal anchor position. |
+
+## Contributing
 
 We welcome contributions! Whether it's submitting pull requests, reporting issues, or suggesting improvements, your input helps make this plugin better for everyone.
 
-## 🧪 Local Development
+## Local Development
 
-Want to test the package locally? Here are two methods:
+To test the package locally, you can use one of the following methods:
 
-### Method 1: npm link
+### Automated Test Script
+
+Run the `test.ts` helper to walk through the full local-preview flow in one step. This script cleans artifacts, rebuilds, packs, installs, and launches the dev server.
+
+```bash
+bun test.ts
+```
+
+### Manual Linking
 
 ```bash
 # In the package directory
@@ -156,7 +208,7 @@ npm link
 npm link vitepress-mermaid-renderer
 ```
 
-### Method 2: npm pack
+### Manual Packing
 
 ```bash
 # In the package directory
@@ -167,8 +219,14 @@ npm pack
 npm install /path/to/vitepress-mermaid-renderer-1.0.0.tgz
 ```
 
-## 📦 Links
+## Links
 
 - [NPM Package](https://www.npmjs.com/package/vitepress-mermaid-renderer)
 - [GitHub Repository](https://github.com/sametcn99/vitepress-mermaid-renderer)
-- [Documentation](https://vitepress-mermaid-renderer.vercel.app)
+- [Live Examples](https://vitepress-mermaid-renderer.sametcc.me)
+
+---
+
+<div align="center">
+  <strong>If you found this project helpful, please consider giving it a star on GitHub!</strong>
+</div>

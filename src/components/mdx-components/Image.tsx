@@ -45,7 +45,7 @@ export function ImageComponent({ alt, ...props }: ImageProps) {
   const handleClose = () => setOpen(false);
 
   // Render badge images inline without zoom functionality (like GitHub)
-  if (isBadgeImage(src)) {
+  if (typeof src === "string" && isBadgeImage(src)) {
     return (
       // eslint-disable-next-line @next/next/no-img-element
       <img

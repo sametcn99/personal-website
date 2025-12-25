@@ -24,7 +24,7 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: "https",
+        protocol: "https" as const,
         hostname: "img.shields.io",
       },
     ],

@@ -4,6 +4,7 @@ import CasinoIcon from "@mui/icons-material/Casino";
 import { Button } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
+import { useUmami } from "@/hooks/useUmami";
 
 interface ImFeelingLuckyProps {
   /** All available content items to pick from */
@@ -16,6 +17,7 @@ interface ImFeelingLuckyProps {
  */
 export default function ImFeelingLucky({ contents }: ImFeelingLuckyProps) {
   const router = useRouter();
+  const { trackEvent } = useUmami();
 
   const handleClick = useCallback(() => {
     if (contents.length === 0) return;
@@ -24,9 +26,12 @@ export default function ImFeelingLucky({ contents }: ImFeelingLuckyProps) {
     const randomContent = contents[randomIndex];
 
     if (randomContent?.href) {
+      trackEvent("im_feeling_lucky_click", {
+        destination: randomContent.href,
+      });
       router.push(randomContent.href);
     }
-  }, [contents, router]);
+  }, [contents, router, trackEvent]);
 
   if (contents.length === 0) return null;
 

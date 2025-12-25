@@ -1,5 +1,10 @@
 import HomePage from "@/components/home/HomePage";
-import { getBlogPosts, getGistPosts, getProjectPosts } from "@/lib/content";
+import {
+  getAllContents,
+  getBlogPosts,
+  getGistPosts,
+  getProjectPosts,
+} from "@/lib/content";
 
 export default function Home() {
   // Get all posts server-side and limit to 5 for homepage
@@ -56,6 +61,8 @@ export default function Home() {
       language: post.metadata.language || "en",
     }));
 
+  const allContents = getAllContents();
+
   return (
     <HomePage
       blogPosts={blogPosts}
@@ -64,6 +71,7 @@ export default function Home() {
       blogTotal={allBlogPosts.length}
       projectTotal={allProjectPosts.length}
       gistTotal={allGistPosts.length}
+      allContents={allContents}
     />
   );
 }

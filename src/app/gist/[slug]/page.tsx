@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import ArticleWrapper from "@/components/ArticleWrapper";
 import { JsonLd } from "@/components/JsonLd";
-import { getGistPosts } from "@/lib/content";
+import { getAllContents, getGistPosts } from "@/lib/content";
 import { CustomMDX } from "../../../components/mdx";
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://localhost:3000";
@@ -86,6 +86,7 @@ export default async function Gist({ params }: PageParams) {
   const currentGist = transformToGistData(post);
   const prevGistData = prevGist ? transformToGistData(prevGist) : null;
   const nextGistData = nextGist ? transformToGistData(nextGist) : null;
+  const allContents = getAllContents();
 
   return (
     <ArticleWrapper
@@ -96,6 +97,7 @@ export default async function Gist({ params }: PageParams) {
       publishedLabel="Last updated"
       prevLabel="Previous Gist"
       nextLabel="Next Gist"
+      allContents={allContents}
     >
       <JsonLd
         data={{

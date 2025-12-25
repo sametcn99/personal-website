@@ -11,6 +11,28 @@ interface ImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   alt?: string;
 }
 
+/**
+ * Checks if the given URL is a badge image (e.g., shields.io, badge.fury.io, etc.)
+ * @param src - The image source URL
+ * @returns True if the URL is a badge image
+ */
+function isBadgeImage(src: string): boolean {
+  const badgeHosts = [
+    "img.shields.io",
+    "badge.fury.io",
+    "badges.gitter.im",
+    "badgen.net",
+    "flat.badgen.net",
+    "codecov.io",
+    "coveralls.io",
+    "travis-ci.org",
+    "travis-ci.com",
+    "circleci.com",
+    "github.com/workflows",
+  ];
+  return badgeHosts.some((host) => src.includes(host));
+}
+
 export function ImageComponent({ alt, ...props }: ImageProps) {
   const theme = useTheme();
   const { width, height, src, style, ...rest } = props;
@@ -21,6 +43,25 @@ export function ImageComponent({ alt, ...props }: ImageProps) {
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  // Render badge images inline without zoom functionality (like GitHub)
+  if (isBadgeImage(src)) {
+    return (
+      // eslint-disable-next-line @next/next/no-img-element
+      <img
+        alt={alt || "Badge"}
+        src={src}
+        style={{
+          display: "inline-block",
+          verticalAlign: "middle",
+          height: "auto",
+          marginRight: theme.spacing(0.5),
+          ...style,
+        }}
+        {...rest}
+      />
+    );
+  }
 
   return (
     <>

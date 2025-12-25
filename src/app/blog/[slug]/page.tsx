@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import ArticleWrapper from "@/components/ArticleWrapper";
 import { JsonLd } from "@/components/JsonLd";
-import { getBlogPosts } from "@/lib/content";
+import { getAllContents, getBlogPosts } from "@/lib/content";
 import { CustomMDX } from "../../../components/mdx";
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://localhost:3000";
@@ -86,6 +86,7 @@ export default async function BlogPost({ params }: PageParams) {
   const currentPost = transformToBlogData(post);
   const prevPostData = prevPost ? transformToBlogData(prevPost) : null;
   const nextPostData = nextPost ? transformToBlogData(nextPost) : null;
+  const allContents = getAllContents();
 
   return (
     <ArticleWrapper
@@ -98,6 +99,7 @@ export default async function BlogPost({ params }: PageParams) {
       nextLabel="Next Post"
       tags={post.metadata.tags}
       language={post.metadata.language}
+      allContents={allContents}
     >
       <JsonLd
         data={{

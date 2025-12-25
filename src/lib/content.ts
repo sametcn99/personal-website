@@ -275,3 +275,25 @@ export function getSortedContent(contentType: ContentType): ContentItem[] {
     return dateB.getTime() - dateA.getTime();
   });
 }
+
+/**
+ * Get all content items from all content types with their hrefs
+ */
+export function getAllContents(): ContentMetadata[] {
+  const blogPosts = getBlogPosts().map((post) => ({
+    ...post.metadata,
+    href: `/blog/${post.slug}`,
+  }));
+
+  const gistPosts = getGistPosts().map((post) => ({
+    ...post.metadata,
+    href: `/gist/${post.slug}`,
+  }));
+
+  const projectPosts = getProjectPosts().map((post) => ({
+    ...post.metadata,
+    href: `/project/${post.slug}`,
+  }));
+
+  return [...blogPosts, ...gistPosts, ...projectPosts];
+}

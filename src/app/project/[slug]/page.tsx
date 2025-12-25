@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import ArticleWrapper from "@/components/ArticleWrapper";
 import { JsonLd } from "@/components/JsonLd";
 import { CustomMDX } from "@/components/mdx";
-import { getProjectPosts } from "@/lib/content";
+import { getAllContents, getProjectPosts } from "@/lib/content";
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://localhost:3000";
 
@@ -88,6 +88,7 @@ export default async function BlogPost({ params }: PageParams) {
   const currentPost = transformToPostData(post);
   const prevPostData = prevPost ? transformToPostData(prevPost) : null;
   const nextPostData = nextPost ? transformToPostData(nextPost) : null;
+  const allContents = getAllContents();
 
   return (
     <ArticleWrapper
@@ -100,6 +101,7 @@ export default async function BlogPost({ params }: PageParams) {
       nextLabel="Next Project"
       tags={post.metadata.tags}
       language={post.metadata.language}
+      allContents={allContents}
     >
       <JsonLd
         data={{

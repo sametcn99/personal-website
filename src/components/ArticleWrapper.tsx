@@ -3,6 +3,7 @@
 import { Box, Container, Divider, Typography } from "@mui/material";
 import ArticleNavigation from "@/components/ArticleNavigation";
 import BackToHome from "@/components/BackToHome";
+import ImFeelingLucky from "@/components/ImFeelingLucky";
 import ReadingTime from "@/components/ReadingTime";
 import ScrollProgress from "@/components/ScrollProgress";
 import ShareButton from "@/components/ShareButton";
@@ -25,6 +26,7 @@ interface ArticleWrapperProps {
   nextLabel?: string;
   tags?: string[];
   language?: string;
+  allContents?: ContentMetadata[];
 }
 
 export default function ArticleWrapper({
@@ -38,6 +40,7 @@ export default function ArticleWrapper({
   nextLabel = "Next",
   tags = [],
   language,
+  allContents = [],
 }: ArticleWrapperProps) {
   return (
     <Container maxWidth="md">
@@ -127,6 +130,13 @@ export default function ArticleWrapper({
           prevLabel={prevLabel}
           nextLabel={nextLabel}
         />
+
+        {/* I'm Feeling Lucky button */}
+        {allContents.length > 0 && (
+          <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
+            <ImFeelingLucky contents={allContents} />
+          </Box>
+        )}
       </Box>
     </Container>
   );

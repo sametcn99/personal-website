@@ -20,6 +20,15 @@ const nextConfig = {
   trailingSlash: false,
   // Enable standalone output for Docker builds
   output: "standalone" as const,
+  // Configure allowed image hostnames
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "img.shields.io",
+      },
+    ],
+  },
 };
 
 const withMDX = createMDX({

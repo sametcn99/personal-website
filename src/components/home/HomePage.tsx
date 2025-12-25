@@ -4,6 +4,7 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import { useMemo } from "react";
 import Footer from "@/components/Footer";
+import ImFeelingLucky from "@/components/ImFeelingLucky";
 import ContentSection from "@/components/home/ContentSection";
 import LinksSection from "@/components/home/LinksSection";
 import SearchSection from "@/components/home/SearchSection";
@@ -16,6 +17,7 @@ interface HomePageProps {
   blogTotal: number;
   projectTotal: number;
   gistTotal: number;
+  allContents: ContentMetadata[];
 }
 
 export default function HomePage({
@@ -25,6 +27,7 @@ export default function HomePage({
   blogTotal,
   projectTotal,
   gistTotal,
+  allContents,
 }: HomePageProps) {
   const { searchQuery, setSearchQuery, clearSearch } = useSearch("homepage");
 
@@ -68,6 +71,9 @@ export default function HomePage({
                 viewAllHref="/gist"
               />
               <LinksSection />
+              <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
+                <ImFeelingLucky contents={allContents} />
+              </Box>
             </>
           )}
         </Box>

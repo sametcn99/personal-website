@@ -2,6 +2,8 @@
 
 import CheckIcon from "@mui/icons-material/Check";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
+import UnfoldLessIcon from "@mui/icons-material/UnfoldLess";
+import UnfoldMoreIcon from "@mui/icons-material/UnfoldMore";
 import { Box, IconButton, Stack, Tooltip, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import React, {
@@ -22,6 +24,7 @@ export function CodeComponent({
 }: PropsWithChildren<CodeProps>) {
   const theme = useTheme();
   const [copied, setCopied] = useState(false);
+  const [expanded, setExpanded] = useState(false);
   const isInlineCode = !className;
 
   const handleCopy = useCallback(async () => {
@@ -150,6 +153,19 @@ export function CodeComponent({
         </Typography>
 
         <Stack direction="row" spacing={0.5}>
+          <Tooltip title={expanded ? "Collapse" : "Expand"} arrow>
+            <IconButton
+              size="small"
+              onClick={() => setExpanded(!expanded)}
+              aria-label={expanded ? "collapse code" : "expand code"}
+            >
+              {expanded ? (
+                <UnfoldLessIcon fontSize="small" />
+              ) : (
+                <UnfoldMoreIcon fontSize="small" />
+              )}
+            </IconButton>
+          </Tooltip>
           <Tooltip title={copied ? "Copied" : "Copy"} arrow>
             <IconButton
               size="small"
@@ -172,7 +188,7 @@ export function CodeComponent({
         sx={{
           p: 2,
           overflow: "auto",
-          maxHeight: "500px", // Optional: limit max height
+          maxHeight: expanded ? "none" : "500px",
         }}
       >
         <Typography

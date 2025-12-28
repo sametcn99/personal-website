@@ -10,8 +10,8 @@ export default function DownloadCv() {
   return (
     <Box
       component="a"
-      href="/samet_can_cincik_cv.pdf"
-      download="Samet_Can_Cincik_CV.pdf"
+      href="samet-can-cincik-cv.pdf"
+      download="samet-can-cincik-cv.pdf.pdf"
       onClick={() => trackEvent("download_cv")}
       sx={{
         textDecoration: "none",

@@ -58,7 +58,7 @@ function SearchInput({
     >
       <TextField
         fullWidth
-        size="small"
+        size="medium"
         placeholder={placeholder}
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}

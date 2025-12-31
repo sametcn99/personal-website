@@ -1,4 +1,5 @@
 import CssBaseline from "@mui/material/CssBaseline";
+import Box from "@mui/material/Box";
 import GlobalStyles from "@mui/material/GlobalStyles";
 import InitColorSchemeScript from "@mui/material/InitColorSchemeScript";
 import { ThemeProvider } from "@mui/material/styles";
@@ -9,6 +10,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import type * as React from "react";
 import theme from "@/theme";
 import "highlight.js/styles/github-dark.css";
+import Footer from "@/components/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -97,40 +99,18 @@ export default function RootLayout({
         <AppRouterCacheProvider options={{ enableCssLayer: true }}>
           <ThemeProvider theme={theme}>
             <CssBaseline />
-            <GlobalStyles
-              styles={{
-                html: {
-                  scrollbarWidth: "thin" as const,
-                  scrollbarColor: "rgba(255, 255, 255, 0.3) transparent",
-                },
-                "*::-webkit-scrollbar": {
-                  width: "8px",
-                  height: "8px",
-                },
-                "*::-webkit-scrollbar-track": {
-                  background: "transparent",
-                  borderRadius: "4px",
-                },
-                "*::-webkit-scrollbar-thumb": {
-                  background: "rgba(255, 255, 255, 0.3)",
-                  borderRadius: "4px",
-                  border: "1px solid transparent",
-                  backgroundClip: "content-box",
-                  "&:hover": {
-                    background: "rgba(255, 255, 255, 0.5)",
-                    backgroundClip: "content-box",
-                  },
-                  "&:active": {
-                    background: "rgba(255, 255, 255, 0.7)",
-                    backgroundClip: "content-box",
-                  },
-                },
-                "*::-webkit-scrollbar-corner": {
-                  background: "transparent",
-                },
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                minHeight: "100vh",
               }}
-            />
-            {children}
+            >
+              <Box component="main" sx={{ flexGrow: 1 }}>
+                {children}
+              </Box>
+              <Footer />
+            </Box>
           </ThemeProvider>
         </AppRouterCacheProvider>
         <Analytics />

@@ -44,7 +44,7 @@ export default function ArticleWrapper({
 }: ArticleWrapperProps) {
   return (
     <Container maxWidth="md">
-      <Box sx={{ py: 2 }}>
+      <Box>
         <BackToHome />
 
         {/* Article Meta */}

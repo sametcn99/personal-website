@@ -37,8 +37,8 @@ export default function HomePage({
   }, [blogPosts, projectPosts, gistPosts]);
 
   return (
-    <Box sx={{ minHeight: "100vh" }}>
-      <Container maxWidth="md" sx={{ py: 6 }}>
+    <Box>
+      <Container maxWidth="md">
         <Box>
           <SearchSection
             searchQuery={searchQuery}
@@ -78,7 +78,6 @@ export default function HomePage({
           )}
         </Box>
       </Container>
-      <Footer />
     </Box>
   );
 }

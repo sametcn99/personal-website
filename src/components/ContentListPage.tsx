@@ -60,8 +60,8 @@ export default function ContentListPage({
   }, [searchQuery, posts, sortBy, sortOrder]);
 
   return (
-    <Box sx={{ minHeight: "100vh" }}>
-      <Container maxWidth="md" sx={{ py: 6 }}>
+    <Box>
+      <Container maxWidth="md">
         <BackToHome />
 
         <Box sx={{ mt: 4 }}>
@@ -167,7 +167,6 @@ export default function ContentListPage({
           )}
         </Box>
       </Container>
-      <Footer />
     </Box>
   );
 }

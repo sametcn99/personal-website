@@ -11,6 +11,7 @@ import type * as React from "react";
 import theme from "@/theme";
 import "highlight.js/styles/github-dark.css";
 import Footer from "@/components/Footer";
+import { getAllContents } from "@/lib/content";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -109,7 +110,7 @@ export default function RootLayout({
               <Box component="main" sx={{ flexGrow: 1 }}>
                 {children}
               </Box>
-              <Footer />
+              <Footer allContents={getAllContents()} />
             </Box>
           </ThemeProvider>
         </AppRouterCacheProvider>

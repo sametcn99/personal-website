@@ -1,7 +1,6 @@
 "use client";
 
-import CasinoIcon from "@mui/icons-material/Casino";
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 import { useUmami } from "@/hooks/useUmami";
@@ -9,6 +8,11 @@ import { useUmami } from "@/hooks/useUmami";
 interface ImFeelingLuckyProps {
   /** All available content items to pick from */
   contents: ContentMetadata[];
+  /**
+   * The visual style of the component.
+   * @default "button"
+   */
+  variant?: "button" | "text";
 }
 
 /**
@@ -37,19 +41,25 @@ export default function ImFeelingLucky({ contents }: ImFeelingLuckyProps) {
 
   return (
     <Button
-      variant="outlined"
-      startIcon={<CasinoIcon />}
       onClick={handleClick}
+      disableRipple
       sx={{
-        mt: 2,
         textTransform: "none",
-        borderStyle: "dashed",
+        padding: 0,
+        minWidth: 0,
+        minHeight: 0,
+        color: "text.secondary",
+        lineHeight: "inherit",
+        verticalAlign: "baseline",
         "&:hover": {
-          borderStyle: "solid",
+          textDecoration: "underline",
+          backgroundColor: "transparent",
         },
       }}
     >
-      I&apos;m Feeling Lucky
+      <Typography variant="caption" color="inherit">
+        I&apos;m Feeling Lucky
+      </Typography>
     </Button>
   );
 }

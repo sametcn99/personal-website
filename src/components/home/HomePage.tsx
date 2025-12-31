@@ -71,9 +71,6 @@ export default function HomePage({
                 viewAllHref="/gist"
               />
               <LinksSection />
-              <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
-                <ImFeelingLucky contents={allContents} />
-              </Box>
             </>
           )}
         </Box>

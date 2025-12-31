@@ -4,7 +4,13 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Link from "next/link";
 
-export default function Footer() {
+import ImFeelingLucky from "@/components/ImFeelingLucky";
+
+interface FooterProps {
+  allContents: ContentMetadata[];
+}
+
+export default function Footer({ allContents }: FooterProps) {
   return (
     <Box textAlign="center" mt={4} justifyItems="center">
       <Box
@@ -15,11 +21,7 @@ export default function Footer() {
         gap={1}
         mb={1}
       >
-        <Typography variant="caption" color="text.secondary">
-          Last updated:{" "}
-          {new Date(process.env.NEXT_PUBLIC_BUILD_DATE!).toLocaleDateString()}
-        </Typography>
-        <Box display="flex" gap={2} mt={1}>
+        <Box display="flex" gap={2} mt={1} alignItems="baseline">
           <Link
             href="/privacy-policy"
             target="_blank"
@@ -37,6 +39,7 @@ export default function Footer() {
               Privacy Policy
             </Typography>
           </Link>
+          <ImFeelingLucky contents={allContents} />
           <Link href="/rss" style={{ textDecoration: "none" }}>
             <Typography
               variant="caption"

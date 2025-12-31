@@ -130,13 +130,6 @@ export default function ArticleWrapper({
           prevLabel={prevLabel}
           nextLabel={nextLabel}
         />
-
-        {/* I'm Feeling Lucky button */}
-        {allContents.length > 0 && (
-          <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
-            <ImFeelingLucky contents={allContents} />
-          </Box>
-        )}
       </Box>
     </Container>
   );

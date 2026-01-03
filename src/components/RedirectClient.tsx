@@ -1,23 +1,29 @@
 "use client";
 
-import { Box, CircularProgress, Typography } from "@mui/material";
+import { Box, CircularProgress, Link, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 
 export default function RedirectClient({ targetUrl }: { targetUrl: string }) {
   const [countdown, setCountdown] = useState(3);
+  const [showManualLink, setShowManualLink] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCountdown((prev) => prev - 1);
+      setCountdown((prev) => (prev > 0 ? prev - 1 : 0));
     }, 1000);
 
-    const timer = setTimeout(() => {
+    const redirectTimer = setTimeout(() => {
       window.location.href = targetUrl;
     }, 3000);
 
+    const manualLinkTimer = setTimeout(() => {
+      setShowManualLink(true);
+    }, 5000);
+
     return () => {
       clearInterval(interval);
-      clearTimeout(timer);
+      clearTimeout(redirectTimer);
+      clearTimeout(manualLinkTimer);
     };
   }, [targetUrl]);
 
@@ -44,6 +50,26 @@ export default function RedirectClient({ targetUrl }: { targetUrl: string }) {
       </Typography>
 
       <CircularProgress size={32} thickness={5} />
+
+      {showManualLink && (
+        <Box
+          sx={{
+            mt: 2,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: 1,
+          }}
+        >
+          <Typography variant="body2" color="text.secondary">
+            If you are not redirected automatically, please click the link
+            below:
+          </Typography>
+          <Link href={targetUrl} underline="hover">
+            {targetUrl}
+          </Link>
+        </Box>
+      )}
     </Box>
   );
 }

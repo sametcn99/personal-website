@@ -8,6 +8,7 @@ import ImFeelingLucky from "@/components/ImFeelingLucky";
 import ContentSection from "@/components/home/ContentSection";
 import LinksSection from "@/components/home/LinksSection";
 import SearchSection from "@/components/home/SearchSection";
+import SponsorSection from "@/components/home/SponsorSection";
 import { useSearch } from "@/hooks/useSearch";
 
 interface HomePageProps {
@@ -71,6 +72,7 @@ export default function HomePage({
                 viewAllHref="/gist"
               />
               <LinksSection />
+              <SponsorSection />
             </>
           )}
         </Box>

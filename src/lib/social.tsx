@@ -12,6 +12,7 @@ import Theaters from "@mui/icons-material/Theaters";
 import WhatsApp from "@mui/icons-material/WhatsApp";
 import X from "@mui/icons-material/X";
 import YouTube from "@mui/icons-material/YouTube";
+import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
 
 export const socialMediaLinks: SocialMediaLink[] = [
   {
@@ -128,6 +129,15 @@ export const socialMediaLinks: SocialMediaLink[] = [
     external: false,
     category: "Professional Networks",
     icon: <Description />,
+  },
+  {
+    type: ["support", "sponsor", "donate"],
+    link: "/support",
+    label: "Support Me",
+    visible: true,
+    external: false,
+    category: "Contact",
+    icon: <VolunteerActivismIcon />,
   },
   {
     type: ["whatsapp", "wp"],

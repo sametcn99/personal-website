@@ -27,6 +27,14 @@ const nextConfig = {
         protocol: "https" as const,
         hostname: "img.shields.io",
       },
+      {
+        protocol: "https" as const,
+        hostname: "github.com",
+      },
+      {
+        protocol: "https" as const,
+        hostname: "raw.githubusercontent.com",
+      },
     ],
   },
 };

@@ -29,7 +29,7 @@ export default function PrivacyPolicy() {
         Privacy Policy
       </Typography>
       <Typography variant="subtitle1" color="text.secondary" paragraph>
-        Last Updated: October 2025
+        Last Updated: January 2026
       </Typography>
 
       <Divider sx={{ my: 4 }} />
@@ -88,103 +88,24 @@ export default function PrivacyPolicy() {
           gutterBottom
           fontWeight="medium"
         >
-          2. The Data I Collect (Self-Hosted Umami)
+          2. The Data I Collect
         </Typography>
         <Typography paragraph>
-          I use a <strong>Self-Hosted Umami Analytics</strong> instance for data
-          collection. This means <strong>I own and control all the data</strong>
-          , and it is never shared with any external commercial analytics
-          provider (like Google, Meta, etc.). All collected data is{" "}
+          My data collection philosophy is built on transparency and privacy. I
+          primarily use a <strong>Self-Hosted Umami Analytics</strong> instance,
+          which gives me <strong>complete ownership and control</strong> over
+          the data, ensuring it is never shared with third-party commercial
+          providers. All data collected through this method is fully{" "}
           <strong>anonymized</strong>.
         </Typography>
-
-        <Typography variant="h6" component="h3" sx={{ mt: 3, mb: 1 }}>
-          Automatically Collected Contextual Data
-        </Typography>
         <Typography paragraph>
-          Through a custom React Hook, the following technical data is collected
-          with every event to understand your environment and context:
+          In addition, I sometimes experiment with{" "}
+          <strong>Microsoft Clarity</strong> and{" "}
+          <strong>Cloudflare Analytics</strong>. These tools are used{" "}
+          <strong>exclusively for learning purposes</strong>—to understand their
+          integration and functionality—rather than for tracking individual
+          users.
         </Typography>
-
-        <List>
-          <ListItem>
-            <ListItemIcon>
-              <VisibilityIcon />
-            </ListItemIcon>
-            <ListItemText
-              primary="Browser and Device Information"
-              secondary="User Agent (Browser, OS, Device Type), Browser Language. (Purpose: Troubleshooting compatibility and optimizing performance across different platforms.)"
-            />
-          </ListItem>
-          <ListItem>
-            <ListItemIcon>
-              <VisibilityIcon />
-            </ListItemIcon>
-            <ListItemText
-              primary="Session and Page Context"
-              secondary="Current Page Path, Page Title, Referrer URL, and the Timestamp of the event. (Purpose: Analyzing user flow and identifying popular content.)"
-            />
-          </ListItem>
-          <ListItem>
-            <ListItemIcon>
-              <SecurityIcon />
-            </ListItemIcon>
-            <ListItemText
-              primary="IP Address (Anonymized)"
-              secondary="The IP address is used by my Umami instance solely to determine approximate geographical location (country, city) and is either anonymized (hashed) or discarded immediately before being stored in the database. It is never stored in its original form and cannot be traced back to an individual user."
-            />
-          </ListItem>
-        </List>
-      </section>
-
-      <Divider sx={{ my: 4 }} />
-
-      {/* Section 3: Data Usage and Sharing */}
-      <section>
-        <Typography
-          variant="h5"
-          component="h2"
-          gutterBottom
-          fontWeight="medium"
-        >
-          3. How I Use and Protect Your Data
-        </Typography>
-        <List dense>
-          <ListItem>
-            <ListItemText
-              primary={
-                <>
-                  <strong>Data Storage:</strong> All anonymized data is stored
-                  exclusively on my private, controlled servers and remains
-                  within my infrastructure.
-                </>
-              }
-            />
-          </ListItem>
-          <ListItem>
-            <ListItemText
-              primary={
-                <>
-                  <strong>Data Usage:</strong> I use the data strictly for
-                  internal purposes: measuring service stability, analyzing
-                  feature adoption, and improving the overall user experience
-                  (UX/UI).
-                </>
-              }
-            />
-          </ListItem>
-          <ListItem>
-            <ListItemText
-              primary={
-                <>
-                  <strong>No Third-Party Sharing:</strong> I do not sell, rent,
-                  or share any of your collected data with any third-party
-                  marketing, advertising, or data brokerage services.
-                </>
-              }
-            />
-          </ListItem>
-        </List>
       </section>
 
       <Divider sx={{ my: 4 }} />

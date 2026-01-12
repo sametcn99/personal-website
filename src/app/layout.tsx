@@ -12,6 +12,7 @@ import theme from "@/theme";
 import "highlight.js/styles/github-dark.css";
 import Footer from "@/components/Footer";
 import { getAllContents } from "@/lib/content";
+import ClarityAnalytics from "@/components/ClarityAnalytics";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -115,6 +116,7 @@ export default function RootLayout({
           </ThemeProvider>
         </AppRouterCacheProvider>
         <Analytics />
+        <ClarityAnalytics />
       </body>
     </html>
   );

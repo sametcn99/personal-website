@@ -5,6 +5,7 @@ import { useTheme } from "@mui/material/styles";
 import Link from "next/link";
 import type React from "react";
 import { useId } from "react";
+import { useUmami } from "@/hooks/useUmami";
 
 interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   href?: string;
@@ -17,10 +18,20 @@ export function LinkComponent({
 }: React.PropsWithChildren<LinkProps>) {
   const theme = useTheme();
   const uniqueId = useId();
+  const { trackEvent } = useUmami();
+
+  const handleLinkClick = (type: "anchor" | "internal" | "external") => {
+    trackEvent("link_click", {
+      href: href || "unknown",
+      text: typeof children === "string" ? children : String(children),
+      type,
+    });
+  };
 
   // Handle anchor links (same page scroll)
   if (href?.startsWith("#")) {
     const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+      handleLinkClick("anchor");
       e.preventDefault();
       const targetId = href.slice(1);
       const targetElement = document.getElementById(targetId);
@@ -73,6 +84,7 @@ export function LinkComponent({
       <MuiLink
         href={href}
         component={Link}
+        onClick={() => handleLinkClick("internal")}
         className={`link-${uniqueId}`}
         sx={{
           textDecoration: "none",
@@ -109,6 +121,7 @@ export function LinkComponent({
       href={href}
       target="_blank"
       rel="noopener noreferrer"
+      onClick={() => handleLinkClick("external")}
       className={`link-${uniqueId}`}
       sx={{
         textDecoration: "none",

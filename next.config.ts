@@ -35,6 +35,10 @@ const nextConfig = {
         protocol: "https" as const,
         hostname: "raw.githubusercontent.com",
       },
+      {
+        protocol: "https" as const,
+        hostname: "golter.sametcc.me",
+      },
     ],
   },
 };

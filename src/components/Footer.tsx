@@ -3,6 +3,7 @@
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 import ImFeelingLucky from "@/components/ImFeelingLucky";
 
@@ -11,6 +12,12 @@ interface FooterProps {
 }
 
 export default function Footer({ allContents }: FooterProps) {
+  const pathname = usePathname();
+
+  const paths = ["/link", "/repo", "/privacy"];
+
+  if (paths.some((path) => pathname.startsWith(path))) return null;
+
   return (
     <Box textAlign="center" mt={4} justifyItems="center">
       <Box

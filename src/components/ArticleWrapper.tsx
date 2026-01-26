@@ -1,11 +1,9 @@
 "use client";
 
-import { Box, Container, Divider, Typography } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 import ArticleNavigation from "@/components/ArticleNavigation";
 import BackToHome from "@/components/BackToHome";
-import ImFeelingLucky from "@/components/ImFeelingLucky";
 import ReadingTime from "@/components/ReadingTime";
-import ScrollProgress from "@/components/ScrollProgress";
 import ShareButton from "@/components/ShareButton";
 import { HorizontalRule } from "./mdx-components";
 
@@ -40,7 +38,6 @@ export default function ArticleWrapper({
   nextLabel = "Next",
   tags = [],
   language,
-  allContents = [],
 }: ArticleWrapperProps) {
   return (
     <Container maxWidth="md">

@@ -1,16 +1,10 @@
 // components/PrivacyPolicy.tsx
 import CodeIcon from "@mui/icons-material/Code";
 import LockIcon from "@mui/icons-material/Lock";
-import SecurityIcon from "@mui/icons-material/Security";
-import VisibilityIcon from "@mui/icons-material/Visibility";
 import {
   Box,
   Container,
   Divider,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
   Link as MuiLink,
   Typography,
 } from "@mui/material";

@@ -9,10 +9,10 @@ import MusicNote from "@mui/icons-material/MusicNote";
 import QuestionMark from "@mui/icons-material/QuestionMark";
 import Telegram from "@mui/icons-material/Telegram";
 import Theaters from "@mui/icons-material/Theaters";
+import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
 import WhatsApp from "@mui/icons-material/WhatsApp";
 import X from "@mui/icons-material/X";
 import YouTube from "@mui/icons-material/YouTube";
-import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
 
 export const socialMediaLinks: SocialMediaLink[] = [
   {

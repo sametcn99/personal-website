@@ -1,11 +1,11 @@
+import CoffeeIcon from "@mui/icons-material/Coffee";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import CoffeeIcon from "@mui/icons-material/Coffee";
-import FavoriteIcon from "@mui/icons-material/Favorite";
 import type { Metadata } from "next";
 import BackToHome from "@/components/BackToHome";
 

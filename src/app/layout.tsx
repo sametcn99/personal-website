@@ -1,5 +1,5 @@
-import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
+import CssBaseline from "@mui/material/CssBaseline";
 import GlobalStyles from "@mui/material/GlobalStyles";
 import InitColorSchemeScript from "@mui/material/InitColorSchemeScript";
 import { ThemeProvider } from "@mui/material/styles";
@@ -10,9 +10,9 @@ import { Geist, Geist_Mono } from "next/font/google";
 import type * as React from "react";
 import theme from "@/theme";
 import "highlight.js/styles/github-dark.css";
+import ClarityAnalytics from "@/components/ClarityAnalytics";
 import Footer from "@/components/Footer";
 import { getAllContents } from "@/lib/content";
-import ClarityAnalytics from "@/components/ClarityAnalytics";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

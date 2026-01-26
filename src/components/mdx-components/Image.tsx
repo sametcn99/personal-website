@@ -1,11 +1,12 @@
+/** biome-ignore-all lint/performance/noImgElement: . */
 "use client";
 
-import { Modal, Fade, Box, IconButton, alpha } from "@mui/material";
-import { useTheme } from "@mui/material/styles";
 import CloseIcon from "@mui/icons-material/Close";
+import { alpha, Box, Fade, IconButton, Modal } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 import Image from "next/image";
-import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import React from "react";
+import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
 
 interface ImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   alt?: string;

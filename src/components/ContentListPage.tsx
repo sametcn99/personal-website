@@ -10,7 +10,6 @@ import Select from "@mui/material/Select";
 import Typography from "@mui/material/Typography";
 import { useMemo } from "react";
 import BackToHome from "@/components/BackToHome";
-import Footer from "@/components/Footer";
 import PostsList from "@/components/home/PostsList";
 import SearchSection from "@/components/home/SearchSection";
 import { useSearch } from "@/hooks/useSearch";

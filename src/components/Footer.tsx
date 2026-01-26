@@ -49,6 +49,15 @@ export default function Footer({ allContents }: FooterProps) {
               RSS
             </Typography>
           </Link>
+          <Link href="/readme" style={{ textDecoration: "none" }}>
+            <Typography
+              variant="caption"
+              color="text.secondary"
+              sx={{ "&:hover": { textDecoration: "underline" } }}
+            >
+              README
+            </Typography>
+          </Link>
         </Box>
       </Box>
     </Box>

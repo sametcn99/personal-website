@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   description: "About me - content from GitHub profile README",
 };
 
-export const revalidate = 3600;
+export const dynamic = "force-dynamic";
 
 export default async function ReadmePage() {
   const res = await fetch(

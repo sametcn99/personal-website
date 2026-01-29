@@ -5,6 +5,7 @@ import Container from "@mui/material/Container";
 import { useMemo } from "react";
 import ContentSection from "@/components/home/ContentSection";
 import LinksSection from "@/components/home/LinksSection";
+import ReadmeSection from "@/components/home/ReadmeSection";
 import SearchSection from "@/components/home/SearchSection";
 import { useSearch } from "@/hooks/useSearch";
 
@@ -46,6 +47,7 @@ export default function HomePage({
 
           {!searchQuery && (
             <>
+              <ReadmeSection />
               <ContentSection
                 title="Blog Posts"
                 description="A collection of my thoughts on development and the passions that keep me inspired."

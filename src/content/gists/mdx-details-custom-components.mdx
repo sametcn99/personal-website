@@ -16,7 +16,6 @@ When working with MDX in Next.js projects, you might encounter a common challeng
   - [Step 1: Create Custom Components](#step-1-create-custom-components)
   - [Step 2: Transform HTML Tags Before Compilation](#step-2-transform-html-tags-before-compilation)
   - [Step 3: Register Components in MDX](#step-3-register-components-in-mdx)
-- [How It Works](#how-it-works)
 - [Why First Child as Summary?](#why-first-child-as-summary)
 - [Handling the open Attribute](#handling-the-open-attribute)
 - [Extending the Solution](#extending-the-solution)
@@ -186,7 +185,7 @@ Add some basic styles:
 
 ### Step 2: Transform HTML Tags Before Compilation
 
-The key insight is that we need to transform HTML tags **before** MDX compiles them. Create a transform function:
+The key insight is that we need to transform HTML tags **before** MDX compiles them. We also need to be careful not to transform tags inside code blocks or inline code. Create a context-aware transform function:
 
 ```tsx
 // components/mdx.tsx
@@ -196,13 +195,30 @@ import { useMDXComponents } from "../mdx-components";
 /**
  * Transforms HTML details/summary tags to JSX Details/Summary components
  * before MDX compilation since MDX doesn't support raw HTML tags.
+ * Skips transformation for content inside code blocks and inline code.
  */
 function transformHtmlToJsx(source: string): string {
-  return source
-    .replace(/<details(\s|>)/gi, "<Details$1")
-    .replace(/<\/details>/gi, "</Details>")
-    .replace(/<summary(\s|>)/gi, "<Summary$1")
-    .replace(/<\/summary>/gi, "</Summary>");
+  // Regex to match code blocks (```...```) and inline code (`...`)
+  const codeRegex = /(```[\s\S]*?```|`[^`\n]*`)/g;
+
+  // Split by code blocks/inline code while keeping the delimiters
+  const parts = source.split(codeRegex);
+
+  return parts
+    .map((part) => {
+      // If this part is a code block or inline code, don't transform it
+      if (part.match(codeRegex)) {
+        return part;
+      }
+
+      // Transform HTML tags to JSX components for non-code parts
+      return part
+        .replace(/<details(\s|>)/gi, "<Details$1")
+        .replace(/<\/details>/gi, "</Details>")
+        .replace(/<summary(\s|>)/gi, "<Summary$1")
+        .replace(/<\/summary>/gi, "</Summary>");
+    })
+    .join("");
 }
 
 export function CustomMDX({ source }: { source: string }) {
@@ -224,12 +240,12 @@ export function CustomMDX({ source }: { source: string }) {
 }
 ```
 
-This regex-based transformation:
-- Converts `<details>` to `<Details>`
-- Converts `</details>` to `</Details>`
-- Converts `<summary>` to `<Summary>`
-- Converts `</summary>` to `</Summary>`
-- Preserves any attributes on the tags
+This refined transformation:
+- **Identifies code regions** using regex to prevent accidental transformation within examples.
+- **Converts `<details>` to `<Details>`** only in prose.
+- **Converts `</details>` to `</Details>`** only in prose.
+- **Converts `<summary>` to `<Summary>`** only in prose.
+- **Converts `</summary>` to `</Summary>`** only in prose.
 
 ### Step 3: Register Components in MDX
 
@@ -251,41 +267,6 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
 }
 ```
 
-## How It Works
-
-The solution works in three stages:
-
-```
-1. Raw MDX Content
-   <details>
-     <summary>Click me</summary>
-     Hidden content
-   </details>
-   
-2. After Transform (before compilation)
-   <Details>
-     <Summary>Click me</Summary>
-     Hidden content
-   </Details>
-   
-3. After MDX Compilation (React components)
-   <DetailsComponent>
-     <SummaryComponent>Click me</SummaryComponent>
-     Hidden content
-   </DetailsComponent>
-   
-4. Final Render (Collapsible UI)
-   ┌─────────────────────────┐
-   │ ▶ Click me              │
-   └─────────────────────────┘
-   
-   (after click)
-   ┌─────────────────────────┐
-   │ ▼ Click me              │
-   ├─────────────────────────┤
-   │ Hidden content          │
-   └─────────────────────────┘
-```
 
 ## Why First Child as Summary?
 
@@ -315,23 +296,22 @@ const [isOpen, setIsOpen] = useState(open);
 
 ## Extending the Solution
 
-You can extend this pattern for other HTML elements that MDX doesn't handle well:
+You can extend this pattern for other HTML elements that MDX doesn't handle well by adding more replacements inside the non-code part of your transform function:
 
 ```typescript
-function transformHtmlToJsx(source: string): string {
-  return source
-    // Details/Summary
-    .replace(/<details(\s|>)/gi, "<Details$1")
-    .replace(/<\/details>/gi, "</Details>")
-    .replace(/<summary(\s|>)/gi, "<Summary$1")
-    .replace(/<\/summary>/gi, "</Summary>")
-    // Dialog
-    .replace(/<dialog(\s|>)/gi, "<Dialog$1")
-    .replace(/<\/dialog>/gi, "</Dialog>")
-    // Add more transformations as needed
-    .replace(/<mark(\s|>)/gi, "<Mark$1")
-    .replace(/<\/mark>/gi, "</Mark>");
-}
+// Inside the transformHtmlToJsx .map() callback:
+return part
+  // Details/Summary
+  .replace(/<details(\s|>)/gi, "<Details$1")
+  .replace(/<\/details>/gi, "</Details>")
+  .replace(/<summary(\s|>)/gi, "<Summary$1")
+  .replace(/<\/summary>/gi, "</Summary>")
+  // Dialog
+  .replace(/<dialog(\s|>)/gi, "<Dialog$1")
+  .replace(/<\/dialog>/gi, "</Dialog>")
+  // Mark
+  .replace(/<mark(\s|>)/gi, "<Mark$1")
+  .replace(/<\/mark>/gi, "</Mark>");
 ```
 
 ## Summary

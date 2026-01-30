@@ -3,6 +3,7 @@ import {
   BlockQuote,
   CalloutComponent,
   CodeComponent,
+  DetailsComponent,
   H1,
   H2,
   H3,
@@ -14,6 +15,7 @@ import {
   OrderedList,
   Paragraph,
   PreComponent,
+  SummaryComponent,
   TableBodyComponent,
   TableComponent,
   TableDataCell,
@@ -45,6 +47,9 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     td: TableDataCell,
     hr: HorizontalRule,
     img: ImageComponent,
+    // JSX Components for direct use in MDX
+    Details: DetailsComponent,
+    Summary: SummaryComponent,
     Callout: CalloutComponent,
     Mermaid: MermaidComponent,
   };

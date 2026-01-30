@@ -1,6 +1,7 @@
 export { BlockQuote } from "./BlockQuote";
 export { CalloutComponent } from "./Callout";
 export { CodeComponent } from "./Code";
+export { DetailsComponent, SummaryComponent } from "./Details";
 export { H1, H2, H3 } from "./Heading";
 export { HorizontalRule } from "./HorizontalRule";
 export { ImageComponent } from "./Image";

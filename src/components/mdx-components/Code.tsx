@@ -10,12 +10,16 @@ import React, {
   type HTMLAttributes,
   type PropsWithChildren,
   useCallback,
+  useEffect,
+  useRef,
   useState,
 } from "react";
 
 interface CodeProps extends HTMLAttributes<HTMLElement> {
   className?: string;
 }
+
+const COLLAPSED_HEIGHT = 500;
 
 export function CodeComponent({
   children,
@@ -25,7 +29,16 @@ export function CodeComponent({
   const theme = useTheme();
   const [copied, setCopied] = useState(false);
   const [expanded, setExpanded] = useState(false);
+  const [isExpandable, setIsExpandable] = useState(false);
+  const contentRef = useRef<HTMLDivElement>(null);
   const isInlineCode = !className;
+
+  // biome-ignore lint/correctness/useExhaustiveDependencies: children is needed to trigger re-measurement
+  useEffect(() => {
+    if (contentRef.current) {
+      setIsExpandable(contentRef.current.scrollHeight > COLLAPSED_HEIGHT);
+    }
+  }, [children]);
 
   const handleCopy = useCallback(async () => {
     try {
@@ -121,8 +134,6 @@ export function CodeComponent({
         mt: 2,
         mb: 2,
         borderRadius: theme.shape.borderRadius,
-        overflow: "hidden",
-        border: `1px solid ${theme.palette.divider}`,
       }}
     >
       {/* Header with buttons */}
@@ -133,7 +144,14 @@ export function CodeComponent({
           alignItems: "center",
           px: 2,
           py: 1,
+          border: `1px solid ${theme.palette.divider}`,
           borderBottom: `1px solid ${theme.palette.text.secondary}`,
+          position: expanded ? "sticky" : "static",
+          top: 0,
+          zIndex: 1,
+          backgroundColor: theme.palette.background.default,
+          borderTopLeftRadius: theme.shape.borderRadius,
+          borderTopRightRadius: theme.shape.borderRadius,
         }}
       >
         <Typography
@@ -153,19 +171,21 @@ export function CodeComponent({
         </Typography>
 
         <Stack direction="row" spacing={0.5}>
-          <Tooltip title={expanded ? "Collapse" : "Expand"} arrow>
-            <IconButton
-              size="small"
-              onClick={() => setExpanded(!expanded)}
-              aria-label={expanded ? "collapse code" : "expand code"}
-            >
-              {expanded ? (
-                <UnfoldLessIcon fontSize="small" />
-              ) : (
-                <UnfoldMoreIcon fontSize="small" />
-              )}
-            </IconButton>
-          </Tooltip>
+          {isExpandable && (
+            <Tooltip title={expanded ? "Collapse" : "Expand"} arrow>
+              <IconButton
+                size="small"
+                onClick={() => setExpanded(!expanded)}
+                aria-label={expanded ? "collapse code" : "expand code"}
+              >
+                {expanded ? (
+                  <UnfoldLessIcon fontSize="small" />
+                ) : (
+                  <UnfoldMoreIcon fontSize="small" />
+                )}
+              </IconButton>
+            </Tooltip>
+          )}
           <Tooltip title={copied ? "Copied" : "Copy"} arrow>
             <IconButton
               size="small"
@@ -185,10 +205,15 @@ export function CodeComponent({
 
       {/* Code content */}
       <Box
+        ref={contentRef}
         sx={{
           p: 2,
           overflow: "auto",
-          maxHeight: expanded ? "none" : "500px",
+          maxHeight: expanded ? "none" : `${COLLAPSED_HEIGHT}px`,
+          border: `1px solid ${theme.palette.divider}`,
+          borderTop: 0,
+          borderBottomLeftRadius: theme.shape.borderRadius,
+          borderBottomRightRadius: theme.shape.borderRadius,
         }}
       >
         <Typography

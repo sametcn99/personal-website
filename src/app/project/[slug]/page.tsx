@@ -35,30 +35,34 @@ export async function generateMetadata({ params }: PageParams) {
     summary: description,
     image,
   } = post.metadata;
-  const ogImage = image
-    ? image
-    : `${baseUrl}/og?title=${encodeURIComponent(title)}`;
+
+  const openGraphData: any = {
+    title,
+    description,
+    type: "article",
+    publishedTime,
+    url: `${baseUrl}/project/${post.slug}`,
+  };
+
+  // Only explicitly set images if a custom image is defined in metadata
+  // Otherwise, let opengraph-image.tsx handle it
+  if (image) {
+    openGraphData.images = [
+      {
+        url: image,
+      },
+    ];
+  }
 
   return {
     title,
     description,
-    openGraph: {
-      title,
-      description,
-      type: "article",
-      publishedTime,
-      url: `${baseUrl}/blog/${post.slug}`,
-      images: [
-        {
-          url: ogImage,
-        },
-      ],
-    },
+    openGraph: openGraphData,
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: [ogImage],
+      images: image ? [image] : undefined, // If undefined, Next.js may fall back to OG image
     },
   };
 }

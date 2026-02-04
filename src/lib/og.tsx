@@ -4,15 +4,12 @@ export async function generateOgImage(title: string, subtitle?: string) {
   let fontData: ArrayBuffer | null = null;
 
   try {
-    // Attempt to fetch the Inter font from Google Fonts
-    // We use a try/catch block to ensure that if the font fetch fails (e.g. network issues),
-    // the image is still generated with a fallback font.
+    // Satori (ImageResponse) requires TTF or OTF fonts. WOFF2 is not supported directly.
+    // We use a direct string URL to prevent Webpack from trying to bundle the URL as a local asset.
     const response = await fetch(
-      new URL(
-        "https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuFuYAZ9hjp-Ek-_EeA.ttf",
-        "https://fonts.google.com/",
-      ),
+      "https://cdn.jsdelivr.net/gh/vercel/geist-font@main/packages/next/dist/fonts/geist-sans/Geist-Bold.ttf",
     );
+
     if (response.ok) {
       fontData = await response.arrayBuffer();
     } else {
@@ -35,6 +32,7 @@ export async function generateOgImage(title: string, subtitle?: string) {
         justifyContent: "center",
         backgroundColor: "#0e0e0e",
         color: "#b0b0b0",
+        fontFamily: '"Geist"',
       }}
     >
       <div
@@ -88,13 +86,13 @@ export async function generateOgImage(title: string, subtitle?: string) {
       fonts: fontData
         ? [
             {
-              name: "Inter",
+              name: "Geist",
               data: fontData,
               style: "normal",
               weight: 700,
             },
           ]
-        : undefined, // Fallback to system fonts if fetch fails
+        : undefined,
     },
   );
 }

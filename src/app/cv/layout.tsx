@@ -2,7 +2,6 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container"; // MUI Container'ı içe aktar
 import BackToHome from "@/components/BackToHome";
 import DownloadCv from "@/components/DownloadCv";
-import SaveThisPage from "@/components/SaveThisPage";
 
 export default function BlogLayout({
   children,
@@ -26,7 +25,6 @@ export default function BlogLayout({
         }}
       >
         <DownloadCv />
-        <SaveThisPage />
       </Box>
     </Container>
   );

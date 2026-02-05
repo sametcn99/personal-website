@@ -3,7 +3,7 @@ import path from "node:path";
 import { NextResponse } from "next/server";
 
 export async function GET() {
-  const filename = "samet-can-cincik-cv.pdf";
+  const filename = "Samet_Can_Cincik_Ozgecmis.pdf";
   const filePath = path.join(process.cwd(), "public", filename);
 
   if (!fs.existsSync(filePath)) {

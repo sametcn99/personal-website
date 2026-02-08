@@ -25,7 +25,6 @@
     "@next/mdx": "16.1.6",
     "@types/lunr": "^2.3.7",
     "@types/mdx": "^2.0.13",
-    "@vercel/analytics": "^1.6.1",
     "install": "^0.13.0",
     "lunr": "^2.3.9",
     "mermaid": "^11.12.2",

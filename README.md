@@ -7,8 +7,6 @@ GitHub integration.
 
 **Live:** [https://sametcc.me](https://sametcc.me)
 
----
-
 ## Table of Contents
 
 - [Features](#features)
@@ -21,8 +19,6 @@ GitHub integration.
 - [Feeds & SEO](#feeds--seo)
 - [Analytics](#analytics)
 - [Deployment](#deployment)
-
----
 
 ## Features
 
@@ -61,8 +57,6 @@ GitHub integration.
 - **Skeleton loading** — Smooth loading states with dedicated skeleton
   components for every section.
 
----
-
 ## Tech Stack
 
 | Category                 | Technology                                                                                                                           |
@@ -82,8 +76,6 @@ GitHub integration.
 | **Linting & Formatting** | [Biome](https://biomejs.dev/)                                                                                                        |
 | **Testing**              | [Jest](https://jestjs.io/) + [Testing Library](https://testing-library.com/)                                                         |
 | **Deployment**           | [Vercel](https://vercel.com/) / Docker                                                                                               |
-
----
 
 ## Project Structure
 
@@ -145,8 +137,6 @@ GitHub integration.
 └── package.json                # Dependencies & scripts
 ```
 
----
-
 ## Getting Started
 
 ### Prerequisites
@@ -182,8 +172,6 @@ bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
-
----
 
 ## Available Scripts
 
@@ -244,8 +232,6 @@ author: "sametcn99"
 3. Write your content using Markdown and custom MDX components.
 4. The content will be automatically picked up — no configuration needed.
 
----
-
 ## MDX Components
 
 The project provides a rich set of custom MDX components that are automatically
@@ -262,8 +248,6 @@ available in all MDX files:
 | `Callout`             | Info/warning/error callout boxes                        |
 | `Details` / `Summary` | Collapsible sections                                    |
 | `Mermaid`             | Mermaid diagram rendering                               |
-
----
 
 ## Feeds & SEO
 
@@ -294,8 +278,6 @@ author info, and media content references.
 
 The site integrates multiple analytics providers:
 
-- **[Vercel Analytics](https://vercel.com/analytics)** — Performance and web
-  vitals.
 - **[Microsoft Clarity](https://clarity.microsoft.com/)** — Session recordings
   and heatmaps.
 - **[Umami](https://umami.is/)** — Privacy-focused, self-hosted web analytics.

@@ -36,28 +36,25 @@ export async function generateMetadata({ params }: PageParams) {
     image,
   } = post.metadata;
 
-  const openGraphData: any = {
-    title,
-    description,
-    type: "article",
-    publishedTime,
-    url: `${baseUrl}/project/${post.slug}`,
-  };
-
-  // Only explicitly set images if a custom image is defined in metadata
-  // Otherwise, let opengraph-image.tsx handle it
-  if (image) {
-    openGraphData.images = [
-      {
-        url: image,
-      },
-    ];
-  }
-
   return {
     title,
     description,
-    openGraph: openGraphData,
+    openGraph: {
+      title,
+      description,
+      type: "article",
+      publishedTime,
+      url: `${baseUrl}/project/${post.slug}`,
+      ...(image
+        ? {
+            images: [
+              {
+                url: image,
+              },
+            ],
+          }
+        : {}),
+    },
     twitter: {
       card: "summary_large_image",
       title,

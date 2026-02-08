@@ -1,6 +1,6 @@
 "use client";
 import DownloadIcon from "@mui/icons-material/Download";
-import { Link, alpha, IconButton, Typography, useTheme } from "@mui/material";
+import { alpha, IconButton, Link, Typography, useTheme } from "@mui/material";
 import { useUmami } from "@/hooks/useUmami";
 
 export default function DownloadCv() {

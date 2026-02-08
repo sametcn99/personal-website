@@ -56,18 +56,18 @@ export default function HomePage({
                 viewAllHref="/blog"
               />
               <ContentSection
-                title="Projects"
-                description="A showcase of my personal projects and contributions to the developer community."
-                posts={projectPosts}
-                total={projectTotal}
-                viewAllHref="/project"
-              />
-              <ContentSection
                 title="Technical Gists"
                 description="Code snippets, tutorials, and technical documentation."
                 posts={gistPosts}
                 total={gistTotal}
                 viewAllHref="/gist"
+              />
+              <ContentSection
+                title="Projects"
+                description="A showcase of my personal projects and contributions to the developer community."
+                posts={projectPosts}
+                total={projectTotal}
+                viewAllHref="/project"
               />
               <LinksSection />
             </>

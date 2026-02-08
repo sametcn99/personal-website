@@ -33,3 +33,22 @@ export async function getUser() {
   const data = await octokit.rest.users.getAuthenticated();
   return data;
 }
+
+/**
+ * Retrieves the repositories of the authenticated user.
+ * @returns A Promise that resolves to the repositories list.
+ */
+export async function getRepos() {
+  const octokit = new Octokit({
+    auth: process.env.GH_TOKEN,
+    headers: {
+      "X-GitHub-Api-Version": "2022-11-28",
+    },
+  });
+  const data = await octokit.rest.repos.listForUser({
+    username: "sametcn99",
+    type: "owner",
+    per_page: 100,
+  });
+  return data;
+}

@@ -4,9 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "next dev --webpack",
-    "build": "next build --webpack",
-    "start": "next start",
+    "dev": "bun --bun next dev --webpack",
+    "build": "bun --bun next build --webpack",
+    "start": "bun --bun next start",
     "check": "biome check --write .",
     "jest": "jest",
     "lint": "biome check",

@@ -1,16 +1,25 @@
 ---
 title: "PowerShell Scripting"
 publishedAt: "2024-08-25"
-summary: "Complete PowerShell scripting guide covering automation, DevOps practices, Azure integration, and advanced techniques for cross-platform environments."
+summary:
+  "Complete PowerShell scripting guide covering automation, DevOps practices,
+  Azure integration, and advanced techniques for cross-platform environments."
 ---
 
 # PowerShell Scripting
 
 ## Introduction
 
-PowerShell is a powerful task automation and configuration management framework from Microsoft, consisting of a command-line shell and associated scripting language. Initially built on .NET Framework, and now cross-platform with PowerShell Core (built on .NET Core), it provides robust capabilities for system administrators and developers to automate tasks across Windows, macOS, and Linux environments.
+PowerShell is a powerful task automation and configuration management framework
+from Microsoft, consisting of a command-line shell and associated scripting
+language. Initially built on .NET Framework, and now cross-platform with
+PowerShell Core (built on .NET Core), it provides robust capabilities for system
+administrators and developers to automate tasks across Windows, macOS, and Linux
+environments.
 
-This guide covers PowerShell fundamentals, advanced techniques, best practices, and real-world applications to help you leverage its full potential in your DevOps workflows.
+This guide covers PowerShell fundamentals, advanced techniques, best practices,
+and real-world applications to help you leverage its full potential in your
+DevOps workflows.
 
 ## Table of Contents
 
@@ -87,10 +96,12 @@ sudo apt-get install -y powershell
 
 PowerShell has several command types:
 
-1. **Cmdlets**: Native PowerShell commands following verb-noun format (e.g., `Get-Process`)
+1. **Cmdlets**: Native PowerShell commands following verb-noun format (e.g.,
+   `Get-Process`)
 2. **Functions**: Custom reusable code blocks
 3. **Scripts**: Collections of commands saved as .ps1 files
-4. **Aliases**: Shortcuts for commands (e.g., `dir` is an alias for `Get-ChildItem`)
+4. **Aliases**: Shortcuts for commands (e.g., `dir` is an alias for
+   `Get-ChildItem`)
 
 Discovering commands:
 
@@ -180,11 +191,13 @@ Common policies:
 - **AllSigned**: Only signed scripts can run
 - **RemoteSigned**: Local scripts can run; downloaded scripts need signing
 - **Unrestricted**: All scripts can run (not recommended for production)
-- **Bypass**: No restrictions; nothing is blocked and no warnings (use with caution)
+- **Bypass**: No restrictions; nothing is blocked and no warnings (use with
+  caution)
 
 ### PowerShell Profiles
 
-PowerShell profiles allow you to customize your PowerShell environment by loading settings, functions, and aliases whenever you start PowerShell:
+PowerShell profiles allow you to customize your PowerShell environment by
+loading settings, functions, and aliases whenever you start PowerShell:
 
 ```powershell
 # Check if you have a profile
@@ -222,7 +235,8 @@ Profile locations:
 
 ### Basic Script Structure
 
-PowerShell scripts use the `.ps1` extension. Here's a more comprehensive example of a well-structured script:
+PowerShell scripts use the `.ps1` extension. Here's a more comprehensive example
+of a well-structured script:
 
 ```powershell
 <#
@@ -324,7 +338,8 @@ finally {
 
 ### Advanced Script Header Comments
 
-PowerShell supports special comment-based help that VS Code and PowerShell ISE can recognize:
+PowerShell supports special comment-based help that VS Code and PowerShell ISE
+can recognize:
 
 ```powershell
 <#
@@ -1283,6 +1298,12 @@ foreach ($service in $servicesToMonitor) {
 
 ## Conclusion
 
-PowerShell is a versatile and powerful tool for automation, system administration, and DevOps workflows. By mastering PowerShell, you can significantly improve your productivity, create consistent and reliable processes, and effectively manage complex IT environments.
+PowerShell is a versatile and powerful tool for automation, system
+administration, and DevOps workflows. By mastering PowerShell, you can
+significantly improve your productivity, create consistent and reliable
+processes, and effectively manage complex IT environments.
 
-This guide covers the fundamentals, but PowerShell's capabilities extend far beyond what's documented here. As you continue to work with PowerShell, you'll discover innovative ways to solve problems and automate tasks across your infrastructure.
+This guide covers the fundamentals, but PowerShell's capabilities extend far
+beyond what's documented here. As you continue to work with PowerShell, you'll
+discover innovative ways to solve problems and automate tasks across your
+infrastructure.

@@ -1,18 +1,26 @@
 ---
 title: "Payload Docker Config: PostgreSQL + BunJS"
 publishedAt: "2025-12-25"
-summary: "Docker configuration files to run PayloadCMS using the Bun runtime and PostgreSQL database. "
+summary:
+  "Docker configuration files to run PayloadCMS using the Bun runtime and
+  PostgreSQL database. "
 ---
 
 # Payload Docker Config: PostgreSQL + BunJS
-This gist provides Docker configuration files to run [PayloadCMS](https://payloadcms.com/) using the [Bun](https://bun.sh/) runtime and a PostgreSQL database.
+
+This gist provides Docker configuration files to run
+[PayloadCMS](https://payloadcms.com/) using the [Bun](https://bun.sh/) runtime
+and a PostgreSQL database.
 
 ## Files
 
-- `Dockerfile`: Defines the Docker image for the PayloadCMS application using Bun.
-- `docker-compose.yml`: Sets up the Docker services for PayloadCMS and PostgreSQL.
+- `Dockerfile`: Defines the Docker image for the PayloadCMS application using
+  Bun.
+- `docker-compose.yml`: Sets up the Docker services for PayloadCMS and
+  PostgreSQL.
 
 ## Dockerfile
+
 ```yaml
 # To use this Dockerfile, you have to set `output: 'standalone'` in your next.config.js file.
 
@@ -71,14 +79,15 @@ CMD HOSTNAME="0.0.0.0" bun --bun server.js
 ```
 
 ## docker-compose.yml
+
 ```yaml
-version: '3'
+version: "3"
 
 services:
   payload:
     image: oven/bun:1.1.14-alpine
     ports:
-      - '3000:3000'
+      - "3000:3000"
     volumes:
       - .:/home/bun/app
       - node_modules:/home/bun/app/node_modules
@@ -94,7 +103,7 @@ services:
   postgres:
     image: postgres:16-alpine
     ports:
-      - '5432:5432'
+      - "5432:5432"
     environment:
       POSTGRES_DB: payload
       POSTGRES_USER: payload

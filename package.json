@@ -7,10 +7,11 @@
     "dev": "bun --bun next dev --webpack",
     "build": "bun --bun next build --webpack",
     "start": "bun --bun next start",
-    "check": "biome check --write .",
+    "check": "biome check --write . && bun run format:md",
     "jest": "jest",
     "lint": "biome check",
-    "format": "biome format --write"
+    "format": "biome format --write && bun run format:md",
+    "format:md": "prettier --write \"**/*.{md,mdx}\""
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -55,6 +56,7 @@
     "@types/rss": "^0.0.32",
     "jest": "^30.2.0",
     "jest-environment-jsdom": "^30.2.0",
+    "prettier": "^3.8.1",
     "ts-jest": "^29.4.6",
     "ts-node": "^10.9.2",
     "tsx": "^4.21.0",

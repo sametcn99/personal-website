@@ -1,7 +1,9 @@
 ---
 title: "A Comprehensive Guide to Creating and Using Tasks in Visual Studio Code"
 publishedAt: "2024-08-25"
-summary: "Complete guide to VS Code tasks configuration including custom tasks, automation, debugging, and integration with build systems."
+summary:
+  "Complete guide to VS Code tasks configuration including custom tasks,
+  automation, debugging, and integration with build systems."
 ---
 
 # A Comprehensive Guide to Creating and Using Tasks in Visual Studio Code
@@ -21,7 +23,9 @@ summary: "Complete guide to VS Code tasks configuration including custom tasks, 
 
 ## Introduction to Tasks in VS Code
 
-Visual Studio Code's task system is a powerful automation feature that transforms your editor into a complete development environment. Tasks allow you to:
+Visual Studio Code's task system is a powerful automation feature that
+transforms your editor into a complete development environment. Tasks allow you
+to:
 
 - Execute build scripts
 - Run test suites
@@ -29,7 +33,9 @@ Visual Studio Code's task system is a powerful automation feature that transform
 - Perform code analysis
 - And automate any command-line operation
 
-Think of tasks as your personal development assistant that can execute commands with a single keystroke, ensuring consistency and saving valuable development time.
+Think of tasks as your personal development assistant that can execute commands
+with a single keystroke, ensuring consistency and saving valuable development
+time.
 
 ## Why Use Tasks?
 
@@ -374,35 +380,67 @@ Supported types with examples:
 
 ## Advanced Task Features
 
-- **inputs**: The `inputs` section in `tasks.json` allows you to prompt the user for input when a task is run. This input can then be used as variables in the task's command and args. You can define different types of inputs (text input, pick list, etc.).
-- **isBackground**: Setting `isBackground: true` in a task definition marks the task as a background task. Background tasks typically run continuously or for a long time (e.g., a watcher task that monitors file changes). Background tasks have special behavior in VS Code – they don't block other operations, and you can keep working in the editor while they are running. You can use the "Terminate Task" command to stop a background task.
-- **Composite Tasks**: You can create tasks that are composed of other tasks using the `dependsOn` property. This allows you to chain multiple tasks together into a single workflow. A composite task doesn't have its own command or args – it only specifies the tasks it depends on.
+- **inputs**: The `inputs` section in `tasks.json` allows you to prompt the user
+  for input when a task is run. This input can then be used as variables in the
+  task's command and args. You can define different types of inputs (text input,
+  pick list, etc.).
+- **isBackground**: Setting `isBackground: true` in a task definition marks the
+  task as a background task. Background tasks typically run continuously or for
+  a long time (e.g., a watcher task that monitors file changes). Background
+  tasks have special behavior in VS Code – they don't block other operations,
+  and you can keep working in the editor while they are running. You can use the
+  "Terminate Task" command to stop a background task.
+- **Composite Tasks**: You can create tasks that are composed of other tasks
+  using the `dependsOn` property. This allows you to chain multiple tasks
+  together into a single workflow. A composite task doesn't have its own command
+  or args – it only specifies the tasks it depends on.
 
 ## Problem Matchers
 
-Problem matchers are essential for making tasks useful for build and linting processes. They allow VS Code to understand the output of your tools and display errors and warnings in the Problems panel and in the editor itself.
+Problem matchers are essential for making tasks useful for build and linting
+processes. They allow VS Code to understand the output of your tools and display
+errors and warnings in the Problems panel and in the editor itself.
 
-VS Code provides many predefined problem matchers for common tools like GCC, TypeScript compiler (`tsc`), ESLint, JSHint, and more. These are identified by names like `$gcc`, `$tsc`, `$eslint-compact`, etc.
+VS Code provides many predefined problem matchers for common tools like GCC,
+TypeScript compiler (`tsc`), ESLint, JSHint, and more. These are identified by
+names like `$gcc`, `$tsc`, `$eslint-compact`, etc.
 
-When you specify a `problemMatcher` in your task, VS Code scans the output of the task for patterns that match the problem matcher's definition. When a match is found, VS Code extracts information like file path, line number, column number, severity (error/warning/info), and message, and then displays this as a problem in the Problems panel. Clicking on a problem in the Problems panel will often take you directly to the offending line in your code.
+When you specify a `problemMatcher` in your task, VS Code scans the output of
+the task for patterns that match the problem matcher's definition. When a match
+is found, VS Code extracts information like file path, line number, column
+number, severity (error/warning/info), and message, and then displays this as a
+problem in the Problems panel. Clicking on a problem in the Problems panel will
+often take you directly to the offending line in your code.
 
 ### Predefined Problem Matchers
 
-To use a predefined problem matcher, simply put its name (e.g., `$gcc`, `$tsc`) in the `problemMatcher` array of your task definition.
+To use a predefined problem matcher, simply put its name (e.g., `$gcc`, `$tsc`)
+in the `problemMatcher` array of your task definition.
 
 ### Custom Problem Matchers (Brief Overview)
 
-For tools where there isn't a predefined problem matcher, or if you need more control, you can define custom problem matchers. Custom problem matchers are more complex and involve defining regular expressions to parse the output of your tool. They are typically defined as objects within the `problemMatcher` array, instead of just strings.
+For tools where there isn't a predefined problem matcher, or if you need more
+control, you can define custom problem matchers. Custom problem matchers are
+more complex and involve defining regular expressions to parse the output of
+your tool. They are typically defined as objects within the `problemMatcher`
+array, instead of just strings.
 
 A custom problem matcher generally consists of:
 
 - **name**: A name for your problem matcher.
 - **owner**: Typically "external" for tasks.
-- **fileLocation**: How file paths are represented in the output ("absolute", "relative" to workspace folder).
-- **pattern**: An object or array of objects that define the regular expression patterns to match against the task output. Each pattern can have groups to capture different parts of the error/warning information (file path, line number, column number, message, etc.).
-- **severity, code, loop, message**: Optional properties to customize the problem reporting.
+- **fileLocation**: How file paths are represented in the output ("absolute",
+  "relative" to workspace folder).
+- **pattern**: An object or array of objects that define the regular expression
+  patterns to match against the task output. Each pattern can have groups to
+  capture different parts of the error/warning information (file path, line
+  number, column number, message, etc.).
+- **severity, code, loop, message**: Optional properties to customize the
+  problem reporting.
 
-Creating custom problem matchers can be advanced and requires understanding regular expressions and the output format of your tool. Refer to the VS Code documentation for detailed information on custom problem matchers.
+Creating custom problem matchers can be advanced and requires understanding
+regular expressions and the output format of your tool. Refer to the VS Code
+documentation for detailed information on custom problem matchers.
 
 ## Problem Matchers in Detail
 
@@ -473,22 +511,30 @@ Creating custom problem matchers can be advanced and requires understanding regu
 
 ## Variables and Inputs
 
-VS Code provides a rich set of predefined variables that you can use in your task configurations. These variables are replaced with their actual values when the task is executed. Some commonly used variables:
+VS Code provides a rich set of predefined variables that you can use in your
+task configurations. These variables are replaced with their actual values when
+the task is executed. Some commonly used variables:
 
 - `${workspaceFolder}`: The path to the workspace folder opened in VS Code.
 - `${workspaceFolderBasename}`: The name of the workspace folder.
 - `${file}`: The full path to the currently opened file in the editor.
-- `${fileWorkspaceFolder}`: The workspace folder path of the currently opened file.
-- `${relativeFile}`: The path to the currently opened file relative to the workspace folder.
-- `${relativeFileDirname}`: The directory name of the currently opened file relative to the workspace folder.
+- `${fileWorkspaceFolder}`: The workspace folder path of the currently opened
+  file.
+- `${relativeFile}`: The path to the currently opened file relative to the
+  workspace folder.
+- `${relativeFileDirname}`: The directory name of the currently opened file
+  relative to the workspace folder.
 - `${fileBasename}`: The filename of the currently opened file.
-- `${fileBasenameNoExtension}`: The filename of the currently opened file without its extension.
+- `${fileBasenameNoExtension}`: The filename of the currently opened file
+  without its extension.
 - `${fileDirname}`: The directory of the currently opened file.
-- `${cwd}`: The current working directory of VS Code when the task is started (usually the workspace folder).
+- `${cwd}`: The current working directory of VS Code when the task is started
+  (usually the workspace folder).
 - `${lineNumber}`: The current line number in the active file.
 - `${selectedText}`: The currently selected text in the active file.
 - `${execPath}`: The path to the VS Code executable.
-- `${defaultBuildTask}`, `${defaultTestTask}`: Labels of the default build/test tasks, if set.
+- `${defaultBuildTask}`, `${defaultTestTask}`: Labels of the default build/test
+  tasks, if set.
 
 You can see a full list of predefined variables in the VS Code documentation.
 
@@ -811,9 +857,14 @@ You can see a full list of predefined variables in the VS Code documentation.
 
 ## Task Groups and Organization
 
-Task groups help organize your tasks and provide convenient ways to run related tasks together. The predefined groups "build", "test", "clean", and "rebuild" are special as VS Code provides dedicated commands for running tasks in these groups ("Run Build Task", "Run Test Task", etc.).
+Task groups help organize your tasks and provide convenient ways to run related
+tasks together. The predefined groups "build", "test", "clean", and "rebuild"
+are special as VS Code provides dedicated commands for running tasks in these
+groups ("Run Build Task", "Run Test Task", etc.).
 
-To associate a task with a group, use the `group` property in the task definition. You can specify just the group name as a string (e.g., `"group": "test"`), or you can use an object for more control:
+To associate a task with a group, use the `group` property in the task
+definition. You can specify just the group name as a string (e.g.,
+`"group": "test"`), or you can use an object for more control:
 
 ```json
 "group": {
@@ -822,7 +873,9 @@ To associate a task with a group, use the `group` property in the task definitio
 }
 ```
 
-Setting `isDefault: true` for a task in a group makes it the task that will be run when you use the "Run Build Task" (Ctrl+Shift+B or Cmd+Shift+B), "Run Test Task", or "Run Clean Task" command. You can have one default task per group.
+Setting `isDefault: true` for a task in a group makes it the task that will be
+run when you use the "Run Build Task" (Ctrl+Shift+B or Cmd+Shift+B), "Run Test
+Task", or "Run Clean Task" command. You can have one default task per group.
 
 ## Best Practices and Tips
 
@@ -864,11 +917,24 @@ Setting `isDefault: true` for a task in a group makes it the task that will be r
 
 ## Conclusion
 
-VS Code tasks are a remarkably versatile tool for automating development workflows. By mastering `tasks.json` and understanding the different task properties and features, you can significantly enhance your productivity and streamline your development process within VS Code. Experiment with different task types, problem matchers, and configurations to find the task setup that best suits your projects and workflows.
+VS Code tasks are a remarkably versatile tool for automating development
+workflows. By mastering `tasks.json` and understanding the different task
+properties and features, you can significantly enhance your productivity and
+streamline your development process within VS Code. Experiment with different
+task types, problem matchers, and configurations to find the task setup that
+best suits your projects and workflows.
 
-VS Code's task system is a powerful tool that can significantly enhance your development workflow. By understanding and implementing these advanced concepts and examples, you can create sophisticated automation solutions that improve your productivity and code quality. Remember to start simple and gradually add complexity as needed, always keeping maintainability and team collaboration in mind.
+VS Code's task system is a powerful tool that can significantly enhance your
+development workflow. By understanding and implementing these advanced concepts
+and examples, you can create sophisticated automation solutions that improve
+your productivity and code quality. Remember to start simple and gradually add
+complexity as needed, always keeping maintainability and team collaboration in
+mind.
 
-The examples provided in this guide serve as a foundation for building your own task configurations. Feel free to modify and combine them to match your specific development needs. As you become more comfortable with tasks, you'll discover new ways to automate and streamline your development process.
+The examples provided in this guide serve as a foundation for building your own
+task configurations. Feel free to modify and combine them to match your specific
+development needs. As you become more comfortable with tasks, you'll discover
+new ways to automate and streamline your development process.
 
 ## Azure Tasks
 
@@ -942,4 +1008,5 @@ The examples provided in this guide serve as a foundation for building your own 
 }
 ```
 
-These examples provide a starting point for automating Azure-related tasks within VS Code, helping to streamline your development and deployment workflows.
+These examples provide a starting point for automating Azure-related tasks
+within VS Code, helping to streamline your development and deployment workflows.

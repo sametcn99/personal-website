@@ -1,7 +1,9 @@
 ---
 title: "React Component Lifecycle"
 publishedAt: "2024-08-25"
-summary: "Deep dive into React component lifecycle methods, hooks, and modern patterns for managing component state and side effects in React applications."
+summary:
+  "Deep dive into React component lifecycle methods, hooks, and modern patterns
+  for managing component state and side effects in React applications."
 ---
 
 # React Component Lifecycle
@@ -23,7 +25,10 @@ summary: "Deep dive into React component lifecycle methods, hooks, and modern pa
 
 ## Introduction
 
-React component lifecycle represents the series of events that happen from the time a component is created and mounted on the DOM to when it is unmounted and destroyed. Understanding these lifecycle phases is crucial for building efficient and bug-free React applications.
+React component lifecycle represents the series of events that happen from the
+time a component is created and mounted on the DOM to when it is unmounted and
+destroyed. Understanding these lifecycle phases is crucial for building
+efficient and bug-free React applications.
 
 ### Why Understanding Lifecycle is Important
 
@@ -94,7 +99,7 @@ class MyComponent extends React.Component {
     super(props);
     this.state = {
       data: null,
-      loading: true,
+      loading: true
     };
   }
 }
@@ -259,7 +264,7 @@ function Counter() {
   const updatePartially = () => {
     setState((prev) => ({
       ...prev, // Preserve other fields
-      count: prev.count + 1,
+      count: prev.count + 1
     }));
   };
 }
@@ -335,7 +340,7 @@ function useDataFetching(url) {
   const [state, setState] = useState({
     data: null,
     loading: true,
-    error: null,
+    error: null
   });
 
   useEffect(() => {
@@ -351,7 +356,7 @@ function useDataFetching(url) {
           setState({
             data,
             loading: false,
-            error: null,
+            error: null
           });
         }
       } catch (error) {
@@ -359,7 +364,7 @@ function useDataFetching(url) {
           setState({
             data: null,
             loading: false,
-            error: error.message,
+            error: error.message
           });
         }
       }
@@ -410,9 +415,9 @@ function DependenciesExample({ onDataChange, data }) {
   const config = useMemo(
     () => ({
       id: data.id,
-      type: data.type,
+      type: data.type
     }),
-    [data.id, data.type],
+    [data.id, data.type]
   );
 }
 ```
@@ -426,7 +431,7 @@ function SubscriptionComponent() {
   useEffect(() => {
     const subscription = source.subscribe({
       next: (data) => console.log(data),
-      error: (error) => console.error(error),
+      error: (error) => console.error(error)
     });
 
     return () => {
@@ -509,7 +514,7 @@ function CallbackExample({ onItemClick }) {
     (item) => {
       onItemClick(item.id);
     },
-    [onItemClick],
+    [onItemClick]
   );
 }
 ```
@@ -557,7 +562,7 @@ test("cleans up effect", () => {
 // 3. Testing Custom Hooks
 test("custom hook behavior", async () => {
   const { result, waitForNextUpdate } = renderHook(() =>
-    useDataFetching("api/data"),
+    useDataFetching("api/data")
   );
 
   expect(result.current.loading).toBe(true);

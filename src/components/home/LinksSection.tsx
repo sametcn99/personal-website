@@ -4,10 +4,8 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Link from "next/link";
 import { useLinks } from "@/hooks/useLinks";
-import { useUmami } from "@/hooks/useUmami";
 
 export default function LinksSection() {
-  const { trackEvent } = useUmami();
   const { visibleLinks, hiddenLinks } = useLinks();
   const allLinks = [...visibleLinks, ...hiddenLinks];
 
@@ -48,7 +46,7 @@ export default function LinksSection() {
                 target="_blank"
                 rel="noopener noreferrer"
                 sx={commonSx}
-                onClick={() => trackEvent("link_click", { label: link.label })}
+                data-umami-event="home-link-click"
               >
                 {link.label}
               </Typography>
@@ -62,7 +60,7 @@ export default function LinksSection() {
               component={Link}
               href={link.link.toString()}
               sx={commonSx}
-              onClick={() => trackEvent("link_click", { label: link.label })}
+              data-umami-event="home-link-click"
             >
               {link.label}
             </Typography>
@@ -75,7 +73,7 @@ export default function LinksSection() {
           component={Link}
           href={"/link"}
           sx={commonSx}
-          onClick={() => trackEvent("link_click", { label: "Links" })}
+          data-umami-event="home-all-links-click"
         >
           All Links
         </Typography>

@@ -77,6 +77,7 @@ export default function SupportPage() {
               <Button
                 variant="contained"
                 href="https://buymeacoffee.com/sametcn99"
+                data-umami-event="support-buymeacoffee-click"
                 target="_blank"
                 rel="noopener noreferrer"
                 sx={{
@@ -135,6 +136,7 @@ export default function SupportPage() {
                 color="inherit"
                 startIcon={<FavoriteIcon color="error" />}
                 href="https://github.com/sponsors/sametcn99"
+                data-umami-event="support-github-sponsor-click"
                 target="_blank"
                 rel="noopener noreferrer"
                 sx={{

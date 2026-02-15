@@ -32,6 +32,7 @@ export default function FeedActions({
         size="small"
         startIcon={<OpenInNewIcon />}
         href={url}
+        data-umami-event="feed-open-click"
         target="_blank"
         rel="noopener noreferrer"
       >
@@ -43,6 +44,7 @@ export default function FeedActions({
         size="small"
         startIcon={<ContentCopyIcon />}
         onClick={handleCopy}
+        data-umami-event="feed-copy-click"
       >
         {copied ? "Copied!" : "Copy Link"}
       </Button>

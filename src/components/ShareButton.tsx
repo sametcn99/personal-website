@@ -1,7 +1,6 @@
 "use client";
 
 import { Typography } from "@mui/material";
-import { useUmami } from "@/hooks/useUmami";
 
 type ContentType = "gist" | "blog" | "project" | "article";
 
@@ -37,8 +36,6 @@ export default function ShareButton({
   title,
   contentType = "blog",
 }: ShareButtonProps) {
-  const { trackEvent } = useUmami();
-
   const getDefaultTitle = (): string => {
     switch (contentType) {
       case "gist":
@@ -63,20 +60,12 @@ export default function ShareButton({
         title: shareTitle,
         url: shareUrl,
       });
-
-      trackEvent("share_api_success", {
-        contentType,
-      });
       return;
     }
 
     try {
       await copyToClipboard(shareUrl);
       alert(`${shareTitle} URL copied!`);
-      trackEvent("share_fallback_copied", {
-        contentType,
-        title: shareTitle,
-      });
     } catch {
       alert("Failed to copy URL. Please copy it manually.");
     }
@@ -85,6 +74,7 @@ export default function ShareButton({
   return (
     <Typography
       onClick={handleShare}
+      data-umami-event="share-button-click"
       color="textSecondary"
       variant="body2"
       title={`Share this ${contentType} or copy link`}

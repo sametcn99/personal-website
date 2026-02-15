@@ -36,7 +36,13 @@ export default function NotFound() {
         >
           The page you are looking for does not exist or may have been moved.
         </Typography>
-        <Button variant="outlined" component={Link} href="/" draggable="false">
+        <Button
+          variant="outlined"
+          component={Link}
+          href="/"
+          data-umami-event="not-found-home-click"
+          draggable="false"
+        >
           Return to Home Page
         </Button>
       </Container>

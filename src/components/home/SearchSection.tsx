@@ -92,7 +92,12 @@ function SearchInput({
             ),
             endAdornment: showClearButton && searchQuery && (
               <InputAdornment position="end">
-                <IconButton size="small" onClick={clearSearch} edge="end">
+                <IconButton
+                  size="small"
+                  onClick={clearSearch}
+                  edge="end"
+                  data-umami-event="search-clear-click"
+                >
                   <Clear />
                 </IconButton>
               </InputAdornment>
@@ -117,6 +122,7 @@ function SearchResultItem({ post }: SearchResultItemProps) {
     <Box
       component={Link}
       href={post.href}
+      data-umami-event="search-result-click"
       sx={{
         display: "block",
         mb: 3,

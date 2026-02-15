@@ -65,7 +65,11 @@ export default function RedirectClient({ targetUrl }: { targetUrl: string }) {
             If you are not redirected automatically, please click the link
             below:
           </Typography>
-          <Link href={targetUrl} underline="hover">
+          <Link
+            href={targetUrl}
+            underline="hover"
+            data-umami-event="redirect-manual-link-click"
+          >
             {targetUrl}
           </Link>
         </Box>

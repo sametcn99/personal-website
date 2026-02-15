@@ -13,7 +13,11 @@ export default function BackToHome() {
         width: "fit-content",
       }}
     >
-      <Link href="/" style={{ textDecoration: "none" }}>
+      <Link
+        href="/"
+        data-umami-event="back-to-home-click"
+        style={{ textDecoration: "none" }}
+      >
         <Typography
           variant="subtitle1"
           color="text.secondary"

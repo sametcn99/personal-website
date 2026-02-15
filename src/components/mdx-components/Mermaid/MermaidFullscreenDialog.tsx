@@ -150,17 +150,29 @@ export function MermaidFullscreenDialog({
               sx={{ flexWrap: "wrap" }}
             >
               <Tooltip title="Zoom in ( + / = )" arrow>
-                <IconButton onClick={handleZoomIn} aria-label="zoom in">
+                <IconButton
+                  onClick={handleZoomIn}
+                  data-umami-event="mermaid-fullscreen-zoom-in-click"
+                  aria-label="zoom in"
+                >
                   <ZoomInIcon fontSize="small" />
                 </IconButton>
               </Tooltip>
               <Tooltip title="Zoom out ( - )" arrow>
-                <IconButton onClick={handleZoomOut} aria-label="zoom out">
+                <IconButton
+                  onClick={handleZoomOut}
+                  data-umami-event="mermaid-fullscreen-zoom-out-click"
+                  aria-label="zoom out"
+                >
                   <ZoomOutIcon fontSize="small" />
                 </IconButton>
               </Tooltip>
               <Tooltip title="Reset ( 0 )" arrow>
-                <IconButton onClick={handleResetView} aria-label="reset view">
+                <IconButton
+                  onClick={handleResetView}
+                  data-umami-event="mermaid-fullscreen-reset-click"
+                  aria-label="reset view"
+                >
                   <CenterFocusStrongIcon fontSize="small" />
                 </IconButton>
               </Tooltip>
@@ -170,6 +182,7 @@ export function MermaidFullscreenDialog({
               >
                 <IconButton
                   onClick={onDownload}
+                  data-umami-event="mermaid-fullscreen-download-click"
                   disabled={!svg || downloading}
                   aria-label="download svg"
                   color={downloading ? "success" : "default"}
@@ -178,12 +191,20 @@ export function MermaidFullscreenDialog({
                 </IconButton>
               </Tooltip>
               <Tooltip title="Exit Fullscreen (Esc)" arrow>
-                <IconButton onClick={onClose} aria-label="close fullscreen">
+                <IconButton
+                  onClick={onClose}
+                  data-umami-event="mermaid-fullscreen-exit-click"
+                  aria-label="close fullscreen"
+                >
                   <FullscreenExitIcon fontSize="small" />
                 </IconButton>
               </Tooltip>
               <Tooltip title="Close" arrow>
-                <IconButton onClick={onClose} aria-label="close">
+                <IconButton
+                  onClick={onClose}
+                  data-umami-event="mermaid-fullscreen-close-click"
+                  aria-label="close"
+                >
                   <CloseIcon fontSize="small" />
                 </IconButton>
               </Tooltip>

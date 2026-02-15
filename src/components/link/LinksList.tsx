@@ -160,6 +160,7 @@ export default function LinksList() {
                 component="a"
                 href={`/link/${primarySlug}`}
                 divider
+                data-umami-event="links-list-item-click"
               >
                 <ListItemIcon sx={{ minWidth: 40 }}>{social.icon}</ListItemIcon>
                 <ListItemText

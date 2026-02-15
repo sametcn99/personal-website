@@ -112,6 +112,7 @@ export function LoadDialog({
                   <IconButton
                     edge="end"
                     onClick={(e) => handleDelete(entry.id, e)}
+                    data-umami-event="writer-load-delete-click"
                     color="error"
                     size="small"
                   >
@@ -124,7 +125,11 @@ export function LoadDialog({
         )}
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose} color="inherit">
+        <Button
+          onClick={onClose}
+          data-umami-event="writer-load-close-click"
+          color="inherit"
+        >
           Close
         </Button>
       </DialogActions>

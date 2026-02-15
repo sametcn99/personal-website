@@ -56,13 +56,18 @@ export function WriterToolbar({
           <Button
             startIcon={<NewIcon />}
             onClick={onNewEntry}
+            data-umami-event="writer-toolbar-new-click"
             disabled={!hasUnsavedChanges && !hasContent}
           >
             New
           </Button>
         </Tooltip>
         <Tooltip title="Load Entry">
-          <Button startIcon={<LoadIcon />} onClick={onLoadDialog}>
+          <Button
+            startIcon={<LoadIcon />}
+            onClick={onLoadDialog}
+            data-umami-event="writer-toolbar-load-click"
+          >
             Load
           </Button>
         </Tooltip>
@@ -70,6 +75,7 @@ export function WriterToolbar({
           <Button
             startIcon={<SaveIcon />}
             onClick={onSave}
+            data-umami-event="writer-toolbar-save-click"
             disabled={!hasContent}
             color={hasUnsavedChanges ? "primary" : "inherit"}
             variant={hasUnsavedChanges ? "contained" : "outlined"}
@@ -81,6 +87,7 @@ export function WriterToolbar({
           <Button
             startIcon={<SaveAsIcon />}
             onClick={onSaveAs}
+            data-umami-event="writer-toolbar-save-as-click"
             disabled={!hasContent}
           >
             Save As
@@ -94,6 +101,7 @@ export function WriterToolbar({
           <Button
             startIcon={<UndoIcon />}
             onClick={onUndo}
+            data-umami-event="writer-toolbar-undo-click"
             disabled={!canUndo || isPreview}
           >
             Undo
@@ -103,6 +111,7 @@ export function WriterToolbar({
           <Button
             startIcon={<RedoIcon />}
             onClick={onRedo}
+            data-umami-event="writer-toolbar-redo-click"
             disabled={!canRedo || isPreview}
           >
             Redo
@@ -112,6 +121,7 @@ export function WriterToolbar({
           <Button
             startIcon={isPreview ? <EditIcon /> : <PreviewIcon />}
             onClick={onTogglePreview}
+            data-umami-event="writer-toolbar-toggle-preview-click"
             disabled={!hasContent}
             variant={isPreview ? "contained" : "outlined"}
             color={isPreview ? "primary" : "inherit"}

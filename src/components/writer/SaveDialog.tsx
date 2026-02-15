@@ -80,7 +80,11 @@ export function SaveDialog({
         </Box>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose} color="inherit">
+        <Button
+          onClick={handleClose}
+          data-umami-event="writer-save-cancel-click"
+          color="inherit"
+        >
           Cancel
         </Button>
         <Button
@@ -91,6 +95,7 @@ export function SaveDialog({
               },
             } as React.FormEvent)
           }
+          data-umami-event="writer-save-confirm-click"
           variant="contained"
           disabled={!title.trim()}
         >

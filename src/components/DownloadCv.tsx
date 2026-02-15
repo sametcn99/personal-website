@@ -1,17 +1,15 @@
 "use client";
 import DownloadIcon from "@mui/icons-material/Download";
 import { alpha, IconButton, Link, Typography, useTheme } from "@mui/material";
-import { useUmami } from "@/hooks/useUmami";
 
 export default function DownloadCv() {
-  const { trackEvent } = useUmami();
   const theme = useTheme();
 
   return (
     <Link
       href="/cv/download"
       download="Samet_Can_Cincik_Ozgecmis.pdf"
-      onClick={() => trackEvent("download_cv")}
+      data-umami-event="cv-download-link-click"
       underline="none"
       sx={{
         display: "inline-flex",
@@ -32,6 +30,7 @@ export default function DownloadCv() {
       <IconButton
         size="small"
         aria-label="Download CV"
+        data-umami-event="cv-download-button-click"
         sx={{
           color: theme.palette.text.secondary,
           "&:hover": {

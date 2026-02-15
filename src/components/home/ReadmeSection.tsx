@@ -32,6 +32,7 @@ export default function ReadmeSection() {
         <Typography
           component={Link}
           href="/readme"
+          data-umami-event="readme-section-link-click"
           sx={{
             color: "text.primary",
             textDecoration: "underline",

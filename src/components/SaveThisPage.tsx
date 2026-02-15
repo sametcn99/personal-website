@@ -10,10 +10,8 @@ import {
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { useCallback, useEffect, useState } from "react";
-import { useUmami } from "@/hooks/useUmami";
 
 export default function SaveThisPage() {
-  const { trackEvent } = useUmami();
   const theme = useTheme();
   const [isPrinting, setIsPrinting] = useState(false);
   const [showMessage, setShowMessage] = useState<{
@@ -87,7 +85,6 @@ export default function SaveThisPage() {
 
     try {
       setIsPrinting(true);
-      trackEvent("print_initiated");
 
       // Check browser compatibility
       if (typeof window === "undefined") {
@@ -157,6 +154,7 @@ export default function SaveThisPage() {
         <IconButton
           size="small"
           aria-label="Save this page"
+          data-umami-event="save-this-page-click"
           disabled={isPrinting}
           sx={{
             color: theme.palette.text.secondary,

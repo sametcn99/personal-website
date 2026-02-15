@@ -176,6 +176,7 @@ export function CodeComponent({
               <IconButton
                 size="small"
                 onClick={() => setExpanded(!expanded)}
+                data-umami-event="code-toggle-expand-click"
                 aria-label={expanded ? "collapse code" : "expand code"}
               >
                 {expanded ? (
@@ -190,6 +191,7 @@ export function CodeComponent({
             <IconButton
               size="small"
               onClick={handleCopy}
+              data-umami-event="code-copy-click"
               aria-label="copy code"
               color={copied ? "success" : "default"}
             >

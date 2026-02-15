@@ -33,6 +33,7 @@ export default function Footer({ allContents }: FooterProps) {
             href="/privacy-policy"
             target="_blank"
             rel="noopener noreferrer"
+            data-umami-event="footer-privacy-click"
             style={{ textDecoration: "none" }}
           >
             <Typography
@@ -47,7 +48,11 @@ export default function Footer({ allContents }: FooterProps) {
             </Typography>
           </Link>
           <ImFeelingLucky contents={allContents} />
-          <Link href="/rss" style={{ textDecoration: "none" }}>
+          <Link
+            href="/rss"
+            data-umami-event="footer-rss-click"
+            style={{ textDecoration: "none" }}
+          >
             <Typography
               variant="caption"
               color="text.secondary"
@@ -56,7 +61,11 @@ export default function Footer({ allContents }: FooterProps) {
               RSS
             </Typography>
           </Link>
-          <Link href="/readme" style={{ textDecoration: "none" }}>
+          <Link
+            href="/readme"
+            data-umami-event="footer-readme-click"
+            style={{ textDecoration: "none" }}
+          >
             <Typography
               variant="caption"
               color="text.secondary"

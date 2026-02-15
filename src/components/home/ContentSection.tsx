@@ -38,6 +38,7 @@ export default function ContentSection({
           <Button
             component={Link}
             href={viewAllHref}
+            data-umami-event="content-section-see-all-click"
             variant="outlined"
             size="small"
             sx={{ textTransform: "none" }}

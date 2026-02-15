@@ -40,6 +40,7 @@ export default function ArticleNavigation({
           <Link
             component={NextLink}
             href={prevArticle.href}
+            data-umami-event="article-prev-click"
             sx={{ textDecoration: "none", color: "inherit" }}
           >
             <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
@@ -71,6 +72,7 @@ export default function ArticleNavigation({
           <Link
             component={NextLink}
             href={nextArticle.href}
+            data-umami-event="article-next-click"
             sx={{ textDecoration: "none", color: "inherit" }}
           >
             <Box

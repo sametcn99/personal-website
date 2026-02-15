@@ -72,6 +72,7 @@ export function WriterHeader({
         <Tooltip title="Focus Mode (F11)">
           <IconButton
             onClick={onToggleFullscreen}
+            data-umami-event="writer-header-focus-click"
             size="small"
             color={focusMode ? "primary" : "default"}
             aria-label="Toggle focus mode"
@@ -84,6 +85,7 @@ export function WriterHeader({
         <Tooltip title={isHeaderCollapsed ? "Show Controls" : "Hide Controls"}>
           <IconButton
             onClick={onToggleCollapse}
+            data-umami-event="writer-header-collapse-click"
             size="small"
             aria-label={isHeaderCollapsed ? "Show controls" : "Hide controls"}
             aria-expanded={!isHeaderCollapsed}

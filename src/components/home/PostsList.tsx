@@ -6,6 +6,19 @@ interface PostsListProps {
   posts: ContentMetadata[];
 }
 
+/**
+ * Converts a post title into an Umami-safe event name segment.
+ */
+function toEventSegment(title: string): string {
+  const normalized = title
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, "")
+    .trim()
+    .replace(/\s+/g, "-");
+
+  return normalized || "post";
+}
+
 export default function PostsList({ posts }: PostsListProps) {
   return (
     <Box>
@@ -14,6 +27,7 @@ export default function PostsList({ posts }: PostsListProps) {
           key={post.href}
           component={Link}
           href={post.href}
+          data-umami-event={`${toEventSegment(post.title)}-click`}
           sx={{
             display: "block",
             mb: 3,

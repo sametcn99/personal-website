@@ -117,6 +117,7 @@ export function FocusMode({
               <Button
                 startIcon={<NewIcon />}
                 onClick={onNewEntry}
+                data-umami-event="writer-focus-new-click"
                 disabled={!hasUnsavedChanges && !content.trim()}
                 size="small"
               >
@@ -127,6 +128,7 @@ export function FocusMode({
               <Button
                 startIcon={<LoadIcon />}
                 onClick={onLoadDialog}
+                data-umami-event="writer-focus-load-click"
                 size="small"
               >
                 Load
@@ -139,6 +141,7 @@ export function FocusMode({
             <Tooltip title="Undo (Ctrl+Z)">
               <IconButton
                 onClick={onUndo}
+                data-umami-event="writer-focus-undo-click"
                 disabled={!canUndo || isPreview}
                 size="small"
               >
@@ -148,6 +151,7 @@ export function FocusMode({
             <Tooltip title="Redo (Ctrl+Shift+Z)">
               <IconButton
                 onClick={onRedo}
+                data-umami-event="writer-focus-redo-click"
                 disabled={!canRedo || isPreview}
                 size="small"
               >
@@ -157,6 +161,7 @@ export function FocusMode({
             <Tooltip title="Toggle Preview">
               <IconButton
                 onClick={onTogglePreview}
+                data-umami-event="writer-focus-toggle-preview-click"
                 disabled={!content.trim()}
                 color={isPreview ? "primary" : "default"}
                 size="small"
@@ -173,6 +178,7 @@ export function FocusMode({
             >
               <IconButton
                 onClick={onToggleFullWidth}
+                data-umami-event="writer-focus-toggle-width-click"
                 size="small"
                 color={fullscreenFullWidth ? "primary" : "default"}
               >
@@ -182,6 +188,7 @@ export function FocusMode({
             <Tooltip title="Save (Ctrl+S)">
               <IconButton
                 onClick={onSave}
+                data-umami-event="writer-focus-save-click"
                 disabled={!content.trim()}
                 color={hasUnsavedChanges ? "primary" : "default"}
                 size="small"
@@ -192,6 +199,7 @@ export function FocusMode({
             <Tooltip title="Save As (Ctrl+Shift+S)">
               <IconButton
                 onClick={onSaveAs}
+                data-umami-event="writer-focus-save-as-click"
                 disabled={!content.trim()}
                 size="small"
               >
@@ -199,7 +207,12 @@ export function FocusMode({
               </IconButton>
             </Tooltip>
             <Tooltip title="Exit Focus Mode (F11)">
-              <IconButton onClick={onExitFocus} size="small" color="primary">
+              <IconButton
+                onClick={onExitFocus}
+                data-umami-event="writer-focus-exit-click"
+                size="small"
+                color="primary"
+              >
                 <FullscreenIcon />
               </IconButton>
             </Tooltip>

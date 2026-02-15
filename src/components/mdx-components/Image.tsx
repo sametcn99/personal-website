@@ -115,6 +115,7 @@ export function ImageComponent({ alt, ...props }: ImageProps) {
             {/* Close button */}
             <IconButton
               onClick={handleClose}
+              data-umami-event="image-modal-close-click"
               sx={{
                 position: "absolute",
                 top: 20,

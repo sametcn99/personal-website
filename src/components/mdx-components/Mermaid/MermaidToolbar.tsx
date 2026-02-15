@@ -46,6 +46,7 @@ export function MermaidToolbar({
           <IconButton
             size="small"
             onClick={onToggleCode}
+            data-umami-event="mermaid-toggle-code-click"
             aria-label="toggle code view"
           >
             <CodeIcon fontSize="small" />
@@ -55,6 +56,7 @@ export function MermaidToolbar({
           <IconButton
             size="small"
             onClick={onCopy}
+            data-umami-event="mermaid-copy-click"
             aria-label="copy code"
             color={copied ? "success" : "default"}
           >
@@ -69,6 +71,7 @@ export function MermaidToolbar({
           <IconButton
             size="small"
             onClick={onDownload}
+            data-umami-event="mermaid-download-click"
             disabled={!svg || downloading}
             aria-label="download svg"
             color={downloading ? "success" : "default"}
@@ -80,6 +83,7 @@ export function MermaidToolbar({
           <IconButton
             size="small"
             onClick={onFullscreen}
+            data-umami-event="mermaid-fullscreen-click"
             aria-label="fullscreen"
           >
             <FullscreenIcon fontSize="small" />

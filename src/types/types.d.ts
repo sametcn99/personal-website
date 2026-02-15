@@ -20,6 +20,8 @@ type ContentMetadata = {
   title: string;
   href: string;
   publishedAt: string;
+  createdAt?: string;
+  updatedAt?: string;
   summary: string;
   image?: string;
   author?: string;
@@ -28,7 +30,7 @@ type ContentMetadata = {
   onProduction?: boolean;
 };
 
-type ContentType = "blog" | "gist" | "project";
+type ContentType = "blog" | "gist" | "project" | "repo";
 
 interface ContentItem {
   metadata: ContentMetadata;

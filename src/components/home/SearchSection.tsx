@@ -3,12 +3,15 @@
 import Clear from "@mui/icons-material/Clear";
 import Search from "@mui/icons-material/Search";
 import Box from "@mui/material/Box";
+import CircularProgress from "@mui/material/CircularProgress";
 import IconButton from "@mui/material/IconButton";
 import InputAdornment from "@mui/material/InputAdornment";
+import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import Link from "next/link";
 import { type ReactNode, useEffect, useMemo, useRef } from "react";
+import { useReposStore } from "@/hooks/useReposStore";
 
 interface SearchSectionProps {
   searchQuery: string;
@@ -174,10 +177,25 @@ function getContentType(href: string): string {
   if (href.includes("/blog/")) return "Blog";
   if (href.includes("/project/")) return "Project";
   if (href.includes("/link/")) return "Link";
+  if (href.includes("/repo/")) return "Repository";
   return "Gist";
 }
 
+/**
+ * Formats optional ISO date values for UI output.
+ */
+function formatOptionalDate(value?: string): string {
+  if (!value) {
+    return "-";
+  }
+
+  const date = new Date(value);
+  return Number.isNaN(date.getTime()) ? "-" : date.toDateString();
+}
+
 function SearchResultItem({ post }: SearchResultItemProps) {
+  const isRepoResult = post.href.startsWith("/repo/");
+
   return (
     <Box
       component={Link}
@@ -197,10 +215,20 @@ function SearchResultItem({ post }: SearchResultItemProps) {
       <Typography variant="body2" sx={{ mb: 1, color: "gray" }}>
         {post.summary}
       </Typography>
-      <Typography variant="caption" sx={{ color: "gray" }}>
-        {new Date(post.publishedAt).toLocaleDateString()} •{" "}
-        {getContentType(post.href)}
-      </Typography>
+      {isRepoResult ? (
+        <Typography variant="caption" sx={{ color: "gray" }}>
+          Created: {formatOptionalDate(post.createdAt || post.publishedAt)}
+          {" • "}
+          Updated: {formatOptionalDate(post.updatedAt || post.publishedAt)}
+          {" • "}
+          Repository
+        </Typography>
+      ) : (
+        <Typography variant="caption" sx={{ color: "gray" }}>
+          {new Date(post.publishedAt).toLocaleDateString()} •{" "}
+          {getContentType(post.href)}
+        </Typography>
+      )}
     </Box>
   );
 }
@@ -255,17 +283,44 @@ export default function SearchSection({
   additionalControls,
   resultCount,
 }: SearchSectionProps) {
+  const repoPosts = useReposStore((state) => state.repos);
+  const isRepoLoading = useReposStore((state) => state.isLoading);
+  const hasFetchedRepos = useReposStore((state) => state.hasFetched);
+  const fetchRepos = useReposStore((state) => state.fetchRepos);
+
+  useEffect(() => {
+    const normalizedQuery = searchQuery.trim();
+
+    if (normalizedQuery.length !== 1 || hasFetchedRepos) {
+      return;
+    }
+    void fetchRepos();
+  }, [searchQuery, hasFetchedRepos, fetchRepos]);
+
+  const searchablePosts = useMemo(() => {
+    if (repoPosts.length === 0) {
+      return allPosts;
+    }
+
+    const mergedByHref = new Map<string, ContentMetadata>();
+    for (const post of [...allPosts, ...repoPosts]) {
+      mergedByHref.set(post.href, post);
+    }
+
+    return Array.from(mergedByHref.values());
+  }, [allPosts, repoPosts]);
+
   const filteredPosts = useMemo(() => {
     if (!searchQuery.trim()) return [];
 
-    return allPosts
+    return searchablePosts
       .filter(
         (post) =>
           post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
           post.summary.toLowerCase().includes(searchQuery.toLowerCase()),
       )
       .slice(0, 10); // Limit to 10 results
-  }, [searchQuery, allPosts]);
+  }, [searchQuery, searchablePosts]);
 
   const displayResultCount =
     resultCount !== undefined ? resultCount : filteredPosts.length;
@@ -280,6 +335,17 @@ export default function SearchSection({
         placeholder={placeholder}
         additionalControls={additionalControls}
       />
+      {searchQuery.trim() && isRepoLoading ? (
+        <Stack
+          direction="row"
+          spacing={1}
+          alignItems="center"
+          sx={{ mb: 2, color: "text.secondary" }}
+        >
+          <CircularProgress size={16} />
+          <Typography variant="body2">Loading repositories...</Typography>
+        </Stack>
+      ) : null}
       {showResults ? (
         <SearchResults
           searchQuery={searchQuery}

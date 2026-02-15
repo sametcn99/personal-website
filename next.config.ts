@@ -26,7 +26,8 @@ const nextConfig = {
   productionBrowserSourceMaps: false,
   experimental: {
     // Restrict build parallelism for lower peak CPU/RAM usage
-    cpus: Number.isFinite(buildCpuLimit) && buildCpuLimit > 0 ? buildCpuLimit : 2,
+    cpus:
+      Number.isFinite(buildCpuLimit) && buildCpuLimit > 0 ? buildCpuLimit : 2,
     memoryBasedWorkersCount: true,
     webpackBuildWorker: true,
     webpackMemoryOptimizations: true,

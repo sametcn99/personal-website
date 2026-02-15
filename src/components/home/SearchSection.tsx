@@ -195,6 +195,8 @@ function formatOptionalDate(value?: string): string {
 
 function SearchResultItem({ post }: SearchResultItemProps) {
   const isRepoResult = post.href.startsWith("/repo/");
+  const contentType = getContentType(post.href);
+  const isLinkResult = contentType === "Link";
 
   return (
     <Box
@@ -225,8 +227,9 @@ function SearchResultItem({ post }: SearchResultItemProps) {
         </Typography>
       ) : (
         <Typography variant="caption" sx={{ color: "gray" }}>
-          {new Date(post.publishedAt).toLocaleDateString()} •{" "}
-          {getContentType(post.href)}
+          {isLinkResult
+            ? contentType
+            : `${new Date(post.publishedAt).toLocaleDateString()} • ${contentType}`}
         </Typography>
       )}
     </Box>

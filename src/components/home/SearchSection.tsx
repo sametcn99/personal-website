@@ -44,7 +44,7 @@ function SearchInput({
   setSearchQuery,
   clearSearch,
   showClearButton = false,
-  placeholder = "Search blog posts, projects, and gists...",
+  placeholder = "Search blog posts, projects, gists, and links...",
   additionalControls,
 }: SearchInputProps) {
   return (
@@ -108,6 +108,7 @@ function SearchInput({
 function getContentType(href: string): string {
   if (href.includes("/blog/")) return "Blog";
   if (href.includes("/project/")) return "Project";
+  if (href.includes("/link/")) return "Link";
   return "Gist";
 }
 

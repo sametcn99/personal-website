@@ -14,7 +14,15 @@ export default function LinksSection() {
   if (!allLinks.length) {
     return null;
   }
-
+  const commonSx = {
+    color: "text.secondary",
+    textDecoration: "none",
+    transition: "color 0.2s ease",
+    "&:hover": {
+      color: "text.primary",
+      textDecoration: "underline",
+    },
+  } as const;
   return (
     <Box sx={{ mb: 6 }}>
       <Typography
@@ -29,15 +37,6 @@ export default function LinksSection() {
         {visibleLinks.map((link) => {
           const isExternal =
             link.external || /^https?:\/\//.test(link.link.toString());
-          const commonSx = {
-            color: "text.secondary",
-            textDecoration: "none",
-            transition: "color 0.2s ease",
-            "&:hover": {
-              color: "text.primary",
-              textDecoration: "underline",
-            },
-          } as const;
 
           if (isExternal) {
             return (
@@ -69,6 +68,17 @@ export default function LinksSection() {
             </Typography>
           );
         })}
+
+        <Typography
+          key={"all_links"}
+          variant="body2"
+          component={Link}
+          href={"/link"}
+          sx={commonSx}
+          onClick={() => trackEvent("link_click", { label: "Links" })}
+        >
+          All Links
+        </Typography>
       </Box>
     </Box>
   );

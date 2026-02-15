@@ -8,6 +8,7 @@ import LinksSection from "@/components/home/LinksSection";
 import ReadmeSection from "@/components/home/ReadmeSection";
 import SearchSection from "@/components/home/SearchSection";
 import { useSearch } from "@/hooks/useSearch";
+import { socialMediaLinks } from "@/lib/social";
 
 interface HomePageProps {
   blogPosts: ContentMetadata[];
@@ -31,7 +32,16 @@ export default function HomePage({
 
   // Combine all posts for global search
   const allPosts = useMemo(() => {
-    return [...blogPosts, ...projectPosts, ...gistPosts];
+    const linkPosts: ContentMetadata[] = socialMediaLinks.map((link) => ({
+      title: link.label,
+      href: `/link/${link.type[0]}`,
+      publishedAt: "1970-01-01",
+      summary: `${link.category} link • aliases: ${link.type.join(", ")}`,
+      tags: [],
+      language: "en",
+    }));
+
+    return [...blogPosts, ...projectPosts, ...gistPosts, ...linkPosts];
   }, [blogPosts, projectPosts, gistPosts]);
 
   return (

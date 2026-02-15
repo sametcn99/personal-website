@@ -1,18 +1,48 @@
-import BarChart from "@mui/icons-material/BarChart";
-import DataObject from "@mui/icons-material/DataObject";
 import Description from "@mui/icons-material/Description";
 import GitHub from "@mui/icons-material/GitHub";
 import Instagram from "@mui/icons-material/Instagram";
 import LinkedIn from "@mui/icons-material/LinkedIn";
 import MailOutline from "@mui/icons-material/MailOutline";
-import MusicNote from "@mui/icons-material/MusicNote";
-import QuestionMark from "@mui/icons-material/QuestionMark";
 import Telegram from "@mui/icons-material/Telegram";
-import Theaters from "@mui/icons-material/Theaters";
 import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
 import WhatsApp from "@mui/icons-material/WhatsApp";
-import X from "@mui/icons-material/X";
 import YouTube from "@mui/icons-material/YouTube";
+import Box from "@mui/material/Box";
+import { FaXTwitter } from "react-icons/fa6";
+import {
+  SiBluesky,
+  SiDiscord,
+  SiGoodreads,
+  SiImdb,
+  SiLeetcode,
+  SiLetterboxd,
+  SiMastodon,
+  SiNpm,
+  SiPinterest,
+  SiSpotify,
+  SiSteam,
+  SiYoutubemusic,
+} from "react-icons/si";
+import { VscExtensions } from "react-icons/vsc";
+
+/**
+ * Creates a favicon-based icon element for social links.
+ */
+function createFaviconIcon(url: string, label: string) {
+  return (
+    <Box
+      component="img"
+      src={url}
+      alt={`${label} icon`}
+      sx={{
+        width: 24,
+        height: 24,
+        display: "block",
+        borderRadius: 0.5,
+      }}
+    />
+  );
+}
 
 export const socialMediaLinks: SocialMediaLink[] = [
   {
@@ -47,7 +77,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
     visible: false,
     external: true,
     category: "Development Platforms",
-    icon: <DataObject />,
+    icon: <VscExtensions />,
   },
   {
     type: ["npm", "npmjs"],
@@ -56,7 +86,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
     visible: false,
     external: true,
     category: "Development Platforms",
-    icon: <DataObject />,
+    icon: <SiNpm />,
   },
   {
     type: ["instagram", "ig"],
@@ -74,7 +104,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
     visible: false,
     external: true,
     category: "Social Media",
-    icon: <X />,
+    icon: <FaXTwitter />,
   },
   {
     type: ["statsfm", "sfm"],
@@ -83,7 +113,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
     visible: false,
     external: true,
     category: "Social Media",
-    icon: <BarChart />,
+    icon: createFaviconIcon("https://stats.fm/icons/favicon.ico", "Stats.fm"),
   },
   {
     type: ["leetcode", "lc"],
@@ -92,7 +122,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
     visible: false,
     external: true,
     category: "Development Platforms",
-    icon: <DataObject />,
+    icon: <SiLeetcode />,
   },
   {
     type: ["telegram", "tg"],
@@ -110,7 +140,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
     visible: false,
     external: true,
     category: "Social Media",
-    icon: <QuestionMark />,
+    icon: <SiDiscord />,
   },
   {
     type: ["mail", "email", "gmail", "e-mail"],
@@ -166,7 +196,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
     visible: false,
     external: true,
     category: "Social Media",
-    icon: <MusicNote />,
+    icon: <SiYoutubemusic />,
   },
   {
     type: ["spotify", "sp"],
@@ -175,7 +205,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
     external: true,
     link: new URL("https://open.spotify.com/user/31qg3kutxxwdq5lzydjx6md534cq"),
     category: "Social Media",
-    icon: <MusicNote />,
+    icon: <SiSpotify />,
   },
   {
     type: ["letterboxd", "lbxd", "lb"],
@@ -184,7 +214,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
     external: true,
     link: new URL("https://letterboxd.com/sametc001"),
     category: "Social Media",
-    icon: <Theaters />,
+    icon: <SiLetterboxd />,
   },
   {
     type: ["imdb"],
@@ -193,7 +223,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
     external: true,
     link: new URL("https://www.imdb.com/user/ur120575296"),
     category: "Social Media",
-    icon: <Theaters />,
+    icon: <SiImdb />,
   },
   {
     type: ["pinterest"],
@@ -202,7 +232,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
     external: true,
     link: new URL("https://pinterest.com/sametcn99"),
     category: "Social Media",
-    icon: <Theaters />,
+    icon: <SiPinterest />,
   },
   {
     type: ["mastodon"],
@@ -211,7 +241,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
     external: true,
     link: new URL("https://mastodon.social/@sametcn99"),
     category: "Social Media",
-    icon: <QuestionMark />,
+    icon: <SiMastodon />,
   },
   {
     type: ["bluesky", "bsky"],
@@ -220,7 +250,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
     external: true,
     link: new URL("https://bsky.app/profile/sametcn99.bsky.social"),
     category: "Social Media",
-    icon: <QuestionMark />,
+    icon: <SiBluesky />,
   },
   {
     type: ["goodreads", "gr"],
@@ -229,7 +259,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
     external: true,
     link: new URL("https://www.goodreads.com/user/show/75848289-samet"),
     category: "Social Media",
-    icon: <Theaters />,
+    icon: <SiGoodreads />,
   },
   {
     type: ["backloggd"],
@@ -238,7 +268,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
     external: true,
     link: new URL("https://backloggd.com/u/sametc001"),
     category: "Social Media",
-    icon: <Theaters />,
+    icon: createFaviconIcon("https://backloggd.com/favicon.ico", "Backloggd"),
   },
   {
     type: ["steam"],
@@ -247,7 +277,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
     external: true,
     link: new URL("https://steamcommunity.com/id/sametc001"),
     category: "Social Media",
-    icon: <Theaters />,
+    icon: <SiSteam />,
   },
 ];
 

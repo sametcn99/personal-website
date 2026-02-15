@@ -64,6 +64,15 @@ export const socialMediaLinks: SocialMediaLink[] = [
     icon: <GitHub />,
   },
   {
+    type: ["repo", "repos", "repositories"],
+    link: "/repo",
+    label: "Repositories",
+    visible: true,
+    external: false,
+    category: "Development Platforms",
+    icon: <GitHub />,
+  },
+  {
     type: [
       "vscode-extensions",
       "vscodeextensions",

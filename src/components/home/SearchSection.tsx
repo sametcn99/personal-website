@@ -8,7 +8,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import Link from "next/link";
-import { type ReactNode, useMemo } from "react";
+import { type ReactNode, useEffect, useMemo, useRef } from "react";
 
 interface SearchSectionProps {
   searchQuery: string;
@@ -39,6 +39,34 @@ interface SearchResultItemProps {
   post: ContentMetadata;
 }
 
+/**
+ * Checks whether the event target is an editable element.
+ */
+function isEditableTarget(target: EventTarget | null): boolean {
+  if (!(target instanceof HTMLElement)) {
+    return false;
+  }
+
+  const tagName = target.tagName.toLowerCase();
+  return (
+    target.isContentEditable ||
+    tagName === "input" ||
+    tagName === "textarea" ||
+    tagName === "select"
+  );
+}
+
+/**
+ * Determines whether a key should trigger global search typing.
+ */
+function isSearchTriggerKey(event: KeyboardEvent): boolean {
+  if (event.metaKey || event.ctrlKey || event.altKey) {
+    return false;
+  }
+
+  return event.key.length === 1 || event.key === "Backspace";
+}
+
 function SearchInput({
   searchQuery,
   setSearchQuery,
@@ -47,6 +75,37 @@ function SearchInput({
   placeholder = "Search blog posts, projects, gists, and links...",
   additionalControls,
 }: SearchInputProps) {
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  const searchQueryRef = useRef(searchQuery);
+
+  useEffect(() => {
+    searchQueryRef.current = searchQuery;
+  }, [searchQuery]);
+
+  useEffect(() => {
+    const handleGlobalKeyDown = (event: KeyboardEvent) => {
+      if (!isSearchTriggerKey(event) || isEditableTarget(event.target)) {
+        return;
+      }
+
+      inputRef.current?.focus();
+
+      if (event.key === "Backspace") {
+        if (searchQueryRef.current.length > 0) {
+          event.preventDefault();
+          setSearchQuery(searchQueryRef.current.slice(0, -1));
+        }
+        return;
+      }
+
+      event.preventDefault();
+      setSearchQuery(`${searchQueryRef.current}${event.key}`);
+    };
+
+    window.addEventListener("keydown", handleGlobalKeyDown);
+    return () => window.removeEventListener("keydown", handleGlobalKeyDown);
+  }, [setSearchQuery]);
+
   return (
     <Box
       sx={{
@@ -61,6 +120,7 @@ function SearchInput({
         size="medium"
         placeholder={placeholder}
         value={searchQuery}
+        inputRef={inputRef}
         onChange={(e) => setSearchQuery(e.target.value)}
         sx={{
           "& .MuiOutlinedInput-root": {

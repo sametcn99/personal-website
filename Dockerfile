@@ -12,6 +12,8 @@ RUN --mount=type=cache,target=/tmp/.bun-cache \
     bun install --frozen-lockfile
 
 FROM base AS build
+ENV NEXT_BUILD_CPUS=2 \
+    NODE_OPTIONS=--max-old-space-size=1536
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN --mount=type=cache,target=/tmp/.bun-cache \

@@ -7,6 +7,8 @@ import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import remarkMdxFrontmatter from "remark-mdx-frontmatter";
 
+const buildCpuLimit = Number(process.env.NEXT_BUILD_CPUS ?? "2");
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   env: {
@@ -20,6 +22,19 @@ const nextConfig = {
   trailingSlash: false,
   // Enable standalone output for Docker builds
   output: "standalone" as const,
+  // Keep production bundle lean and build safer on low-memory VPS targets
+  productionBrowserSourceMaps: false,
+  experimental: {
+    // Restrict build parallelism for lower peak CPU/RAM usage
+    cpus: Number.isFinite(buildCpuLimit) && buildCpuLimit > 0 ? buildCpuLimit : 2,
+    memoryBasedWorkersCount: true,
+    webpackBuildWorker: true,
+    webpackMemoryOptimizations: true,
+    parallelServerCompiles: false,
+    parallelServerBuildTraces: false,
+    staticGenerationMaxConcurrency: 2,
+    staticGenerationMinPagesPerWorker: 50,
+  },
   // Configure allowed image hostnames
   images: {
     remotePatterns: [
@@ -58,8 +73,5 @@ const withMDX = createMDX({
 
 // Combine MDX and Next.js config, ensuring 'output' is present
 const mdxConfig = withMDX(nextConfig);
-const finalConfig = {
-  ...mdxConfig,
-  output: "standalone" as const,
-};
+const finalConfig = mdxConfig;
 export default finalConfig;

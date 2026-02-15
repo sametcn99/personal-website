@@ -28,7 +28,4 @@ EXPOSE 3000
 ENV HOSTNAME=0.0.0.0 \
     PORT=3000
 
-HEALTHCHECK --interval=30s --timeout=10s --start-period=15s --retries=3 \
-  CMD bun -e "const p=process.env.PORT||'3000';const u=['http://127.0.0.1:'+p,'http://localhost:'+p];let ok=false;for(const x of u){try{const r=await fetch(x);if(r.ok){ok=true;break;}}catch{}}process.exit(ok?0:1)"
-
 CMD ["bun", "server.js"]

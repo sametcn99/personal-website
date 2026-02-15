@@ -2,8 +2,6 @@
 
 import { Typography } from "@mui/material";
 
-type ContentType = "gist" | "blog" | "project" | "article";
-
 interface ShareButtonProps {
   title?: string;
   contentType?: ContentType;

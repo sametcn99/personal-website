@@ -1,47 +1,65 @@
-import Description from "@mui/icons-material/Description";
-import GitHub from "@mui/icons-material/GitHub";
-import Instagram from "@mui/icons-material/Instagram";
-import LinkedIn from "@mui/icons-material/LinkedIn";
-import MailOutline from "@mui/icons-material/MailOutline";
-import Telegram from "@mui/icons-material/Telegram";
-import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
-import WhatsApp from "@mui/icons-material/WhatsApp";
-import YouTube from "@mui/icons-material/YouTube";
 import Box from "@mui/material/Box";
-import { FaXTwitter } from "react-icons/fa6";
-import {
-  SiBluesky,
-  SiDiscord,
-  SiGoodreads,
-  SiImdb,
-  SiLeetcode,
-  SiLetterboxd,
-  SiMastodon,
-  SiNpm,
-  SiPinterest,
-  SiSpotify,
-  SiSteam,
-  SiYoutubemusic,
-} from "react-icons/si";
-import { VscExtensions } from "react-icons/vsc";
+
+const DEFAULT_FAVICON_URL = "/globe.svg";
+
+/**
+ * Returns a proxied favicon URL or a default icon URL when invalid.
+ */
+function getProxiedIconUrl(url: string) {
+  if (url.startsWith("/")) {
+    return url;
+  }
+
+  try {
+    const parsedUrl = new URL(url);
+    if (parsedUrl.protocol !== "http:" && parsedUrl.protocol !== "https:") {
+      return DEFAULT_FAVICON_URL;
+    }
+
+    return `/api/favicon?url=${encodeURIComponent(parsedUrl.toString())}`;
+  } catch {
+    return DEFAULT_FAVICON_URL;
+  }
+}
 
 /**
  * Creates a favicon-based icon element for social links.
  */
 function createFaviconIcon(url: string, label: string) {
+  const iconUrl = getProxiedIconUrl(url);
+
   return (
     <Box
       component="img"
-      src={url}
-      alt={`${label} icon`}
+      src={iconUrl}
+      alt=""
+      aria-label={`${label} icon`}
+      onError={(event) => {
+        const target = event.currentTarget;
+        if (target.dataset.fallbackApplied === "true") {
+          return;
+        }
+
+        target.dataset.fallbackApplied = "true";
+        target.src = DEFAULT_FAVICON_URL;
+      }}
       sx={{
         width: 24,
         height: 24,
         display: "block",
+        objectFit: "cover",
+        flexShrink: 0,
         borderRadius: 0.5,
       }}
     />
   );
+}
+
+/**
+ * Builds a standard favicon URL from a site origin.
+ */
+function buildFaviconUrl(origin: string) {
+  return `${origin}/favicon.ico`;
 }
 
 export const socialMediaLinks: SocialMediaLink[] = [
@@ -52,7 +70,10 @@ export const socialMediaLinks: SocialMediaLink[] = [
     visible: true,
     external: true,
     category: "Professional Networks",
-    icon: <LinkedIn />,
+    icon: createFaviconIcon(
+      buildFaviconUrl("https://www.linkedin.com"),
+      "LinkedIn",
+    ),
     iconColor: "#0A66C2",
   },
   {
@@ -62,7 +83,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
     visible: true,
     external: true,
     category: "Development Platforms",
-    icon: <GitHub />,
+    icon: createFaviconIcon(buildFaviconUrl("https://github.com"), "GitHub"),
     iconColor: "#181717",
   },
   {
@@ -72,7 +93,10 @@ export const socialMediaLinks: SocialMediaLink[] = [
     visible: true,
     external: false,
     category: "Development Platforms",
-    icon: <GitHub />,
+    icon: createFaviconIcon(
+      buildFaviconUrl("https://github.com"),
+      "Repositories",
+    ),
     iconColor: "#181717",
   },
   {
@@ -89,7 +113,10 @@ export const socialMediaLinks: SocialMediaLink[] = [
     visible: false,
     external: true,
     category: "Development Platforms",
-    icon: <VscExtensions />,
+    icon: createFaviconIcon(
+      buildFaviconUrl("https://marketplace.visualstudio.com"),
+      "VSCode Extensions",
+    ),
     iconColor: "#007ACC",
   },
   {
@@ -99,7 +126,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
     visible: false,
     external: true,
     category: "Development Platforms",
-    icon: <SiNpm />,
+    icon: createFaviconIcon(buildFaviconUrl("https://www.npmjs.com"), "NPMJS"),
     iconColor: "#CB3837",
   },
   {
@@ -109,7 +136,10 @@ export const socialMediaLinks: SocialMediaLink[] = [
     visible: false,
     external: true,
     category: "Social Media",
-    icon: <Instagram />,
+    icon: createFaviconIcon(
+      buildFaviconUrl("https://www.instagram.com"),
+      "Instagram",
+    ),
     iconColor: "#E4405F",
   },
   {
@@ -119,7 +149,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
     visible: false,
     external: true,
     category: "Social Media",
-    icon: <FaXTwitter />,
+    icon: createFaviconIcon(buildFaviconUrl("https://x.com"), "X/Twitter"),
     iconColor: "#111827",
   },
   {
@@ -138,7 +168,10 @@ export const socialMediaLinks: SocialMediaLink[] = [
     visible: false,
     external: true,
     category: "Development Platforms",
-    icon: <SiLeetcode />,
+    icon: createFaviconIcon(
+      buildFaviconUrl("https://leetcode.com"),
+      "LeetCode",
+    ),
     iconColor: "#FFA116",
   },
   {
@@ -148,7 +181,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
     visible: true,
     external: true,
     category: "Contact",
-    icon: <Telegram />,
+    icon: createFaviconIcon(buildFaviconUrl("https://t.me"), "Telegram"),
     iconColor: "#26A5E4",
   },
   {
@@ -158,7 +191,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
     visible: false,
     external: true,
     category: "Social Media",
-    icon: <SiDiscord />,
+    icon: createFaviconIcon(buildFaviconUrl("https://discord.com"), "Discord"),
     iconColor: "#5865F2",
   },
   {
@@ -168,7 +201,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
     visible: true,
     external: false,
     category: "Contact",
-    icon: <MailOutline />,
+    icon: createFaviconIcon(buildFaviconUrl("https://mail.google.com"), "Mail"),
     iconColor: "#EA4335",
   },
   {
@@ -178,7 +211,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
     visible: true,
     external: false,
     category: "Professional Networks",
-    icon: <Description />,
+    icon: createFaviconIcon(buildFaviconUrl("https://sametcc.me"), "Resume"),
     iconColor: "#1A73E8",
   },
   {
@@ -188,7 +221,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
     visible: true,
     external: false,
     category: "Development Platforms",
-    icon: <Description />,
+    icon: createFaviconIcon(buildFaviconUrl("https://sametcc.me"), "Readme"),
     iconColor: "#24292F",
   },
   {
@@ -198,7 +231,10 @@ export const socialMediaLinks: SocialMediaLink[] = [
     visible: true,
     external: false,
     category: "Contact",
-    icon: <VolunteerActivismIcon />,
+    icon: createFaviconIcon(
+      buildFaviconUrl("https://sametcc.me"),
+      "Support Me",
+    ),
     iconColor: "#FFDD00",
   },
   {
@@ -208,7 +244,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
     category: "Contact",
     visible: false,
     external: true,
-    icon: <WhatsApp />,
+    icon: createFaviconIcon(buildFaviconUrl("https://wa.me"), "WhatsApp"),
     iconColor: "#25D366",
   },
   {
@@ -218,7 +254,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
     visible: false,
     category: "Social Media",
     external: true,
-    icon: <YouTube />,
+    icon: createFaviconIcon(buildFaviconUrl("https://youtube.com"), "YouTube"),
     iconColor: "#FF0000",
   },
   {
@@ -230,7 +266,10 @@ export const socialMediaLinks: SocialMediaLink[] = [
     visible: false,
     external: true,
     category: "Social Media",
-    icon: <SiYoutubemusic />,
+    icon: createFaviconIcon(
+      buildFaviconUrl("https://music.youtube.com"),
+      "YouTubeMusic",
+    ),
     iconColor: "#FF0000",
   },
   {
@@ -240,7 +279,10 @@ export const socialMediaLinks: SocialMediaLink[] = [
     external: true,
     link: new URL("https://open.spotify.com/user/31qg3kutxxwdq5lzydjx6md534cq"),
     category: "Social Media",
-    icon: <SiSpotify />,
+    icon: createFaviconIcon(
+      buildFaviconUrl("https://open.spotify.com"),
+      "Spotify",
+    ),
     iconColor: "#1DB954",
   },
   {
@@ -250,7 +292,10 @@ export const socialMediaLinks: SocialMediaLink[] = [
     external: true,
     link: new URL("https://letterboxd.com/sametc001"),
     category: "Social Media",
-    icon: <SiLetterboxd />,
+    icon: createFaviconIcon(
+      buildFaviconUrl("https://letterboxd.com"),
+      "Letterboxd",
+    ),
     iconColor: "#202830",
   },
   {
@@ -260,7 +305,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
     external: true,
     link: new URL("https://www.imdb.com/user/ur120575296"),
     category: "Social Media",
-    icon: <SiImdb />,
+    icon: createFaviconIcon(buildFaviconUrl("https://www.imdb.com"), "IMDb"),
     iconColor: "#F5C518",
   },
   {
@@ -270,7 +315,10 @@ export const socialMediaLinks: SocialMediaLink[] = [
     external: true,
     link: new URL("https://pinterest.com/sametcn99"),
     category: "Social Media",
-    icon: <SiPinterest />,
+    icon: createFaviconIcon(
+      buildFaviconUrl("https://pinterest.com"),
+      "Pinterest",
+    ),
     iconColor: "#E60023",
   },
   {
@@ -280,7 +328,10 @@ export const socialMediaLinks: SocialMediaLink[] = [
     external: true,
     link: new URL("https://mastodon.social/@sametcn99"),
     category: "Social Media",
-    icon: <SiMastodon />,
+    icon: createFaviconIcon(
+      buildFaviconUrl("https://mastodon.social"),
+      "Mastodon",
+    ),
     iconColor: "#6364FF",
   },
   {
@@ -290,7 +341,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
     external: true,
     link: new URL("https://bsky.app/profile/sametcn99.bsky.social"),
     category: "Social Media",
-    icon: <SiBluesky />,
+    icon: createFaviconIcon(buildFaviconUrl("https://bsky.app"), "Bluesky"),
     iconColor: "#0285FF",
   },
   {
@@ -300,7 +351,10 @@ export const socialMediaLinks: SocialMediaLink[] = [
     external: true,
     link: new URL("https://www.goodreads.com/user/show/75848289-samet"),
     category: "Social Media",
-    icon: <SiGoodreads />,
+    icon: createFaviconIcon(
+      buildFaviconUrl("https://www.goodreads.com"),
+      "Goodreads",
+    ),
     iconColor: "#553B08",
   },
   {
@@ -319,7 +373,10 @@ export const socialMediaLinks: SocialMediaLink[] = [
     external: true,
     link: new URL("https://steamcommunity.com/id/sametc001"),
     category: "Social Media",
-    icon: <SiSteam />,
+    icon: createFaviconIcon(
+      buildFaviconUrl("https://steamcommunity.com"),
+      "Steam",
+    ),
     iconColor: "#171A21",
   },
 ];

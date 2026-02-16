@@ -8,8 +8,8 @@ export default function manifest(): MetadataRoute.Manifest {
       "Web Developer passionate about creating compelling and user-friendly web experiences.",
     start_url: "/",
     display: "standalone",
-    background_color: "#ffffff",
-    theme_color: "#000000",
+    background_color: "#0c0c0cff",
+    theme_color: "#0c0c0cff",
     orientation: "portrait-primary",
     scope: "/",
     lang: "en",
@@ -22,13 +22,25 @@ export default function manifest(): MetadataRoute.Manifest {
         purpose: "any",
       },
       {
-        src: "/icon-192.png",
+        src: "/favicon-16x16.png",
+        sizes: "16x16",
+        type: "image/png",
+        purpose: "any",
+      },
+      {
+        src: "/favicon-32x32.png",
+        sizes: "32x32",
+        type: "image/png",
+        purpose: "any",
+      },
+      {
+        src: "/android-chrome-192x192.png",
         sizes: "192x192",
         type: "image/png",
         purpose: "any",
       },
       {
-        src: "/icon-512.png",
+        src: "/android-chrome-512x512.png",
         sizes: "512x512",
         type: "image/png",
         purpose: "any",
@@ -40,22 +52,6 @@ export default function manifest(): MetadataRoute.Manifest {
         purpose: "any",
       },
     ],
-    screenshots: [
-      {
-        src: "/screenshot-wide.png",
-        sizes: "1280x720",
-        type: "image/png",
-        form_factor: "wide",
-        label: "Desktop view of the website",
-      },
-      {
-        src: "/screenshot-narrow.png",
-        sizes: "750x1334",
-        type: "image/png",
-        form_factor: "narrow",
-        label: "Mobile view of the website",
-      },
-    ],
     shortcuts: [
       {
         name: "Blog",
@@ -64,7 +60,7 @@ export default function manifest(): MetadataRoute.Manifest {
         url: "/blog",
         icons: [
           {
-            src: "/icon-192.png",
+            src: "/android-chrome-192x192.png",
             sizes: "192x192",
             type: "image/png",
           },
@@ -77,7 +73,7 @@ export default function manifest(): MetadataRoute.Manifest {
         url: "/",
         icons: [
           {
-            src: "/icon-192.png",
+            src: "/android-chrome-192x192.png",
             sizes: "192x192",
             type: "image/png",
           },
@@ -90,7 +86,7 @@ export default function manifest(): MetadataRoute.Manifest {
         url: "/writer",
         icons: [
           {
-            src: "/icon-192.png",
+            src: "/android-chrome-192x192.png",
             sizes: "192x192",
             type: "image/png",
           },
@@ -103,7 +99,7 @@ export default function manifest(): MetadataRoute.Manifest {
         url: "/cv",
         icons: [
           {
-            src: "/icon-192.png",
+            src: "/android-chrome-192x192.png",
             sizes: "192x192",
             type: "image/png",
           },

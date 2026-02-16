@@ -190,17 +190,14 @@ export default function LinksList() {
                   }}
                 />
                 <Stack direction="row" spacing={1}>
-                  <Chip
-                    size="small"
-                    label={social.category}
-                    variant="outlined"
-                  />
                   {social.external ? (
                     <Chip
                       size="small"
                       icon={<OpenInNewIcon />}
                       label="External"
-                      variant="outlined"
+                      sx={{
+                        bgcolor: 'transparent'
+                      }}
                     />
                   ) : null}
                 </Stack>

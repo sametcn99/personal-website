@@ -14,6 +14,21 @@ const nextConfig = {
   env: {
     NEXT_PUBLIC_BUILD_DATE: new Date().toISOString(),
   },
+  /**
+   * Proxies Umami assets and event endpoints through first-party paths.
+   */
+  async rewrites() {
+    return [
+      {
+        source: "/stats/script.js",
+        destination: "https://umami.sametcc.me/script.js",
+      },
+      {
+        source: "/stats/:path*",
+        destination: "https://umami.sametcc.me/:path*",
+      },
+    ];
+  },
   // Allow .mdx extensions for files
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
   // Set the correct workspace root to avoid lockfile detection issues

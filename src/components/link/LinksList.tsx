@@ -196,7 +196,7 @@ export default function LinksList() {
                       icon={<OpenInNewIcon />}
                       label="External"
                       sx={{
-                        bgcolor: 'transparent'
+                        bgcolor: "transparent",
                       }}
                     />
                   ) : null}

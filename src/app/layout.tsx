@@ -86,7 +86,8 @@ export default function RootLayout({
         />
         <script
           defer
-          src="https://umami.sametcc.me/script.js"
+          src="/stats/script.js"
+          data-host-url="/stats"
           data-website-id="be8d6d00-6517-4fe6-8a97-e5d0f8434685"
         ></script>
         <meta

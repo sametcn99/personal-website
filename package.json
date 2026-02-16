@@ -23,7 +23,7 @@
     "@mui/material": "^7.3.8",
     "@mui/material-nextjs": "^7.3.8",
     "@next/mdx": "16.1.6",
-    "@scalar/api-reference-react": "^0.8.55",
+    "@scalar/api-reference-react": "^0.8.57",
     "@types/lunr": "^2.3.7",
     "@types/mdx": "^2.0.13",
     "install": "^0.13.0",

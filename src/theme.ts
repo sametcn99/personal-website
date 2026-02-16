@@ -15,8 +15,8 @@ const theme = createTheme({
     },
     divider: "#5f5f5fff",
     background: {
-      paper: "#0c0c0cff",
-      default: "#0e0e0eff",
+      paper: "#0e0e0e",
+      default: "#0e0e0e",
     },
     error: {
       main: "#f44336",

@@ -5,6 +5,19 @@ import Typography from "@mui/material/Typography";
 import Link from "next/link";
 import { useLinks } from "@/hooks/useLinks";
 
+/**
+ * Creates a stable Umami event name for a home link label.
+ */
+function getHomeLinkUmamiEventName(label: string): string {
+  const normalizedLabel = label
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+
+  return `home-link-${normalizedLabel || "item"}-click`;
+}
+
 export default function LinksSection() {
   const { visibleLinks, hiddenLinks } = useLinks();
   const allLinks = [...visibleLinks, ...hiddenLinks];
@@ -35,6 +48,7 @@ export default function LinksSection() {
         {visibleLinks.map((link) => {
           const isExternal =
             link.external || /^https?:\/\//.test(link.link.toString());
+          const umamiEventName = getHomeLinkUmamiEventName(link.label);
 
           if (isExternal) {
             return (
@@ -46,7 +60,7 @@ export default function LinksSection() {
                 target="_blank"
                 rel="noopener noreferrer"
                 sx={commonSx}
-                data-umami-event="home-link-click"
+                data-umami-event={umamiEventName}
               >
                 {link.label}
               </Typography>
@@ -60,7 +74,7 @@ export default function LinksSection() {
               component={Link}
               href={link.link.toString()}
               sx={commonSx}
-              data-umami-event="home-link-click"
+              data-umami-event={umamiEventName}
             >
               {link.label}
             </Typography>

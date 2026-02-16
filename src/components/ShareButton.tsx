@@ -7,6 +7,19 @@ interface ShareButtonProps {
   contentType?: ContentType;
 }
 
+/**
+ * Converts content type values into a stable Umami-safe event segment.
+ */
+function toEventSegment(value: string): string {
+  const normalized = value
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+
+  return normalized || "content";
+}
+
 const copyToClipboard = (text: string): Promise<void> => {
   if (navigator.clipboard && window.isSecureContext) {
     return navigator.clipboard.writeText(text);
@@ -34,6 +47,8 @@ export default function ShareButton({
   title,
   contentType = "blog",
 }: ShareButtonProps) {
+  const contentTypeEventSegment = toEventSegment(contentType);
+
   const getDefaultTitle = (): string => {
     switch (contentType) {
       case "gist":
@@ -72,7 +87,7 @@ export default function ShareButton({
   return (
     <Typography
       onClick={handleShare}
-      data-umami-event="share-button-click"
+      data-umami-event={`share-${contentTypeEventSegment}-click`}
       color="textSecondary"
       variant="body2"
       title={`Share this ${contentType} or copy link`}

@@ -10,6 +10,23 @@ interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   href?: string;
 }
 
+/**
+ * Converts arbitrary text into a stable Umami-safe event segment.
+ */
+function toEventSegment(value: string | undefined): string {
+  if (!value) {
+    return "item";
+  }
+
+  const normalized = value
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+
+  return normalized || "item";
+}
+
 export function LinkComponent({
   children,
   href,
@@ -17,9 +34,12 @@ export function LinkComponent({
 }: React.PropsWithChildren<LinkProps>) {
   const theme = useTheme();
   const uniqueId = useId();
+  const hrefSegment = toEventSegment(href);
 
   // Handle anchor links (same page scroll)
   if (href?.startsWith("#")) {
+    const anchorTargetSegment = toEventSegment(href.slice(1));
+
     const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
       e.preventDefault();
       const targetId = href.slice(1);
@@ -36,7 +56,7 @@ export function LinkComponent({
       <MuiLink
         href={href}
         onClick={handleAnchorClick}
-        data-umami-event="mdx-anchor-link-click"
+        data-umami-event={`mdx-anchor-${anchorTargetSegment}-click`}
         className={`link-${uniqueId}`}
         sx={{
           textDecoration: "none",
@@ -74,7 +94,7 @@ export function LinkComponent({
       <MuiLink
         href={href}
         component={Link}
-        data-umami-event="mdx-internal-link-click"
+        data-umami-event={`mdx-internal-${hrefSegment}-click`}
         className={`link-${uniqueId}`}
         sx={{
           textDecoration: "none",
@@ -111,7 +131,7 @@ export function LinkComponent({
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      data-umami-event="mdx-external-link-click"
+      data-umami-event={`mdx-external-${hrefSegment}-click`}
       className={`link-${uniqueId}`}
       sx={{
         textDecoration: "none",

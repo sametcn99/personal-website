@@ -182,6 +182,19 @@ function getContentType(href: string): string {
 }
 
 /**
+ * Converts a post title into an Umami-safe event name segment.
+ */
+function toEventSegment(title: string): string {
+  const normalized = title
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, "")
+    .trim()
+    .replace(/\s+/g, "-");
+
+  return normalized || "untitled";
+}
+
+/**
  * Formats optional ISO date values for UI output.
  */
 function formatOptionalDate(value?: string): string {
@@ -197,12 +210,13 @@ function SearchResultItem({ post }: SearchResultItemProps) {
   const isRepoResult = post.href.startsWith("/repo/");
   const contentType = getContentType(post.href);
   const isLinkResult = contentType === "Link";
+  const umamiEventName = `search-result-${toEventSegment(post.title)}-click`;
 
   return (
     <Box
       component={Link}
       href={post.href}
-      data-umami-event="search-result-click"
+      data-umami-event={umamiEventName}
       sx={{
         display: "block",
         mb: 3,

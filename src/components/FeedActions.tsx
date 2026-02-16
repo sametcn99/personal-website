@@ -11,11 +11,25 @@ interface FeedActionsProps {
   color?: "primary" | "secondary";
 }
 
+/**
+ * Converts a URL/path into a stable Umami-safe event segment.
+ */
+function toEventSegment(value: string): string {
+  const normalized = value
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+
+  return normalized || "feed";
+}
+
 export default function FeedActions({
   url,
   color = "primary",
 }: FeedActionsProps) {
   const [copied, setCopied] = useState(false);
+  const eventSegment = toEventSegment(url);
 
   const handleCopy = () => {
     const fullUrl = `${window.location.origin}${url}`;
@@ -32,7 +46,7 @@ export default function FeedActions({
         size="small"
         startIcon={<OpenInNewIcon />}
         href={url}
-        data-umami-event="feed-open-click"
+        data-umami-event={`feed-open-${eventSegment}-click`}
         target="_blank"
         rel="noopener noreferrer"
       >
@@ -44,7 +58,7 @@ export default function FeedActions({
         size="small"
         startIcon={<ContentCopyIcon />}
         onClick={handleCopy}
-        data-umami-event="feed-copy-click"
+        data-umami-event={`feed-copy-${eventSegment}-click`}
       >
         {copied ? "Copied!" : "Copy Link"}
       </Button>

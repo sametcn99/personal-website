@@ -16,6 +16,19 @@ interface ArticleNavigationProps {
   nextLabel?: string;
 }
 
+/**
+ * Creates a stable Umami event segment from an article title.
+ */
+function toArticleEventSegment(title: string): string {
+  const normalized = title
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+
+  return normalized || "article";
+}
+
 export default function ArticleNavigation({
   prevArticle,
   nextArticle,
@@ -23,6 +36,13 @@ export default function ArticleNavigation({
   nextLabel = "Next",
 }: ArticleNavigationProps) {
   if (!prevArticle && !nextArticle) return null;
+
+  const prevEventName = prevArticle
+    ? `article-prev-${toArticleEventSegment(prevArticle.title)}-click`
+    : undefined;
+  const nextEventName = nextArticle
+    ? `article-next-${toArticleEventSegment(nextArticle.title)}-click`
+    : undefined;
 
   return (
     <Box sx={{ mt: 4, display: "flex", gap: 2, flexWrap: "wrap" }}>
@@ -40,7 +60,7 @@ export default function ArticleNavigation({
           <Link
             component={NextLink}
             href={prevArticle.href}
-            data-umami-event="article-prev-click"
+            data-umami-event={prevEventName}
             sx={{ textDecoration: "none", color: "inherit" }}
           >
             <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
@@ -72,7 +92,7 @@ export default function ArticleNavigation({
           <Link
             component={NextLink}
             href={nextArticle.href}
-            data-umami-event="article-next-click"
+            data-umami-event={nextEventName}
             sx={{ textDecoration: "none", color: "inherit" }}
           >
             <Box

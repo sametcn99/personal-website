@@ -3,9 +3,23 @@
 import { Box, CircularProgress, Link, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 
+/**
+ * Converts a URL-like value into a stable Umami-safe event segment.
+ */
+function toEventSegment(value: string): string {
+  const normalized = value
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+
+  return normalized || "target";
+}
+
 export default function RedirectClient({ targetUrl }: { targetUrl: string }) {
   const [countdown, setCountdown] = useState(3);
   const [showManualLink, setShowManualLink] = useState(false);
+  const targetEventSegment = toEventSegment(targetUrl);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -68,7 +82,7 @@ export default function RedirectClient({ targetUrl }: { targetUrl: string }) {
           <Link
             href={targetUrl}
             underline="hover"
-            data-umami-event="redirect-manual-link-click"
+            data-umami-event={`redirect-manual-link-${targetEventSegment}-click`}
           >
             {targetUrl}
           </Link>

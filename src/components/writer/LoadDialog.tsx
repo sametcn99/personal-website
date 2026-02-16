@@ -32,6 +32,19 @@ interface LoadDialogProps {
   entries: WriterEntry[];
 }
 
+/**
+ * Creates a stable Umami event name from a writer entry title.
+ */
+function getWriterEntryUmamiEventName(title: string): string {
+  const normalizedTitle = title
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+
+  return `writer-load-delete-${normalizedTitle || "entry"}-click`;
+}
+
 export function LoadDialog({
   isOpen,
   onClose,
@@ -112,7 +125,7 @@ export function LoadDialog({
                   <IconButton
                     edge="end"
                     onClick={(e) => handleDelete(entry.id, e)}
-                    data-umami-event="writer-load-delete-click"
+                    data-umami-event={getWriterEntryUmamiEventName(entry.title)}
                     color="error"
                     size="small"
                   >

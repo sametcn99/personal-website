@@ -111,6 +111,19 @@ function getUmamiEventNameFromTitle(title: string) {
 }
 
 /**
+ * Creates a stable Umami event name from a category label.
+ */
+function getUmamiEventNameFromCategory(category: string) {
+  const normalizedCategory = category
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+
+  return `links-category-${normalizedCategory || "item"}-click`;
+}
+
+/**
  * Renders a searchable list of all short links.
  */
 export default function LinksList() {
@@ -192,7 +205,7 @@ export default function LinksList() {
                 toggleCategory(currentCategories, category),
               )
             }
-            data-umami-event="links-category-filter-click"
+            data-umami-event={getUmamiEventNameFromCategory(category)}
             data-umami-event-category={category}
             color={
               selectedCategories.includes(category) ? "primary" : "default"

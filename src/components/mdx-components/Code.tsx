@@ -114,11 +114,14 @@ export function CodeComponent({
         component="code"
         sx={{
           color: "#1565c0",
+          backgroundColor: "rgba(127, 127, 127, 0.1)", // Light background for visibility
           padding: "0.2em 0.4em",
           borderRadius: 1,
           fontFamily: "monospace",
           fontSize: "0.875em",
           fontWeight: 500,
+          wordBreak: "break-word", // Allow breaking long words
+          overflowWrap: "anywhere", // Ensure it wraps on small screens
         }}
         {...props}
         aria-label="Inline Code"

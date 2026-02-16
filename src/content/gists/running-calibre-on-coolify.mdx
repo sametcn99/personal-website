@@ -10,9 +10,10 @@ tags:
 
 # Deploying Calibre-Web on Coolify with Docker Compose
 
-This guide walks you through setting up and running on using . It focuses on
-building a stable, persistent deployment with proper permissions and fully
-working upload functionality.
+This guide walks you through setting up and running **Calibre-Web** on
+**Coolify** using **Docker Compose**. It focuses on building a stable,
+persistent deployment with proper permissions and fully working upload
+functionality.
 
 ---
 
@@ -87,26 +88,26 @@ security purposes.
 Calibre-Web requires a valid database in the `/books` directory. If the
 directory is empty, you’ll see:
 
-> “New db location is invalid.”
+> "New db location is invalid."
 
 To create a minimal database:
 
 1. Open the **Terminal** tab for the Calibre-Web service in Coolify.
 2. Navigate to the `/books` directory:
 
-   ```
+   ```bash
    cd /books
    ```
 
 3. Download a minimal `metadata.db` file to initialize the database:
 
-   ```
+   ```bash
    curl -LJO https://github.com/janeczku/calibre-web/raw/refs/heads/master/library/metadata.db
    ```
 
 4. In the Calibre-Web interface, set the database path to:
 
-   ```
+   ```text
    /books
    ```
 
@@ -125,9 +126,9 @@ Uploads are disabled by default. To enable:
    upload**.
 4. Set an upload directory, e.g., `/books` or `/books/uploads`.
 
-At this stage, attempting to upload a book may result in a **“readonly
-database”** or **“permission denied”** error. This occurs because the container
-still lacks proper write access to the mounted volumes.
+At this stage, attempting to upload a book may result in a `readonly database`
+or `permission denied` error. This occurs because the container still lacks
+proper write access to the mounted volumes.
 
 → Continue to **Step 6** to fix permissions.
 
@@ -141,7 +142,7 @@ To fix permission issues:
 2. Navigate to the `/books` and `/config` directories and update ownership to
    match the container user:
 
-   ```
+   ```bash
    chown -R 1000:1000 /books
    chown -R 1000:1000 /config
    ```

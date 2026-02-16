@@ -170,6 +170,15 @@ export const socialMediaLinks: SocialMediaLink[] = [
     icon: <Description />,
   },
   {
+    type: ["readme", "about"],
+    link: "/readme",
+    label: "Readme",
+    visible: true,
+    external: false,
+    category: "Development Platforms",
+    icon: <Description />,
+  },
+  {
     type: ["support", "sponsor", "donate"],
     link: "/support",
     label: "Support Me",

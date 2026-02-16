@@ -12,6 +12,7 @@ type SocialMediaLink = {
     | "Contact"
     | "Other";
   icon?: React.ReactNode; // Add optional icon property
+  iconColor?: string; // Add optional icon brand color
   external?: boolean; // Add optional external property
 };
 

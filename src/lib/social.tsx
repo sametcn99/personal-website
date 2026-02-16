@@ -53,6 +53,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
     external: true,
     category: "Professional Networks",
     icon: <LinkedIn />,
+    iconColor: "#0A66C2",
   },
   {
     type: ["github", "gh"],
@@ -62,6 +63,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
     external: true,
     category: "Development Platforms",
     icon: <GitHub />,
+    iconColor: "#181717",
   },
   {
     type: ["repo", "repos", "repositories"],
@@ -71,6 +73,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
     external: false,
     category: "Development Platforms",
     icon: <GitHub />,
+    iconColor: "#181717",
   },
   {
     type: [
@@ -87,6 +90,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
     external: true,
     category: "Development Platforms",
     icon: <VscExtensions />,
+    iconColor: "#007ACC",
   },
   {
     type: ["npm", "npmjs"],
@@ -96,6 +100,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
     external: true,
     category: "Development Platforms",
     icon: <SiNpm />,
+    iconColor: "#CB3837",
   },
   {
     type: ["instagram", "ig"],
@@ -105,6 +110,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
     external: true,
     category: "Social Media",
     icon: <Instagram />,
+    iconColor: "#E4405F",
   },
   {
     type: ["twitter", "x", "tw"],
@@ -114,6 +120,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
     external: true,
     category: "Social Media",
     icon: <FaXTwitter />,
+    iconColor: "#111827",
   },
   {
     type: ["statsfm", "sfm"],
@@ -132,6 +139,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
     external: true,
     category: "Development Platforms",
     icon: <SiLeetcode />,
+    iconColor: "#FFA116",
   },
   {
     type: ["telegram", "tg"],
@@ -141,6 +149,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
     external: true,
     category: "Contact",
     icon: <Telegram />,
+    iconColor: "#26A5E4",
   },
   {
     type: ["discord", "dc"],
@@ -150,6 +159,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
     external: true,
     category: "Social Media",
     icon: <SiDiscord />,
+    iconColor: "#5865F2",
   },
   {
     type: ["mail", "email", "gmail", "e-mail"],
@@ -159,6 +169,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
     external: false,
     category: "Contact",
     icon: <MailOutline />,
+    iconColor: "#EA4335",
   },
   {
     type: ["cv", "ozgecmis", "letter", "resume"],
@@ -168,6 +179,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
     external: false,
     category: "Professional Networks",
     icon: <Description />,
+    iconColor: "#1A73E8",
   },
   {
     type: ["readme", "about"],
@@ -177,6 +189,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
     external: false,
     category: "Development Platforms",
     icon: <Description />,
+    iconColor: "#24292F",
   },
   {
     type: ["support", "sponsor", "donate"],
@@ -186,6 +199,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
     external: false,
     category: "Contact",
     icon: <VolunteerActivismIcon />,
+    iconColor: "#FFDD00",
   },
   {
     type: ["whatsapp", "wp"],
@@ -195,6 +209,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
     visible: false,
     external: true,
     icon: <WhatsApp />,
+    iconColor: "#25D366",
   },
   {
     type: ["youtube", "yt"],
@@ -204,6 +219,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
     category: "Social Media",
     external: true,
     icon: <YouTube />,
+    iconColor: "#FF0000",
   },
   {
     type: ["youtubemusic", "ytmusic", "ytm"],
@@ -215,6 +231,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
     external: true,
     category: "Social Media",
     icon: <SiYoutubemusic />,
+    iconColor: "#FF0000",
   },
   {
     type: ["spotify", "sp"],
@@ -224,6 +241,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
     link: new URL("https://open.spotify.com/user/31qg3kutxxwdq5lzydjx6md534cq"),
     category: "Social Media",
     icon: <SiSpotify />,
+    iconColor: "#1DB954",
   },
   {
     type: ["letterboxd", "lbxd", "lb"],
@@ -233,6 +251,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
     link: new URL("https://letterboxd.com/sametc001"),
     category: "Social Media",
     icon: <SiLetterboxd />,
+    iconColor: "#202830",
   },
   {
     type: ["imdb"],
@@ -242,6 +261,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
     link: new URL("https://www.imdb.com/user/ur120575296"),
     category: "Social Media",
     icon: <SiImdb />,
+    iconColor: "#F5C518",
   },
   {
     type: ["pinterest"],
@@ -251,6 +271,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
     link: new URL("https://pinterest.com/sametcn99"),
     category: "Social Media",
     icon: <SiPinterest />,
+    iconColor: "#E60023",
   },
   {
     type: ["mastodon"],
@@ -260,6 +281,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
     link: new URL("https://mastodon.social/@sametcn99"),
     category: "Social Media",
     icon: <SiMastodon />,
+    iconColor: "#6364FF",
   },
   {
     type: ["bluesky", "bsky"],
@@ -269,6 +291,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
     link: new URL("https://bsky.app/profile/sametcn99.bsky.social"),
     category: "Social Media",
     icon: <SiBluesky />,
+    iconColor: "#0285FF",
   },
   {
     type: ["goodreads", "gr"],
@@ -278,6 +301,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
     link: new URL("https://www.goodreads.com/user/show/75848289-samet"),
     category: "Social Media",
     icon: <SiGoodreads />,
+    iconColor: "#553B08",
   },
   {
     type: ["backloggd"],
@@ -296,6 +320,7 @@ export const socialMediaLinks: SocialMediaLink[] = [
     link: new URL("https://steamcommunity.com/id/sametc001"),
     category: "Social Media",
     icon: <SiSteam />,
+    iconColor: "#171A21",
   },
 ];
 

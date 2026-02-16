@@ -9,12 +9,28 @@ import ListItemText from "@mui/material/ListItemText";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import { useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { SearchInput } from "@/components/home/SearchSection";
 import { useSearch } from "@/hooks/useSearch";
 import { categoryOrder, socialMediaLinks } from "@/lib/social";
 
 type LinkCategoryFilter = SocialMediaLink["category"];
+
+const LINK_SORT_MODE_STORAGE_KEY = "links-page-sort-mode";
+
+/**
+ * Defines sorting modes for the links list.
+ */
+type LinkSortMode = "category" | "label-asc" | "label-desc";
+
+/**
+ * Checks whether a value is a valid link sort mode.
+ */
+function isLinkSortMode(value: string): value is LinkSortMode {
+  return (
+    value === "category" || value === "label-asc" || value === "label-desc"
+  );
+}
 
 /**
  * Checks whether a social media link matches the active search query.
@@ -59,6 +75,42 @@ function toggleCategory(
 }
 
 /**
+ * Sorts links by the selected sort mode.
+ */
+function sortLinks(links: SocialMediaLink[], sortMode: LinkSortMode) {
+  return [...links].sort((left, right) => {
+    if (sortMode === "label-asc") {
+      return left.label.localeCompare(right.label);
+    }
+
+    if (sortMode === "label-desc") {
+      return right.label.localeCompare(left.label);
+    }
+
+    const categoryDiff =
+      categoryOrder[left.category] - categoryOrder[right.category];
+    if (categoryDiff !== 0) {
+      return categoryDiff;
+    }
+
+    return left.label.localeCompare(right.label);
+  });
+}
+
+/**
+ * Creates a stable Umami event name from a link title.
+ */
+function getUmamiEventNameFromTitle(title: string) {
+  const normalizedTitle = title
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+
+  return `links-list-${normalizedTitle || "item"}-click`;
+}
+
+/**
  * Renders a searchable list of all short links.
  */
 export default function LinksList() {
@@ -66,36 +118,44 @@ export default function LinksList() {
   const [selectedCategories, setSelectedCategories] = useState<
     LinkCategoryFilter[]
   >([]);
+  const [sortMode, setSortMode] = useState<LinkSortMode>("category");
 
-  const sortedLinks = useMemo(() => {
-    return [...socialMediaLinks].sort((left, right) => {
-      const categoryDiff =
-        categoryOrder[left.category] - categoryOrder[right.category];
-      if (categoryDiff !== 0) {
-        return categoryDiff;
-      }
-
-      return left.label.localeCompare(right.label);
-    });
+  useEffect(() => {
+    const savedSortMode = localStorage.getItem(LINK_SORT_MODE_STORAGE_KEY);
+    if (savedSortMode && isLinkSortMode(savedSortMode)) {
+      setSortMode(savedSortMode);
+    }
   }, []);
 
-  const filteredLinks = useMemo(() => {
-    return sortedLinks.filter(
-      (link) =>
-        matchesQuery(link, searchQuery) &&
-        matchesCategory(link, selectedCategories),
+  /**
+   * Updates and persists the selected sorting mode.
+   */
+  const handleSetSortMode = useCallback((newSortMode: LinkSortMode) => {
+    setSortMode(newSortMode);
+    localStorage.setItem(LINK_SORT_MODE_STORAGE_KEY, newSortMode);
+  }, []);
+
+  const displayedLinks = useMemo(() => {
+    const filteredLinks = socialMediaLinks.filter(
+      (socialMediaLink) =>
+        matchesQuery(socialMediaLink, searchQuery) &&
+        matchesCategory(socialMediaLink, selectedCategories),
     );
-  }, [searchQuery, selectedCategories, sortedLinks]);
+
+    return sortLinks(filteredLinks, sortMode);
+  }, [searchQuery, selectedCategories, sortMode]);
 
   const categoryFilters = useMemo(() => {
     const categories = Array.from(
-      new Set(sortedLinks.map((link) => link.category)),
+      new Set(
+        socialMediaLinks.map((socialMediaLink) => socialMediaLink.category),
+      ),
     );
     categories.sort(
       (left, right) => categoryOrder[left] - categoryOrder[right],
     );
     return categories;
-  }, [sortedLinks]);
+  }, []);
 
   return (
     <>
@@ -117,6 +177,7 @@ export default function LinksList() {
           label="All"
           clickable
           onClick={() => setSelectedCategories([])}
+          data-umami-event="links-category-all-click"
           color={selectedCategories.length === 0 ? "primary" : "default"}
           variant={selectedCategories.length === 0 ? "filled" : "outlined"}
         />
@@ -131,6 +192,8 @@ export default function LinksList() {
                 toggleCategory(currentCategories, category),
               )
             }
+            data-umami-event="links-category-filter-click"
+            data-umami-event-category={category}
             color={
               selectedCategories.includes(category) ? "primary" : "default"
             }
@@ -141,18 +204,53 @@ export default function LinksList() {
         ))}
       </Stack>
 
+      <Stack
+        direction="row"
+        spacing={1}
+        sx={{ mb: 2, flexWrap: "wrap", gap: 1 }}
+      >
+        <Chip
+          size="small"
+          label="Category"
+          clickable
+          onClick={() => handleSetSortMode("category")}
+          data-umami-event="links-sort-category-click"
+          color={sortMode === "category" ? "primary" : "default"}
+          variant={sortMode === "category" ? "filled" : "outlined"}
+        />
+        <Chip
+          size="small"
+          label="A → Z"
+          clickable
+          onClick={() => handleSetSortMode("label-asc")}
+          data-umami-event="links-sort-az-click"
+          color={sortMode === "label-asc" ? "primary" : "default"}
+          variant={sortMode === "label-asc" ? "filled" : "outlined"}
+        />
+        <Chip
+          size="small"
+          label="Z → A"
+          clickable
+          onClick={() => handleSetSortMode("label-desc")}
+          data-umami-event="links-sort-za-click"
+          color={sortMode === "label-desc" ? "primary" : "default"}
+          variant={sortMode === "label-desc" ? "filled" : "outlined"}
+        />
+      </Stack>
+
       {searchQuery || selectedCategories.length > 0 ? (
         <Typography variant="body2" sx={{ color: "gray", mb: 2 }}>
-          {filteredLinks.length} result{filteredLinks.length !== 1 ? "s" : ""}{" "}
+          {displayedLinks.length} result{displayedLinks.length !== 1 ? "s" : ""}{" "}
           found
         </Typography>
       ) : null}
 
       <Paper variant="outlined" sx={{ borderColor: "divider" }}>
         <List disablePadding>
-          {filteredLinks.map((social) => {
+          {displayedLinks.map((social) => {
             const primarySlug = social.type[0];
             const aliases = social.type.slice(1);
+            const umamiEventName = getUmamiEventNameFromTitle(social.label);
 
             return (
               <ListItemButton
@@ -160,9 +258,19 @@ export default function LinksList() {
                 component="a"
                 href={`/link/${primarySlug}`}
                 divider
-                data-umami-event="links-list-item-click"
+                data-umami-event={umamiEventName}
               >
-                <ListItemIcon sx={{ minWidth: 40 }}>{social.icon}</ListItemIcon>
+                <ListItemIcon
+                  sx={{
+                    minWidth: 40,
+                    color: social.iconColor ?? "action.active",
+                    "& svg": {
+                      color: social.iconColor ?? "action.active",
+                    },
+                  }}
+                >
+                  {social.icon}
+                </ListItemIcon>
                 <ListItemText
                   primary={social.label}
                   secondary={

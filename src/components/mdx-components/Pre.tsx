@@ -1,8 +1,13 @@
 "use client";
 
 import { Box } from "@mui/material";
+import dynamic from "next/dynamic";
 import React from "react";
-import { MermaidComponent } from "./Mermaid/Mermaid";
+
+const MermaidComponent = dynamic(
+  () => import("./Mermaid/Mermaid").then((mod) => ({ default: mod.MermaidComponent })),
+  { ssr: false },
+);
 
 // Helper function to extract text content from React children
 const getTextFromChildren = (childrenNode: React.ReactNode): string => {

@@ -1,10 +1,8 @@
 "use client";
 
-import {
-  ExpandLess as ExpandLessIcon,
-  ExpandMore as ExpandMoreIcon,
-  Fullscreen as FullscreenIcon,
-} from "@mui/icons-material";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import FullscreenIcon from "@mui/icons-material/Fullscreen";
 import { Box, Chip, IconButton, Tooltip, Typography } from "@mui/material";
 
 interface WriterHeaderProps {

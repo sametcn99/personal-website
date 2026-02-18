@@ -1,17 +1,15 @@
 "use client";
 
-import {
-  AspectRatio as AspectRatioIcon,
-  Edit as EditIcon,
-  Fullscreen as FullscreenIcon,
-  FolderOpen as LoadIcon,
-  Add as NewIcon,
-  Preview as PreviewIcon,
-  Redo as RedoIcon,
-  SaveAs as SaveAsIcon,
-  Save as SaveIcon,
-  Undo as UndoIcon,
-} from "@mui/icons-material";
+import AspectRatioIcon from "@mui/icons-material/AspectRatio";
+import EditIcon from "@mui/icons-material/Edit";
+import FullscreenIcon from "@mui/icons-material/Fullscreen";
+import LoadIcon from "@mui/icons-material/FolderOpen";
+import NewIcon from "@mui/icons-material/Add";
+import PreviewIcon from "@mui/icons-material/Preview";
+import RedoIcon from "@mui/icons-material/Redo";
+import SaveAsIcon from "@mui/icons-material/SaveAs";
+import SaveIcon from "@mui/icons-material/Save";
+import UndoIcon from "@mui/icons-material/Undo";
 import {
   Box,
   Button,

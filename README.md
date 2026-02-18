@@ -1,3 +1,7 @@
+> [!NOTE]
+> I’m migrating this project to the .NET ecosystem because I’m tired of Next.js dependency hell and its heavy RAM usage.<br/>
+> New repository: <https://github.com/sametcn99/personal-website-blazor>
+
 # personal-website
 
 A personal portfolio and blog website built with **Next.js 16**, **MDX**, and

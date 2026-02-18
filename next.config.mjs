@@ -6,8 +6,11 @@ import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import remarkMdxFrontmatter from "remark-mdx-frontmatter";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
-const buildCpuLimit = Number(process.env.NEXT_BUILD_CPUS ?? "2");
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -36,38 +39,25 @@ const nextConfig = {
   // Force consistent route generation
   trailingSlash: false,
   // Enable standalone output for Docker builds
-  output: "standalone" as const,
-  // Keep production bundle lean and build safer on low-memory VPS targets
+  output: "standalone",
   productionBrowserSourceMaps: false,
-  experimental: {
-    // Restrict build parallelism for lower peak CPU/RAM usage
-    cpus:
-      Number.isFinite(buildCpuLimit) && buildCpuLimit > 0 ? buildCpuLimit : 2,
-    memoryBasedWorkersCount: true,
-    webpackBuildWorker: true,
-    webpackMemoryOptimizations: true,
-    parallelServerCompiles: false,
-    parallelServerBuildTraces: false,
-    staticGenerationMaxConcurrency: 2,
-    staticGenerationMinPagesPerWorker: 50,
-  },
   // Configure allowed image hostnames
   images: {
     remotePatterns: [
       {
-        protocol: "https" as const,
+        protocol: "https",
         hostname: "img.shields.io",
       },
       {
-        protocol: "https" as const,
+        protocol: "https",
         hostname: "github.com",
       },
       {
-        protocol: "https" as const,
+        protocol: "https",
         hostname: "raw.githubusercontent.com",
       },
       {
-        protocol: "https" as const,
+        protocol: "https",
         hostname: "golter.sametcc.me",
       },
     ],
@@ -87,7 +77,4 @@ const withMDX = createMDX({
   },
 });
 
-// Combine MDX and Next.js config, ensuring 'output' is present
-const mdxConfig = withMDX(nextConfig);
-const finalConfig = mdxConfig;
-export default finalConfig;
+export default withMDX(nextConfig);

@@ -1,15 +1,13 @@
 "use client";
 
-import {
-  Edit as EditIcon,
-  FolderOpen as LoadIcon,
-  Add as NewIcon,
-  Preview as PreviewIcon,
-  Redo as RedoIcon,
-  SaveAs as SaveAsIcon,
-  Save as SaveIcon,
-  Undo as UndoIcon,
-} from "@mui/icons-material";
+import EditIcon from "@mui/icons-material/Edit";
+import LoadIcon from "@mui/icons-material/FolderOpen";
+import NewIcon from "@mui/icons-material/Add";
+import PreviewIcon from "@mui/icons-material/Preview";
+import RedoIcon from "@mui/icons-material/Redo";
+import SaveAsIcon from "@mui/icons-material/SaveAs";
+import SaveIcon from "@mui/icons-material/Save";
+import UndoIcon from "@mui/icons-material/Undo";
 import { Box, Button, ButtonGroup, Tooltip } from "@mui/material";
 
 interface WriterToolbarProps {

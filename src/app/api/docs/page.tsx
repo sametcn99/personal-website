@@ -1,6 +1,6 @@
 import Container from "@mui/material/Container";
 import type { Metadata } from "next";
-import ApiReferenceDocs from "@/components/ApiReferenceDocs";
+import ApiDocsWrapper from "@/components/ApiDocsWrapper";
 
 export const metadata: Metadata = {
   title: "API Docs",
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default function ApiDocsPage() {
   return (
     <Container maxWidth={false} disableGutters>
-      <ApiReferenceDocs />
+      <ApiDocsWrapper />
     </Container>
   );
 }

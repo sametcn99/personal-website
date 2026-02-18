@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1.7
 
-FROM oven/bun:1 AS base
+FROM oven/bun:alpine AS base
 WORKDIR /app
 ENV NODE_ENV=production \
     NEXT_TELEMETRY_DISABLED=1 \
@@ -12,8 +12,6 @@ RUN --mount=type=cache,target=/tmp/.bun-cache \
     bun install --frozen-lockfile
 
 FROM base AS build
-ENV NEXT_BUILD_CPUS=2 \
-    NODE_OPTIONS=--max-old-space-size=1536
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN --mount=type=cache,target=/tmp/.bun-cache \

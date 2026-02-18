@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "bun --bun next dev --webpack",
     "build": "bun --bun next build --webpack",
-    "start": "bun --bun next start",
+    "start": "bun --bun next start --webpack",
     "check": "biome check --write . && bun run format:md",
     "jest": "jest",
     "lint": "biome check",
@@ -23,19 +23,13 @@
     "@mui/material": "^7.3.8",
     "@mui/material-nextjs": "^7.3.8",
     "@next/mdx": "16.1.6",
-    "@scalar/api-reference-react": "^0.8.57",
-    "@types/lunr": "^2.3.7",
-    "@types/mdx": "^2.0.13",
-    "install": "^0.13.0",
     "lunr": "^2.3.9",
     "mermaid": "^11.12.2",
     "next": "16.1.6",
     "next-mdx-remote": "^6.0.0",
     "octokit": "^5.0.5",
-    "playwright": "^1.58.2",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
-    "react-icons": "^5.5.0",
     "react-zoom-pan-pinch": "^3.7.0",
     "rehype-autolink-headings": "^7.1.0",
     "rehype-highlight": "^7.0.2",
@@ -62,6 +56,9 @@
     "ts-jest": "^29.4.6",
     "ts-node": "^10.9.2",
     "tsx": "^4.21.0",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "@types/lunr": "^2.3.7",
+    "@types/mdx": "^2.0.13",
+    "playwright": "^1.58.2"
   }
 }
